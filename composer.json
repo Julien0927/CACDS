@@ -1,0 +1,17 @@
+{
+    "name": "varac/cacds-v2",
+    "autoload": {
+        "psr-4": {
+            "Varac\\CacdsV2\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Julien Varachas",
+            "email": "varachasjulien@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

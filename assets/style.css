@@ -1,0 +1,275 @@
+:root {
+ --blueNav-color: #72C8DF;  
+ --blue-color: #12758C;  
+ --orange-color: #EC930F;
+ --white-color: #FFFFFF;
+ --purple-color: #6A0572;
+
+ --font-montserrat: "Montserrat", sans-serif;
+  --font-lato: "Lato", sans-serif;
+
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+}
+
+
+/* .montserrat-montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.lato-thin {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.lato-light {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.lato-regular {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lato-bold {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.lato-black {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.lato-thin-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.lato-light-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.lato-regular-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.lato-bold-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.lato-black-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+ */
+ .font-montserrat {
+  font-family: var(--font-montserrat);
+}
+
+.font-lato {
+  font-family: var(--font-lato);
+}
+
+.thin {
+  font-weight: var(--font-weight-thin);
+}
+
+.light {
+  font-weight: var(--font-weight-light);
+}
+
+.regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.black {
+  font-weight: var(--font-weight-black);
+}
+
+.italic {
+  font-style: italic;
+}
+
+/*Titres*/
+h1 {
+  font-family: var(--montserrat);
+  font-weight: 800;
+  color: var(--blue-color);
+}
+
+.h2Sports{
+  font-family: var(--montserrat);
+  font-weight: 700;
+  color: var(--orange-color);
+}
+
+.h3Sports {
+  font-family: var(--montserrat);
+  font-weight: 600;
+  color: var(--blue-color);
+}
+/*************************/
+
+label {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  color: var(--blue-color);
+}
+
+option, select {
+  color: var(--blue-color);
+}
+
+/*Alignements des éléments*/
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.insideNav {
+  display: flex;
+  justify-content: center;
+}
+
+/*------------------------*/
+.inputRegister {
+  width: 30%;
+  padding: 2px 10px;
+  border-radius: 5px;
+}
+
+/*Buttons*/
+.btn1 {
+  background:linear-gradient(to right, #e0bc86 0%, #dea34a 50%, var(--orange-color) 100%);
+  color: var(--white-color);
+  border: 3px solid #b45605;
+}
+.btn1:hover {
+  background:linear-gradient(to right, #b5ced8 0%, #99d0e0 50%, var(--blueNav-color) 100%);
+  color: var(--white-color);
+  border: 3px solid #041188;
+}
+/* Pour les messages de succès */
+.alert.success {
+  text-align: center;
+  color: var(--blue-color);
+  padding: 10px;
+  margin-top: 20px;
+  border: 3px solid var(--blue-color);
+}
+
+.alert.success.connexion {
+  background-color: var(--orange-color);
+  color: var(--white-color);
+  width: 30%;
+}
+
+/* Pour les messages d'erreur */
+.alert.error {
+  text-align: center;
+  color: var(--orange-color);
+  padding: 10px;
+  margin-top: 20px;
+  border-color: var(--orange-color);
+  border: 3px solid var(--orange-color);
+}
+
+.alert.error p {
+  margin: 0;
+}
+
+.navbar {
+  background-color: var(--blueNav-color);
+}
+
+.nav-link {
+  color: var(--white-color);
+  font-family: var(--montserrat);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.logo {
+  border-radius: 50px;
+  width: 20%;
+  height: 20%;
+}
+.cacds {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--montserrat);
+  font-weight: 800;
+}
+
+fieldset {
+    border: 4px solid var(--blue-color); /* Bordure du cadre */
+    padding: 20px;
+    border-radius: 8px; /* Coins arrondis */
+  }
+  
+  legend {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0 10px;
+    color: var(--orange-color);
+  }
+
+.sportsNav {
+  background-color: var(--white-color);
+  padding: 1rem;
+  font-family: var(--montserrat);
+  font-weight: 600;
+}
+
+.insideItem a {
+  color:var(--orange-color);
+
+}
+
+/*Footer*/
+footer {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--montserrat);
+  font-weight: 800;
+}
+  
+/*----RESPONSIVE----*/
+
+@media screen and (max-width: 768px) {
+/*   .insideNav {
+    display:flex;
+    justify-content: end;
+  }
+ */}
