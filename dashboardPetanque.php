@@ -1,9 +1,18 @@
 <?php
 require_once 'header.php';
 require_once 'templates/nav.php';
+require_once 'lib/auth.php';
+
+
+if (isset($_SESSION['success_message'])) {
+    echo '<div class="alert success connexion bold mx-auto">' . $_SESSION['success_message'] . '</div>';
+    // Supprimer le message après affichage
+    unset($_SESSION['success_message']);
+}
+
 ?>
 
-<h2>Liste des articles</h2>
+<h2>Pétanque</h2>
 <form method="POST">
 <div class="container">
     <div class="row">

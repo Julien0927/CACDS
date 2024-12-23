@@ -1,11 +1,8 @@
-<?php   
+<?php
 session_start();
-if(!isset($_SESSION["user"])){
-    header("Location: index.php");
-    exit;
-}
+session_unset(); // Supprime toutes les variables de session
+session_destroy(); // Détruit la session active
 
-//Supprime une variable de session
-unset($_SESSION["user"]);
-
+// Redirige vers la page principale avec la navigation classique
 header("Location: index.php");
+exit;

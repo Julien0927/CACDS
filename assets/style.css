@@ -176,6 +176,14 @@ option, select {
   color: var(--white-color);
   border: 3px solid #041188;
 }
+
+.btnLogout {
+  /* background:linear-gradient(to right, #726274 0%, #6f3674 50%, var(--purple-color) 100%); */
+  background-color: var(--blueNav-color);
+  color: var(--white-color);
+  border: 3px solid var(--white-color);
+  margin-top: 3px;
+}
 /* Pour les messages de succès */
 .alert.success {
   text-align: center;

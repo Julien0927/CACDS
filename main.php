@@ -1,13 +1,14 @@
+<?php
+require_once 'header.php';
+require_once 'templates/nav.php';
+?>
+
 <h1 class="cacds">Coupe de l'Amitié Corporative des Deux-Sèvres</h1>
 
 <?php
-session_start();
-// Vérifier s'il y a un message de succès
-if (isset($_SESSION['success_message'])) {
-    echo '<div class="alert success connexion bold mx-auto">' . $_SESSION['success_message'] . '</div>';
-    // Supprimer le message après affichage
-    unset($_SESSION['success_message']);
-}
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}// Vérifier s'il y a un message de succès
 ?>
 <div class="d-flex justify-content-center">
     <img src="/assets/logos/cacds_logo_CACDS.jpg" style="width: 10%; height: 10%" alt="cacds" class="img-fluid">
@@ -56,3 +57,6 @@ if (isset($_SESSION['success_message'])) {
         </div>
 
 </section>
+
+<?php
+require_once 'templates/footer.php';

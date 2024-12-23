@@ -1,50 +1,63 @@
 <?php
-require_once ('lib/pdo.php');
-require_once ('App/Users.php');
+require_once('lib/pdo.php');
+require_once('App/Users.php');
 
 use App\Users\Users;
 
 session_start();
-require_once ('lib/security.php');
+require_once('lib/security.php');
 
 $messages = [];
 $errors = [];
 
-if(isset($_SESSION["user"])){
+if (isset($_SESSION["user"])) {
     header("Location: index.php");
     exit;
 }
 
-//On verifie si le formulaire est envoyé
-
-if(!empty($_POST)){
-    //Le formulaire a été envoyé
-    //On verifie que tous les champs sont remplis
-    if(isset($_POST["email"], $_POST["password"])
-        && !empty($_POST["email"]) && !empty($_POST["password"])
-    ){
+if (!empty($_POST)) {
+    if (isset($_POST["email"], $_POST["password"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
         try {
             $user = new Users($db);
 
-            if($user->login($_POST["email"], $_POST["password"])){
-                $_SESSION['success_message'] = "Connexion réussie. Bienvenue !";
-                header("Location: index.php");
+            $userInfo = $user->login($_POST["email"], $_POST["password"]);
+
+            if ($userInfo) {
+                // Stocker les informations utilisateur dans la session
+                $_SESSION['user'] = $userInfo; // Par exemple : ['email' => '...', 'sport' => 'badminton']
+                $_SESSION['success_message'] = "Bienvenue sur votre tableau de bord !";
+
+                // Rediriger en fonction du sport ou rôle
+                switch ($userInfo['sport_id']) {
+                    case '2':
+                        header("Location: dashboardBad.php");
+                        break;
+                    case '4':
+                        header("Location: dashboardVolley.php");
+                        break;
+                    case '1':
+                        header("Location: dashboardTdT.php");
+                        break;
+                    case '3':
+                        header("Location: dashboardPetanque.php");
+                        break;
+                    default:
+                        header("Location: index.php"); // Redirection par défaut
+                        break;
+                }
                 exit;
+            } else {
+                $errors[] = "Vos identifiants ne sont pas valides";
             }
-         else {
-            $errors[] = ("Vos identifiants ne sont pas valides");
-        }
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
 }
 
- require_once ('header.php');
- ?>
- <h1 class="center mt-3">Connexion</h1>
- <!-- Affichage des messages -->
+require_once('header.php');
+?>
+<h1 class="center mt-3">Connexion</h1>
 <?php if ($messages): ?>
     <div class="alert success mx-auto" style="width: 50%;"><?php echo $message; ?></div>
 <?php endif; ?>
@@ -58,7 +71,7 @@ if(!empty($_POST)){
 <?php endif; ?>
 
 <div class="">
-    <form  method="POST" action="login.php" class="ms-2">
+    <form method="POST" action="login.php" class="ms-2">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control inputRegister" name="email" id="email" placeholder="Votre email" required>
@@ -75,5 +88,5 @@ if(!empty($_POST)){
 </div>
 
 <?php
-require_once ('templates/footer.php');
+require_once('templates/footer.php');
 ?>

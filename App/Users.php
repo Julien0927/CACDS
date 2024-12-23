@@ -92,4 +92,5 @@ class Users
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+
 }
