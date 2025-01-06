@@ -1,8 +1,16 @@
 <?php
+ob_start();
+session_start();
+
 require_once 'header.php';
 require_once 'templates/nav.php';
 require_once 'lib/auth.php';
+require_once 'App/News.php';
+require_once 'lib/pdo.php';
+require_once 'templates/messages.php';
 
+$messages = [];
+$errors = [];
 
 if (isset($_SESSION['success_message'])) {
     echo '<div class="alert success connexion bold mx-auto">' . $_SESSION['success_message'] . '</div>';
@@ -10,10 +18,30 @@ if (isset($_SESSION['success_message'])) {
     unset($_SESSION['success_message']);
 }
 
+$news = new App\News\News($db);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNew'])) {
+    foreach ($_POST['newBox'] as $idToDelete) {
+        $news->setId($idToDelete);
+        $news->deleteNew();
+    }
+    if (count($_POST['newBox']) > 1) {
+
+        $_SESSION['messages'] = ["Les articles ont bien été supprimés"];
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    } else {
+        $_SESSION['messages'] = ["L'article a bien été supprimé"];
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+
+    }
+}
+
+$allNews = $news->getAllNews();
 ?>
 
-<h2 class="center text-center mt-3">Tableau de bord<br>Tennis de table</h2>
-<h3>Ajouter un article</h3>
+<h2>Tennis de Table</h2>
 <form method="POST">
 <div class="container">
     <div class="row">
@@ -29,13 +57,13 @@ if (isset($_SESSION['success_message'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($allArticles as $article) { ?>
-                        <tr class="allArticles text-start">
-                            <td><?=($article["date"])?></td>
-                            <td><?=($article["title"])?></td>
-                            <td class="content d-none d-md-table-cell"><?=($article["content"])?></td>
-                            <td class="text-center"><img src="<?=($article["image"])?>" class="imgArticle"></td>
-                            <td><input type="checkbox" name="articleBox[]" value="<?= $article['id'] ?>"></td>
+                        <?php foreach ($allNews as $new) { ?>
+                        <tr class="allNews text-start">
+                            <td><?=($new["date"])?></td>
+                            <td><?=($new["title"])?></td>
+                            <td class="content d-none d-md-table-cell"><?=($new["content"])?></td>
+                            <td class="text-center"><img src="<?=($new["image"])?>" class="imgNew"></td>
+                            <td><input type="checkbox" name="newBox[]" value="<?= $new['id'] ?>"></td>
                         </tr>
                         <?php } ?>
                     </tbody>
@@ -46,16 +74,13 @@ if (isset($_SESSION['success_message'])) {
     <div class="row">
         <div class="d-flex justify-content-end">
             <div class=" my-3">
-                <a href="addArticles.php" class="btn btn-secondary">Ajouter un article</button></a>
-                <button type="submit" class="btn btn-original" name="deleteArticle">Supprimer</button>
+                <a href="addNews.php" class="btn btn-secondary">Ajouter un article</button></a>
+                <button type="submit" class="btn btn-original" name="deleteNew">Supprimer</button>
             </div>
         </div>
     </div>
 </div>
 </form>
-<h3>Mise à jour du classement</h3>
-<h3>Mise à jour des résultats</h3>
-<h3>Ajouter une photo</h3>
 
 <?php
 require_once 'templates/footer.php';

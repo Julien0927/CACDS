@@ -178,26 +178,28 @@ option, select {
 }
 
 .btnLogout {
-  /* background:linear-gradient(to right, #726274 0%, #6f3674 50%, var(--purple-color) 100%); */
   background-color: var(--blueNav-color);
   color: var(--white-color);
   border: 3px solid var(--white-color);
   margin-top: 3px;
 }
+
+/*Fleche pour remonter en haut de la page*/
+
 /* Pour les messages de succès */
 .alert.success {
   text-align: center;
   color: var(--blue-color);
   padding: 10px;
   margin-top: 20px;
-  border: 3px solid var(--blue-color);
 }
 
 .alert.success.connexion {
-  background-color: var(--orange-color);
-  color: var(--white-color);
+  color: var(--orange-color);
   width: 30%;
+  font-size: 1.5rem;
 }
+
 
 /* Pour les messages d'erreur */
 .alert.error {
@@ -261,6 +263,11 @@ fieldset {
 .insideItem a {
   color:var(--orange-color);
 
+}
+
+.imgNew {
+  width: 30%;
+  height: 30%;
 }
 
 /*Footer*/

@@ -11,7 +11,7 @@
               Compétitions
             </a>
             <ul class="dropdown-menu dropdown-menu">
-              <li><a class="dropdown-item" href="#">Calendrier de la saison</a></li>
+              <li><a class="dropdown-item" href="#calendrier">Calendrier de la saison</a></li>
               <li><a class="dropdown-item" href="#compet">Championnat</a></li>
               <li><a class="dropdown-item" href="#cup">Coupe</a></li>
               <li><a class="dropdown-item" href="#tournament">Tournois</a></li>
@@ -44,8 +44,8 @@
           </li>
         </ul>
         <ul class="navbar-nav me-5">
-          <li class="nav-item insideItem dropdown">
-            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
+          <li class="nav-item insideItem">
+            <a class="" href="#chiffres" style="text-decoration: none;" >
               Les chiffres
             </a>
             <ul class="dropdown-menu dropdown-menu">
@@ -56,21 +56,16 @@
           </li>
         </ul>
         <ul class="navbar-nav me-5">
-          <li class="nav-item insideItem dropdown">
-            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
+          <li class="nav-item insideItem">
+            <a class="" href="#gallery" style="text-decoration: none;">
               Galerie photos
             </a>
-            <ul class="dropdown-menu dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item insideItem">
             <a class="" href="#link" style="text-decoration: none;">
-              Liens
+              Liens utiles
             </a>
           </li>
         </ul>

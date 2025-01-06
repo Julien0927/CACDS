@@ -2,77 +2,35 @@
 
 namespace App\News;
 
-class News {
-    private $pdo;
-    
-    public function __construct(PDO $pdo) {
-        $this->pdo = $pdo;
-    }
-    
-    public function create($titre, $contenu, $sport_id, $users_id) {
-        $stmt = $this->pdo->prepare("
-            INSERT INTO news (titre, contenu, sport_id, users_id)
-            VALUES (?, ?, ?, ?)
-        ");
-        return $stmt->execute([$titre, $contenu, $sport_id, $users_id]);
-    }
-    
-    public function update($id, $titre, $contenu) {
-        $stmt = $this->pdo->prepare("
-            UPDATE news 
-            SET titre = ?, contenu = ? 
-            WHERE id = ?
-        ");
-        return $stmt->execute([$titre, $contenu, $id]);
-    }
-    
-    public function delete($id) {
-        $stmt = $this->pdo->prepare("DELETE FROM news WHERE id = ?");
-        return $stmt->execute([$id]);
-    }
-    
-    public function getById($id) {
-        $stmt = $this->pdo->prepare("
-            SELECT a.*, u.name as auteur 
-            FROM news a
-            JOIN users u ON a.users_id = u.id
-            WHERE a.id = ?
-        ");
-        $stmt->execute([$id]);
-        return $stmt->fetch();
-    }
-    
-    public function getBySport($sport_id) {
-        $stmt = $this->pdo->prepare("
-            SELECT a.*, u.name as auteur 
-            FROM news a
-            JOIN users u ON a.users_id = u.id
-            WHERE a.sport_id = ?
-            ORDER BY a.date_creation DESC
-        ");
-        $stmt->execute([$sport_id]);
-        return $stmt->fetchAll();
-    }
-}
-
-/* <?php
-
-namespace App\Articles;
-
 use PDO;
 use PDOException;
 
-class Articles {
+class News {
     private PDO $db;
     private int $id;
     private string $title;
     private string $content;
     private string $image;
     private string $date;
-    private int $articlesParPage = 6;
+    private int $sport_id;
+    private ?int $poule_id;
+    private int $user_id;
+    private int $newsParPage = 6;
 
     public function __construct(PDO $db) {
         $this->db = $db;
+    }
+
+    public function setSportId(int $sport_id) {
+        $this->sport_id = $sport_id;
+    }
+
+    public function setPouleId(?int $poule_id) {
+        $this->poule_id = $poule_id;
+    }
+
+    public function setUserId(int $user_id) {
+        $this->user_id = $user_id;
     }
 
     public function setId(int $id) {
@@ -117,8 +75,8 @@ class Articles {
     }
 
     //Fonction permettant de recuperer un article par son id
-    public function getArticleById(int $id) {
-        $sql = "SELECT * FROM `articles` WHERE `id` = :id";
+    public function getNewById(int $id) {
+        $sql = "SELECT * FROM `news` WHERE `id` = :id";
         $query = $this->db->prepare($sql);
         $query->bindValue(":id", $id, PDO::PARAM_INT);
         $query->execute();
@@ -126,48 +84,106 @@ class Articles {
         return $query->fetch(PDO::FETCH_ASSOC);
     }
     //Fonction d'ajouter un article
-    public function addArticle(): void {
+public function addNew(): void {
+        // Vérifie si l'utilisateur est connecté
+        if (!isset($_SESSION['user_id'])) {
+            throw new \Exception("Vous devez être connecté pour ajouter une news");
+        }
 
-        $sql = "INSERT INTO `articles`(`title`, `content`, `image`, `date`) VALUES (:title, :content, :image, :date)";
+        $sql = "INSERT INTO `news`(
+            `title`, `content`, `image`, `date`, `sport_id`, `poule_id`, `user_id`
+        ) VALUES (
+            :title, :content, :image, :date, :sport_id, :poule_id, :user_id
+        )";
+        
         $query = $this->db->prepare($sql);
 
         $query->bindValue(":title", $this->title, PDO::PARAM_STR);
         $query->bindValue(":content", $this->content, PDO::PARAM_STR);
         $query->bindValue(":image", $this->image, PDO::PARAM_STR);
         $query->bindValue(":date", $this->date, PDO::PARAM_STR);
+        $query->bindValue(":sport_id", $_SESSION['sport_id'], PDO::PARAM_INT);
+        $query->bindValue(":poule_id", $_SESSION['poule_id'], PDO::PARAM_INT);
+        $query->bindValue(":user_id", $_SESSION['user_id'], PDO::PARAM_INT);
 
-       $query->execute();
+        $query->execute();
     }
 
-     //Fonction permettant de recuperer tous les articles
-    public function getAllArticles() {
-        $sql = "SELECT * FROM `articles` ORDER BY `date` DESC";
+    //Fonction permettant de récupérer les news par sport et poule
+    public function getAllNews() {
+        $sql = "SELECT n.*, u.name as author_name 
+                FROM `news` n
+                LEFT JOIN users u ON n.user_id = u.id
+                WHERE 1=1";
+        $params = [];
+
+        // Si l'utilisateur n'est pas super admin, filtrer par sport et poule
+        if ($_SESSION['role'] !== 'super_admin') {
+            $sql .= " AND n.sport_id = :sport_id";
+            $params[':sport_id'] = $_SESSION['sport_id'];
+
+            if ($_SESSION['poule_id']) {
+                $sql .= " AND n.poule_id = :poule_id";
+                $params[':poule_id'] = $_SESSION['poule_id'];
+            }
+        }
+
+        $sql .= " ORDER BY n.date DESC";
         $query = $this->db->prepare($sql);
+        
+        foreach($params as $key => $value) {
+            $query->bindValue($key, $value, PDO::PARAM_INT);
+        }
+        
         $query->execute();
-       
-        $articles = $query->fetchAll(PDO::FETCH_ASSOC);
+        $news = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        //Formatage de la date
-        foreach ($articles as $key => $article) {
-            $articles[$key]['date'] = $this->formatDate($article['date']);
-
-            if (strlen($article['content']) > 100) {
-                $articles[$key]['content'] = substr($article['content'], 0, 100) . '...';
+        //Formatage de la date et du contenu
+        foreach ($news as $key => $new) {
+            $news[$key]['date'] = $this->formatDate($new['date']);
+            if (strlen($new['content']) > 100) {
+                $news[$key]['content'] = substr($new['content'], 0, 100) . '...';
             }
         }
     
-        return $articles;
-    }
-
- 
+        return $news;
+    } 
     //Fonction permettant de formater la date
     private function formatDate(string $date): string {
         return date('d/m/Y', strtotime($date));
     }
 
-    //Fonction permmettant de modifier un article
-    public function updateArticle(): void {
-        $sql = "UPDATE `articles` SET `title`=:title,`content`=:content,`image`=:image,`date`=:date WHERE id=:id";
+    // Méthode pour vérifier si l'utilisateur a le droit de modifier/supprimer une news
+    private function canModifyNews(int $newsId): bool {
+        if ($_SESSION['role'] === 'super_admin') {
+            return true;
+        }
+
+        $sql = "SELECT user_id, sport_id, poule_id FROM news WHERE id = :id";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(':id', $newsId, PDO::PARAM_INT);
+        $query->execute();
+        $news = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $news &&
+               $news['sport_id'] === $_SESSION['sport_id'] &&
+               ($news['poule_id'] === $_SESSION['poule_id'] || $_SESSION['poule_id'] === null);
+    }
+
+
+    //Fonction permettant de modifier un article
+    public function updateNew(): void {
+        if (!$this->canModifyNews($this->id)) {
+            throw new \Exception("Vous n'avez pas les droits pour modifier cette news");
+        }
+
+        $sql = "UPDATE `news` SET 
+                `title` = :title,
+                `content` = :content,
+                `image` = :image,
+                `date` = :date 
+                WHERE id = :id";
+                
         $query = $this->db->prepare($sql);
 
         $query->bindValue(":title", $this->title, PDO::PARAM_STR);
@@ -180,18 +196,20 @@ class Articles {
     }
 
     //Fonction permettant de supprimer un article
-    public function deleteArticle(): void {
-        $sql = "DELETE FROM `articles` WHERE id=:id";
+    public function deleteNew(): void {
+        if (!$this->canModifyNews($this->id)) {
+            throw new \Exception("Vous n'avez pas les droits pour supprimer cette news");
+        }
+
+        $sql = "DELETE FROM `news` WHERE id = :id";
         $query = $this->db->prepare($sql);
-
         $query->bindValue(":id", $this->id, PDO::PARAM_INT);
-
         $query->execute();
     }
 
     //Fonction permettant de sauvegarder une image
     public function saveImage(): void {
-        $sql = "INSERT INTO `articles`(`image`) VALUES (:image)";
+        $sql = "INSERT INTO `news`(`image`) VALUES (:image)";
         $query = $this->db->prepare($sql);
 
         $query->bindValue(":image", $this->image, PDO::PARAM_STR);
@@ -199,35 +217,72 @@ class Articles {
         $query->execute();
     }
 
-    // Méthode pour obtenir le nombre total de pages
+    // Méthode pour obtenir le nombre total de pages avec filtres
     public function getTotalPages(): int {
-        $stmt = $this->db->query("SELECT COUNT(*) FROM articles");
-        $totalArticles = $stmt->fetchColumn();
-        return ceil($totalArticles / $this->articlesParPage);
+        $sql = "SELECT COUNT(*) FROM news WHERE 1=1";
+        $params = [];
+
+        if ($_SESSION['role'] !== 'super_admin') {
+            $sql .= " AND sport_id = :sport_id";
+            $params[':sport_id'] = $_SESSION['sport_id'];
+
+            if ($_SESSION['poule_id']) {
+                $sql .= " AND poule_id = :poule_id";
+                $params[':poule_id'] = $_SESSION['poule_id'];
+            }
+        }
+
+        $stmt = $this->db->prepare($sql);
+        foreach($params as $key => $value) {
+            $stmt->bindValue($key, $value, PDO::PARAM_INT);
+        }
+        $stmt->execute();
+        
+        $totalNews = $stmt->fetchColumn();
+        return ceil($totalNews / $this->newsParPage);
     }
 
-    // Méthode pour récupérer les articles pour une page donnée
-    public function getArticlesByPage(int $pageActuelle = 1): array {
+
+    // Méthode pour récupérer les articles pour une page donnée avec filtres
+    public function getNewsByPage(int $pageActuelle = 1): array {
         $pageActuelle = max(1, $pageActuelle);
+        $offset = ($pageActuelle - 1) * $this->newsParPage;
+
+        $sql = "SELECT n.*, u.name as author_name 
+                FROM `news` n
+                LEFT JOIN users u ON n.user_id = u.id
+                WHERE 1=1";
+        $params = [];
+
+        if ($_SESSION['role'] !== 'super_admin') {
+            $sql .= " AND n.sport_id = :sport_id";
+            $params[':sport_id'] = $_SESSION['sport_id'];
+
+            if ($_SESSION['poule_id']) {
+                $sql .= " AND n.poule_id = :poule_id";
+                $params[':poule_id'] = $_SESSION['poule_id'];
+            }
+        }
+
+        $sql .= " ORDER BY n.date DESC LIMIT :limit OFFSET :offset";
         
-        $offset = ($pageActuelle - 1) * $this->articlesParPage;
-        $sql = "SELECT * FROM articles ORDER BY date DESC LIMIT :limit OFFSET :offset";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':limit', $this->articlesParPage, PDO::PARAM_INT);
+        foreach($params as $key => $value) {
+            $stmt->bindValue($key, $value, PDO::PARAM_INT);
+        }
+        $stmt->bindValue(':limit', $this->newsParPage, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        
         $stmt->execute();
-        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $news = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        //Formatage de la date
-        foreach ($articles as $key => $article) {
-            $articles[$key]['date'] = $this->formatDate($article['date']);
-
-            if (strlen($article['content']) > 100) {
-                $articles[$key]['content'] = substr($article['content'], 0, 100) . '...';
+        foreach ($news as $key => $new) {
+            $news[$key]['date'] = $this->formatDate($new['date']);
+            if (strlen($new['content']) > 100) {
+                $news[$key]['content'] = substr($new['content'], 0, 100) . '...';
             }
         }
     
-        return $articles;
+        return $news;
     }
-
-} */
+}

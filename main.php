@@ -42,6 +42,9 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 </section>
+<section class="mt-3">
+    <h1 style="text-align: center;">TEXTE DE PRÉSENTATION DE L'ASSOCIATION</h1>
+</section>
 <section class="d-flex flex-md-row flex-column justify-content-around mt-5 mb-5">
         <div >
             <img src="/assets/icones/Badminton item.svg" alt="">

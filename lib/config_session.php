@@ -10,6 +10,7 @@
 ]; 
  */
 
+ define ('_NEWS_IMG_PATH_', 'uploads/news/');
 // Pages pour les administrateurs (ajoutées dynamiquement selon l'utilisateur connecté)
 $admin = [
     'dashboardBad.php' => 'Dashboard Badminton',

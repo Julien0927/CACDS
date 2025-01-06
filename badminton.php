@@ -21,7 +21,7 @@ require_once 'templates/insideNav.php';
     <!-- Section Compétitions -->
     <section>
         <h2 class="h2Sports">Compétitions</h2>
-        <h3 class="h3Sports ms-4">Calendrier de la saison</h3>
+        <h3 id="calendrier" class="h3Sports ms-4">Calendrier de la saison</h3>
         <p class="center">Ici image du calendrier</p>
         <h3 class="h3Sports ms-4" id="compet">Championnat</h3>
         <p>Le championnat regroupe plusieurs poules où évoluent 6 équipes. Les matchs se déroulent en phase aller-retour.<br> 
@@ -45,6 +45,12 @@ require_once 'templates/insideNav.php';
     <section>
         <h2 class="h2Sports">Documents</h2>
         <p>Accédez aux documents officiels et informations utiles.</p>
+        <h3 class="h3Sports ms-4">CR Réunion des capitaines</h3>
+        <h3 class="h3Sports ms-4">Demande d'adhésion</h3>
+        <h3 class="h3Sports ms-4">Demande d'engagement</h3>
+        <h3 class="h3Sports ms-4">Attestation certificats médicaux</h3>
+        <h3 class="h3Sports ms-4">Autorisation de droit à l'image</h3>
+        <h3 class="h3Sports ms-4">Règlement badminton</h3>
     </section>
 
     <!-- Section Informations -->
@@ -54,13 +60,13 @@ require_once 'templates/insideNav.php';
     </section>
 
     <!-- Section Les Chiffres -->
-    <section>
+    <section id="chiffres">
         <h2 class="h2Sports">Les Chiffres</h2>
         <p>Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>
 
     <!-- Section Galerie Photos -->
-    <section>
+    <section id="gallery">
         <h2 class="h2Sports">Galerie Photos</h2>
         <p>Découvrez les meilleurs moments du club en images.</p>
     </section>
