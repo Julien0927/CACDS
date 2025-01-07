@@ -15,7 +15,7 @@ class News {
     private int $sport_id;
     private ?int $poule_id;
     private int $user_id;
-    private int $newsParPage = 6;
+    private int $newsParPage = 3;
 
     public function __construct(PDO $db) {
         $this->db = $db;
@@ -74,6 +74,20 @@ class News {
         return $this->date;
     }
 
+    //Fonction permettant de recuperer les news par sport
+    public function getNewsBySport($sport_id, $page)
+    {
+    $offset = ($page - 1) * $this->newsParPage;
+    $sql = "SELECT * FROM news WHERE sport_id = :sport_id ORDER BY date DESC LIMIT :limit OFFSET :offset" ;
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':sport_id', $sport_id, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $this->newsParPage, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     //Fonction permettant de recuperer un article par son id
     public function getNewById(int $id) {
         $sql = "SELECT * FROM `news` WHERE `id` = :id";
@@ -84,7 +98,8 @@ class News {
         return $query->fetch(PDO::FETCH_ASSOC);
     }
     //Fonction d'ajouter un article
-public function addNew(): void {
+    public function addNew(): void {
+    
         // Vérifie si l'utilisateur est connecté
         if (!isset($_SESSION['user_id'])) {
             throw new \Exception("Vous devez être connecté pour ajouter une news");
@@ -141,9 +156,6 @@ public function addNew(): void {
         //Formatage de la date et du contenu
         foreach ($news as $key => $new) {
             $news[$key]['date'] = $this->formatDate($new['date']);
-            if (strlen($new['content']) > 100) {
-                $news[$key]['content'] = substr($new['content'], 0, 100) . '...';
-            }
         }
     
         return $news;
@@ -278,9 +290,6 @@ public function addNew(): void {
 
         foreach ($news as $key => $new) {
             $news[$key]['date'] = $this->formatDate($new['date']);
-            if (strlen($new['content']) > 100) {
-                $news[$key]['content'] = substr($new['content'], 0, 100) . '...';
-            }
         }
     
         return $news;

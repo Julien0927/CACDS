@@ -171,7 +171,7 @@ option, select {
   color: var(--white-color);
   border: 3px solid #b45605;
 }
-.btn1:hover {
+.btn1:hover, .btn-card:hover {
   background:linear-gradient(to right, #b5ced8 0%, #99d0e0 50%, var(--blueNav-color) 100%);
   color: var(--white-color);
   border: 3px solid #041188;
@@ -182,6 +182,12 @@ option, select {
   color: var(--white-color);
   border: 3px solid var(--white-color);
   margin-top: 3px;
+}
+
+.btn-card {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  border: 3px solid var(--white-color);
 }
 
 /*Fleche pour remonter en haut de la page*/
@@ -214,6 +220,27 @@ option, select {
 .alert.error p {
   margin: 0;
 }
+
+.imgHome {
+  width: 100%;
+  max-width: 200px;
+  height: 200px;
+  border-radius: 1rem 1rem 1rem 1rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+/*pagination*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--purple-color);
+  border-color: var(--white-color);
+}
+
 
 .navbar {
   background-color: var(--blueNav-color);
@@ -269,6 +296,48 @@ fieldset {
   width: 30%;
   height: 30%;
 }
+/*Cards*/
+.imgBlog {
+  width: 100%;
+  max-width: 500px;
+  height: 150px;
+  border-radius: 1rem 1rem 1rem 1rem;
+  -o-object-fit: contain;
+     object-fit: contain; 
+}
+
+.card {
+  position: relative;
+  font-family: var(--montserrat);
+  border-radius: 1rem;
+  border: 3px solid var(--blue-color);
+  padding: 0.5rem;
+  text-align: justify;
+}
+
+.card-text-blog {
+  text-align: justify;
+  margin-bottom: 4rem;
+  font-family: var(--font-lato);
+}
+
+.btn-fixed {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+/*Modal*/
+
+.imgModal {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  border-radius: 1rem 1rem 1rem 1rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 
 /*Footer*/
 footer {

@@ -1,6 +1,14 @@
 <?php
 require_once 'header.php';
 require_once 'templates/nav.php';
+require_once 'lib/pdo.php';
+require_once 'App/News.php';
+
+$news = new App\News\News($db);
+$sportId = 2;
+$totalPages = $news->getTotalPages();
+$pageActuelle = isset ($_GET['page']) ? $_GET['page'] : 1;
+$newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
 
 ?>
 
@@ -13,9 +21,25 @@ require_once 'templates/insideNav.php';
 ?>
 <div class="container-fluid ms-3">
 <!-- Section Actualités -->
-    <section>
+    <section class="container-fluid">
         <h2 class="h2Sports">Actualités</h2>
         <p>Retrouvez ici les dernières nouvelles importantes concernant le club.</p>
+        <div class="row mb-2"> <!-- Conteneur principal des articles -->
+            <?php foreach ($newsPageActuelle as $new): ?>
+                <?php include 'templates/partial_news.php'; ?>
+            <?php endforeach; ?>
+        </div>
+        <!-- Génération des liens de pagination -->
+        <nav aria-label="Page navigation example" id="pagination">
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <li class="page-item <?= $pageActuelle == $i ? 'active' : '' ?>">
+                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                <?php endfor; ?>
+
+            </ul>
+        </nav>
     </section>
 
     <!-- Section Compétitions -->
