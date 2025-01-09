@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="/assets/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/assets/script.js" defer></script>
+</head>
 <body>
   <header class="navbar" >
     <div class=" d-flex  justify-content-start align-items-center mx-3">
-      <img src="/assets/logos/square_logo.jpg" class="logo" alt="logo CACDS">
-      <a href="index.php/" class="disabled-link"></a>
+      <a href="index.php"><img src="/assets/logos/square_logo.jpg" class="logo" alt="logo CACDS"></a>
+      <a href="index.php" class="disabled-link"></a>
     </div>
     
   <?php 

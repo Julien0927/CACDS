@@ -1,4 +1,5 @@
 /*Sélection dynamique des poules*/
+document.addEventListener('DOMContentLoaded', () => {
 const sportsSelect = document.getElementById('sports');
     const poulesContainer = document.getElementById('poules-container');
     const poulesSelect = document.getElementById('poules');
@@ -25,3 +26,50 @@ const sportsSelect = document.getElementById('sports');
             poulesContainer.style.display = 'none';
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+// Récupération des éléments
+const competitionSelect = document.getElementById('results');
+const poulesResultsContainer = document.getElementById('poules-results-container');
+const poulesResultsSelect = document.getElementById('poulesResults');
+
+// Écouteur d'événement sur le select des compétitions
+competitionSelect.addEventListener('change', () => {
+    // Vérifier si "Championnat" est sélectionné
+    if (competitionSelect.value === 'Champ') {
+        // Afficher le conteneur
+        poulesResultsContainer.style.display = 'block';
+        
+        // Vider le select des poules
+        poulesResultsSelect.innerHTML = '';
+        
+        // Générer les options de 1 à 8
+        for (let i = 1; i <= 8; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `Poule ${i}`;
+            poulesResultsSelect.appendChild(option);
+        }
+        
+    } else {
+        // Masquer le conteneur si ce n'est pas "Championnat"
+        poulesResultsContainer.style.display = 'none';
+    }
+});
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const competitionSelect = document.getElementById('results');
+    const dayNumberSelect = document.getElementById('dayNumber');
+    const dayNumberContainer = document.getElementById('dayNumber-container');
+    competitionSelect.addEventListener('change', () => {
+        if (competitionSelect.value === 'Champ') {
+            dayNumberContainer.style.display = 'block';
+            dayNumberSelect.innerHTML = '';
+        } else {
+            dayNumberContainer.style.display = 'none';
+        }
+    });
+    
+});

@@ -7,7 +7,7 @@ require_once 'App/News.php';
 $news = new App\News\News($db);
 $sportId = 2;
 $totalPages = $news->getTotalPages();
-$pageActuelle = isset ($_GET['page']) ? $_GET['page'] : 1;
+$pageActuelle = isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? (int)$_GET['page'] : 1;
 $newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
 
 ?>
@@ -18,6 +18,11 @@ $newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
 
 <?php
 require_once 'templates/insideNav.php';
+$sql = "SELECT id FROM poules WHERE sport_id = :sport_id";
+$stmt = $db->prepare($sql);
+$stmt->bindValue(':sport_id', $sportId, PDO::PARAM_INT);
+$stmt->execute();
+$poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="container-fluid ms-3">
 <!-- Section Actualités -->
@@ -37,7 +42,6 @@ require_once 'templates/insideNav.php';
                         <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                     </li>
                 <?php endfor; ?>
-
             </ul>
         </nav>
     </section>
@@ -52,14 +56,10 @@ require_once 'templates/insideNav.php';
             En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
             <label for="sports" class="form-label me-2">Sélectionnez votre poule</label>
             <select name="poules" id="poules">
-                <option value="">Poule 1</option>
-                <option value="">Poule 2</option>
-                <option value="">Poule 3</option>
-                <option value="">Poule 4</option>
-                <option value="">Poule 5</option>
-                <option value="">Poule 6</option>
-                <option value="">Poule 7</option>
-                <option value="">Poule 8</option>
+            <?php foreach ($poules as $poule): ?>
+                <option value="<?= $poule['id'] ?>"><?= htmlspecialchars($poule['id']) ?></option>
+            <?php endforeach; ?>
+
             </select>
         <h3 class="h3Sports ms-4" id="cup">Coupe</h3>
         <h3 class="h3Sports ms-4" id="tournament">Tournois</h3>

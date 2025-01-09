@@ -4,6 +4,7 @@
  --orange-color: #EC930F;
  --white-color: #FFFFFF;
  --purple-color: #6A0572;
+ --green-color: #4db769;
 
  --font-montserrat: "Montserrat", sans-serif;
   --font-lato: "Lato", sans-serif;
@@ -169,25 +170,51 @@ option, select {
 .btn1 {
   background:linear-gradient(to right, #e0bc86 0%, #dea34a 50%, var(--orange-color) 100%);
   color: var(--white-color);
-  border: 3px solid #b45605;
+  border: 3px solid #df8b0c;
 }
-.btn1:hover, .btn-card:hover {
+.btn1:hover {
   background:linear-gradient(to right, #b5ced8 0%, #99d0e0 50%, var(--blueNav-color) 100%);
   color: var(--white-color);
   border: 3px solid #041188;
+}
+
+.btn-original {
+  background-color: var(--orange-color);
+  color: var(--white-color);
+  border: 3px solid var(--orange-color);
+}
+
+.btn-original:hover {
+  background-color: var(--white-color);
+  color: var(--orange-color);
+  border: 3px solid var(--orange-color);
 }
 
 .btnLogout {
   background-color: var(--blueNav-color);
   color: var(--white-color);
   border: 3px solid var(--white-color);
-  margin-top: 3px;
 }
 
 .btn-card {
   background-color: var(--blue-color);
   color: var(--white-color);
-  border: 3px solid var(--white-color);
+  border: 3px solid var(--blue-color);
+}
+.btn-card:hover {
+  background-color: var(--white-color);
+  color: var(--blue-color);
+  border: 3px solid var(--blue-color);
+}
+.btn-second {
+  background-color: var(--green-color);
+  color: var(--white-color);
+  border: 3px solid var(--green-color);
+}
+.btn-second:hover {
+  background-color: var(--white-color);
+  color: var(--green-color);
+  border: 3px solid var(--green-color);
 }
 
 /*Fleche pour remonter en haut de la page*/
@@ -221,15 +248,105 @@ option, select {
   margin: 0;
 }
 
-.imgHome {
-  width: 100%;
-  max-width: 200px;
-  height: 200px;
-  border-radius: 1rem 1rem 1rem 1rem;
-  -o-object-fit: contain;
-     object-fit: contain;
+/*styles pour les news-Home*/
+ .news-container {
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  height: 100%;
 }
-/*pagination*/
+
+.news-wrapper {
+  display: flex;
+  gap: 15px;
+  height: 100%;
+}
+
+.news-text-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sport-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.news-title {
+  font-size: 1.2rem;
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.news-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.news-image-container {
+  width: 150px; /* Réduit de 200px à 150px */
+  flex-shrink: 0;
+}
+
+.news-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.date {
+  font-style: italic;
+  color: #666;
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.btn {
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .news-wrapper {
+      flex-direction: column;
+  }
+  
+  .news-image-container {
+      width: 100%;
+      height: 180px;
+  }
+}
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .news-wrapper {
+      flex-direction: column;
+  }
+  
+  .news-image-container {
+      width: 100%;
+      height: 200px;
+  }
+}
+ /*pagination*/
 .pagination {
   display: flex;
   justify-content: center;
@@ -299,11 +416,11 @@ fieldset {
 /*Cards*/
 .imgBlog {
   width: 100%;
-  max-width: 500px;
-  height: 150px;
+  max-width: 300px;
+  height: 200px;
   border-radius: 1rem 1rem 1rem 1rem;
-  -o-object-fit: contain;
-     object-fit: contain; 
+  -o-object-fit: cover;
+     object-fit: covern; 
 }
 
 .card {

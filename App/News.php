@@ -74,11 +74,14 @@ class News {
         return $this->date;
     }
 
-    //Fonction permettant de recuperer les news par sport
+     //Fonction permettant de recuperer les news par sport
     public function getNewsBySport($sport_id, $page)
     {
     $offset = ($page - 1) * $this->newsParPage;
-    $sql = "SELECT * FROM news WHERE sport_id = :sport_id ORDER BY date DESC LIMIT :limit OFFSET :offset" ;
+    $sql = "SELECT * FROM news 
+            WHERE sport_id = :sport_id 
+            ORDER BY date DESC, id DESC 
+            LIMIT :limit OFFSET :offset" ;
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':sport_id', $sport_id, PDO::PARAM_INT);
     $stmt->bindValue(':limit', $this->newsParPage, PDO::PARAM_INT);
@@ -86,7 +89,7 @@ class News {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+ 
 
     //Fonction permettant de recuperer un article par son id
     public function getNewById(int $id) {
@@ -99,7 +102,7 @@ class News {
     }
     //Fonction d'ajouter un article
     public function addNew(): void {
-    
+        
         // Vérifie si l'utilisateur est connecté
         if (!isset($_SESSION['user_id'])) {
             throw new \Exception("Vous devez être connecté pour ajouter une news");
@@ -231,28 +234,30 @@ class News {
 
     // Méthode pour obtenir le nombre total de pages avec filtres
     public function getTotalPages(): int {
-        $sql = "SELECT COUNT(*) FROM news WHERE 1=1";
-        $params = [];
+    $sql = "SELECT COUNT(*) FROM news WHERE 1=1";
+    $params = [];
 
-        if ($_SESSION['role'] !== 'super_admin') {
-            $sql .= " AND sport_id = :sport_id";
-            $params[':sport_id'] = $_SESSION['sport_id'];
+    // Vérification si l'utilisateur est connecté
+    if (isset($_SESSION['role']) && $_SESSION['role'] !== 'super_admin') {
+        $sql .= " AND sport_id = :sport_id";
+        $params[':sport_id'] = $_SESSION['sport_id'];
 
-            if ($_SESSION['poule_id']) {
-                $sql .= " AND poule_id = :poule_id";
-                $params[':poule_id'] = $_SESSION['poule_id'];
-            }
+        if (!empty($_SESSION['poule_id'])) {
+            $sql .= " AND poule_id = :poule_id";
+            $params[':poule_id'] = $_SESSION['poule_id'];
         }
-
-        $stmt = $this->db->prepare($sql);
-        foreach($params as $key => $value) {
-            $stmt->bindValue($key, $value, PDO::PARAM_INT);
-        }
-        $stmt->execute();
-        
-        $totalNews = $stmt->fetchColumn();
-        return ceil($totalNews / $this->newsParPage);
     }
+
+    $stmt = $this->db->prepare($sql);
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value, PDO::PARAM_INT);
+    }
+    $stmt->execute();
+    
+    $totalNews = $stmt->fetchColumn();
+    return ceil($totalNews / $this->newsParPage);
+}
+
 
 
     // Méthode pour récupérer les articles pour une page donnée avec filtres

@@ -82,7 +82,7 @@ require_once('header.php');
         </div>
         <div class="mb-3">
             <?php addCSRFTokenToForm() ?>
-            <button type="submit" class="btn btn1 bold" value="Se connecter">Se connecter</button>
+            <button type="submit" class="btn btn-original bold" value="Se connecter">Se connecter</button>
         </div>
     </form>
 </div>

@@ -52,19 +52,40 @@ function truncateText($text, $length = 100) {
 // Fonction pour afficher une section d'actualité
 function displayNewsSection($news, $sport) {
     ?>
-    <div class="col-12 col-md-6">
-        <img src="/assets/icones/<?= $sport['icon'] ?>" alt="<?= $sport['name'] ?>">
-        <?php if ($news): ?>
-            <p class="date"><?= htmlspecialchars($news['date']) ?></p>
-            <h3><?= htmlspecialchars($news['title']) ?></h3>
-            <p><?= htmlspecialchars(truncateText($news['content'])) ?></p>
-            <img class="imgHome" src="<?= $news['image'] ?>" alt="<?= htmlspecialchars($news['title']) ?>">
-        <?php else: ?>
-            <p>Aucun article disponible pour le <?= $sport['name'] ?>.</p>
-        <?php endif; ?>
-        <button class="btn btn-primary">Lire</button>
+ <div class="col-12 col-md-12">
+    <div class="news-container">
+        <div class="news-wrapper">
+            <!-- Partie gauche avec le texte -->
+            <div class="news-text-content">
+                <!-- En-tête avec icône et titre -->
+                <div class="news-header">
+                    <img class="sport-icon" src="/assets/icones/<?= $sport['icon'] ?>" alt="<?= $sport['name'] ?>">
+                    <?php if ($news): ?>
+                        <h3 class="news-title"><?= htmlspecialchars($news['title']) ?></h3>
+                    <?php endif; ?>
+                </div>
+                
+                <?php if ($news): ?>
+                    <div class="news-body">
+                        <p class="content"><?= htmlspecialchars(truncateText($news['content'])) ?></p>
+                        <p class="date"><?= htmlspecialchars($news['date']) ?></p>
+                    </div>
+                <?php else: ?>
+                    <p>Aucun article disponible pour le <?= $sport['name'] ?>.</p>
+                <?php endif; ?>
+                
+                <button class="btn btn-original" href="">Lire</button>
+            </div>
+            
+            <!-- Image à droite -->
+            <?php if ($news): ?>
+                <div class="news-image-container">
+                    <img class="news-image" src="<?= $news['image'] ?>" alt="<?= htmlspecialchars($news['title']) ?>">
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
-    <?php
+</div>     <?php
 }
 ?>
 
@@ -80,14 +101,20 @@ function displayNewsSection($news, $sport) {
             <fieldset>
                 <legend>Actualités</legend>
                 <div class="row">
-                    <?php displayNewsSection($latestNews['bad'], $sports['bad']); ?>
-                    <?php displayNewsSection($latestNews['volley'], $sports['volley']); ?>
+                    <div class="col-12 col-md-6">
+                        <?php displayNewsSection($latestNews['bad'], $sports['bad']); ?>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <?php displayNewsSection($latestNews['volley'], $sports['volley']); ?>
+                    </div>
+                    <div class="row mt-5">
+                    <div class="col-12 col-md-6">
+                        <?php displayNewsSection($latestNews['tdt'], $sports['tdt']); ?>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <?php displayNewsSection($latestNews['petanque'], $sports['petanque']); ?>
+                    </div>
                 </div>
-                <div class="row mt-5">
-                    <?php displayNewsSection($latestNews['tdt'], $sports['tdt']); ?>
-                    <?php displayNewsSection($latestNews['petanque'], $sports['petanque']); ?>
-                </div>
-                <p>Contenu à l'intérieur du cadre.</p>
             </fieldset>
         </div>
     </div>
