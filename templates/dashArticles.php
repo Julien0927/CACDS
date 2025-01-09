@@ -18,7 +18,7 @@
                         <tr class="allNews text-start">
                             <td><?=($new["date"])?></td>
                             <td><?=($new["title"])?></td>
-                            <td class="content d-none d-md-table-cell"><?=($new["content"])?></td>
+                            <td class="content d-none d-md-table-cell"><?=mb_strlen($new["content"]) > 150 ? mb_substr($new["content"], 0, 150) . '...' : $new["content"] ?></td>
                             <td class="text-center"><img src="<?=($new["image"])?>" class="imgNew"></td>
                             <td><input type="checkbox" name="newBox[]" value="<?= $new['id'] ?>"></td>
                         </tr>
