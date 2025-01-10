@@ -7,7 +7,7 @@ require_once 'App/News.php';
 $news = new App\News\News($db);
 $sportId = 2;
 $totalPages = $news->getTotalPages();
-$pageActuelle = isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? (int)$_GET['page'] : 1;
+$pageActuelle = isset ($_GET['page']) ? $_GET['page'] : 1;
 $newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
 
 ?>
@@ -18,6 +18,7 @@ $newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
 
 <?php
 require_once 'templates/insideNav.php';
+/*Affichage dynamique des poules*/
 $sql = "SELECT id FROM poules WHERE sport_id = :sport_id";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(':sport_id', $sportId, PDO::PARAM_INT);
@@ -35,7 +36,7 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
         </div>
         <!-- Génération des liens de pagination -->
-        <nav aria-label="Page navigation example" id="pagination">
+<!--         <nav aria-label="Page navigation example" id="pagination">
             <ul class="pagination">
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                     <li class="page-item <?= $pageActuelle == $i ? 'active' : '' ?>">
@@ -44,7 +45,7 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endfor; ?>
             </ul>
         </nav>
-    </section>
+ -->    </section>
 
     <!-- Section Compétitions -->
     <section>

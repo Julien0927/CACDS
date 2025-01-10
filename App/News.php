@@ -17,8 +17,10 @@ class News {
     private int $user_id;
     private int $newsParPage = 3;
 
+
     public function __construct(PDO $db) {
         $this->db = $db;
+        $this->newsParPage = 3;
     }
 
     public function setSportId(int $sport_id) {
@@ -54,6 +56,10 @@ class News {
         $this->date = $date;
     }
 
+    public function setNewsParPage(int $number): void {
+        $this->newsParPage = $number;
+    }
+
     public function getId(): int {
         return $this->id;
     }
@@ -73,19 +79,18 @@ class News {
     public function getDate(): string {
         return $this->date;
     }
+    public function getNewsParPage(): int {
+        return $this->newsParPage;
+    }
 
      //Fonction permettant de recuperer les news par sport
     public function getNewsBySport($sport_id, $page)
     {
-    $offset = ($page - 1) * $this->newsParPage;
     $sql = "SELECT * FROM news 
             WHERE sport_id = :sport_id 
-            ORDER BY date DESC, id DESC 
-            LIMIT :limit OFFSET :offset" ;
+            ORDER BY date DESC, id DESC"; 
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':sport_id', $sport_id, PDO::PARAM_INT);
-    $stmt->bindValue(':limit', $this->newsParPage, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -232,7 +237,7 @@ class News {
         $query->execute();
     }
 
-    // Méthode pour obtenir le nombre total de pages avec filtres
+     // Méthode pour obtenir le nombre total de pages avec filtres
     public function getTotalPages(): int {
     $sql = "SELECT COUNT(*) FROM news WHERE 1=1";
     $params = [];
@@ -256,9 +261,8 @@ class News {
     
     $totalNews = $stmt->fetchColumn();
     return ceil($totalNews / $this->newsParPage);
-}
-
-
+    }
+ 
 
     // Méthode pour récupérer les articles pour une page donnée avec filtres
     public function getNewsByPage(int $pageActuelle = 1): array {

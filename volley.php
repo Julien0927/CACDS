@@ -29,7 +29,7 @@ require_once 'templates/insideNav.php';
             <?php endforeach; ?>
         </div>
         <!-- Génération des liens de pagination -->
-        <nav aria-label="Page navigation example" id="pagination">
+<!--         <nav aria-label="Page navigation example" id="pagination">
             <ul class="pagination">
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                     <li class="page-item <?= $pageActuelle == $i ? 'active' : '' ?>">
@@ -38,7 +38,7 @@ require_once 'templates/insideNav.php';
                 <?php endfor; ?>
             </ul>
         </nav>
-    </section>
+ -->    </section>
 </div>
 
 <?php

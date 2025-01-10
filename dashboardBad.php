@@ -3,9 +3,9 @@ ob_start();
 session_start();
 
 require_once 'header.php';
-require_once 'templates/nav.php';
 require_once 'lib/auth.php';
 require_once 'lib/pdo.php';
+require_once 'templates/nav.php';
 require_once 'templates/messages.php';
 require_once 'App/News.php';
 require_once 'App/Results.php';
@@ -63,6 +63,7 @@ require_once 'templates/dashArticles.php';
                 <table class="table table-striped table-responsive text-center nowrap">
                     <thead>
                         <tr>
+                            <th>Compétitions</th>
                             <th>Poule</th>
                             <th>Journée</th>
                             <th>Fichier</th>
@@ -72,6 +73,7 @@ require_once 'templates/dashArticles.php';
                         <?php if (!empty($allResults)) { ?>
                             <?php foreach ($allResults as $result) { ?>
                                 <tr>
+                                    <td><?= htmlspecialchars($result["competition_type"]) ?></td>
                                     <td><?= htmlspecialchars($result["poule_id"]) ?></td>
                                     <td><?= htmlspecialchars($result["day_number"]) ?></td>
                                     <td>

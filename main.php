@@ -61,14 +61,14 @@ function displayNewsSection($news, $sport) {
                 <div class="news-header">
                     <img class="sport-icon" src="/assets/icones/<?= $sport['icon'] ?>" alt="<?= $sport['name'] ?>">
                     <?php if ($news): ?>
-                        <h3 class="news-title"><?= htmlspecialchars($news['title']) ?></h3>
+                        <h3 class="news-title"><?= ($news['title']) ?></h3>
                     <?php endif; ?>
                 </div>
                 
                 <?php if ($news): ?>
                     <div class="news-body">
-                        <p class="content"><?= htmlspecialchars(truncateText($news['content'])) ?></p>
-                        <p class="date"><?= htmlspecialchars($news['date']) ?></p>
+                        <p class="content"><?= (truncateText($news['content'])) ?></p>
+                        <p class="date"><?= ($news['date']) ?></p>
                     </div>
                 <?php else: ?>
                     <p>Aucun article disponible pour le <?= $sport['name'] ?>.</p>

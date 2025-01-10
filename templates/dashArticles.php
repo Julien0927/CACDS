@@ -1,3 +1,4 @@
+
 <h3 class="h2Sports ms-2">Gestion des articles</h3>
 <form method="POST" enctype="multipart/form-data">
 <div class="container">
@@ -25,7 +26,17 @@
                         <?php } ?>
                     </tbody>
                 </table>
-            </div>
+                <!-- Génération des liens de pagination -->
+<!--                 <nav aria-label="Page navigation example" id="pagination">
+                    <ul class="pagination">
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                            <li class="page-item <?= $pageActuelle == $i ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </nav>
+ -->            </div>
         </div>
     </div>
     <div class="row">
