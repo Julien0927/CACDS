@@ -10,6 +10,7 @@ require_once 'templates/nav.php';
 require_once 'templates/messages.php';
 require_once 'App/News.php';
 require_once 'App/Results.php';
+require_once 'App/Classements.php';
 
 $messages = [];
 $errors = [];
@@ -32,8 +33,9 @@ $pouleId = $_POST['poulesResults'] ?? null; // Récupérer l'ID de la poule depu
 
 $news = new App\News\News($db);
 $results = new App\Results\Results($db, $competitionId, $pouleId);
+$classement = new App\Classements\Classements($db);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNew'])) {
+/* if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNew'])) {
     foreach ($_POST['newBox'] as $idToDelete) {
         $news->setId($idToDelete);
         $news->deleteNew();
@@ -67,6 +69,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNew'])) {
 
     }
 }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteClassement'])) {
+        foreach ($_POST['rankingBox'] as $idToDelete) {
+            $classement->setId($idToDelete);
+            $classement->deleteClassement();
+        }
+        if (count($_POST['rankingBox']) > 1) {
+    
+            $_SESSION['messages'] = ["Les classements ont bien été supprimés"];
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit;
+        } else {
+            $_SESSION['messages'] = ["Le classement a bien été supprimé"];
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit;
+    
+        }
+    }
+ */
+function handleDeletion($postKey, $boxKey, $entity, $singleMessage, $multipleMessage) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST[$postKey])) {
+        foreach ($_POST[$boxKey] as $idToDelete) {
+            $entity->setId($idToDelete);
+            $entity->{"" . ucfirst($postKey)}();
+        }
+        $message = count($_POST[$boxKey]) > 1 ? $multipleMessage : $singleMessage;
+        $_SESSION['messages'] = [$message];
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    }
+}
+
+// Appeler la fonction pour chaque type de suppression
+handleDeletion(
+    'deleteNew',
+    'newBox',
+    $news,
+    "L'article a bien été supprimé",
+    "Les articles ont bien été supprimés"
+);
+
+handleDeletion(
+    'deleteResult',
+    'resultBox',
+    $results,
+    "Le résultat a bien été supprimé",
+    "Les résultats ont bien été supprimés"
+);
+
+handleDeletion(
+    'deleteClassement',
+    'rankingBox',
+    $classement,
+    "Le classement a bien été supprimé",
+    "Les classements ont bien été supprimés"
+);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification si l'on souhaite supprimer ou modifier
@@ -94,8 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 $allNews = $news->getAllNews();
-
 $allResults = $results->getResults();
+$allClassements = $classement->getClassements();
+
 
 
 ?>
@@ -107,7 +165,59 @@ require_once 'templates/dashArticles.php';
 require_once 'templates/dashResults.php';
 ?>
 
-<h3 class="h2Sports ms-2">Mise à jour du classement</h3>
+<h3 class="h2Sports ms-2">Mise à jour des classements</h3>
+<form method="POST" enctype="multipart/form-data">
+<div class="container">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <div class="table-responsive-sm">
+                <table class="table table-striped table-responsive text-center nowrap">
+                    <thead>
+                        <tr>
+                            <th>Compétition</th>
+                            <th>Poule</th>
+                            <th>Journée</th>
+                            <th>Classement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($allClassements)) { ?>
+                            <?php foreach ($allClassements as $classement) { ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($classement["competition_type"]) ?></td>
+                                    <td><?= $classement["competition_type"] === 'Championnat' ? htmlspecialchars($classement["poule_id"]) : '-' ?></td>
+                                    <td><?= $classement["competition_type"] === 'Championnat' ? htmlspecialchars($classement["day_number"]) : '-' ?></td>
+                                    <td>
+                                        <a href="<?= htmlspecialchars($classement["classement_pdf_url"]) ?>" title="<?= ($classement["classement_pdf_url"]) ?>" target="_blank">
+                                            <img src="/assets/icones/pdf-250.png" alt="pdf" class="imgNew">
+                                        </a>
+                                    </td>
+                                    <td><input type="checkbox" name="rankingBox[]" value="<?= $classement['id'] ?>"></td>
+                                </tr>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <tr>
+                                <td colspan="5">Aucun résultat trouvé.</td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="d-flex justify-content-end">
+            <div class=" my-3">
+                <a href="addRanking.php" class="btn btn-card">Ajouter un classement</button></a>
+                <?php addCSRFTokenToForm() ?>
+                <button type="submit" class="btn btn-original" name="deleteClassement">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
 <h3 class="h2Sports ms-2">Ajouter une photo</h3>
 <?php
 require_once 'templates/footer.php';

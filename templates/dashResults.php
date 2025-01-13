@@ -10,7 +10,7 @@
                             <th>Compétition</th>
                             <th>Poule</th>
                             <th>Journée</th>
-                            <th>Fichier</th>
+                            <th>Résultat</th>
                         </tr>
                     </thead>
                     <tbody>

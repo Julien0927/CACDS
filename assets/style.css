@@ -136,6 +136,13 @@ h1 {
 }
 /*************************/
 
+/*Pargraphes*/
+
+p {
+  font-family: var(--font-lato);
+  font-weight: 400;
+}
+
 label {
   font-family: "Lato", sans-serif;
   font-weight: 900;
