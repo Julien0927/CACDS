@@ -1,21 +1,19 @@
 <?php
-ob_start(); // Démarre le tampon de sortie
+ob_start();
 require_once 'header.php';
 require_once 'templates/nav.php';
+require_once 'templates/messages.php';
 require_once 'lib/pdo.php';
 require_once 'lib/tools.php';
 require_once 'lib/security.php';
 require_once 'App/Results.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 // Mapping des IDs de compétition
 $competitionMapping = [
-    'Champ' => 1,
-    'Cup' => 2,
-    'Tourn' => 3
+    'Championnat' => 1,
+    'Coupe' => 2,
+    'Tournoi' => 3
 ];
 
 // Fonction de traitement des erreurs
@@ -36,7 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pouleId = $_POST['poulesResults'] ?? null;
         $dayNumber = $_POST['dayNumber'] ?? null;
 
-        if (!$competitionId || !$pouleId || !$dayNumber) {
+        // Les coupes et les tournois n'ont pas besoin de poule ou de journée
+        if (in_array($_POST['results'], ['Cup', 'Tourn'])) {
+            $pouleId = null;
+            $dayNumber = null;
+        }
+
+        if (!$competitionId && !$pouleId && !$dayNumber) {
             handleError("Tous les champs sont requis");
         }
 
@@ -75,8 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Ajout du résultat dans la base de données
         $results = new App\Results\Results($db, $competitionId, $pouleId);
         $results->addResult($dayNumber, $destPath);
-        $_SESSION['success'] = "Le résultat a été ajouté avec succès";
-        header('Location: dashboardBad.php'); 
+
+        $_SESSION['messages'] = ["Le résultat a été ajouté avec succès"];
+        header('Location: addScores.php');
         exit();
 
     } catch (Exception $e) {
@@ -106,26 +111,16 @@ ob_end_flush();
         <div class="me-3 mt-4">
             <select name="results" id="results" class="form-select" required>
                 <option value="">Choix de la compétition</option>
-                <?php 
-                try {
-                    $results = new App\Results\Results($db);
-                    $competitions = $results->getCompetitions();
-                    foreach($competitions as $competition) {
-                        $displayText = $competition['type'] ;
-                        echo '<option value="' . htmlspecialchars($competition['id']) . '">' 
-                        . htmlspecialchars($displayText) . '</option>';
-                    }
-                } catch (Exception $e) {
-                    echo '<option value="">Erreur de chargement</option>';
-                }
-                ?>
+                <option value="Championnat">Championnat</option>
+                <option value="Coupe">Coupe</option>
+                <option value="Tournoi">Tournoi</option>
             </select>
         </div>
         
         <!-- Choix de la poule -->
         <div id="poules-results-container" style="display: none;" class="me-3 mb-2">
             <label for="poulesResults" class="form-label me-2">Choisir une poule</label>
-            <select name="poulesResults" id="poulesResults" class="form-select" required>
+            <select name="poulesResults" id="poulesResults" class="form-select">
                 <!-- Les options seront générées en JS -->
             </select>
         </div>
@@ -133,7 +128,7 @@ ob_end_flush();
         <!-- Numéro de journée -->
         <div id="dayNumber-container" style="display: none;" class="me-3 mb-2">
             <label for="dayNumber" class="form-label me-2">Numéro de la journée</label>
-            <input type="number" name="dayNumber" id="dayNumber" min="1" class="form-control" required>
+            <input type="number" name="dayNumber" id="dayNumber" class="form-control">
         </div>
 
         <!-- Upload de fichier -->

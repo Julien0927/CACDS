@@ -1,17 +1,20 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+<?php 
+if (session_status() === PHP_SESSION_NONE) { 
+    session_start(); 
+} 
+require_once('lib/config_session.php');
 
-require_once('lib/config_session.php'); // Charger les menus
+// Obtenir le nom de la page courante
+$current_page = basename($_SERVER['PHP_SELF']);
 
-// Initialisation du menu à afficher
+// Charger les menus
+// Initialisation du menu à afficher 
 $menuToShow = $menu;
 
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['user'])) {
     $userSport = $_SESSION['user']['sport_id'] ?? null;
-
+    
     // Ajouter le lien vers le dashboard spécifique si un sport est défini
     if ($userSport) {
         $dashboardPages = [
@@ -20,7 +23,7 @@ if (isset($_SESSION['user'])) {
             '3' => 'dashboardPetanque.php',
             '4' => 'dashboardVolley.php',
         ];
-
+        
         // Ajouter le dashboard au menu, s'il existe pour cet utilisateur
         if (isset($dashboardPages[$userSport])) {
             $menuToShow = [
@@ -43,7 +46,7 @@ if (isset($_SESSION['user'])) {
                 <?php foreach ($menuToShow as $url => $label): ?>
                     <?php if (!isset($_SESSION['user']) || $url !== 'login.php'): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= htmlspecialchars($url) ?>">
+                            <a class="nav-link <?= ($current_page === $url) ? 'active' : '' ?>" href="<?= htmlspecialchars($url) ?>">
                                 <?php if ($url === 'login.php'): ?>
                                     <?= $label; // Affiche directement l'icône si c'est login.php ?>
                                 <?php else: ?>
@@ -52,10 +55,11 @@ if (isset($_SESSION['user'])) {
                             </a>
                         </li>
                     <?php endif; ?>
-                <?php endforeach; ?>                <!-- Bouton de déconnexion -->
+                <?php endforeach; ?>
+                <!-- Bouton de déconnexion -->
                 <?php if (isset($_SESSION['user'])): ?>
-                    <li class="nav-item ">
-                        <a class="btn btnLogout me-2" href="logout.php">Se déconnecter</a>
+                    <li class="nav-item">
+                        <a class="btn btnLogout me-2 <?= ($current_page === 'logout.php') ? 'active' : '' ?>" href="logout.php">Se déconnecter</a>
                     </li>
                 <?php endif; ?>
             </ul>

@@ -68,7 +68,7 @@ function displayNewsSection($news, $sport) {
                 <?php if ($news): ?>
                     <div class="news-body">
                         <p class="content"><?= (truncateText($news['content'])) ?></p>
-                        <p class="date"><?= ($news['date']) ?></p>
+                        <p class="date"><?= date ('d/m/Y', strtotime($news['date'])) ?></p>
                     </div>
                 <?php else: ?>
                     <p>Aucun article disponible pour le <?= $sport['name'] ?>.</p>
@@ -85,7 +85,8 @@ function displayNewsSection($news, $sport) {
             <?php endif; ?>
         </div>
     </div>
-</div>     <?php
+</div>     
+<?php
 }
 ?>
 

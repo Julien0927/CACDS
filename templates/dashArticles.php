@@ -43,7 +43,8 @@
         <div class="d-flex justify-content-end">
             <div class=" my-3">
                 <a href="addNews.php" class="btn btn-card">Ajouter un article</button></a>
-                <button type="submit" class="btn btn-second " name="deleteNew">Modifier</button>
+                <?php addCSRFTokenToForm() ?>
+                <button type="submit" class="btn btn-second" name="updateNew">Modifier</button>
                 <button type="submit" class="btn btn-original" name="deleteNew">Supprimer</button>
             </div>
         </div>

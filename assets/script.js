@@ -37,7 +37,7 @@ const poulesResultsSelect = document.getElementById('poulesResults');
 // Écouteur d'événement sur le select des compétitions
 competitionSelect.addEventListener('change', () => {
     // Vérifier si "Championnat" est sélectionné
-    if (competitionSelect.value === 'Champ') {
+    if (competitionSelect.value === 'Championnat') {
         // Afficher le conteneur
         poulesResultsContainer.style.display = 'block';
         
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dayNumberSelect = document.getElementById('dayNumber');
     const dayNumberContainer = document.getElementById('dayNumber-container');
     competitionSelect.addEventListener('change', () => {
-        if (competitionSelect.value === 'Champ') {
+        if (competitionSelect.value === 'Championnat') {
             dayNumberContainer.style.display = 'block';
             dayNumberSelect.innerHTML = '';
         } else {
