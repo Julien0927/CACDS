@@ -15,7 +15,7 @@
 </head>
 <body>
   <header class="navbar" >
-    <div class=" d-flex  justify-content-start align-items-center mx-3">
+    <div class=" d-flex justify-content-start col-8 col-md-3 align-items-center ms-3">
       <a href="index.php"><img src="/assets/logos/square_logo.jpg" class="logo" alt="logo CACDS"></a>
       <a href="index.php" class="disabled-link"></a>
     </div>

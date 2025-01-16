@@ -121,10 +121,6 @@ function displayNewsSection($news, $sport) {
     </div>
 </section>
 
-            </div>
-        </div>
-    </div>
-</section>
 <section class="mt-3">
     <h1 style="text-align: center;">TEXTE DE PRÉSENTATION DE L'ASSOCIATION</h1>
 </section>

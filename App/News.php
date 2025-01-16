@@ -84,7 +84,7 @@ class News {
     }
 
      //Fonction permettant de recuperer les news par sport
-    public function getNewsBySport($sport_id, $page)
+/*     public function getNewsBySport($sport_id, $page)
     {
     $sql = "SELECT * FROM news 
             WHERE sport_id = :sport_id 
@@ -94,7 +94,36 @@ class News {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
- 
+ */ 
+public function getNewsBySport($sport_id, $page)
+{
+    // Calculer l'offset pour la pagination
+    $offset = ($page - 1) * $this->newsParPage;
+    
+    $sql = "SELECT * FROM news 
+            WHERE sport_id = :sport_id 
+            ORDER BY date DESC, id DESC
+            LIMIT :limit OFFSET :offset"; 
+            
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':sport_id', $sport_id, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $this->newsParPage, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Ajoutez une nouvelle méthode pour compter le total des news par sport
+public function getTotalNewsBySport($sport_id): int
+{
+    $sql = "SELECT COUNT(*) FROM news WHERE sport_id = :sport_id";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':sport_id', $sport_id, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return (int)$stmt->fetchColumn();
+}
 
     //Fonction permettant de recuperer un article par son id
     public function getNewById(int $id) {

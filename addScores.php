@@ -8,13 +8,13 @@ require_once 'lib/tools.php';
 require_once 'lib/security.php';
 require_once 'App/Results.php';
 
-
 // Mapping des IDs de compétition
 $competitionMapping = [
     'Championnat' => 1,
     'Coupe' => 2,
     'Tournoi' => 3
 ];
+
 
 // Fonction de traitement des erreurs
 function handleError($message) {
@@ -33,11 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $competitionId = $competitionMapping[$_POST['results']] ?? null;
         $pouleId = $_POST['poulesResults'] ?? null;
         $dayNumber = $_POST['dayNumber'] ?? null;
+        $name = $_POST['name'] ?? null;
 
         // Les coupes et les tournois n'ont pas besoin de poule ou de journée
-        if (in_array($_POST['results'], ['Cup', 'Tourn'])) {
+        if (in_array($_POST['results'], ['Coupe', 'Tournoi'])) {
             $pouleId = null;
             $dayNumber = null;
+
+            if (empty($name)) {
+                handleError("Le nom de la compétition est requis");
+            }
         }
 
         if (!$competitionId && !$pouleId && !$dayNumber) {
@@ -78,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Ajout du résultat dans la base de données
         $results = new App\Results\Results($db, $competitionId, $pouleId);
-        $results->addResult($dayNumber, $destPath);
+        $results->addResult($dayNumber, $destPath, $name);
 
         $_SESSION['messages'] = ["Le résultat a été ajouté avec succès"];
         header('Location: addScores.php');
@@ -124,6 +129,11 @@ ob_end_flush();
                 <!-- Les options seront générées en JS -->
             </select>
         </div>
+        <!-- Nom de la compétition -->
+        <div id="competitionNameContainer" style="display: none;" class="me-3 mb-2">
+            <label for="name" class="form-label me-2">Nom de la compétition :</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Nom de la compétition">
+        </div>
         
         <!-- Numéro de journée -->
         <div id="dayNumber-container" style="display: none;" class="me-3 mb-2">
@@ -132,7 +142,7 @@ ob_end_flush();
         </div>
 
         <!-- Upload de fichier -->
-        <div class="mt-4">
+        <div class="mt-5">
             <input type="file" class="form-control" name="result_pdf_url" id="result_pdf_url" accept="application/pdf" required>
             <small class="form-text text-muted">Taille maximum : 5MB. Format accepté : PDF uniquement.</small>
         </div>

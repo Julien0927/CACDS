@@ -23,7 +23,7 @@ class Classements {
         $this->id = (int)$id;
     }
     
-public function getClassements() {
+/* public function getClassements() {
     try {
         $query = "
             SELECT 
@@ -60,9 +60,49 @@ public function getClassements() {
         throw new \Exception("Erreur lors de la récupération des classements : " . $e->getMessage());
     }
 }
-
+ */
+public function getClassements() {
+    try {
+        $query = "
+            SELECT 
+                cb.*,
+                c.name AS competition_name,
+                c.type AS competition_type
+            FROM classementbad cb
+            INNER JOIN competitions c ON cb.competitions_id = c.id
+            WHERE 1=1
+        ";
+        $params = [];
+        
+        // Filtrer par competition_id si spécifié
+        if ($this->competitionId) {
+            $query .= " AND cb.competitions_id = :competitions_id";
+            $params[':competitions_id'] = $this->competitionId;
+        }
+        
+        // Filtrer par poule_id si spécifié
+        if ($this->pouleId) {
+            $query .= " AND cb.poule_id = :poule_id";
+            $params[':poule_id'] = $this->pouleId;
+        }
+        
+        // Ordonner différemment selon le type de compétition
+        $query .= "
+        ORDER BY 
+            c.id, 
+            COALESCE(cb.day_number, 0), 
+            cb.name";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new \Exception("Erreur lors de la récupération du classement : " . $e->getMessage());
+    }
+}
 // Dans la méthode addResult(), modifiez la vérification du type :
-public function addClassement($dayNumber = NULL, $pdfUrl) {
+public function addClassement($dayNumber = NULL, $pdfUrl, $name = NULL) {
     if ($this->competitionId === null) {
         throw new InvalidArgumentException("Competition ID est requis pour ajouter un classement");
     }
@@ -77,18 +117,28 @@ public function addClassement($dayNumber = NULL, $pdfUrl) {
         if ($competition && in_array($competition['type'], ['Coupe', 'Tournoi'])) {
             $this->pouleId = null;
             $dayNumber = null;
+
+            // Vérifie que le nom est fourni pour les coupes et tournois
+            if (empty($name)) {
+                throw new InvalidArgumentException("Le nom est requis pour les coupes et tournois");
+            }
+        } else {
+            // Pour le championnat, le nom est optionnel
+            $name = null;
         }
+    
         
         $query = $this->db->prepare("
-            INSERT INTO classementbad (poule_id, competitions_id, day_number, classement_pdf_url)
-            VALUES (:poule_id, :competitions_id, :day_number, :pdf_url)
+            INSERT INTO classementbad (poule_id, competitions_id, day_number, classement_pdf_url, name)
+            VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name)
         ");
         
         return $query->execute([
             'poule_id' => $this->pouleId,
             'competitions_id' => $this->competitionId,
             'day_number' => $dayNumber,
-            'pdf_url' => $pdfUrl
+            'pdf_url' => $pdfUrl,
+            'name' => $name
         ]);
     } catch (PDOException $e) {
         throw new \Exception("Erreur lors de l'ajout du classement : " . $e->getMessage());

@@ -8,7 +8,6 @@ require_once 'lib/tools.php';
 require_once 'lib/security.php';
 require_once 'App/Classements.php';
 
-
 // Mapping des IDs de compétition
 $competitionMapping = [
     'Championnat' => 1,
@@ -19,7 +18,7 @@ $competitionMapping = [
 // Fonction de traitement des erreurs
 function handleError($message) {
     $_SESSION['error'] = $message;
-    header('Location: addScores.php');
+    header('Location: addRanking.php');
     exit();
 }
 
@@ -33,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $competitionId = $competitionMapping[$_POST['results']] ?? null;
         $pouleId = $_POST['poulesResults'] ?? null;
         $dayNumber = $_POST['dayNumber'] ?? null;
+        $name = $_POST['name'] ?? null;
 
         // Les coupes et les tournois n'ont pas besoin de poule ou de journée
         if (in_array($_POST['results'], ['Coupe', 'Tournoi'])) {
@@ -78,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Ajout du résultat dans la base de données
         $classements = new App\Classements\Classements($db, $competitionId, $pouleId);
-        $classements->addClassement($dayNumber, $destPath);
+        $classements->addClassement($dayNumber, $destPath, $name);
 
         $_SESSION['messages'] = ["Le classement a été ajouté avec succès"];
-        header('Location: addScores.php');
+        header('Location: addRanking.php');
         exit();
 
     } catch (Exception $e) {
@@ -124,7 +124,13 @@ ob_end_flush();
                 <!-- Les options seront générées en JS -->
             </select>
         </div>
-        
+
+        <!-- Nom de la compétition -->
+        <div id="competitionNameContainer" style="display: none;" class="me-3 mb-2">
+            <label for="name" class="form-label me-2">Nom de la compétition :</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Entrez le nom de la compétition">
+        </div>
+
         <!-- Numéro de journée -->
         <div id="dayNumber-container" style="display: none;" class="me-3 mb-2">
             <label for="dayNumber" class="form-label me-2">Numéro de la journée</label>
@@ -132,7 +138,7 @@ ob_end_flush();
         </div>
 
         <!-- Upload de fichier -->
-        <div class="mt-4">
+        <div class="mt-5">
             <input type="file" class="form-control" name="classement_pdf_url" id="classement_pdf_url" accept="application/pdf" required>
             <small class="form-text text-muted">Taille maximum : 5MB. Format accepté : PDF uniquement.</small>
         </div>

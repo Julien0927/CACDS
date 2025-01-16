@@ -1,5 +1,5 @@
 <?php
-require_once 'header.php';
+/* require_once 'header.php';
 require_once 'templates/nav.php';
 require_once 'lib/pdo.php';
 require_once 'App/News.php';
@@ -9,7 +9,25 @@ $sportId = 2;
 $totalPages = $news->getTotalPages();
 $pageActuelle = isset ($_GET['page']) ? $_GET['page'] : 1;
 $newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
+ */
+require_once 'header.php';
+require_once 'templates/nav.php';
+require_once 'lib/pdo.php';
+require_once 'App/News.php';
 
+$news = new App\News\News($db);
+$sportId = 2; // ID du badminton
+
+// Récupération de la page courante
+$pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($pageActuelle < 1) $pageActuelle = 1;
+
+// Calcul du nombre total de pages
+$totalNews = $news->getTotalNewsBySport($sportId);
+$totalPages = ceil($totalNews / $news->getNewsParPage());
+
+// Récupération des news pour la page actuelle
+$newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
 ?>
 
 <div class="center">
@@ -24,36 +42,55 @@ $stmt = $db->prepare($sql);
 $stmt->bindValue(':sport_id', $sportId, PDO::PARAM_INT);
 $stmt->execute();
 $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+/*Affichage dynamique des compétitions*/
+$sql = "SELECT name FROM journees WHERE competitions_id = :competitions_id";
 ?>
 <div class="container-fluid ms-3">
 <!-- Section Actualités -->
-    <section class="container-fluid">
-        <h2 class="h2Sports">Actualités</h2>
-        <p>Retrouvez ici les dernières nouvelles importantes concernant le club.</p>
-        <div class="row mb-2"> <!-- Conteneur principal des articles -->
-            <?php foreach ($newsPageActuelle as $new): ?>
-                <?php include 'templates/partial_news.php'; ?>
-            <?php endforeach; ?>
-        </div>
-        <!-- Génération des liens de pagination -->
-<!--         <nav aria-label="Page navigation example" id="pagination">
-            <ul class="pagination">
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <li class="page-item <?= $pageActuelle == $i ? 'active' : '' ?>">
-                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                    </li>
-                <?php endfor; ?>
-            </ul>
-        </nav>
- -->    </section>
-
-    <!-- Section Compétitions -->
+<section class="container-fluid">
+    <h2 class="h2Sports">Actualités</h2>
+    <p>Retrouvez ici les dernières nouvelles importantes concernant le club.</p>
+    <div class="row mb-2">
+        <?php foreach ($newsPageActuelle as $new): ?>
+            <?php include 'templates/partial_news.php'; ?>
+        <?php endforeach; ?>
+    </div>
+    
+    <?php if ($totalPages > 1): ?>
+    <nav aria-label="Navigation des articles">
+        <ul class="pagination justify-content-center">
+            <?php if ($pageActuelle > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?= $pageActuelle - 1 ?>" aria-label="Précédent">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?= $pageActuelle == $i ? 'active' : '' ?>">
+                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+            <?php endfor; ?>
+            
+            <?php if ($pageActuelle < $totalPages): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?= $pageActuelle + 1 ?>" aria-label="Suivant">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+    <?php endif; ?>
+</section>
+<!-- Section Compétitions -->
     <section>
         <h2 class="h2Sports">Compétitions</h2>
-        <h3 id="calendrier" class="h3Sports ms-4">Calendrier de la saison</h3>
-        <p class="center">Ici image du calendrier</p>
+        <h3 id="calendrier" class="h3Sports ms-4 text-center">Calendrier de la saison</h3>
+        <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
         <h3 class="h3Sports ms-4" id="compet">Championnat</h3>
-        <p>Le championnat regroupe plusieurs poules où évoluent 6 équipes. Les matchs se déroulent en phase aller-retour.<br> 
+        <p>Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
             En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
             <label for="sports" class="form-label me-2">Sélectionnez votre poule</label>
             <select name="poules" id="poules">
@@ -62,7 +99,43 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
 
             </select>
-        <h3 class="h3Sports ms-4" id="cup">Coupe</h3>
+            <div class="row d-flex justify-content-center mt-4">
+                <div class="col-md-3">
+                    <h4>Résultats</h4>
+                    <div id="resultats-container">
+                        <!-- Les résultats seront chargés ici -->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4>Classement</h4>
+                    <div id="classement-container">
+                        <!-- Le classement sera chargé ici -->
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="h3Sports ms-4" id="cup">Coupe</h3>
+            <p>La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
+            <label for="coupe" class="form-label me-2">Sélectionnez votre coupe</label>
+            <select name="name" id="name">
+                <?php foreach ($competitionNames as $competitionName): ?>
+                    <option value="<?= $competitionName ?>"><?= htmlspecialchars($competitionName) ?></option>
+                <?php endforeach; ?>
+            <div class="row d-flex justify-content-center mt-4">
+                <div class="col-md-3">
+                    <h4>Résultats</h4>
+                    <div id="resultats-container">
+                        <!-- Les résultats seront chargés ici -->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4>Classement</h4>
+                    <div id="classement-container">
+                        <!-- Le classement sera chargé ici -->
+                    </div>
+                </div>
+            </div>
+        
         <h3 class="h3Sports ms-4" id="tournament">Tournois</h3>
     </section>
 
@@ -79,11 +152,11 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <!-- Section Informations -->
-    <section>
+<!--     <section>
         <h2 class="h2Sports">Informations</h2>
         <p>Toutes les informations à propos de nos événements et activités.</p>
     </section>
-
+ -->
     <!-- Section Les Chiffres -->
     <section id="chiffres">
         <h2 class="h2Sports">Les Chiffres</h2>

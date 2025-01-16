@@ -12,6 +12,10 @@ require_once 'templates/messages.php';
 $messages = [];
 $errors = [];
 
+if (isset($_SESSION ['user'])) {
+    $sportId = $_SESSION ['sport_id'];
+}
+
 if (isset($_SESSION['success_message'])) {
     echo '<div class="alert success connexion bold mx-auto">' . $_SESSION['success_message'] . '</div>';
     // Supprimer le message après affichage

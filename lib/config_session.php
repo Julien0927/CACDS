@@ -9,7 +9,7 @@
     'contact.php' => ['label' => 'Contact'],
 ]; 
  */
-
+ define ('_IMG_PATH_', 'uploads/photos/');
  define ('_NEWS_IMG_PATH_', 'uploads/news/');
 // Pages pour les administrateurs (ajoutées dynamiquement selon l'utilisateur connecté)
 $admin = [

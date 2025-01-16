@@ -16,6 +16,11 @@
   --font-weight-black: 900;
 }
 
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 
 /* .montserrat-montserrat {
   font-family: "Montserrat", sans-serif;
@@ -161,6 +166,7 @@ option, select {
   justify-content: center;
 }
 
+
 .insideNav {
   display: flex;
   justify-content: center;
@@ -255,6 +261,15 @@ option, select {
   margin: 0;
 }
 
+/*cards news home*/
+.card {
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 /*styles pour les news-Home*/
  .news-container {
   padding: 15px;
@@ -329,6 +344,39 @@ option, select {
 .btn {
   margin-top: 10px;
   align-self: flex-start;
+}
+
+/*style affichage resultats*/
+.results-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.results-list .card {
+  border-color: var(--orange-color);
+  transition: transform 0.2s ease;
+  border-left: 4px solid var(--orange-color);
+}
+
+.results-list .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+/*style affichage classement*/
+.classement-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.classement-list .card {
+  border-color: var(--green-color);
+  transition: transform 0.2s ease;
+  border-left: 4px solid var(--green-color);
+}
+
+.classement-list .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* Responsive pour mobile */
