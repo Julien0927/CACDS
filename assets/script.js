@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function loadCupResults(cupName) {
-        fetch(`get_cup_results.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`) // 2 pour la coupe
+        fetch(`get_results.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`) // 2 pour la coupe
             .then(response => response.text())
             .then(data => {
                 cupResultsContainer.innerHTML = data;
@@ -197,8 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    /*Nouveau gestionnaire pour les tournois*/
-/*     const tournamentSelect = document.getElementById('tournamentName');
+    // Gestionnaire pour les tournois
+    const tournamentSelect = document.getElementById('tournamentName');
     const tournamentResultsContainer = document.getElementById('resultTournament-container');
     const tournamentRankingContainer = document.getElementById('rankingTournament-container');
 
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function loadTournamentResults(tournamentName) {
-        fetch(`get_tournament_results.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`) // 3 pour le tournoi
+        fetch(`get_results.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`) // 3 pour le tournoi
             .then(response => response.text())
             .then(data => {
                 tournamentResultsContainer.innerHTML = data;
@@ -239,50 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 tournamentRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
             });
     }
- */
-    // Gestionnaire pour les tournois
-const tournamentSelect = document.getElementById('tournamentName');
-const tournamentResultsContainer = document.getElementById('resultTournament-container');
-const tournamentRankingContainer = document.getElementById('rankingTournament-container');
-
-if (tournamentSelect) {
-    loadTournamentResults(tournamentSelect.value);
-    tournamentSelect.addEventListener('change', function() {
-        loadTournamentResults(this.value);
     });
-}
-
-if (tournamentSelect) {
-    loadTournamentRanking(tournamentSelect.value);
-    tournamentSelect.addEventListener('change', function() {
-        loadTournamentRanking(this.value);
-    });
-}
-
-function loadTournamentResults(tournamentName) {
-    fetch(`get_tournament_results.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`) // 3 pour le tournoi
-        .then(response => response.text())
-        .then(data => {
-            tournamentResultsContainer.innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            tournamentResultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
-        });
-}
-
-function loadTournamentRanking(tournamentName) {
-    fetch(`get_tournament_classement.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`) // 3 pour le tournoi
-        .then(response => response.text())
-        .then(data => {
-            tournamentRankingContainer.innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            tournamentRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
-        });
-}
-});
 
 /*Affichage dynamique des résultats de tournoi*/
 

@@ -1,5 +1,5 @@
 <?php
-require_once 'lib/pdo.php';
+/* require_once 'lib/pdo.php';
 require_once 'App/Results.php';
 
 // Récupération des paramètres
@@ -41,4 +41,4 @@ try {
 } catch (Exception $e) {
     echo '<p class="text-danger">Erreur : ' . htmlspecialchars($e->getMessage()) . '</p>';
 }
-?>
+ */?>

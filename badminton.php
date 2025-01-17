@@ -82,15 +82,15 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </section>
 <!-- Section Compétitions -->
     <section>
-        <h2 class="h2Sports ms-5">Compétitions</h2>
+        <h2 class="h2Sports line ">Compétitions</h2>
         <h3 id="calendrier" class="h3Sports ms-4 text-center">Calendrier de la saison</h3>
         <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
 
         <!--Championnat-->
         <h3 class="h3Sports ms-4" id="compet">Championnat</h3>
-        <p>Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
+        <p class="ms-4">Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
             En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
-            <label for="sports" class="form-label me-2">Sélectionnez votre poule</label>
+            <label for="sports" class="form-label me-2 ms-4">Sélectionnez votre poule</label>
             <select name="poules" id="poules">
             <?php foreach ($poules as $poule): ?>
                 <option value="<?= $poule['id'] ?>"><?= htmlspecialchars($poule['id']) ?></option>
@@ -111,10 +111,11 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
             </div>
+
         <!--Coupe-->
         <h3 class="h3Sports ms-4" id="cup">Coupe</h3>
-        <p>La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
-        <label for="coupe" class="form-label me-2">Sélectionnez votre coupe</label>
+        <p class="ms-4">La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
+        <label for="coupe" class="form-label me-2 ms-4">Sélectionnez votre coupe</label>
         <?php
         $results = new App\Results\Results($db);
         $cupNames = $results->getCupNames();
@@ -140,11 +141,10 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-
         <!--Tournois-->
         <h3 class="h3Sports ms-4" id="tourn">Tournois</h3>
-        <p>Les tournois sont des compétitions individuelles ou par équipes sur une ou plusieurs journées.</p>
-        <label for="tournament" class="form-label me-2">Sélectionnez votre tournoi</label>
+        <p class="ms-4">Les tournois sont des compétitions individuelles ou par équipes sur une ou plusieurs journées.</p>
+        <label for="tournament" class="form-label me-2 ms-4">Sélectionnez votre tournoi</label>
         <?php
         $results = new App\Results\Results($db);
         $tournamentNames = $results->getTournamentNames();
@@ -175,12 +175,34 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section>
         <h2 class="h2Sports">Documents</h2>
         <p>Accédez aux documents officiels et informations utiles.</p>
-        <h3 class="h3Sports ms-4">CR Réunion des capitaines</h3>
-        <h3 class="h3Sports ms-4">Demande d'adhésion</h3>
-        <h3 class="h3Sports ms-4">Demande d'engagement</h3>
-        <h3 class="h3Sports ms-4">Attestation certificats médicaux</h3>
-        <h3 class="h3Sports ms-4">Autorisation de droit à l'image</h3>
-        <h3 class="h3Sports ms-4">Règlement badminton</h3>
+        <div class="row">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Demande d'adhésion</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Demande d'engagement</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Fiche d'inscription</h3>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Règlement badminton</h3>
+            </div>
+        </div>
     </section>
 
     <!-- Section Informations -->
@@ -191,7 +213,7 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
  -->
     <!-- Section Les Chiffres -->
     <section id="chiffres">
-        <h2 class="h2Sports">Les Chiffres</h2>
+        <h2 class="h2Sports mt-3">Les Chiffres</h2>
         <p>Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>
 
@@ -199,6 +221,8 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section id="gallery">
         <h2 class="h2Sports">Galerie Photos</h2>
         <p>Découvrez les meilleurs moments du club en images.</p>
+        
+        
     </section>
 
     <!-- Section Liens Utiles -->
