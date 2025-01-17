@@ -261,6 +261,8 @@ option, select {
   margin: 0;
 }
 
+/*décoration ligne*/
+
 /*cards news home*/
 .card {
   transition: transform 0.2s ease;

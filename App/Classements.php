@@ -23,44 +23,6 @@ class Classements {
         $this->id = (int)$id;
     }
     
-/* public function getClassements() {
-    try {
-        $query = "
-            SELECT 
-                cb.*,
-                c.name AS competition_name,
-                c.type AS competition_type
-            FROM classementbad cb
-            INNER JOIN competitions c ON cb.competitions_id = c.id;
-
-        ";
-        $params = [];
-        
-        if ($this->competitionId || $this->pouleId) {
-            $query .= " WHERE 1=1";
-            
-            if ($this->competitionId) {
-                $query .= " AND cb.competitions_id = :competitions_id";
-                $params['competitions_id'] = $this->competitionId;
-            }
-            
-            if ($this->pouleId) {
-                $query .= " AND cb.poule_id = :poule_id";
-                $params['poule_id'] = $this->pouleId;
-            }
-        }
-        
-        $query .= " ORDER BY cb.id, cb.day_number";
-        
-        $stmt = $this->db->prepare($query);
-        $stmt->execute($params);
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        throw new \Exception("Erreur lors de la récupération des classements : " . $e->getMessage());
-    }
-}
- */
 public function getClassements() {
     try {
         $query = "

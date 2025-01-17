@@ -25,7 +25,7 @@ try {
         echo '<div class="card mb-3">';
         echo '<div class="card-body">';
         if ($classement['day_number']) {
-            echo '<h5 class="card-title">Classement - Journée ' . htmlspecialchars($classement['day_number']) . '</h5>';
+            echo '<h5 class="card-title">Journée ' . htmlspecialchars($classement['day_number']) . '</h5>';
         } else {
             echo '<h5 class="card-title">Classement général</h5>';
         }

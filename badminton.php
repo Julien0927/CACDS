@@ -82,7 +82,7 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </section>
 <!-- Section Compétitions -->
     <section>
-        <h2 class="h2Sports">Compétitions</h2>
+        <h2 class="h2Sports ms-5">Compétitions</h2>
         <h3 id="calendrier" class="h3Sports ms-4 text-center">Calendrier de la saison</h3>
         <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
 
@@ -142,28 +142,34 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
         <!--Tournois-->
-<!--         <h3 class="h3Sports ms-4" id="tournament">Tournois</h3>
-        <label for="coupe" class="form-label me-2">Sélectionnez votre coupe</label>
-            <select name="name" id="name">
-                <?php foreach ($tournamentNames as $tournamentName): ?>
-                    <option value="<?= $tournamentName['name'] ?>"><?= ($tournamentName['name']) ?></option>
-                <?php endforeach; ?>
-            <div class="row d-flex justify-content-center mt-4">
-                <div class="col-md-3">
-                    <h4>Résultats</h4>
-                    <div id="resultats-container">
-                        <!-- Les résultats seront chargés ici -->
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <h4>Classement</h4>
-                    <div id="classement-container">
-                        <!-- Le classement sera chargé ici -->
-                    </div>
+        <h3 class="h3Sports ms-4" id="tourn">Tournois</h3>
+        <p>Les tournois sont des compétitions individuelles ou par équipes sur une ou plusieurs journées.</p>
+        <label for="tournament" class="form-label me-2">Sélectionnez votre tournoi</label>
+        <?php
+        $results = new App\Results\Results($db);
+        $tournamentNames = $results->getTournamentNames();
+        ?>
+        <select name="tournamentName" id="tournamentName">
+            <?php foreach ($tournamentNames as $tournamentName): ?>
+                <option value="<?= $tournamentName['name'] ?>"><?= ($tournamentName['name']) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <div class="row d-flex justify-content-center mt-4">
+            <div class="col-md-3">
+                <h4>Résultats</h4>
+                <div id="resultTournament-container">
+                    <!-- Les résultats seront chargés ici -->
                 </div>
             </div>
- -->
-    </section>
+            <div class="col-md-3">
+                <h4>Classement</h4>
+                <div id="rankingTournament-container">
+                    <!-- Le classement sera chargé ici -->
+                </div>
+            </div>
+        </div>
+</section>
 
     <!-- Section Documents -->
     <section>

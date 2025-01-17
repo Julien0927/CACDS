@@ -71,6 +71,12 @@ public function setCupName($name): void {
     }
     $this->cupName = $name;
 }
+public function setTournamentName($name): void {
+    if (empty($name)) {
+        throw new InvalidArgumentException("Le nom de la coupe est requis");
+    }
+    $this->cupName = $name;
+}
 
 
 public function getResults() {
@@ -160,6 +166,22 @@ public function getCupNames() {
             FROM journees j
             INNER JOIN competitions c ON j.competitions_id = c.id
             WHERE c.type = 'Coupe'
+            ORDER BY j.name
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new \Exception("Erreur lors de la récupération des noms de coupes : " . $e->getMessage());
+    }
+}
+
+public function getTournamentNames() {
+    try {
+        $stmt = $this->db->prepare("
+            SELECT DISTINCT j.name 
+            FROM journees j
+            INNER JOIN competitions c ON j.competitions_id = c.id
+            WHERE c.type = 'Tournoi'
             ORDER BY j.name
         ");
         $stmt->execute();
