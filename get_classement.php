@@ -44,3 +44,4 @@ try {
 } catch (Exception $e) {
     echo '<p class="text-danger">Erreur : ' . htmlspecialchars($e->getMessage()) . '</p>';
 }
+?>

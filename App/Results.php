@@ -23,167 +23,6 @@ class Results {
         $this->id = (int)$id;
     }
     
-/*     public function addResult($dayNumber = NULL, $pdfUrl) {
-        if (!$this->competitionId = null || !$this->pouleId = null) {
-            throw new InvalidArgumentException("Competition ID et Poule ID sont requis pour ajouter un résultat");
-        }
-        
-        if ($dayNumber !== null && (!is_numeric($dayNumber) || $dayNumber <= 0)) {
-            throw new InvalidArgumentException("Numéro de journée invalide");
-        }
-        
-        try {
-            $query = $this->db->prepare("
-                INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url)
-                VALUES (:poule_id, :competitions_id, :day_number, :pdf_url)
-            ");
-            
-            return $query->execute([
-                'poule_id' => $this->pouleId ?? null,
-                'competitions_id' => $this->competitionId,
-                'day_number' => $dayNumber ?? null,
-                'pdf_url' => $pdfUrl
-            ]);
-        } catch (PDOException $e) {
-            throw new \Exception("Erreur lors de l'ajout du résultat : " . $e->getMessage());
-        }
-    }
- */    
-/* public function getResults() {
-    try {
-        $query = "
-            SELECT 
-                j.*,
-                c.name as competition_name,
-                c.type as competition_type
-            FROM journees j
-            INNER JOIN competitions c ON j.competitions_id = c.id
-        ";
-        $params = [];
-        
-        if ($this->competitionId || $this->pouleId) {
-            $query .= " WHERE 1=1";
-            
-            if ($this->competitionId) {
-                $query .= " AND j.competitions_id = :competitions_id";
-                $params['competitions_id'] = $this->competitionId;
-            }
-            
-            if ($this->pouleId) {
-                $query .= " AND j.poule_id = :poule_id";
-                $params['poule_id'] = $this->pouleId;
-            }
-        }
-        
-        $query .= " ORDER BY c.id, j.day_number";
-        
-        $stmt = $this->db->prepare($query);
-        $stmt->execute($params);
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        throw new \Exception("Erreur lors de la récupération des résultats : " . $e->getMessage());
-    }
-}
-
-// Dans la méthode addResult(), modifiez la vérification du type :
-public function addResult($dayNumber = NULL, $pdfUrl) {
-    if ($this->competitionId === null) {
-        throw new InvalidArgumentException("Competition ID est requis pour ajouter un résultat");
-    }
-    
-    try {
-        // Vérifie le type de compétition
-        $stmt = $this->db->prepare("SELECT type FROM competitions WHERE id = :id");
-        $stmt->execute(['id' => $this->competitionId]);
-        $competition = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        // Pour les coupes et tournois, force poule_id et day_number à NULL
-        if ($competition && in_array($competition['type'], ['Coupe', 'Tournoi'])) {
-            $this->pouleId = null;
-            $dayNumber = null;
-        }
-        
-        $query = $this->db->prepare("
-            INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url)
-            VALUES (:poule_id, :competitions_id, :day_number, :pdf_url)
-        ");
-        
-        return $query->execute([
-            'poule_id' => $this->pouleId,
-            'competitions_id' => $this->competitionId,
-            'day_number' => $dayNumber,
-            'pdf_url' => $pdfUrl
-        ]);
-    } catch (PDOException $e) {
-        throw new \Exception("Erreur lors de l'ajout du résultat : " . $e->getMessage());
-    }
-}
- *//*     public function getResults() {
-        try {
-            $query = "SELECT * FROM journees";
-            $params = [];
-            
-            // Ajoute des conditions seulement si les IDs sont définis
-            if ($this->competitionId || $this->pouleId) {
-                $query .= " WHERE 1=1";
-                
-                if ($this->competitionId) {
-                    $query .= " AND competitions_id = :competitions_id";
-                    $params['competitions_id'] = $this->competitionId;
-                }
-                
-                if ($this->pouleId) {
-                    $query .= " AND poule_id = :poule_id";
-                    $params['poule_id'] = $this->pouleId;
-                }
-            }
-            
-            $query .= " ORDER BY day_number";
-            
-            $stmt = $this->db->prepare($query);
-            $stmt->execute($params);
-            
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            throw new \Exception("Erreur lors de la récupération des résultats : " . $e->getMessage());
-        }
-    }
- */    
-/* public function getResults() {
-    try {
-        $query = "
-            SELECT j.*, c.name as competition_name, c.type as competition_type 
-            FROM journees j
-            LEFT JOIN competitions c ON j.competitions_id = c.id
-        ";
-        $params = [];
-        
-        if ($this->competitionId || $this->pouleId) {
-            $query .= " WHERE 1=1";
-            
-            if ($this->competitionId) {
-                $query .= " AND j.competitions_id = :competitions_id";
-                $params['competitions_id'] = $this->competitionId;
-            }
-            
-            if ($this->pouleId) {
-                $query .= " AND j.poule_id = :poule_id";
-                $params['poule_id'] = $this->pouleId;
-            }
-        }
-        
-        $query .= " ORDER BY j.day_number";
-        
-        $stmt = $this->db->prepare($query);
-        $stmt->execute($params);
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        throw new \Exception("Erreur lors de la récupération des résultats : " . $e->getMessage());
-    }
-}
- */
 public function addResult($dayNumber = NULL, $pdfUrl, $name = NULL) {
     if ($this->competitionId === null) {
         throw new InvalidArgumentException("Competition ID est requis pour ajouter un résultat");
@@ -226,6 +65,14 @@ public function addResult($dayNumber = NULL, $pdfUrl, $name = NULL) {
     }
 }
 
+public function setCupName($name): void {
+    if (empty($name)) {
+        throw new InvalidArgumentException("Le nom de la coupe est requis");
+    }
+    $this->cupName = $name;
+}
+
+
 public function getResults() {
     try {
         $query = "
@@ -250,8 +97,12 @@ public function getResults() {
                 $query .= " AND j.poule_id = :poule_id";
                 $params['poule_id'] = $this->pouleId;
             }
+
+            if (isset($this->cupName)) {
+                $query .= " AND j.name = :cup_name"; // Filtrage par le nom de la coupe
+                $params['cup_name'] = $this->cupName;
+            }
         }
-        
         $query .= " ORDER BY c.id, COALESCE(j.day_number, 0), j.name";
         
         $stmt = $this->db->prepare($query);
@@ -262,6 +113,8 @@ public function getResults() {
         throw new \Exception("Erreur lors de la récupération des résultats : " . $e->getMessage());
     }
 }
+  
+
 public function getCompetitions() {
     try {
         $stmt = $this->db->query("SELECT id, name, type FROM competitions ORDER BY id");
@@ -299,4 +152,20 @@ public function getCompetitions() {
         $query->bindValue(':id', $this->id, PDO::PARAM_INT);
         $query->execute();
     }
+
+public function getCupNames() {
+    try {
+        $stmt = $this->db->prepare("
+            SELECT DISTINCT j.name 
+            FROM journees j
+            INNER JOIN competitions c ON j.competitions_id = c.id
+            WHERE c.type = 'Coupe'
+            ORDER BY j.name
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new \Exception("Erreur lors de la récupération des noms de coupes : " . $e->getMessage());
+    }
+}
 }

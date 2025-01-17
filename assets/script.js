@@ -130,7 +130,75 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 });
+/*Affichage dynamique des résultats de coupe*/
+document.addEventListener('DOMContentLoaded', function() {
+    // Gestionnaire existant pour les poules
+    const pouleSelect = document.getElementById('poules');
+    const resultsContainer = document.getElementById('resultats-container');
+    
+    if (pouleSelect) {
+        loadResults(pouleSelect.value);
+        pouleSelect.addEventListener('change', function() {
+            loadResults(this.value);
+        });
+    }
 
+    // Nouveau gestionnaire pour les coupes
+    const cupSelect = document.getElementById('cupName');
+    const cupResultsContainer = document.getElementById('resultCup-container');
+    const cupRankingContainer = document.getElementById('rankingCup-container');
+    
+    if (cupSelect) {
+        loadCupResults(cupSelect.value);
+        cupSelect.addEventListener('change', function() {
+            loadCupResults(this.value);
+        });
+    }
+    if (cupSelect) {
+        loadCupRanking(cupSelect.value);
+        cupSelect.addEventListener('change', function() {
+            loadCupRanking(this.value);
+        });
+    }
+    
+    function loadResults(pouleId) {
+        fetch(`get_results.php?poule_id=${pouleId}&competition_id=1`)
+            .then(response => response.text())
+            .then(data => {
+                resultsContainer.innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                resultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
+            });
+    }
+    
+    function loadCupResults(cupName) {
+        fetch(`get_cup_results.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`) // 2 pour la coupe
+            .then(response => response.text())
+            .then(data => {
+                cupResultsContainer.innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                cupResultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
+            });
+    }
+
+    function loadCupRanking(cupName) {
+        fetch(`get_cup_classement.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`) // 2 pour la coupe
+            .then(response => response.text())
+            .then(data => {
+                cupRankingContainer.innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                cupRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
+            });
+    }
+
+    
+});
 document.addEventListener('DOMContentLoaded', function() {
     const pouleSelect = document.getElementById('poules');
     const resultsContainer = document.getElementById('resultats-container');

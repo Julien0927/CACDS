@@ -181,4 +181,29 @@ public function getCompetitions() {
         $query->bindValue(':id', $this->id, PDO::PARAM_INT);
         $query->execute();
     }
+
+    public function setCupName($name): void {
+        if (empty($name)) {
+            throw new InvalidArgumentException("Le nom de la coupe est requis");
+        }
+        $this->cupName = $name;
+    }
+    
+    public function getCupNames() {
+        try {
+            $stmt = $this->db->query("SELECT name FROM journees WHERE competitions_id = 2");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new \Exception("Erreur lors de la récupération des noms de compétitions : " . $e->getMessage());
+        }
+    }
+
+    public function getTournamentNames() {
+        try {
+            $stmt = $this->db->query("SELECT name FROM journees WHERE competitions_id = 3");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new \Exception("Erreur lors de la récupération des noms de compétitions : " . $e->getMessage());
+        }
+    }
 }

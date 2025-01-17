@@ -1,21 +1,13 @@
 <?php
-/* require_once 'header.php';
-require_once 'templates/nav.php';
-require_once 'lib/pdo.php';
-require_once 'App/News.php';
-
-$news = new App\News\News($db);
-$sportId = 2;
-$totalPages = $news->getTotalPages();
-$pageActuelle = isset ($_GET['page']) ? $_GET['page'] : 1;
-$newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
- */
 require_once 'header.php';
 require_once 'templates/nav.php';
 require_once 'lib/pdo.php';
 require_once 'App/News.php';
+require_once 'App/Classements.php';
+require_once 'App/Results.php';
 
 $news = new App\News\News($db);
+$classement = new App\Classements\Classements($db);
 $sportId = 2; // ID du badminton
 
 // Récupération de la page courante
@@ -28,11 +20,17 @@ $totalPages = ceil($totalNews / $news->getNewsParPage());
 
 // Récupération des news pour la page actuelle
 $newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
+
+// Récupération des noms des compétitions
+$cupNames = $classement->getCupNames();
+$tournamentNames = $classement->getTournamentNames();
+
 ?>
 
 <div class="center">
     <h1 class="mt-3"><img src="/assets/icones/Square item bad.svg" class="me-3">BADMINTON</h1>
 </div>
+
 
 <?php
 require_once 'templates/insideNav.php';
@@ -42,8 +40,6 @@ $stmt = $db->prepare($sql);
 $stmt->bindValue(':sport_id', $sportId, PDO::PARAM_INT);
 $stmt->execute();
 $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
-/*Affichage dynamique des compétitions*/
-$sql = "SELECT name FROM journees WHERE competitions_id = :competitions_id";
 ?>
 <div class="container-fluid ms-3">
 <!-- Section Actualités -->
@@ -89,6 +85,8 @@ $sql = "SELECT name FROM journees WHERE competitions_id = :competitions_id";
         <h2 class="h2Sports">Compétitions</h2>
         <h3 id="calendrier" class="h3Sports ms-4 text-center">Calendrier de la saison</h3>
         <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
+
+        <!--Championnat-->
         <h3 class="h3Sports ms-4" id="compet">Championnat</h3>
         <p>Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
             En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
@@ -113,13 +111,42 @@ $sql = "SELECT name FROM journees WHERE competitions_id = :competitions_id";
                     </div>
                 </div>
             </div>
-            
-            <h3 class="h3Sports ms-4" id="cup">Coupe</h3>
-            <p>La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
-            <label for="coupe" class="form-label me-2">Sélectionnez votre coupe</label>
+        <!--Coupe-->
+        <h3 class="h3Sports ms-4" id="cup">Coupe</h3>
+        <p>La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
+        <label for="coupe" class="form-label me-2">Sélectionnez votre coupe</label>
+        <?php
+        $results = new App\Results\Results($db);
+        $cupNames = $results->getCupNames();
+        ?>
+        <select name="cupName" id="cupName">
+            <?php foreach ($cupNames as $cupName): ?>
+                <option value="<?= $cupName['name'] ?>"><?= ($cupName['name']) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <div class="row d-flex justify-content-center mt-4">
+            <div class="col-md-3">
+                <h4>Résultats</h4>
+                <div id="resultCup-container">
+                    <!-- Les résultats seront chargés ici -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4>Classement</h4>
+                <div id="rankingCup-container">
+                    <!-- Le classement sera chargé ici -->
+                </div>
+            </div>
+        </div>
+
+
+        <!--Tournois-->
+<!--         <h3 class="h3Sports ms-4" id="tournament">Tournois</h3>
+        <label for="coupe" class="form-label me-2">Sélectionnez votre coupe</label>
             <select name="name" id="name">
-                <?php foreach ($competitionNames as $competitionName): ?>
-                    <option value="<?= $competitionName ?>"><?= htmlspecialchars($competitionName) ?></option>
+                <?php foreach ($tournamentNames as $tournamentName): ?>
+                    <option value="<?= $tournamentName['name'] ?>"><?= ($tournamentName['name']) ?></option>
                 <?php endforeach; ?>
             <div class="row d-flex justify-content-center mt-4">
                 <div class="col-md-3">
@@ -135,8 +162,7 @@ $sql = "SELECT name FROM journees WHERE competitions_id = :competitions_id";
                     </div>
                 </div>
             </div>
-        
-        <h3 class="h3Sports ms-4" id="tournament">Tournois</h3>
+ -->
     </section>
 
     <!-- Section Documents -->
