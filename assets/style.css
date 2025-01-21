@@ -262,7 +262,10 @@ option, select {
 }
 
 /*décoration ligne*/
-
+hr {
+  border: 3px solid var(--blue-color);
+  margin: 5px 0;
+}
 
 /*cards news home*/
 .card {
@@ -478,9 +481,24 @@ fieldset {
 
 }
 
+.zoom {
+
+  transition: transform .2s;
+}
+
+.zoom:hover {
+  transform: scale(1.2);
+}
 .imgNew {
   width: 10%;
   height: 10%;
+}
+
+.imgGallery {
+  object-fit: cover; 
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    max-height: 150px;  
 }
 /*Cards*/
 .imgBlog {

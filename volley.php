@@ -14,9 +14,13 @@ require_once 'header.php';
 require_once 'templates/nav.php';
 require_once 'lib/pdo.php';
 require_once 'App/News.php';
+require_once 'App/Results.php';
+require_once 'App/Classements.php';
+require_once 'App/Photos.php';
 
 $news = new App\News\News($db);
-$sportId = 4; // ID du badminton
+$classement = new App\Classements\Classements($db);
+$sportId = 4; // ID du volley
 
 // Récupération de la page courante
 $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -28,6 +32,15 @@ $totalPages = ceil($totalNews / $news->getNewsParPage());
 
 // Récupération des news pour la page actuelle
 $newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
+
+// Récupération des noms des compétitions
+$cupNames = $classement->getCupNames();
+$tournamentNames = $classement->getTournamentNames();
+
+// Récupération des photos
+$photos = new App\Photos\Photos($db);
+$photoData = $photos->getBySportId($sportId);
+
 ?>
 
 <div class="center">
@@ -87,6 +100,7 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="h2Sports">Compétitions</h2>
         <h3 id="calendrier" class="h3Sports ms-4">Calendrier de la saison</h3>
         <p class="center">Ici image du calendrier</p>
+        <!--Championnat-->
         <h3 class="h3Sports ms-4" id="compet">Championnat</h3>
         <p>Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
             En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
@@ -111,26 +125,102 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
             </div>
-
+        <!--Coupe-->
         <h3 class="h3Sports ms-4" id="cup">Coupe</h3>
-        <h3 class="h3Sports ms-4" id="tournament">Tournois</h3>
+        <p class="ms-4">La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
+        <label for="coupe" class="form-label me-2 ms-4">Sélectionnez votre coupe</label>
+        <?php
+        $results = new App\Results\Results($db);
+        $cupNames = $results->getCupNames();
+        ?>
+        <select name="cupName" id="cupName">
+            <?php foreach ($cupNames as $cupName): ?>
+                <option value="<?= $cupName['name'] ?>"><?= ($cupName['name']) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <div class="row d-flex justify-content-center mt-4">
+            <div class="col-md-3">
+                <h4>Résultats</h4>
+                <div id="resultCup-container">
+                    <!-- Les résultats seront chargés ici -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4>Classement</h4>
+                <div id="rankingCup-container">
+                    <!-- Le classement sera chargé ici -->
+                </div>
+            </div>
+        </div>
+        <!--Tournois-->
+        <h3 class="h3Sports ms-4" id="tourn">Tournois</h3>
+        <p class="ms-4">Les tournois sont des compétitions individuelles ou par équipes sur une ou plusieurs journées.</p>
+        <label for="tournament" class="form-label me-2 ms-4">Sélectionnez votre tournoi</label>
+        <?php
+        $results = new App\Results\Results($db);
+        $tournamentNames = $results->getTournamentNames();
+        ?>
+        <select name="tournamentName" id="tournamentName">
+            <?php foreach ($tournamentNames as $tournamentName): ?>
+                <option value="<?= $tournamentName['name'] ?>"><?= ($tournamentName['name']) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <div class="row d-flex justify-content-center mt-4">
+            <div class="col-md-3">
+                <h4>Résultats</h4>
+                <div id="resultTournament-container">
+                    <!-- Les résultats seront chargés ici -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4>Classement</h4>
+                <div id="rankingTournament-container">
+                    <!-- Le classement sera chargé ici -->
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Section Documents -->
+     
     <section>
         <h2 class="h2Sports">Documents</h2>
+        <hr>
         <p>Accédez aux documents officiels et informations utiles.</p>
-        <h3 class="h3Sports ms-4">Demande d'adhésion</h3>
-        <h3 class="h3Sports ms-4">Demande d'engagement</h3>
-        <h3 class="h3Sports ms-4">Attestation certificats médicaux</h3>
-        <h3 class="h3Sports ms-4">Autorisation de droit à l'image</h3>
+        <div class="row">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Demande d'adhésion</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Demande d'engagement</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Fiche d'inscription</h3>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png"></a>
+                <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
+            </div>
+        </div>
     </section>
 
+
     <!-- Section Informations -->
-    <section>
+    <!-- <section>
         <h2 class="h2Sports">Informations</h2>
         <p>Toutes les informations à propos de nos événements et activités.</p>
-    </section>
+    </section> -->
 
     <!-- Section Les Chiffres -->
     <section id="chiffres">
@@ -141,7 +231,18 @@ $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Section Galerie Photos -->
     <section id="gallery">
         <h2 class="h2Sports">Galerie Photos</h2>
+        <hr>
         <p>Découvrez les meilleurs moments du club en images.</p>
+        <div class="row">
+            <?php foreach ($photoData as $photos): ?>
+                <div class="col-6 col-md-4 col-lg-2 mb-4 d-flex justify-content-center">
+                    <a href="<?= $photos['image'] ?>" data-lightbox="photos" data-title="<?= $photos['title'] ?>">
+                        <img src="<?= $photos['image'] ?>" class="img-fluid imgGallery" title="<?=$photos['title']?>" alt="photo">
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        
     </section>
 
     <!-- Section Liens Utiles -->

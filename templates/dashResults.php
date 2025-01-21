@@ -17,17 +17,17 @@
                             <?php if (!empty($allResults)) { ?>
                                 <?php foreach ($allResults as $result) { ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($result["competition_type"]) ?></td>
-                                        <td><?= $result["competition_type"] === 'Championnat' ? htmlspecialchars($result["poule_id"]) : '-' ?></td>
+                                        <td><?= ($result["competition_type"]) ?></td>
+                                        <td><?= $result["competition_type"] === 'Championnat' ? ($result["poule_id"]) : '-' ?></td>
                                         <td>
                                             <?php if ($result["competition_type"] === 'Championnat'): ?>
-                                                <?= htmlspecialchars($result["day_number"]) ?>
+                                                <?= ($result["day_number"]) ?>
                                             <?php else: ?>
                                                 <?= ($result["name"]) ?>
                                             <?php endif; ?>
                                         </td>
                                         <td>
-                                            <a href="<?= htmlspecialchars($result["result_pdf_url"]) ?>" title="<?= ($result["result_pdf_url"]) ?>" target="_blank">
+                                            <a href="<?= ($result["result_pdf_url"]) ?>" title="<?= ($result["result_pdf_url"]) ?>" target="_blank">
                                                 <img src="/assets/icones/pdf-250.png" alt="pdf" class="imgNew">
                                             </a>
                                         </td>

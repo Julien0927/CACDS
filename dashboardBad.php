@@ -16,6 +16,7 @@ require_once 'App/Photos.php';
 $messages = [];
 $errors = [];
 
+
 if (isset($_SESSION['success_message'])) {
     echo '<div class="alert success connexion bold mx-auto">' . $_SESSION['success_message'] . '</div>';
     // Supprimer le message après affichage

@@ -1,14 +1,5 @@
 <?php
 
-/* $admin = [
-   'main.php' => ['label' => 'CACDS'],
-   'badminton.php' => ['label' => 'Badminton'],
-   'volley.php' => ['label' => 'Volle-Ball'],
-   'tennisDT.php' => ['label' => 'Tennis de Table'],
-    'petanque.php' => ['label' => 'Pétanque'],
-    'contact.php' => ['label' => 'Contact'],
-]; 
- */
  define ('_IMG_PATH_', 'uploads/photos/');
  define ('_NEWS_IMG_PATH_', 'uploads/news/');
 // Pages pour les administrateurs (ajoutées dynamiquement selon l'utilisateur connecté)

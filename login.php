@@ -25,7 +25,8 @@ if (!empty($_POST)) {
             if ($userInfo) {
                 // Stocker les informations utilisateur dans la session
                 $_SESSION['user'] = $userInfo; // Par exemple : ['email' => '...', 'sport' => 'badminton']
-                $_SESSION['success_message'] = "Bienvenue sur votre tableau de bord !";
+                $_SESSION['sport_id'] = $userInfo['sport_id'];
+                $_SESSION['success_message'] = "Bienvenue sur votre tableau de bord ". $userInfo['firstname'] . " !";
 
                 // Rediriger en fonction du sport ou rôle
                 switch ($userInfo['sport_id']) {

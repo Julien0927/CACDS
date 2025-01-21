@@ -131,7 +131,7 @@ class ResultsDisplay {
         if ($this->type === 'poule' && isset($result['day_number'])) {
             echo '<h5 class="card-title">Journée ' . htmlspecialchars($result['day_number']) . '</h5>';
         } else {
-            echo '<h5 class="card-title">' . htmlspecialchars($result['name']) . '</h5>';
+            echo '<h5 class="card-title">' . ($result['name']) . '</h5>';
         }
 
         // Lien PDF
@@ -139,7 +139,7 @@ class ResultsDisplay {
             $icon = $this->type === 'tournament' ? 'fa-table' : 'fa-file-pdf';
             $text = $this->type === 'tournament' ? 'Voir le classement' : 'Voir les résultats';
             
-            echo '<a href="' . htmlspecialchars($result['result_pdf_url']) . '" 
+            echo '<a href="' . ($result['result_pdf_url']) . '" 
                       class="btn btn-original" target="_blank">
                      <i class="fas ' . $icon . '"></i> ' . $text . '
                   </a>';

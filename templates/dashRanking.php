@@ -17,17 +17,17 @@
                         <?php if (!empty($allClassements)) { ?>
                             <?php foreach ($allClassements as $classement) { ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($classement["competition_type"]) ?></td>
-                                    <td><?= $classement["competition_type"] === 'Championnat' ? htmlspecialchars($classement["poule_id"]) : '-' ?></td>
+                                    <td><?= ($classement["competition_type"]) ?></td>
+                                    <td><?= $classement["competition_type"] === 'Championnat' ? ($classement["poule_id"]) : '-' ?></td>
                                     <td>
                                         <?php if ($result["competition_type"] === 'Championnat'): ?>
-                                            <?= htmlspecialchars($classement["day_number"]) ?>
+                                            <?= ($classement["day_number"]) ?>
                                         <?php else: ?>
                                             <?= trim($classement["name"]) ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <a href="<?= htmlspecialchars($classement["classement_pdf_url"]) ?>" title="<?= ($classement["classement_pdf_url"]) ?>" target="_blank">
+                                        <a href="<?= ($classement["classement_pdf_url"]) ?>" title="<?= ($classement["classement_pdf_url"]) ?>" target="_blank">
                                             <img src="/assets/icones/pdf-250.png" alt="pdf" class="imgNew">
                                         </a>
                                     </td>

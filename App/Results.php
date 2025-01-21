@@ -9,11 +9,22 @@ class Results {
     private $db;
     private $competitionId;
     private $pouleId;
+    private $sportId;
     
     public function __construct($db, $competitionId = null, $pouleId = null) {
         $this->db = $db;
         $this->competitionId = $competitionId;
         $this->pouleId = $pouleId;
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['sport_id'])) {
+            throw new \Exception("Sport ID non trouvé dans la session");
+        }
+        
+        $this->sportId = (int)$_SESSION['sport_id'];
     }
 
     public function setId($id): void {
@@ -49,8 +60,8 @@ public function addResult($dayNumber = NULL, $pdfUrl, $name = NULL) {
         }
         
         $query = $this->db->prepare("
-            INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url, name)
-            VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name)
+            INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url, name, sport_id)
+            VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)
         ");
         
         return $query->execute([
@@ -58,7 +69,8 @@ public function addResult($dayNumber = NULL, $pdfUrl, $name = NULL) {
             'competitions_id' => $this->competitionId,
             'day_number' => $dayNumber,
             'pdf_url' => $pdfUrl,
-            'name' => $name
+            'name' => $name,
+            'sport_id' => $this->sportId
         ]);
     } catch (PDOException $e) {
         throw new \Exception("Erreur lors de l'ajout du résultat : " . $e->getMessage());
@@ -88,27 +100,25 @@ public function getResults() {
                 c.type as competition_type
             FROM journees j
             INNER JOIN competitions c ON j.competitions_id = c.id
+            WHERE j.sport_id = :sport_id
         ";
-        $params = [];
+        $params = ['sport_id' => $this->sportId]; // Toujours filtrer par le sport_id de la session
         
-        if ($this->competitionId || $this->pouleId) {
-            $query .= " WHERE 1=1";
-            
-            if ($this->competitionId) {
-                $query .= " AND j.competitions_id = :competitions_id";
-                $params['competitions_id'] = $this->competitionId;
-            }
-            
-            if ($this->pouleId) {
-                $query .= " AND j.poule_id = :poule_id";
-                $params['poule_id'] = $this->pouleId;
-            }
-
-            if (isset($this->cupName)) {
-                $query .= " AND j.name = :cup_name"; // Filtrage par le nom de la coupe
-                $params['cup_name'] = $this->cupName;
-            }
+        if ($this->competitionId) {
+            $query .= " AND j.competitions_id = :competitions_id";
+            $params['competitions_id'] = $this->competitionId;
         }
+        
+        if ($this->pouleId) {
+            $query .= " AND j.poule_id = :poule_id";
+            $params['poule_id'] = $this->pouleId;
+        }
+
+        if (isset($this->cupName)) {
+            $query .= " AND j.name = :cup_name";
+            $params['cup_name'] = $this->cupName;
+        }
+        
         $query .= " ORDER BY c.id, COALESCE(j.day_number, 0), j.name";
         
         $stmt = $this->db->prepare($query);
@@ -138,8 +148,8 @@ public function getCompetitions() {
             if ($results) {
                 foreach ($results as $result) {
                     $output .= "<div class='result-item'>";
-                    $output .= "<p>Journée " . htmlspecialchars($result['day_number']) . ":</p>";
-                    $output .= "<a href='" . htmlspecialchars($result['result_pdf_url']) . "' target='_blank'>Voir le résultat</a>";
+                    $output .= "<p>Journée " . ($result['day_number']) . ":</p>";
+                    $output .= "<a href='" . ($result['result_pdf_url']) . "' target='_blank'>Voir le résultat</a>";
                     $output .= "</div>";
                 }
             } else {
