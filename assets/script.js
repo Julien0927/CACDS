@@ -62,50 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const competitionSelect = document.getElementById('results');
-    const dayNumberSelect = document.getElementById('day_number');
-    const dayNumberContainer = document.getElementById('dayNumber-container');
-    competitionSelect.addEventListener('change', () => {
-        if (competitionSelect.value === 'Championnat') {
-            dayNumberContainer.style.display = 'block';
-            dayNumberSelect.innerHTML = '';
-        } else {
-            dayNumberContainer.style.display = 'none';
-        }
-    });
-    
-});
+    // ... (Le code pour la gestion des affichages reste identique) ...
 
-document.addEventListener('DOMContentLoaded', function() {
+    // Mise à jour de la partie chargement des résultats
     const pouleSelect = document.getElementById('poules');
     const resultsContainer = document.getElementById('resultats-container');
+    const classementContainer = document.getElementById('classement-container');
     
-    // Charger les résultats initiaux
-    loadResults(pouleSelect.value);
-    
-    // Écouter les changements de poule
-    pouleSelect.addEventListener('change', function() {
-        loadResults(this.value);
-    });
-    
-    function loadResults(pouleId) {
-        fetch(`get_results.php?poule_id=${pouleId}&competition_id=1`) // 1 pour le championnat
-            .then(response => response.text())
-            .then(data => {
-                resultsContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                resultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
-            });
-    }
-});
-/*Affichage dynamique des résultats de coupe*/
-document.addEventListener('DOMContentLoaded', function() {
-    // Gestionnaire existant pour les poules
-    const pouleSelect = document.getElementById('poules');
-    const resultsContainer = document.getElementById('resultats-container');
-    
+    // Chargement des résultats du championnat
     if (pouleSelect) {
         loadResults(pouleSelect.value);
         pouleSelect.addEventListener('change', function() {
@@ -113,141 +77,157 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Nouveau gestionnaire pour les coupes
+    // Chargement des résultats de coupe
     const cupSelect = document.getElementById('cupName');
     const cupResultsContainer = document.getElementById('resultCup-container');
     const cupRankingContainer = document.getElementById('rankingCup-container');
     
     if (cupSelect) {
         loadCupResults(cupSelect.value);
-        cupSelect.addEventListener('change', function() {
-            loadCupResults(this.value);
-        });
-    }
-    if (cupSelect) {
         loadCupRanking(cupSelect.value);
         cupSelect.addEventListener('change', function() {
+            loadCupResults(this.value);
             loadCupRanking(this.value);
         });
     }
-    
-    function loadResults(pouleId) {
-        fetch(`get_results.php?poule_id=${pouleId}&competition_id=1`)
-            .then(response => response.text())
-            .then(data => {
-                resultsContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                resultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
-            });
-    }
-    
-    function loadCupResults(cupName) {
-        fetch(`get_results.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`) // 2 pour la coupe
-            .then(response => response.text())
-            .then(data => {
-                cupResultsContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                cupResultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
-            });
-    }
 
-    function loadCupRanking(cupName) {
-        fetch(`get_cup_classement.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`) // 2 pour la coupe
-            .then(response => response.text())
-            .then(data => {
-                cupRankingContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                cupRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
-            });
-    }
-
-    // Gestionnaire pour les tournois
+    // Chargement des résultats de tournoi
     const tournamentSelect = document.getElementById('tournamentName');
     const tournamentResultsContainer = document.getElementById('resultTournament-container');
     const tournamentRankingContainer = document.getElementById('rankingTournament-container');
 
     if (tournamentSelect) {
         loadTournamentResults(tournamentSelect.value);
-        tournamentSelect.addEventListener('change', function() {
-            loadTournamentResults(this.value);
-        });
-    }
-
-    if (tournamentSelect) {
         loadTournamentRanking(tournamentSelect.value);
         tournamentSelect.addEventListener('change', function() {
+            loadTournamentResults(this.value);
             loadTournamentRanking(this.value);
         });
     }
 
+    // Fonctions de chargement mises à jour
+    function loadResults(pouleId) {
+        fetch(`get_results.php?poule_id=${pouleId}&competition_id=1`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau');
+            }
+            return response.text();
+        })
+        .then(data => {
+            resultsContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            resultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
+        });
+
+        // Chargement du classement associé
+        fetch(`get_classement.php?poule_id=${pouleId}&competition_id=1`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau');
+            }
+            return response.text();
+        })
+        .then(data => {
+            classementContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            classementContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
+        });
+    }
+
+    function loadCupResults(cupName) {
+        fetch(`get_results.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau');
+            }
+            return response.text();
+        })
+        .then(data => {
+            cupResultsContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            cupResultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
+        });
+    }
+
+    function loadCupRanking(cupName) {
+        fetch(`get_cup_classement.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau');
+            }
+            return response.text();
+        })
+        .then(data => {
+            cupRankingContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            cupRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
+        });
+    }
+
     function loadTournamentResults(tournamentName) {
-        fetch(`get_results.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`) // 3 pour le tournoi
-            .then(response => response.text())
-            .then(data => {
-                tournamentResultsContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                tournamentResultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
-            });
+        fetch(`get_results.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau');
+            }
+            return response.text();
+        })
+        .then(data => {
+            tournamentResultsContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            tournamentResultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
+        });
     }
 
     function loadTournamentRanking(tournamentName) {
-        fetch(`get_tournament_classement.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`) // 3 pour le tournoi
-            .then(response => response.text())
-            .then(data => {
-                tournamentRankingContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                tournamentRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
-            });
-    }
-    });
-
-/*Affichage dynamique des résultats de tournoi*/
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const pouleSelect = document.getElementById('poules');
-    const resultsContainer = document.getElementById('resultats-container');
-    const classementContainer = document.getElementById('classement-container');
-    
-    // Charger les données initiales
-    loadData(pouleSelect.value);
-    
-    // Écouter les changements de poule
-    pouleSelect.addEventListener('change', function() {
-        loadData(this.value);
-    });
-    
-    function loadData(pouleId) {
-        // Charger les résultats
-        fetch(`get_results.php?poule_id=${pouleId}&competition_id=1`)
-            .then(response => response.text())
-            .then(data => {
-                resultsContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                resultsContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement des résultats.</p>';
-            });
-            
-        // Charger le classement
-        fetch(`get_classement.php?poule_id=${pouleId}&competition_id=1`)
-            .then(response => response.text())
-            .then(data => {
-                classementContainer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                classementContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
-            });
+        fetch(`get_tournament_classement.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau');
+            }
+            return response.text();
+        })
+        .then(data => {
+            tournamentRankingContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            tournamentRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
+        });
     }
 });
