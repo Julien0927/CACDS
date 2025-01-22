@@ -133,7 +133,7 @@ if (isset($_POST['deletePhoto']) && isset($_POST['photoBox'])) {
 $allNews = $news->getAllNews();
 $allResults = $results->getResults();
 $allClassements = $classement->getClassements();
-$allPhotos = $photo->getAllPhotos();
+$allPhotos = $photo->getBySportId();
 
 ?>
 

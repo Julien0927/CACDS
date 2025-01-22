@@ -62,6 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    const competitionSelect = document.getElementById('results');
+    const dayNumberSelect = document.getElementById('day_number');
+    const dayNumberContainer = document.getElementById('dayNumber-container');
+    competitionSelect.addEventListener('change', () => {
+        if (competitionSelect.value === 'Championnat') {
+            dayNumberContainer.style.display = 'block';
+            dayNumberSelect.innerHTML = '';
+        } else {
+            dayNumberContainer.style.display = 'none';
+        }
+    });
+    
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     // ... (Le code pour la gestion des affichages reste identique) ...
 
     // Mise à jour de la partie chargement des résultats
@@ -169,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadCupRanking(cupName) {
-        fetch(`get_cup_classement.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`, {
+        fetch(`get_classement.php?cupName=${encodeURIComponent(cupName)}&competition_id=2`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -211,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadTournamentRanking(tournamentName) {
-        fetch(`get_tournament_classement.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`, {
+        fetch(`get_classement.php?tournamentName=${encodeURIComponent(tournamentName)}&competition_id=3`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }

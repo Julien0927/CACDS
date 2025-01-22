@@ -100,7 +100,7 @@ function displayNewsSection($news, $sport) {
     <div class="container">
         <div class="col-12">
             <fieldset>
-                <legend>Actualités</legend>
+                <legend id="menu">Actualités</legend>
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <?php displayNewsSection($latestNews['bad'], $sports['bad']); ?>
@@ -126,16 +126,16 @@ function displayNewsSection($news, $sport) {
 </section>
 <section class="d-flex flex-md-row flex-column justify-content-around mt-5 mb-5">
         <div >
-            <img src="/assets/icones/Badminton item.svg" alt="">
+            <a href="badminton.php"><img src="/assets/icones/Badminton item.svg" alt=""></a>
         </div>
         <div >
-            <img src="/assets/icones/Volley Item.svg" alt="">
+        <a href="volley.php"><img src="/assets/icones/Volley Item.svg" alt=""></a>
         </div>
         <div >
-            <img src="/assets/icones/TdT Item.svg" alt="">
+        <a href="tennisDT.php"><img src="/assets/icones/TdT Item.svg" alt=""></a>
         </div>
         <div >
-            <img src="/assets/icones/petanque item.svg" alt="">
+        <a href="petanque.php"><img src="/assets/icones/petanque item.svg" alt=""></a>
         </div>
 
 </section>

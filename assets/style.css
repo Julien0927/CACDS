@@ -469,20 +469,28 @@ fieldset {
     color: var(--orange-color);
   }
 
+.insideNav {
+  display: flex;
+  justify-content: center;
+  background-color: var(--orange-color);
+}
+
 .sportsNav {
-  background-color: var(--white-color);
+  background-color: var(--orange-color);
   padding: 1rem;
   font-family: var(--montserrat);
   font-weight: 600;
 }
 
 .insideItem a {
-  color:var(--orange-color);
+  color:var(--white-color);
+}
 
+li .dropdown-item {
+  color: var(--orange-color);
 }
 
 .zoom {
-
   transition: transform .2s;
 }
 

@@ -133,8 +133,8 @@ ob_end_flush();
 
         <!-- Numéro de journée -->
         <div id="dayNumber-container" style="display: none;" class="me-3 mb-2">
-            <label for="day_number" class="form-label me-2">Numéro de la journée</label>
-            <input type="number" name="day_number" id="day_number" class="form-control">
+            <label for="dayNumber" class="form-label me-2">Numéro de la journée</label>
+            <input type="number" name="dayNumber" id="dayNumber" class="form-control">
         </div>
 
         <!-- Upload de fichier -->

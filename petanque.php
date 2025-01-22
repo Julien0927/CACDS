@@ -3,32 +3,135 @@ require_once 'header.php';
 require_once 'templates/nav.php';
 require_once 'lib/pdo.php';
 require_once 'App/News.php';
+require_once 'App/Classements.php';
+require_once 'App/Results.php';
+require_once 'App/Photos.php';
 
-$news = new App\News\News($db);
-$sportId = 3;
-$totalPages = $news->getTotalPages();
-$pageActuelle = isset ($_GET['page']) ? $_GET['page'] : 1;
-$newsPageActuelle = $news->getNewsBySport($sportId, $pageActuelle);
+// Définition constante pour l'ID du badminton
+const PETANQUE_SPORT_ID = 3;
 
+// Initialisation des classes avec l'ID du badminton
+try {
+    // Initialisation de News
+    $news = new App\News\News($db);
+    
+    // Initialisation de Classements avec l'ID du badminton
+    $classement = new App\Classements\Classements($db);
+    
+    // Initialisation de Results avec l'ID du badminton explicite
+    $results = new App\Results\Results($db, null, null, PETANQUE_SPORT_ID);
+    
+    // Initialisation de Photos
+    $photos = new App\Photos\Photos($db);
+
+    // Récupération de la page courante pour la pagination
+    $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    if ($pageActuelle < 1) $pageActuelle = 1;
+
+    // Calcul du nombre total de pages
+    $totalNews = $news->getTotalNewsBySport(PETANQUE_SPORT_ID);
+    $totalPages = ceil($totalNews / $news->getNewsParPage());
+
+    // Récupération des news pour la page actuelle
+    $newsPageActuelle = $news->getNewsBySport(PETANQUE_SPORT_ID, $pageActuelle);
+
+    // Récupération des noms des compétitions
+    $cupNames = $results->getCupNames();
+    $tournamentNames = $results->getTournamentNames();
+
+    // Récupération des photos
+    $photoData = $photos->getBySportId(PETANQUE_SPORT_ID);
+
+    // Récupération des poules
+    $stmt = $db->prepare("SELECT id FROM poules WHERE sport_id = :sport_id");
+    $stmt->bindValue(':sport_id', PETANQUE_SPORT_ID, PDO::PARAM_INT);
+    $stmt->execute();
+    $poules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (\Exception $e) {
+    // Log l'erreur et affiche un message utilisateur
+    error_log($e->getMessage());
+    $error = "Une erreur est survenue lors du chargement de la page. Veuillez réessayer plus tard.";
+}
 ?>
+
 <div class="center">
-    <h1 class="mt-3"><img src="/assets/icones/Square item Volley.svg" class="me-3">PÉTANQUE</h1>
+    <h1 class="mt-3"><img src="/assets/icones/Square item bad.svg" class="me-3">PÉTANQUE</h1>
 </div>
 
-<?php
-require_once 'templates/insideNav.php';
-?>
+<?php if (isset($error)): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= htmlspecialchars($error) ?>
+    </div>
+<?php endif; ?>
+
+<?php require_once 'templates/insideNav.php'; ?>
+
 <div class="container-fluid ms-3">
-<!-- Section Actualités -->
-    <section>
-        <h2 class="h2Sports">Actualités</h2>
-        <p>Retrouvez ici les dernières nouvelles importantes concernant le club.</p>
-        <?php foreach ($newsPageActuelle as $new) {
-            include 'templates/partial_news.php';
-        } ?>
-            
-    </section>
-</div>
 
+    <!--Section News-->
+<?php require_once 'templates/viewNews.php'; ?>
+
+<section>
+        <h2 class="h2Sports line ">Compétitions</h2>
+        <hr>
+        <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
+        <a  class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
+
+    <!--Section Résultats-->
+<?php require_once 'templates/viewCompetitions.php';?>
+
+
+    <!-- Section Documents -->
+    <section id="documents">
+        <h2 class="h2Sports">Documents</h2>
+        <hr>
+        <p>Accédez aux documents officiels et informations utiles.</p>
+        <div class="row">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <h3 class="h3Sports text-center">Demande d'adhésion</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <h3 class="h3Sports text-center">Demande d'engagement</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <h3 class="h3Sports text-center">Fiche d'inscription</h3>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Informations -->
+<!--     <section>
+        <h2 class="h2Sports">Informations</h2>
+        <p>Toutes les informations à propos de nos événements et activités.</p>
+    </section>
+ -->
+    <!-- Section Les Chiffres -->
+    <section id="chiffres">
+        <h2 class="h2Sports mt-3">Les Chiffres</h2>
+        <hr>
+        <p>Quelques statistiques clés pour mieux comprendre nos performances.</p>
+    </section>
+
+    <!-- Section Galerie Photos -->
+    <?php require_once 'templates/viewPhotos.php'; ?>
+
+    <!-- Section Liens Utiles -->
+    <section id="link">
+        <h2 class="h2Sports">Liens Utiles</h2>
+    </section>
 <?php
 require_once 'templates/footer.php';

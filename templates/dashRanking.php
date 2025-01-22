@@ -20,11 +20,12 @@
                                     <td><?= ($classement["competition_type"]) ?></td>
                                     <td><?= $classement["competition_type"] === 'Championnat' ? ($classement["poule_id"]) : '-' ?></td>
                                     <td>
-                                        <?php if ($result["competition_type"] === 'Championnat'): ?>
+                                        <?php if ($classement["competition_type"] === 'Championnat'): ?>
                                             <?= ($classement["day_number"]) ?>
                                         <?php else: ?>
                                             <?= trim($classement["name"]) ?>
-                                        <?php endif; ?>
+                             
+                                            <?php endif; ?>
                                     </td>
                                     <td>
                                         <a href="<?= ($classement["classement_pdf_url"]) ?>" title="<?= ($classement["classement_pdf_url"]) ?>" target="_blank">

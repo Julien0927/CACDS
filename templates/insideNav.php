@@ -1,4 +1,4 @@
-<section class="insideNav">
+<section class="insideNav mt-2 mb-3">
   <div class="navbar navbar-expand-lg sportsNav">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,14 +20,9 @@
         </ul>
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem dropdown">
-            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
+            <a class="" href="#documents" style="text-decoration: none;">
               Documents
             </a>
-            <ul class="dropdown-menu dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
           </li>
         </ul>
         <ul class="navbar-nav me-5">
@@ -48,11 +43,6 @@
             <a class="" href="#chiffres" style="text-decoration: none;" >
               Les chiffres
             </a>
-            <ul class="dropdown-menu dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
           </li>
         </ul>
         <ul class="navbar-nav me-5">
