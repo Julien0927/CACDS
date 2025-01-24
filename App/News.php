@@ -83,18 +83,6 @@ class News {
         return $this->newsParPage;
     }
 
-     //Fonction permettant de recuperer les news par sport
-/*     public function getNewsBySport($sport_id, $page)
-    {
-    $sql = "SELECT * FROM news 
-            WHERE sport_id = :sport_id 
-            ORDER BY date DESC, id DESC"; 
-    $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(':sport_id', $sport_id, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
- */ 
 public function getNewsBySport($sport_id, $page)
 {
     // Calculer l'offset pour la pagination

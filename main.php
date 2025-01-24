@@ -2,11 +2,8 @@
 require_once 'header.php';
 require_once 'templates/nav.php';
 require_once 'lib/pdo.php';
+require_once 'lib/config_session.php';
 require_once 'App/News.php';
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 $news = new App\News\News($db);
 
@@ -51,8 +48,8 @@ function truncateText($text, $length = 100) {
 }
 // Fonction pour afficher une section d'actualité
 function displayNewsSection($news, $sport) {
-    ?>
- <div class="col-12 col-md-12">
+?>
+<div class="col-12 col-md-12">
     <div class="news-container">
         <div class="news-wrapper">
             <!-- Partie gauche avec le texte -->
@@ -126,13 +123,13 @@ function displayNewsSection($news, $sport) {
 </section>
 <section class="d-flex flex-md-row flex-column justify-content-around mt-5 mb-5">
         <div >
-            <a href="badminton.php"><img src="/assets/icones/Badminton item.svg" alt=""></a>
+            <a href="badminton.php"><img src="/assets/icones/Badminton Item.svg" alt=""></a>
         </div>
         <div >
         <a href="volley.php"><img src="/assets/icones/Volley Item.svg" alt=""></a>
         </div>
         <div >
-        <a href="tennisDT.php"><img src="/assets/icones/TdT Item.svg" alt=""></a>
+        <a href="tennisDT.php"><img src="/assets/icones/TdT item.svg" alt=""></a>
         </div>
         <div >
         <a href="petanque.php"><img src="/assets/icones/petanque item.svg" alt=""></a>

@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
  define ('_IMG_PATH_', 'uploads/photos/');
  define ('_NEWS_IMG_PATH_', 'uploads/news/');

@@ -37,6 +37,7 @@ $results = new App\Results\Results($db, $competitionId, $pouleId);
 $classement = new App\Classements\Classements($db);
 $photo = new App\Photos\Photos($db);
 
+
 function handleDeletion($postKey, $boxKey, $entity, $singleMessage, $multipleMessage) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST[$postKey])) {
         foreach ($_POST[$boxKey] as $idToDelete) {
@@ -49,6 +50,7 @@ function handleDeletion($postKey, $boxKey, $entity, $singleMessage, $multipleMes
         exit;
     }
 }
+
 
 // Appeler la fonction pour chaque type de suppression
 handleDeletion(

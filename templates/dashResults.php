@@ -1,9 +1,26 @@
+<?php
+$itemsPerPage = 5; // Nombre d'éléments par page
+$totalItems = count($allResults);
+$totalPages = ceil($totalItems / $itemsPerPage);
+
+// Récupérer la page courante depuis l'URL
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$currentPage = max(1, min($currentPage, $totalPages)); // S'assurer que la page est valide
+
+// Calculer l'index de début
+$startIndex = ($currentPage - 1) * $itemsPerPage;
+
+// Extraire les éléments pour la page courante
+$resultsForCurrentPage = array_slice($allResults, $startIndex, $itemsPerPage);
+?>
+
 <h3 class="h2Sports ms-2">Gestion des résultats</h3>
+<hr>
 <form method="POST" enctype="multipart/form-data">
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-center">
-                <div class="table-responsive-sm">
+                <div class="table-responsive-sm" id="tableResults">
                     <table class="table table-striped table-responsive text-center nowrap">
                         <thead>
                             <tr>
@@ -14,8 +31,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($allResults)) { ?>
-                                <?php foreach ($allResults as $result) { ?>
+                            <?php if (!empty($resultsForCurrentPage)) { ?>
+                                <?php foreach ($resultsForCurrentPage as $result) { ?>
                                     <tr>
                                         <td><?= ($result["competition_type"]) ?></td>
                                         <td><?= $result["competition_type"] === 'Championnat' ? ($result["poule_id"]) : '-' ?></td>
@@ -41,6 +58,28 @@
                             <?php } ?>
                         </tbody>
                     </table>
+                        <nav aria-label="Navigation des pages">
+                        <ul class="pagination justify-content-center">
+                            <?php if ($currentPage > 1): ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?= $currentPage - 1 ?>#tableResults"><</a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                <li class="page-item <?= $i === $currentPage ? 'active' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $i ?>#tableResults"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
+
+                            <?php if ($currentPage < $totalPages): ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?= $currentPage + 1 ?>#tableResults">></a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </nav>
+
                 </div>
             </div>
         </div>

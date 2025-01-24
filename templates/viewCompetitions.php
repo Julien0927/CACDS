@@ -1,7 +1,7 @@
 <!-- Section Compétitions -->
 
         <!--Championnat-->
-        <h3 class="h3Sports ms-4" id="compet">Championnat</h3>
+        <h3 class="h3Sports" id="compet">Championnat</h3>
         <p class="ms-4">Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
             En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
             <label for="sports" class="form-label me-2 ms-4">Sélectionnez votre poule</label>

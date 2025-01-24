@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Ajout du résultat dans la base de données
         $results = new App\Results\Results($db, $competitionId, $pouleId);
-        $results->addResult($dayNumber, $destPath, $name);
+        $results->addResult($destPath, $dayNumber, $name);
 
         $_SESSION['messages'] = ["Le résultat a été ajouté avec succès"];
         header('Location: addScores.php');
@@ -110,8 +110,8 @@ ob_end_flush();
         <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
 
-    <h3>Ajouter un résultat</h3>
-    <form method="POST" action="addScores.php" enctype="multipart/form-data" class="d-flex flex-row align-items-center justify-content-start flex-wrap">
+    <h3 class="h2Sports mt-3 text-center">Ajouter un résultat</h3>
+    <form method="POST" action="addScores.php" enctype="multipart/form-data" class="d-flex flex-row align-items-center justify-content-center flex-wrap">
         <!-- Choix de la compétition -->
         <div class="me-3 mt-4">
             <select name="results" id="results" class="form-select" required>
@@ -150,7 +150,7 @@ ob_end_flush();
         <!-- Bouton de soumission -->
         <div class="d-flex justify-content-center ms-3 mt-4">
             <?php addCSRFTokenToForm() ?>
-            <button type="submit" class="btn btn-secondary justify-content-center my-3">Enregistrer</button>
+            <button type="submit" class="btn btn-card justify-content-center my-3">Enregistrer</button>
         </div>
     </form>
 </section>
