@@ -1,4 +1,4 @@
-<section id="gallery">
+<section class="container-fluid" id="gallery">
         <h2 class="h2Sports">Galerie Photos</h2>
         <hr>
         <p>Découvrez les meilleurs moments du club en images.</p>

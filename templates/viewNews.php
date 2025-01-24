@@ -3,7 +3,7 @@
         <h2 class="h2Sports">Actualités</h2>
         <hr>
         <p>Retrouvez ici les dernières nouvelles importantes concernant le club.</p>
-        <div class="row mb-2">
+        <div class="row d-flex flex-wrap">
             <?php if (!empty($newsPageActuelle)): ?>
                 <?php foreach ($newsPageActuelle as $new): ?>
                     <?php include 'templates/partial_news.php'; ?>
@@ -11,8 +11,7 @@
             <?php else: ?>
                 <p>Aucune actualité disponible pour le moment.</p>
             <?php endif; ?>
-        </div>
-        
+        </div>        
         <?php if ($totalPages > 1): ?>
             <nav aria-label="Navigation des articles">
                 <ul class="pagination justify-content-center">
@@ -41,4 +40,4 @@
             </nav>
         <?php endif; ?>
     </section>
-</div>
+

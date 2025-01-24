@@ -18,11 +18,6 @@ class Results {
         $this->db = $db;
         $this->competitionId = $competitionId;
         $this->pouleId = $pouleId;
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        
         $this->setSportId($sportId);
     }
 
@@ -73,7 +68,7 @@ class Results {
         $this->id = (int)$id;
     }
     
-    public function addResult($dayNumber = NULL, $pdfUrl, $name = NULL) {
+    public function addResult($pdfUrl, $dayNumber = NULL, $name = NULL) {
         if ($this->competitionId === null) {
             throw new InvalidArgumentException("Competition ID est requis pour ajouter un résultat");
         }
@@ -105,9 +100,9 @@ class Results {
             
             return $query->execute([
                 'poule_id' => $this->pouleId,
-                'competitions_id' => $this->competitionId,
                 'day_number' => $dayNumber,
                 'pdf_url' => $pdfUrl,
+                'competitions_id' => $this->competitionId,
                 'name' => $name,
                 'sport_id' => $this->sportId
             ]);

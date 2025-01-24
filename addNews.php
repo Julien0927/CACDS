@@ -45,7 +45,7 @@ require_once 'header.php';
 require_once 'templates/messages.php';
 ?>
 
-<h2 class="h2Sports ms-2 mt-3">Ajouter un article</h2>
+<h2 class="h2Sports text-center mt-3">Ajouter un article</h2>
 
 <div class="container col-12 col-md-6">
     <form method="POST" action="addNews.php" enctype="multipart/form-data" >

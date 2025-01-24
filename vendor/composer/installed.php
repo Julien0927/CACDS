@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'varac/cacds-v2',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'f245afeab627b177112474634260d77c7013ecbb',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'ae4a94387cae4cb5f9f538e97612cfdd14efb04c',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -56,9 +56,9 @@
             'dev_requirement' => false,
         ),
         'varac/cacds-v2' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'f245afeab627b177112474634260d77c7013ecbb',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'ae4a94387cae4cb5f9f538e97612cfdd14efb04c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

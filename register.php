@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
     <?php addCSRFTokenToForm() ?>
-    <button class="btn btn1 bold" type="submit">Soumettre</button>
+    <button class="btn btn-original bold" type="submit">Soumettre</button>
 </form>
 
 <?php

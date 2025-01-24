@@ -1,7 +1,4 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) { 
-    session_start(); 
-} 
 require_once('lib/config_session.php');
 
 // Obtenir le nom de la page courante

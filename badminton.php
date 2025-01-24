@@ -74,7 +74,7 @@ try {
     <!--Section News-->
 <?php require_once 'templates/viewNews.php'; ?>
 
-<section>
+<section class="container-fluid">
         <h2 class="h2Sports line ">Compétitions</h2>
         <hr>
         <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
@@ -84,7 +84,7 @@ try {
 <?php require_once 'templates/viewCompetitions.php';?>
 
     <!-- Section Documents -->
-    <section id="documents">
+    <section class="container-fluid" id="documents">
         <h2 class="h2Sports">Documents</h2>
         <hr>
         <p>Accédez aux documents officiels et informations utiles.</p>
@@ -119,13 +119,13 @@ try {
     </section>
 
     <!-- Section Informations -->
-<!--     <section>
+<!--     <section class="container-fluid" id="informations">
         <h2 class="h2Sports">Informations</h2>
         <p>Toutes les informations à propos de nos événements et activités.</p>
     </section>
  -->
     <!-- Section Les Chiffres -->
-    <section id="chiffres">
+    <section class="container-fluid" id="chiffres">
         <h2 class="h2Sports mt-3">Les Chiffres</h2>
         <hr>
         <p>Quelques statistiques clés pour mieux comprendre nos performances.</p>
@@ -134,7 +134,7 @@ try {
     <!-- Section Galerie Photos -->
 <?php require_once 'templates/viewPhotos.php'; ?>
     <!-- Section Liens Utiles -->
-    <section id="link">
+    <section class="container-fluid" id="link">
         <h2 class="h2Sports">Liens Utiles</h2>
         <hr>
         <div class="d-flex justify-content-around mt-5">

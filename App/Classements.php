@@ -17,12 +17,7 @@ class Classements {
     public function __construct($db, $competitionId = null, $pouleId = null, $sportId = null) {
         $this->db = $db;
         $this->competitionId = $competitionId;
-        $this->pouleId = $pouleId;
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        
+        $this->pouleId = $pouleId;        
         $this->setSportId($sportId);
     }
 
@@ -116,7 +111,7 @@ class Classements {
         }
     }
 
-    public function addClassement($dayNumber = NULL, $pdfUrl, $name = NULL) { 
+    public function addClassement($pdfUrl, $dayNumber = NULL, $name = NULL) { 
            
         if ($dayNumber !== null && !is_numeric($dayNumber)) {
             throw new InvalidArgumentException("Le numéro de journée (day_number) doit être un nombre ou nul.");
@@ -184,7 +179,7 @@ class Classements {
 
     public function deleteClassement(): void {
         if (!isset($this->id)) {
-            throw new InvalidArgumentException("ID non défini pour la suppression");
+            throw new InvalidArgumentException("Sélection non défini pour la suppression");
         }
         
         try {

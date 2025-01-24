@@ -205,7 +205,7 @@ require_once 'header.php';
 require_once 'templates/messages.php';
 ?>
 
-<h2 class="h2Sports ms-2 mt-3">Ajouter une photo</h2>
+<h2 class="h2Sports mt-3 text-center">Ajouter une photo</h2>
 
 <div class="container col-12 col-md-6">
     <form method="POST" action="addPhotos.php" enctype="multipart/form-data" >
