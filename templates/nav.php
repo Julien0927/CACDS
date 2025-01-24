@@ -54,12 +54,12 @@ if (isset($_SESSION['user'])) {
                     <?php endif; ?>
                 <?php endforeach; ?>
                 <!-- Bouton de déconnexion -->
-                <?php if (isset($_SESSION['user'])): ?>
-                    <li class="nav-item">
-                        <a class="btn btnLogout me-2 <?= ($current_page === 'logout.php') ? 'active' : '' ?>" href="logout.php">Se déconnecter</a>
-                    </li>
-                <?php endif; ?>
             </ul>
+            <?php if (isset($_SESSION['user'])): ?>
+                <li class="nav-item mb-2" style="list-style-type: none;">
+                    <a class="btn btnLogout me-2 <?= ($current_page === 'logout.php') ? 'active' : '' ?>" href="logout.php">Se déconnecter</a>
+                </li>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

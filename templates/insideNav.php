@@ -25,7 +25,7 @@
             </a>
           </li>
         </ul>
-        <ul class="navbar-nav me-5">
+<!--         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem dropdown">
             <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
               Informations
@@ -38,7 +38,7 @@
             </ul>
           </li>
         </ul>
-        <ul class="navbar-nav me-5">
+ -->        <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#chiffres" style="text-decoration: none;" >
               Les chiffres

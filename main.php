@@ -71,7 +71,42 @@ function displayNewsSection($news, $sport) {
                     <p>Aucun article disponible pour le <?= $sport['name'] ?>.</p>
                 <?php endif; ?>
                 
-                <button class="btn btn-original" href="">Lire</button>
+                <!-- <button class="btn btn-original" href="">Lire</button> -->
+                <?php if ($news): ?>
+                    <button class="btn btn-original" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#newsModal"
+                            data-title="<?=($news['title']) ?>"
+                            data-image="<?=($news['image']) ?>"
+                            data-content="<?=($news['content']) ?>"
+                            data-sport-id="<?= $news['sport_id'] ?>"
+                            data-date="<?= date('d/m/Y', strtotime($news['date'])) ?>">
+                            Lire
+                    </button>
+                <?php endif; ?>
+            </div>
+            <!-- Modal Bootstrap -->
+            <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Contenu dynamique -->
+                            <h3 class="h3Sports" id="modalTitle"></h3>
+                            <div class="center">
+                                <img id="modalImage" class="img-fluid center" alt="Image de l'article">
+                            </div>
+                            <p id="modalContent"></p>
+                            <p id="modalDate" class="text-muted"></p>
+                            <div class="center">
+                                <button type="button" class="btn btn-original" data-bs-dismiss="modal">Fermer</button>
+                                <a id="moreArticles"  href="#" class="btn btn-card ms-3">Plus d'articles</a>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <!-- Image à droite -->

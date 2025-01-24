@@ -67,7 +67,7 @@ try {
 
 <?php require_once 'templates/insideNav.php'; ?>
 
-<div class="container-fluid ms-3">
+<div class="container-fluid">
 
     <!--Section News-->
 <?php require_once 'templates/viewNews.php'; ?>

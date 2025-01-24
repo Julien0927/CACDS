@@ -16,11 +16,11 @@
   --font-weight-black: 900;
 }
 
-body {
+/* body {
   width: 100%;
   overflow-x: hidden;
 }
-
+ */
 
 /* .montserrat-montserrat {
   font-family: "Montserrat", sans-serif;
@@ -136,8 +136,21 @@ h1 {
 
 .h3Sports {
   font-family: var(--montserrat);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--blue-color);
+}
+
+
+h4 {
+  color: var(--blue-color);
+  font-family: var(--montserrat);
+  font-weight: 800;
+}
+
+.h5Sports {
+  color: var(--orange-color);
+  font-family: var(--montserrat);
+  font-weight: 800;
 }
 /*************************/
 
@@ -145,7 +158,7 @@ h1 {
 
 p {
   font-family: var(--font-lato);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 label {
@@ -230,6 +243,18 @@ option, select {
   border: 2px solid var(--green-color);
 }
 
+.btn-third {
+  background-color: var(--purple-color);
+  color: var(--white-color);
+  border: 2px solid var(--purple-color);
+}
+
+.btn-third:hover {
+  background-color: var(--white-color);
+  color: var(--purple-color);
+  border: 2px solid var(--purple-color);
+}
+
 /*Fleche pour remonter en haut de la page*/
 
 /* Pour les messages de succès */
@@ -311,7 +336,10 @@ hr {
 }
 
 .news-title {
-  font-size: 1.2rem;
+  font-family: var(--font-montserrat);
+  color: var(--blue-color);
+  font-weight: 700;
+  font-size: 1.8rem;
   margin: 0;
   line-height: 1.3;
   flex: 1;
@@ -362,8 +390,18 @@ hr {
   border-color: var(--orange-color);
   transition: transform 0.2s ease;
   border-left: 4px solid var(--orange-color);
+  background : #dcdad8;
 }
 
+.results-list .card-body {
+  background : #dcdad8;
+}
+ 
+.results-list .card-title {
+  color: var(--orange-color);
+  font-family: var(--font-montserrat) ;
+  font-weight: 600;
+}
 .results-list .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -378,6 +416,17 @@ hr {
   border-color: var(--green-color);
   transition: transform 0.2s ease;
   border-left: 4px solid var(--green-color);
+  background : #dcdad8;
+}
+
+.classement-list .card-body {
+  background : #dcdad8;
+}
+
+.classement-list .card-title {
+  color: var(--green-color);
+  font-family: var(--font-montserrat) ;
+  font-weight: 600;
 }
 
 .classement-list .card:hover {

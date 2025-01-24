@@ -106,47 +106,48 @@ ob_end_flush();
     <?php endif; ?>
 
     <h3 class="h2Sports mt-3 text-center">Ajouter un classement</h3>
-    <form method="POST" action="addRanking.php" enctype="multipart/form-data" class="d-flex flex-row align-items-center justify-content-center flex-wrap">
+    <form method="POST" action="addRanking.php" enctype="multipart/form-data" >
         <!-- Choix de la compétition -->
-        <div class="me-3 mt-4">
-            <select name="results" id="results" class="form-select" required>
-                <option value="">Choix de la compétition</option>
-                <option value="Championnat">Championnat</option>
-                <option value="Coupe">Coupe</option>
-                <option value="Tournoi">Tournoi</option>
-            </select>
-        </div>
-        
-        <!-- Choix de la poule -->
-        <div id="poules-results-container" style="display: none;" class="me-3 mb-2">
-            <label for="poulesResults" class="form-label me-2">Choisir une poule</label>
-            <select name="poulesResults" id="poulesResults" class="form-select">
-                <!-- Les options seront générées en JS -->
-            </select>
-        </div>
+        <div class="d-flex flex-row align-items-center justify-content-center flex-wrap">
+            <div class="me-3 mt-4">
+                <select name="results" id="results" class="form-select" required>
+                    <option value="">Choix de la compétition</option>
+                    <option value="Championnat">Championnat</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Tournoi">Tournoi</option>
+                </select>
+            </div>
+            
+            <!-- Choix de la poule -->
+            <div id="poules-results-container" style="display: none;" class="me-3 mb-2">
+                <label for="poulesResults" class="form-label me-2">Choisir une poule</label>
+                <select name="poulesResults" id="poulesResults" class="form-select">
+                    <!-- Les options seront générées en JS -->
+                </select>
+            </div>
 
-        <!-- Nom de la compétition -->
-        <div id="competitionNameContainer" style="display: none;" class="me-3 mb-2">
-            <label for="name" class="form-label me-2">Nom de la compétition :</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Entrez le nom de la compétition">
-        </div>
+            <!-- Nom de la compétition -->
+            <div id="competitionNameContainer" style="display: none;" class="me-3 mb-2">
+                <label for="name" class="form-label me-2">Nom de la compétition :</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Entrez le nom de la compétition">
+            </div>
 
-        <!-- Numéro de journée -->
-        <div id="dayNumber-container" style="display: none;" class="me-3 mb-2">
-            <label for="dayNumber" class="form-label me-2">Numéro de la journée</label>
-            <input type="number" name="dayNumber" id="dayNumber" class="form-control">
-        </div>
+            <!-- Numéro de journée -->
+            <div id="dayNumber-container" style="display: none;" class="me-3 mb-2">
+                <label for="dayNumber" class="form-label me-2">Numéro de la journée</label>
+                <input type="number" name="dayNumber" id="dayNumber" class="form-control">
+            </div>
 
-        <!-- Upload de fichier -->
-        <div class="mt-5">
-            <input type="file" class="form-control" name="classement_pdf_url" id="classement_pdf_url" accept="application/pdf" required>
-            <small class="form-text text-muted">Taille maximum : 5MB. Format accepté : PDF uniquement.</small>
+            <!-- Upload de fichier -->
+            <div class="mt-5">
+                <input type="file" class="form-control" name="classement_pdf_url" id="classement_pdf_url" accept="application/pdf" required>
+                <small class="form-text text-muted">Taille maximum : 5MB. Format accepté : PDF uniquement.</small>
+            </div>
         </div>
-
         <!-- Bouton de soumission -->
-        <div class="d-flex justify-content-center ms-3 mt-4">
+        <div class="d-flex justify-content-center mt-2">
             <?php addCSRFTokenToForm() ?>
-            <button type="submit" class="btn btn-card my-3">Enregistrer</button>
+            <button type="submit" class="btn btn-original my-3">Enregistrer</button>
         </div>
     </form>
 </section>

@@ -111,8 +111,9 @@ ob_end_flush();
     <?php endif; ?>
 
     <h3 class="h2Sports mt-3 text-center">Ajouter un résultat</h3>
-    <form method="POST" action="addScores.php" enctype="multipart/form-data" class="d-flex flex-row align-items-center justify-content-center flex-wrap">
+    <form method="POST" action="addScores.php" enctype="multipart/form-data">
         <!-- Choix de la compétition -->
+        <div class="d-flex flex-row align-items-center justify-content-center flex-wrap">
         <div class="me-3 mt-4">
             <select name="results" id="results" class="form-select" required>
                 <option value="">Choix de la compétition</option>
@@ -146,11 +147,11 @@ ob_end_flush();
             <input type="file" class="form-control" name="result_pdf_url" id="result_pdf_url" accept="application/pdf" required>
             <small class="form-text text-muted">Taille maximum : 5MB. Format accepté : PDF uniquement.</small>
         </div>
-
+        </div>
         <!-- Bouton de soumission -->
-        <div class="d-flex justify-content-center ms-3 mt-4">
+        <div class="d-flex justify-content-center mt-2">
             <?php addCSRFTokenToForm() ?>
-            <button type="submit" class="btn btn-card justify-content-center my-3">Enregistrer</button>
+            <button type="submit" class="btn btn-original my-3">Enregistrer</button>
         </div>
     </form>
 </section>

@@ -10,7 +10,7 @@
             </div>
             <div class="col-12 col-md-8">
                 <div class="card-body d-flex flex-column h-100">
-                    <h5 class="card-title"><?= $new["title"] ?></h5>
+                    <h5 class=" h5Sports card-title"><?= $new["title"] ?></h5>
                     <p class="card-text flex-grow-1">
                         <?= mb_strlen($new["content"]) > 100 ? mb_substr($new["content"], 0, 100) . '...' : $new["content"] ?>
                     </p>

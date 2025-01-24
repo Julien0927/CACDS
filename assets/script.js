@@ -246,3 +246,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Remplir la modal avec les données dynamiques
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('newsModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    const modalContent = document.getElementById('modalContent');
+    const modalDate = document.getElementById('modalDate');
+    const moreArticles = document.getElementById('moreArticles');
+
+    modal.addEventListener('show.bs.modal', (event) => {
+        const button = event.relatedTarget; // Bouton qui a déclenché la modal
+        const title = button.getAttribute('data-title');
+        const image = button.getAttribute('data-image');
+        const content = button.getAttribute('data-content');
+        const date = button.getAttribute('data-date');
+        const sportId = button.getAttribute('data-sport-id');
+
+        // Met à jour le contenu de la modal
+        modalTitle.textContent = title;
+        modalImage.src = image;
+        modalContent.textContent = content;
+        modalDate.textContent = `Publié le : ${date}`;
+        if (sportId === '1') {
+            moreArticles.href = 'tennisDT.php';
+        } else if (sportId === '2') {
+            moreArticles.href = 'badminton.php';
+        } else if (sportId === '3') {
+            moreArticles.href = 'petanque.php';
+        } else if (sportId === '4') {
+            moreArticles.href = 'volley.php';
+        } else {
+            moreArticles.href = 'index.php';
+        }
+    });
+});
