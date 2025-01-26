@@ -110,8 +110,8 @@ ob_end_flush();
         <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
 
-    <h3 class="h2Sports mt-3 text-center">Ajouter un résultat</h3>
-    <form method="POST" action="addScores.php" enctype="multipart/form-data">
+    <h3>Ajouter un résultat</h3>
+    <form method="POST" action="addScores.php" enctype="multipart/form-data" class="d-flex flex-row align-items-center justify-content-start flex-wrap">
         <!-- Choix de la compétition -->
         <div class="d-flex flex-row align-items-center justify-content-center flex-wrap">
         <div class="me-3 mt-4">
@@ -151,7 +151,7 @@ ob_end_flush();
         <!-- Bouton de soumission -->
         <div class="d-flex justify-content-center mt-2">
             <?php addCSRFTokenToForm() ?>
-            <button type="submit" class="btn btn-original my-3">Enregistrer</button>
+            <button type="submit" class="btn btn-secondary justify-content-center my-3">Enregistrer</button>
         </div>
     </form>
 </section>
