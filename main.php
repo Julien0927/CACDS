@@ -75,7 +75,7 @@ function displayNewsSection($news, $sport) {
                 
                 <!-- <button class="btn btn-original" href="">Lire</button> -->
                 <?php if ($news): ?>
-                    <button class="btn btn-original" 
+                    <button class="btn btn-original bold" 
                             data-bs-toggle="modal" 
                             data-bs-target="#newsModal"
                             data-title="<?=($news['title']) ?>"
@@ -98,13 +98,13 @@ function displayNewsSection($news, $sport) {
                             <!-- Contenu dynamique -->
                             <h3 class="h3Sports" id="modalTitle"></h3>
                             <div class="center">
-                                <img id="modalImage" class="img-fluid center" alt="Image de l'article">
+                                <img id="modalImage" class="img-fluid center" alt="Image de l'article" loading="lazy">
                             </div>
                             <p id="modalContent"></p>
                             <p id="modalDate" class="text-muted"></p>
                             <div class="center">
-                                <button type="button" class="btn btn-original" data-bs-dismiss="modal">Fermer</button>
-                                <a id="moreArticles"  href="#" class="btn btn-card ms-3">Plus d'articles</a>
+                                <button type="button" class="btn btn-original bold" data-bs-dismiss="modal">Fermer</button>
+                                <a id="moreArticles" href="#" class="btn btn-card bold ms-3">Plus d'articles</a>
                             </div>                            
                         </div>
                     </div>
@@ -114,7 +114,7 @@ function displayNewsSection($news, $sport) {
             <!-- Image à droite -->
             <?php if ($news): ?>
                 <div class="news-image-container">
-                    <img class="news-image img-fluid" src="<?= $news['image'] ?>" alt="<?= htmlspecialchars($news['title']) ?>">
+                    <img class="news-image img-fluid" src="<?= $news['image'] ?>" alt="<?= htmlspecialchars($news['title']) ?>" loading="lazy">
                 </div>
             <?php endif; ?>
         </div>
@@ -127,7 +127,7 @@ function displayNewsSection($news, $sport) {
 <h1 class="cacds">Coupe de l'Amitié Corporative des Deux-Sèvres</h1>
 
 <div class="d-flex justify-content-center">
-    <img src="/assets/logos/cacds_logo_CACDS.jpg" style="width: 10%; height: 10%" alt="cacds" class="img-fluid">
+    <img src="/assets/logos/cacds_logo_CACDS.webp" style="width: 10%; height: 10%" alt="cacds" class="img-fluid">
 </div>
 
 <section class="mt-3">
@@ -162,11 +162,11 @@ function displayNewsSection($news, $sport) {
     <div class="center col-12 col-md-6">
         <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5511.415663923563!2d-0.4802229241907535!3d46.31563967622913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48072e2f1b910733%3A0x448a1ec76d99546a!2sNIORT-ASSOCIATIONS!5e0!3m2!1sfr!2sfr!4v1738249707293!5m2!1sfr!2sfr" 
-            class="map img-fluid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            class="map img-fluid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Adresse de l'association">
         </iframe>
     </div>
     <div class="center flex-column text-center col-12 col-md-6">
-        <img src="/assets/logos/square_logo.jpg" alt="logo CACDS" style="width: 20%; height: auto" class="img-fluid mx-auto">
+        <img src="/assets/logos/square_logo.webp" alt="logo CACDS" style="width: 20%; height: auto" class="img-fluid mx-auto">
         <h3 class="h3Sports">Adresse</h3>
         <p>Maison des Associations, Rue Joseph Cugnot, Niort 79000</p>
         <h3 class="h3Sports">Téléphone</h3>
@@ -178,22 +178,22 @@ function displayNewsSection($news, $sport) {
 <section class="container-fluid mt-5 mb-5">
     <div class="row g-3 justify-content-center">
         <div class="col-6 col-md-3 text-center">
-            <a href="badminton.php">
+            <a href="badminton.php" aria-label="badminton">
                 <img src="/assets/icones/Badminton Item.svg" alt="badminton" class="img-fluid">
             </a>
         </div>
         <div class="col-6 col-md-3 text-center">
-            <a href="volley.php">
+            <a href="volley.php" aria-label="volleyball">
                 <img src="/assets/icones/Volley Item.svg" alt="volleyball" class="img-fluid">
             </a>
         </div>
         <div class="col-6 col-md-3 text-center">
-            <a href="tennisDT.php">
+            <a href="tennisDT.php" aria-label="tennis de table">
                 <img src="/assets/icones/TdT item.svg" alt="Tennis de table" class="img-fluid">
             </a>
         </div>
         <div class="col-6 col-md-3 text-center">
-            <a href="petanque.php">
+            <a href="petanque.php" aria-label="pétanque">
                 <img src="/assets/icones/petanque item.svg" alt="pétanque" class="img-fluid">
             </a>
         </div>

@@ -76,7 +76,7 @@ try {
         <h2 class="h2Sports line ">Compétitions</h2>
         <hr>
         <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
-        <a  class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
+        <a  class="center" aria-label="calendrier"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
 
     <!--Section Résultats-->
 <?php require_once 'templates/viewCompetitions.php';?>
@@ -89,25 +89,25 @@ try {
         <p>Accédez aux documents officiels et informations utiles.</p>
         <div class="row">
             <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhesion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
                 <h3 class="h3Sports text-center">Demande d'adhésion</h3>
             </div>
             <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
                 <h3 class="h3Sports text-center">Demande d'engagement</h3>
             </div>
             <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
                 <h3 class="h3Sports text-center">Fiche d'inscription</h3>
             </div>
         </div>
         <div class="row mt-3">
             <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
                 <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
             </div>
             <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
                 <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
             </div>
         </div>
@@ -134,6 +134,10 @@ try {
         <h2 class="h2Sports">Liens Utiles</h2>
         <hr>
     </section>
+    <div id="backToTop" >
+        <img src="/assets/icones/chevron-up.png">
+    </div>
+
 </section>
 <?php
 require_once 'templates/footer.php';
