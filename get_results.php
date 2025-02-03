@@ -59,7 +59,7 @@ try {
             $text = ($result['competition_type'] === 'Tournoi') ? 'Voir le classement' : 'Voir les résultats';
             
             echo '<a href="' . ($result['result_pdf_url']) . '" 
-                     class="btn btn-original" target="_blank">
+                     class="btn btn-original bold" target="_blank">
                      <i class="fas ' . $icon . '"></i> ' . $text . '
                   </a>';
         }

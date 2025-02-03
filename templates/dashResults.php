@@ -13,21 +13,22 @@ $startIndex = ($currentPage - 1) * $itemsPerPage;
 // Extraire les éléments pour la page courante
 $resultsForCurrentPage = array_slice($allResults, $startIndex, $itemsPerPage);
 ?>
-
-<h3 class="h2Sports ms-2">Gestion des résultats</h3>
+<section class="container-fluid">
+<h3 class="h2Sports">Gestion des résultats</h3>
 <hr>
 <form method="POST" enctype="multipart/form-data">
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-center">
-                <div class="table-responsive-sm" id="tableResults">
+                <div class="table-responsive-sm mt-3" id="tableResults">
                     <table class="table table-striped table-responsive text-center nowrap">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>Compétition</th>
                                 <th>Poule</th>
                                 <th>Journée/Nom</th>
                                 <th>Résultat</th>
+                                <th>Sélectionner</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -86,11 +87,12 @@ $resultsForCurrentPage = array_slice($allResults, $startIndex, $itemsPerPage);
         <div class="row">
             <div class="d-flex justify-content-end">
                 <div class="my-3">
-                    <a href="addScores.php" class="btn btn-card">Ajouter un résultat</button></a>
+                    <a href="addScores.php" class="btn btn-card bold">Ajouter un résultat</button></a>
                     <?php addCSRFTokenToForm() ?>
-                    <button type="submit" class="btn btn-original" name="deleteResult">Supprimer</button>
+                    <button type="submit" class="btn btn-original bold" name="deleteResult">Supprimer</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+</section>

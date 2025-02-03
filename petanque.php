@@ -56,7 +56,7 @@ try {
 ?>
 
 <div class="center">
-    <h1 class="mt-3"><img src="/assets/icones/Square item bad.svg" class="me-3">PÉTANQUE</h1>
+    <h1 class="mt-3"><img src="/assets/icones/Square item petanque.svg" class="me-3">PÉTANQUE</h1>
 </div>
 
 <?php if (isset($error)): ?>
@@ -67,7 +67,7 @@ try {
 
 <?php require_once 'templates/insideNav.php'; ?>
 
-<div class="container-fluid">
+<section class="container-fluid">
 
     <!--Section News-->
 <?php require_once 'templates/viewNews.php'; ?>
@@ -132,6 +132,8 @@ try {
     <!-- Section Liens Utiles -->
     <section class="container-fluid" id="link">
         <h2 class="h2Sports">Liens Utiles</h2>
+        <hr>
     </section>
+</section>
 <?php
 require_once 'templates/footer.php';

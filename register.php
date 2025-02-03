@@ -17,10 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'firstname' => $_POST['firstname'],
         'email' => $_POST['email'],
         'password' => $_POST['password'],
-        'role' => 'user', // Vous pouvez définir un rôle par défaut ou le récupérer d'un champ du formulaire
-        'sport_id' => ($_POST['sports']), // Récupérer l'ID du sport sélectionné
-        'poule_id' => isset($_POST['poules']) ? $_POST['poules'] : null // Récupérer l'ID de la poule, si sélectionné
+        'role' => 'user', 
+        'sport_id' => null, 
+        'poule_id' => null 
     ];
+
+    // Si l'utilisateur n'est pas un super_admin, on définit son sport_id
+    if ($data['role'] !== 'super_admin') {
+        $data['sport_id'] = $_POST['sports'];
+        $data['poule_id'] = isset($_POST['poules']) ? $_POST['poules'] : null;
+    }
 
     // Créer une instance de la classe Users
     $users = new App\Users\Users($db); // $db est la connexion PDO
@@ -29,6 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Vérification des erreurs avant d'ajouter l'utilisateur
     if (empty($data['name']) || empty($data['firstname']) || empty($data['email']) || empty($data['password'])) {
         $errors[] = "Tous les champs sont requis.";
+    }
+
+     // Vérification de la longueur du mot de passe
+     if (strlen($data['password']) < 8) {
+        $errors[] = "Le mot de passe doit contenir au moins 8 caractères.";
     }
 
     // Si aucun problème, procéder à la création de l'utilisateur

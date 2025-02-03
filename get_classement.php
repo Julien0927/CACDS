@@ -222,7 +222,7 @@ try {
 
         if ($classement['classement_pdf_url']) {
             echo '<a href="' . htmlspecialchars($classement['classement_pdf_url']) . '" 
-                     class="btn btn-second" target="_blank">
+                     class="btn btn-card bold" target="_blank">
                      <i class="fas fa-table"></i> Voir le classement
                   </a>';
         }

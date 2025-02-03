@@ -25,7 +25,7 @@ try {
     $photos = new App\Photos\Photos($db);
 
     // Récupération de la page courante pour la pagination
-    $pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $pageActuelle = isset($_GET['pageNews']) ? (int)$_GET['pageNews'] : 1;
     if ($pageActuelle < 1) $pageActuelle = 1;
 
     // Calcul du nombre total de pages
@@ -69,13 +69,13 @@ try {
 
 <?php require_once 'templates/insideNav.php'; ?>
 
-<div class="container-fluid">
+<section class="container-fluid">
 
     <!--Section News-->
 <?php require_once 'templates/viewNews.php'; ?>
 
 <section class="container-fluid">
-        <h2 class="h2Sports line ">Compétitions</h2>
+        <h2 class="h2Sports line">Compétitions</h2>
         <hr>
         <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
         <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
@@ -152,6 +152,6 @@ try {
             </a>
         </div>
     </section>
-</div>
+</section>
 <?php
 require_once 'templates/footer.php';

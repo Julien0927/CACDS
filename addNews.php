@@ -67,7 +67,7 @@ require_once 'templates/messages.php';
         </div>
         <div class="d-flex justify-content-center">
         <?php addCSRFTokenToForm() ?>
-        <button type="submit" class="btn btn-original justify-content-center my-3" value="">Enregistrer</button>
+        <button type="submit" class="btn btn-original bold justify-content-center my-3" value="">Enregistrer</button>
         </div>
     </form>
 </div>

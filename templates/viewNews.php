@@ -17,7 +17,7 @@
                 <ul class="pagination justify-content-center">
                     <?php if ($pageActuelle > 1): ?>
                         <li class="page-item">
-                            <a class="page-link" href="?page=<?= $pageActuelle - 1 ?>" aria-label="Précédent">
+                            <a class="page-link" href="?pageNews=<?= $pageActuelle - 1 ?>" aria-label="Précédent">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -25,13 +25,13 @@
                     
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                         <li class="page-item <?= $pageActuelle == $i ? 'active' : '' ?>">
-                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            <a class="page-link" href="?pageNews=<?= $i ?>"><?= $i ?></a>
                         </li>
                     <?php endfor; ?>
                     
                     <?php if ($pageActuelle < $totalPages): ?>
                         <li class="page-item">
-                            <a class="page-link" href="?page=<?= $pageActuelle + 1 ?>" aria-label="Suivant">
+                            <a class="page-link" href="?pageNews=<?= $pageActuelle + 1 ?>" aria-label="Suivant">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

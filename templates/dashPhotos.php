@@ -7,7 +7,7 @@ $totalItems = count($allPhotos);
 $totalPages = ceil($totalItems / $itemsPerPage);
 
 // Récupérer la page courante depuis l'URL
-$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$currentPage = isset($_GET['pagePhotos']) ? (int)$_GET['pagePhotos'] : 1;
 $currentPage = max(1, min($currentPage, $totalPages)); // S'assurer que la page est valide
 
 // Calculer l'index de début
@@ -17,19 +17,21 @@ $startIndex = ($currentPage - 1) * $itemsPerPage;
 $photosForCurrentPage = array_slice($allPhotos, $startIndex, $itemsPerPage);
 ?>
 
-<h3 class="h2Sports ms-2">Gestion des photos</h3>
+<section class="container-fluid">
+<h3 class="h2Sports">Gestion des photos</h3>
 <hr>
 <div class="row">
     <form method="POST" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    <div class="table-responsive-sm" id="tablePhotos">
+                    <div class="table-responsive-sm mt-3" id="tablePhotos">
                         <table class="table table-striped table-responsive text-center nowrap">
-                            <thead>
+                            <thead class="table-dark">
                                 <tr>
                                     <th>Titre</th>
                                     <th>Photo</th>
+                                    <th>Sélectionner</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,19 +54,19 @@ $photosForCurrentPage = array_slice($allPhotos, $startIndex, $itemsPerPage);
                             <ul class="pagination justify-content-center">
                                 <?php if ($currentPage > 1): ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $currentPage - 1 ?>#tablePhotos"><</a>
+                                        <a class="page-link" href="?pagePhotos=<?= $currentPage - 1 ?>#tablePhotos"><</a>
                                     </li>
                                 <?php endif; ?>
 
                                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                                     <li class="page-item <?= $i === $currentPage ? 'active' : '' ?>">
-                                        <a class="page-link" href="?page=<?= $i ?>#tablePhotos"><?= $i ?></a>
+                                        <a class="page-link" href="?pagePhotos=<?= $i ?>#tablePhotos"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
 
                                 <?php if ($currentPage < $totalPages): ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="?page=<?= $currentPage + 1 ?>#tablePhotos">></a>
+                                        <a class="page-link" href="?pagePhotos=<?= $currentPage + 1 ?>#tablePhotos">></a>
                                     </li>
                                 <?php endif; ?>
                             </ul>
@@ -75,11 +77,12 @@ $photosForCurrentPage = array_slice($allPhotos, $startIndex, $itemsPerPage);
 
             <div class="d-flex justify-content-end">
                 <div class="my-3">
-                    <a href="addPhotos.php" class="btn btn-card">Ajouter une photo</a>
+                    <a href="addPhotos.php" class="btn btn-card bold">Ajouter une photo</a>
                     <?php addCSRFTokenToForm() ?>
-                    <button type="submit" class="btn btn-original" name="deletePhoto">Supprimer</button>
+                    <button type="submit" class="btn btn-original bold" name="deletePhoto">Supprimer</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+</section>

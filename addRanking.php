@@ -147,7 +147,7 @@ ob_end_flush();
         <!-- Bouton de soumission -->
         <div class="d-flex justify-content-center mt-2">
             <?php addCSRFTokenToForm() ?>
-            <button type="submit" class="btn btn-original my-3">Enregistrer</button>
+            <button type="submit" class="btn btn-original bold my-3">Enregistrer</button>
         </div>
     </form>
 </section>

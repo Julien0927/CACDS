@@ -68,7 +68,7 @@ require_once 'header.php';
 require_once 'templates/messages.php';
 ?>
 
-<h2>Modifier un article</h2>
+<h2 class="h2Sports text-center mt-3">Modifier un article</h2>
 
 <div class="container col-12 col-md-6">
     <form method="POST" action="updateNews.php?id=<?=htmlspecialchars($_GET['id'])?>" enctype="multipart/form-data" >
@@ -90,7 +90,7 @@ require_once 'templates/messages.php';
         </div>
         <div class="d-flex justify-content-center">
             <?php addCSRFTokenToForm() ?>
-            <button type="submit" class="btn btn-original my-3">Enregistrer</button>
+            <button type="submit" class="btn btn-original bold my-3">Enregistrer</button>
         </div>
     </form>
 </div>

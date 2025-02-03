@@ -1,10 +1,12 @@
 :root {
  --blueNav-color: #72C8DF;  
+ --blueNav2-color: #0c637b;  
  --blue-color: #12758C;  
  --orange-color: #EC930F;
  --white-color: #FFFFFF;
  --purple-color: #6A0572;
  --green-color: #4db769;
+ --green2-color: #165319;
 
  --font-montserrat: "Montserrat", sans-serif;
   --font-lato: "Lato", sans-serif;
@@ -122,7 +124,7 @@
 }
 
 /*Titres*/
-h1 {
+h1, .h1Sports {
   font-family: var(--montserrat);
   font-weight: 800;
   color: var(--blue-color);
@@ -191,6 +193,37 @@ option, select {
   padding: 2px 10px;
   border-radius: 5px;
 }
+
+/*user status*/
+.user-status {
+  margin-left: 5px;
+}
+
+.user-status p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--purple-color);
+}
+
+/*map*/
+.map {
+  border-radius: 10px;
+}
+
+/*Tableaux*/
+.table {
+  border-collapse: collapse; /* Éviter les doublons de bordures */
+  border-radius: 10px;
+  overflow: hidden; /* Nécessaire pour que les bords arrondis s'appliquent aux enfants */
+  border: 2px solid var(--blue-color); /* Facultatif, pour mieux voir l'effet */
+  background-color: var(--blue-color);
+}
+
+.table th {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  }
 
 /*Buttons*/
 .btn1 {
@@ -413,9 +446,9 @@ hr {
 }
 
 .classement-list .card {
-  border-color: var(--green-color);
+  border-color: var(--blue-color);
   transition: transform 0.2s ease;
-  border-left: 4px solid var(--green-color);
+  border-left: 4px solid var(--blue-color);
   background : #dcdad8;
 }
 
@@ -424,7 +457,7 @@ hr {
 }
 
 .classement-list .card-title {
-  color: var(--green-color);
+  color: var(--blue-color);
   font-family: var(--font-montserrat) ;
   font-weight: 600;
 }
@@ -464,8 +497,8 @@ hr {
 }
 
 .pagination .page-item.active .page-link {
-  background-color: var(--purple-color);
-  border-color: var(--white-color);
+  background-color: var(--blueNav-color);
+  border-color: var(--blueNav2-color);
 }
 
 
@@ -496,6 +529,11 @@ hr {
   width: 20%;
   height: 20%;
 }
+.logo2 {
+  border-radius: 50px;
+  width: 10%;
+  height: 10%;
+}
 .cacds {
   background-color: var(--blue-color);
   color: var(--white-color);
@@ -521,11 +559,11 @@ fieldset {
 .insideNav {
   display: flex;
   justify-content: center;
-  background-color: var(--orange-color);
+  background-color: var(--blue-color);
 }
 
 .sportsNav {
-  background-color: var(--orange-color);
+  background-color: var(--blue-color);
   padding: 1rem;
   font-family: var(--montserrat);
   font-weight: 600;
@@ -610,6 +648,13 @@ footer {
   font-weight: 800;
 }
   
+.mentions {
+  font-family: var(--font-lato);
+  font-weight: 300;
+  font-size: 0.75rem;
+  color: var(--white-color);
+  text-decoration: none;
+}
 /*----RESPONSIVE----*/
 
 @media screen and (max-width: 768px) {

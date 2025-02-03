@@ -4,31 +4,16 @@ require_once('lib/config_session.php');
 // Obtenir le nom de la page courante
 $current_page = basename($_SERVER['PHP_SELF']);
 
-// Charger les menus
-// Initialisation du menu à afficher 
 $menuToShow = $menu;
 
-// Vérifier si l'utilisateur est connecté
-if (isset($_SESSION['user'])) {
-    $userSport = $_SESSION['user']['sport_id'] ?? null;
-    
-    // Ajouter le lien vers le dashboard spécifique si un sport est défini
-    if ($userSport) {
-        $dashboardPages = [
-            '1' => 'dashboardTdT.php',
-            '2' => 'dashboardBad.php',
-            '3' => 'dashboardPetanque.php',
-            '4' => 'dashboardVolley.php',
-        ];
-        
-        // Ajouter le dashboard au menu, s'il existe pour cet utilisateur
-        if (isset($dashboardPages[$userSport])) {
-            $menuToShow = [
-                $dashboardPages[$userSport] => 'Mon Dashboard',
-            ] + $menu;
-        }
-    }
-}
+$dashboardPages = [
+    '1' => ['url' => 'dashboardTdT.php', 'name' => 'Tennis de Table', 'sport_id' => 1],
+    '2' => ['url' => 'dashboardBad.php', 'name' => 'Badminton', 'sport_id' => 2],
+    '3' => ['url' => 'dashboardPetanque.php', 'name' => 'Pétanque', 'sport_id' => 3],
+    '4' => ['url' => 'dashboardVolley.php', 'name' => 'Volley-Ball', 'sport_id' => 4],
+    '5' => ['url' => 'dashboardAdmin.php', 'name' => 'Messages', 'sport_id' => null],
+];
+
 ?>
 
 <nav class="navbar navbar-expand-lg ms-auto py-2">
@@ -39,27 +24,58 @@ if (isset($_SESSION['user'])) {
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav link-offset-3">
-                <!-- Génération dynamique du menu -->
+                <!-- Menu principal -->
                 <?php foreach ($menuToShow as $url => $label): ?>
                     <?php if (!isset($_SESSION['user']) || $url !== 'login.php'): ?>
                         <li class="nav-item">
                             <a class="nav-link <?= ($current_page === $url) ? 'active' : '' ?>" href="<?= htmlspecialchars($url) ?>">
                                 <?php if ($url === 'login.php'): ?>
-                                    <?= $label; // Affiche directement l'icône si c'est login.php ?>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($label); // Sinon, échappe le texte ?>
-                                <?php endif; ?>
-                            </a>
-                        </li>
+                                    <?= $label; ?>
+                                    <?php else: ?>
+                                        <?=($label); ?>
+                                        <?php endif; ?>
+                                    </a>
+                                </li>
                     <?php endif; ?>
                 <?php endforeach; ?>
-                <!-- Bouton de déconnexion -->
-            </ul>
-            <?php if (isset($_SESSION['user'])): ?>
-                <li class="nav-item mb-2" style="list-style-type: none;">
-                    <a class="btn btnLogout me-2 <?= ($current_page === 'logout.php') ? 'active' : '' ?>" href="logout.php">Se déconnecter</a>
-                </li>
-            <?php endif; ?>
+
+                <!-- Gestion des dashboards -->
+                <?php if (isset($_SESSION['user'])): ?>
+                    <?php if (isset($_SESSION['is_super_admin']) && $_SESSION['is_super_admin']): ?>
+                        <!-- Lien direct pour le super admin -->
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($current_page === 'dashboardAdmin.php') ? 'active' : '' ?>" 
+                               href="dashboardAdmin.php">
+                               Dashboard
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <!-- Dashboard unique pour utilisateur normal -->
+                        <?php 
+                        $userSport = $_SESSION['sport_id'] ?? null;
+                        if ($userSport && isset($dashboardPages[$userSport])):
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link <?= ($current_page === $dashboardPages[$userSport]['url']) ? 'active' : '' ?>" 
+                                href="<?= ($dashboardPages[$userSport]['url']) ?>">
+                                Mon Dashboard
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                        <?php endif; ?>
+                        <?php endif; ?>
+                    </ul>
+                    
+                    <!-- Bouton de déconnexion -->
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item mb-2">
+                                <a class="btn btnLogout me-2 <?= ($current_page === 'logout.php') ? 'active' : '' ?>" href="logout.php">
+                                    Se déconnecter
+                                </a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
         </div>
     </div>
 </nav>

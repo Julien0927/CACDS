@@ -6,7 +6,7 @@ use PDOException;
 use InvalidArgumentException;
 
 class Classements {
-    private $db;
+    private PDO $db;
     private $competitionId;
     private $pouleId;
     private $sportId;
@@ -27,18 +27,13 @@ class Classements {
      */
     private function setSportId($sportId = null): void {
         if ($sportId !== null) {
-            // Priorité 1: Utilise le sport_id passé en paramètre
             $this->sportId = (int)$sportId;
+        } else if (isset($this->adminSportsHandler)) {
+            $this->sportId = $this->adminSportsHandler->getCurrentSportId() ?? 2;
         } else if (isset($_SESSION['sport_id'])) {
-            // Priorité 2: Utilise le sport_id de la session
             $this->sportId = (int)$_SESSION['sport_id'];
         } else {
-            // Priorité 3: Utilise la valeur par défaut pour le badminton
             $this->sportId = 2;
-        }
-
-        if ($this->sportId <= 0) {
-            throw new InvalidArgumentException("Sport ID invalide");
         }
     }
 
@@ -68,92 +63,70 @@ class Classements {
         $this->id = (int)$id;
     }
 
-    public function getClassements() {
-        try {
-            $query = "
-                SELECT 
-                    cb.*,
-                    c.name AS competition_name,
-                    c.type AS competition_type,
-                    cb.day_number
-                FROM classementbad cb
-                INNER JOIN competitions c ON cb.competitions_id = c.id
-                WHERE cb.sport_id = :sport_id
-            ";
-            $params = ['sport_id' => $this->sportId];
-            
-            if ($this->competitionId) {
-                $query .= " AND cb.competitions_id = :competitions_id";
-                $params['competitions_id'] = $this->competitionId;
-            }
-            
-            if ($this->pouleId) {
-                $query .= " AND cb.poule_id = :poule_id";
-                $params['poule_id'] = $this->pouleId;
-            }
-
-            if (isset($this->cupName)) {
-                $query .= " AND cb.name = :name";
-                $params['name'] = $this->cupName;
-            }
-            
-            $query .= "
-            ORDER BY 
-                c.id, 
-                COALESCE(cb.day_number, 0), 
-                cb.name";
-            
-            $stmt = $this->db->prepare($query);
-            $stmt->execute($params);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-           } catch (PDOException $e) {
-            throw new \Exception("Erreur lors de la récupération du classement : " . $e->getMessage());
+public function getClassements() {
+    try {
+        $query = "
+            SELECT cb.*, c.name AS competition_name, c.type AS competition_type, cb.day_number
+            FROM classementbad cb
+            INNER JOIN competitions c ON cb.competitions_id = c.id
+            WHERE cb.sport_id = :sport_id";
+        
+        if ($this->competitionId) {
+            $query .= " AND cb.competitions_id = :competitions_id";
         }
+        if ($this->pouleId) {
+            $query .= " AND cb.poule_id = :poule_id";
+        }
+        if (isset($this->cupName)) {
+            $query .= " AND cb.name = :name";
+        }
+        
+        $query .= " ORDER BY c.id, COALESCE(cb.day_number, 0), cb.name";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':sport_id', $this->sportId, PDO::PARAM_INT);
+        
+        if ($this->competitionId) {
+            $stmt->bindValue(':competitions_id', $this->competitionId, PDO::PARAM_INT);
+        }
+        if ($this->pouleId) {
+            $stmt->bindValue(':poule_id', $this->pouleId, PDO::PARAM_INT);
+        }
+        if (isset($this->cupName)) {
+            $stmt->bindValue(':name', $this->cupName, PDO::PARAM_STR);
+        }
+        
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new \Exception("Erreur lors de la récupération du classement : " . $e->getMessage());
     }
+}
 
     public function addClassement($pdfUrl, $dayNumber = NULL, $name = NULL) { 
-           
         if ($dayNumber !== null && !is_numeric($dayNumber)) {
-            throw new InvalidArgumentException("Le numéro de journée (day_number) doit être un nombre ou nul.");
+            throw new InvalidArgumentException("Le numéro de journée doit être un nombre ou nul.");
         }
         if ($this->competitionId === null) {
             throw new InvalidArgumentException("Competition ID est requis pour ajouter un classement");
         }
-    
+        
         try {
-            $stmt = $this->db->prepare("SELECT type FROM competitions WHERE id = :id");
-            $stmt->execute(['id' => $this->competitionId]);
-            $competition = $stmt->fetch(PDO::FETCH_ASSOC);
+            $query = $this->db->prepare("INSERT INTO classementbad (poule_id, competitions_id, day_number, classement_pdf_url, name, sport_id) VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)");
             
-            if ($competition && in_array($competition['type'], ['Coupe', 'Tournoi'])) {
-                $this->pouleId = null;
-                $dayNumber = null;
-
-                if (empty($name)) {
-                    throw new InvalidArgumentException("Le nom est requis pour les coupes et tournois");
-                }
-            } else {
-                $name = null;
-            }
+            $query->bindValue(':poule_id', $this->pouleId, PDO::PARAM_INT);
+            $query->bindValue(':competitions_id', $this->competitionId, PDO::PARAM_INT);
+            $query->bindValue(':day_number', $dayNumber, PDO::PARAM_INT);
+            $query->bindValue(':pdf_url', $pdfUrl, PDO::PARAM_STR);
+            $query->bindValue(':name', $name, PDO::PARAM_STR);
+            $query->bindValue(':sport_id', $this->sportId, PDO::PARAM_INT);
             
-            $query = $this->db->prepare("
-                INSERT INTO classementbad (poule_id, competitions_id, day_number, classement_pdf_url, name, sport_id)
-                VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)
-            ");
-            
-            return $query->execute([
-                'poule_id' => $this->pouleId,
-                'competitions_id' => $this->competitionId,
-                'day_number' => $dayNumber,
-                'pdf_url' => $pdfUrl,
-                'name' => $name,
-                'sport_id' => $this->sportId
-            ]);
-            
+            return $query->execute();
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de l'ajout du classement : " . $e->getMessage());
         }
     }
+
 
     public function displayClassement() {
         try {
@@ -179,12 +152,11 @@ class Classements {
 
     public function deleteClassement(): void {
         if (!isset($this->id)) {
-            throw new InvalidArgumentException("Sélection non défini pour la suppression");
+            throw new InvalidArgumentException("Sélection non définie pour la suppression");
         }
         
         try {
-            $sql = "DELETE FROM classementbad WHERE id = :id";
-            $query = $this->db->prepare($sql);
+            $query = $this->db->prepare("DELETE FROM classementbad WHERE id = :id");
             $query->bindValue(':id', $this->id, PDO::PARAM_INT);
             $query->execute();
         } catch (PDOException $e) {

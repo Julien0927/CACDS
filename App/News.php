@@ -151,11 +151,19 @@ public function getTotalNewsBySport($sport_id): int
 
     //Fonction permettant de récupérer les news par sport et poule
     public function getAllNews() {
-        $sql = "SELECT n.*, u.name as author_name 
+            $currentSportId = isset($adminSportsHandler) ? 
+            $adminSportsHandler->getCurrentSportId() : 
+            ($_SESSION['sport_id'] ?? null);
+
+            $sql = "SELECT n.*, u.name as author_name 
                 FROM `news` n
                 LEFT JOIN users u ON n.user_id = u.id
                 WHERE 1=1";
         $params = [];
+        if ($currentSportId) {
+            $sql .= " AND n.sport_id = :sport_id";
+            $params[':sport_id'] = $currentSportId;
+        }
 
         // Si l'utilisateur n'est pas super admin, filtrer par sport et poule
         if ($_SESSION['role'] !== 'super_admin') {

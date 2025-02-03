@@ -4,6 +4,7 @@ require_once 'templates/nav.php';
 require_once 'lib/pdo.php';
 require_once 'lib/config_session.php';
 require_once 'App/News.php';
+require_once 'lib/security.php';
 
 $news = new App\News\News($db);
 
@@ -49,6 +50,7 @@ function truncateText($text, $length = 100) {
 // Fonction pour afficher une section d'actualité
 function displayNewsSection($news, $sport) {
 ?>
+<section>
 <div class="col-12 col-md-12">
     <div class="news-container">
         <div class="news-wrapper">
@@ -112,7 +114,7 @@ function displayNewsSection($news, $sport) {
             <!-- Image à droite -->
             <?php if ($news): ?>
                 <div class="news-image-container">
-                    <img class="news-image" src="<?= $news['image'] ?>" alt="<?= htmlspecialchars($news['title']) ?>">
+                    <img class="news-image img-fluid" src="<?= $news['image'] ?>" alt="<?= htmlspecialchars($news['title']) ?>">
                 </div>
             <?php endif; ?>
         </div>
@@ -130,7 +132,7 @@ function displayNewsSection($news, $sport) {
 
 <section class="mt-3">
     <div class="container">
-        <div class="col-12">
+        <div class="col-12 col-md-12">
             <fieldset>
                 <legend id="menu">Actualités</legend>
                 <div class="row">
@@ -153,23 +155,49 @@ function displayNewsSection($news, $sport) {
     </div>
 </section>
 
-<section class="mt-3">
-    <h1 style="text-align: center;">TEXTE DE PRÉSENTATION DE L'ASSOCIATION</h1>
+<section class="container-fluid mt-3">
+    <h2 class="h3Sports text-center">PRÉSENTATION DE L'ASSOCIATION</h2>
 </section>
-<section class="d-flex flex-md-row flex-column justify-content-around mt-5 mb-5">
-        <div >
-            <a href="badminton.php"><img src="/assets/icones/Badminton Item.svg" alt=""></a>
+<section class="container-fluid mx-auto row mt-5">
+    <div class="center col-12 col-md-6">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5511.415663923563!2d-0.4802229241907535!3d46.31563967622913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48072e2f1b910733%3A0x448a1ec76d99546a!2sNIORT-ASSOCIATIONS!5e0!3m2!1sfr!2sfr!4v1738249707293!5m2!1sfr!2sfr" 
+            class="map img-fluid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+    <div class="center flex-column text-center col-12 col-md-6">
+        <img src="/assets/logos/square_logo.jpg" alt="logo CACDS" style="width: 20%; height: auto" class="img-fluid mx-auto">
+        <h3 class="h3Sports">Adresse</h3>
+        <p>Maison des Associations, Rue Joseph Cugnot, Niort 79000</p>
+        <h3 class="h3Sports">Téléphone</h3>
+        <p>06 64 28 58 40</p>
+        <h3 class="h3Sports">Email</h3>
+        <p>assocacds@gmail.com</p>
+    </div>
+</section>
+<section class="container-fluid mt-5 mb-5">
+    <div class="row g-3 justify-content-center">
+        <div class="col-6 col-md-3 text-center">
+            <a href="badminton.php">
+                <img src="/assets/icones/Badminton Item.svg" alt="badminton" class="img-fluid">
+            </a>
         </div>
-        <div >
-        <a href="volley.php"><img src="/assets/icones/Volley Item.svg" alt=""></a>
+        <div class="col-6 col-md-3 text-center">
+            <a href="volley.php">
+                <img src="/assets/icones/Volley Item.svg" alt="volleyball" class="img-fluid">
+            </a>
         </div>
-        <div >
-        <a href="tennisDT.php"><img src="/assets/icones/TdT item.svg" alt=""></a>
+        <div class="col-6 col-md-3 text-center">
+            <a href="tennisDT.php">
+                <img src="/assets/icones/TdT item.svg" alt="Tennis de table" class="img-fluid">
+            </a>
         </div>
-        <div >
-        <a href="petanque.php"><img src="/assets/icones/petanque item.svg" alt=""></a>
+        <div class="col-6 col-md-3 text-center">
+            <a href="petanque.php">
+                <img src="/assets/icones/petanque item.svg" alt="pétanque" class="img-fluid">
+            </a>
         </div>
-
+    </div>
 </section>
 
 <?php

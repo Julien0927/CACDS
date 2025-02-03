@@ -5,9 +5,6 @@ namespace App\Users;
 use PDO;
 use Exception;
 
-
-namespace App\Users;
-
 class Users
 {
     private $db;
@@ -52,6 +49,14 @@ class Users
         return $stmt->execute();
     }
 
+        // Nouvelle méthode pour vérifier si l'utilisateur est super admin
+    public function isSuperAdmin($userId) {
+        $stmt = $this->db->prepare("SELECT role FROM users WHERE id = ?");
+        $stmt->execute([$userId]);
+        $user = $stmt->fetch();
+        return $user && $user['role'] === 'super_admin';
+    }
+
         // Méthode pour connecter un utilisateur
     public function login($email, $password) {
         $stmt = $this->db->prepare("
@@ -64,12 +69,17 @@ class Users
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            // Démarrage session sécurisée
             session_start(['cookie_httponly' => true]);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role'] = $user['role'];
-            $_SESSION['sport_id'] = $user['sport_id'];
-            $_SESSION['poule_id'] = $user['poule_id'];
+            
+            // Pour un super_admin, on ne définit pas de sport_id ou poule_id spécifique
+            if ($user['role'] !== 'super_admin') {
+                $_SESSION['sport_id'] = $user['sport_id'];
+                $_SESSION['poule_id'] = $user['poule_id'];
+            }
+            
+            $_SESSION['is_super_admin'] = ($user['role'] === 'super_admin');
             return $user;
         }
         return false;
@@ -80,6 +90,32 @@ class Users
         session_start(['cookie_httponly' => true]);
         session_destroy();
     }
+
+    //Méthode pour récupérer tous les sports
+public function getAllSports() {
+    $stmt = $this->db->prepare("SELECT * FROM sports ORDER BY name");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Modification de la méthode canAccessSport pour le super_admin
+public function canAccessSport($userId, $sportId) {
+    $stmt = $this->db->prepare("
+        SELECT role, sport_id 
+        FROM users 
+        WHERE id = ?
+    ");
+    $stmt->execute([$userId]);
+    $user = $stmt->fetch();
+    
+    // Le super_admin peut accéder à tous les sports
+    if ($user && $user['role'] === 'super_admin') {
+        return true;
+    }
+    
+    // Pour les autres utilisateurs, vérifier le sport_id
+    return $user && $user['sport_id'] == $sportId;
+}
 
         // Méthode pour récupérer un utilisateur par son ID
     public function getUserById($id) {

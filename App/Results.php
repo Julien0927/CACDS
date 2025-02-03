@@ -74,42 +74,40 @@ class Results {
         }
         
         try {
-            // Vérifie le type de compétition
             $stmt = $this->db->prepare("SELECT type FROM competitions WHERE id = :id");
-            $stmt->execute(['id' => $this->competitionId]);
+            $stmt->bindValue(':id', $this->competitionId, PDO::PARAM_INT);
+            $stmt->execute();
             $competition = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            // Pour les coupes et tournois, force poule_id et day_number à NULL
             if ($competition && in_array($competition['type'], ['Coupe', 'Tournoi'])) {
                 $this->pouleId = null;
                 $dayNumber = null;
                 
-                // Vérifie que le nom est fourni pour les coupes et tournois
                 if (empty($name)) {
                     throw new InvalidArgumentException("Le nom est requis pour les coupes et tournois");
                 }
             } else {
-                // Pour le championnat, le nom est optionnel
                 $name = null;
             }
             
-            $query = $this->db->prepare("
-                INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url, name, sport_id)
-                VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)
-            ");
+            $query = $this->db->prepare(
+                "INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url, name, sport_id)
+                VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)"
+            );
             
-            return $query->execute([
-                'poule_id' => $this->pouleId,
-                'day_number' => $dayNumber,
-                'pdf_url' => $pdfUrl,
-                'competitions_id' => $this->competitionId,
-                'name' => $name,
-                'sport_id' => $this->sportId
-            ]);
+            $query->bindValue(':poule_id', $this->pouleId, PDO::PARAM_INT);
+            $query->bindValue(':competitions_id', $this->competitionId, PDO::PARAM_INT);
+            $query->bindValue(':day_number', $dayNumber, PDO::PARAM_INT);
+            $query->bindValue(':pdf_url', $pdfUrl, PDO::PARAM_STR);
+            $query->bindValue(':name', $name, PDO::PARAM_STR);
+            $query->bindValue(':sport_id', $this->sportId, PDO::PARAM_INT);
+            
+            return $query->execute();
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de l'ajout du résultat : " . $e->getMessage());
         }
     }
+
 
     public function getResults() {
         try {

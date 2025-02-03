@@ -24,23 +24,18 @@ class Photos {
      * Définit le sport_id avec gestion des priorités
      * @param int|null $sportId
      */
-    private function setSportId(?int $sportId = null): void {
+    private function setSportId($sportId = null): void {
         if ($sportId !== null) {
-            // Priorité 1: Utilise le sport_id passé en paramètre
-            $this->sportId = $sportId;
+            $this->sportId = (int)$sportId;
+        } else if (isset($this->adminSportsHandler)) {
+            $this->sportId = $this->adminSportsHandler->getCurrentSportId() ?? 2;
         } else if (isset($_SESSION['sport_id'])) {
-            // Priorité 2: Utilise le sport_id de la session
             $this->sportId = (int)$_SESSION['sport_id'];
         } else {
-            // Priorité 3: Utilise la valeur par défaut pour le badminton
             $this->sportId = 2;
         }
-
-        if ($this->sportId <= 0) {
-            throw new InvalidArgumentException("Sport ID invalide");
-        }
     }
-
+    
     /**
      * Permet de changer le sport_id après l'instanciation
      * @param int $sportId
@@ -103,24 +98,19 @@ class Photos {
         $this->image = $image;
     }
 
-    // Méthodes CRUD modifiées...
     public function addPhoto(): bool {
         try {
             if (!$this->title || !$this->date || !$this->image) {
                 throw new InvalidArgumentException("Titre, date et image sont requis");
             }
 
-            $query = "INSERT INTO photos (title, date, image, sport_id)
-                      VALUES (:title, :date, :image, :sport_id)";
-            
+            $query = "INSERT INTO photos (title, date, image, sport_id) VALUES (:title, :date, :image, :sport_id)";
             $stmt = $this->db->prepare($query);
-            
-            return $stmt->execute([
-                ':title' => $this->title,
-                ':date' => $this->date,
-                ':image' => $this->image,
-                ':sport_id' => $this->sportId
-            ]);
+            $stmt->bindValue(':title', $this->title, PDO::PARAM_STR);
+            $stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
+            $stmt->bindValue(':image', $this->image, PDO::PARAM_STR);
+            $stmt->bindValue(':sport_id', $this->sportId, PDO::PARAM_INT);
+            return $stmt->execute();
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de l'ajout de la photo : " . $e->getMessage());
         }
@@ -128,23 +118,17 @@ class Photos {
 
     public function getBySportId(?int $sportId = null): array {
         try {
-            // Si aucun sport_id n'est fourni, utilise celui de la classe
             $sportIdToUse = $sportId ?? $this->sportId;
-
-            $query = "SELECT * FROM {$this->table}
-                      WHERE sport_id = :sport_id
-                      ORDER BY date DESC";
-            
+            $query = "SELECT * FROM {$this->table} WHERE sport_id = :sport_id ORDER BY date DESC";
             $stmt = $this->db->prepare($query);
-            $stmt->execute([':sport_id' => $sportIdToUse]);
-            
+            $stmt->bindValue(':sport_id', $sportIdToUse, PDO::PARAM_INT);
+            $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de la récupération des photos : " . $e->getMessage());
         }
     }
 
-    // Autres méthodes existantes...
     public function getAllPhotos(): array {
         try {
             $query = "SELECT * FROM {$this->table} ORDER BY date DESC";
@@ -159,10 +143,10 @@ class Photos {
             if ($this->id === null) {
                 throw new InvalidArgumentException("ID non défini pour la suppression");
             }
-
             $sql = "DELETE FROM {$this->table} WHERE id = :id";
             $stmt = $this->db->prepare($sql);
-            return $stmt->execute([':id' => $this->id]);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+            return $stmt->execute();
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de la suppression de la photo : " . $e->getMessage());
         }
@@ -172,8 +156,8 @@ class Photos {
         try {
             $query = "SELECT 1 FROM {$this->table} WHERE id = :id";
             $stmt = $this->db->prepare($query);
-            $stmt->execute([':id' => $id]);
-            
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de la vérification de l'existence de la photo : " . $e->getMessage());

@@ -26,9 +26,15 @@ if (!empty($_POST)) {
                 // Stocker les informations utilisateur dans la session
                 $_SESSION['user'] = $userInfo; // Par exemple : ['email' => '...', 'sport' => 'badminton']
                 $_SESSION['sport_id'] = $userInfo['sport_id'];
+                $_SESSION['role'] = $userInfo['role'];
                 $_SESSION['success_message'] = "Bienvenue sur votre tableau de bord ". $userInfo['firstname'] . " !";
 
                 // Rediriger en fonction du sport ou rôle
+                if ($userInfo['role'] === 'super_admin') {
+                    header("Location: dashboardAdmin.php");
+                    exit;
+                }
+                
                 switch ($userInfo['sport_id']) {
                     case '2':
                         header("Location: dashboardBad.php");
