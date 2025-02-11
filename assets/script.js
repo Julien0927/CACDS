@@ -301,3 +301,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+  //Faire pivoter l'icône de la flèche
+  const toggleIcons = document.querySelectorAll(".toggle-icon");
+
+  // Ajoute ou retire la classe "rotated" au clic
+  toggleIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+      icon.classList.toggle("rotated"); // Alterne la classe "rotated"
+    });
+  });
+
+  // Données du menu //
+
+  document.querySelectorAll('[data-target]').forEach(element => {
+    element.addEventListener('click', () => {
+      const targetId = element.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      targetElement.classList.toggle('show'); // Alterne entre affiché et masqué
+    });
+  });

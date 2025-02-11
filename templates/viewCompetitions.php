@@ -13,17 +13,17 @@
             </select>
             <div class="row d-flex justify-content-center mt-4">
                 <div class="col-md-3">
-                    <h4>Résultats</h4>
+                    <h4>Résultats et Classements</h4>
                     <div id="resultats-container">
                         <!-- Les résultats seront chargés ici -->
                     </div>
                 </div>
-                <div class="col-md-3">
+                <!--<div class="col-md-3">
                     <h4>Classements</h4>
-                    <div id="classement-container">
+                    <div id="classement-container">-->
                         <!-- Le classement sera chargé ici -->
-                    </div>
-                </div>
+                    <!--</div>
+                </div>-->
             </div>
         <!--Coupe-->
         <h3 class="h3Sports" id="cup">Coupe</h3>
@@ -37,7 +37,7 @@
                 <option value="<?= $cupName['name'] ?>"><?= ($cupName['name']) ?></option>
             <?php endforeach; ?>
         </select>
-
+ 
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
                 <h4>Résultats</h4>

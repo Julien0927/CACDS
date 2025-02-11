@@ -124,14 +124,17 @@ function displayNewsSection($news, $sport) {
 }
 ?>
 
-<h1 class="cacds">Coupe de l'Amitié Corporative des Deux-Sèvres</h1>
-
-<div class="d-flex justify-content-center">
-    <img src="/assets/logos/cacds_logo_CACDS.webp" style="width: 10%; height: 10%" alt="cacds" class="img-fluid">
+<h1 class="text-center mt-3">Coupe de l'Amitié Corporative des Deux-Sèvres</h1>
+<div class="d-flex justify-content-center align-items-center mt-3 gap-5">
+    <img src="/assets/icones/Square item bad.svg" alt="badminton" class="img-fluid itemSquare">
+    <img src="/assets/icones/Square item Volley.svg" alt="volleyball" class="img-fluid itemSquare">
+    <img src="/assets/logos/cacds_logo_CACDS.webp" style="width: 10%; height: auto" alt="cacds" class="img-fluid">
+    <img src="/assets/icones/Square item TdT.svg" alt="tennis de table" class="img-fluid itemSquare">
+    <img src="/assets/icones/Square item petanque.svg" alt="pétanque" class="img-fluid itemSquare">
 </div>
 
 <section class="mt-3">
-    <div class="container">
+    <div class="container ">
         <div class="col-12 col-md-12">
             <fieldset>
                 <legend id="menu">Actualités</legend>
@@ -157,6 +160,29 @@ function displayNewsSection($news, $sport) {
 
 <section class="container-fluid mt-3">
     <h2 class="h3Sports text-center">PRÉSENTATION DE L'ASSOCIATION</h2>
+    <h2 class="h3Sports text-center">HISTOIRE</h2>
+    <p>
+    
+    </p>
+    <h2 class="h3Sports">Assurance dommage corporels</h2>
+    <p>
+    Comme vous le savez, la CACDS a souscrit au nom et pour le compte de ses adhérents, une garantie "Dommages Corporels" en cas de survenance d’un accident corporel résultant de la pratique du sport en tant qu’adhérent CACDS.
+Lors de la dernière Assemblée Générale, la garantie vous a été présentée.
+Elle peut intervenir en cas de reste à charge pour l’adhérent, après intervention de la Sécurité Sociale et de sa mutuelle Santé.
+
+Vous trouverez ci-dessous, le document type à télécharger, pour faire votre déclaration de sinistre.
+
+La procédure est donc la suivante :
+
+1/ En cas d’accident entrainant une déclaration de sinistre, le responsable de votre équipe informe le responsable de la section sportive qu’une déclaration va être transmise.
+2/ Vous renseignez le document le plus précisément possible. Pour faciliter la lecture des informations par l’assureur, merci de remplir le document au format WORD (pas de mention manuscrite).
+3/ Vous nous transmettez ce document renseigné par mail à l’adresse suivante : assocacds@gmail.com
+A réception, nous transmettrons votre déclaration à la MAIF.
+La MAIF aura ainsi vos coordonnées et gérera ensuite le dossier directement avec vous.
+
+En espérant malgré tout ne jamais avoir à traiter ce genre de situation !
+    </p>
+
 </section>
 <section class="container-fluid mx-auto row mt-5">
     <div class="center col-12 col-md-6">

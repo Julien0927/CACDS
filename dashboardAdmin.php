@@ -68,7 +68,7 @@ if ($_SESSION['role'] === 'super_admin') {
         <div class="center mt-4">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
         <select id="sportSelector" name="selected_sport_id" onchange="this.form.submit()">
-            <option value="" disabled selected>-- Sélectionnez un sport --</option>
+            <option value="" >-- Sélectionnez un sport --</option>
             <?php foreach ($sports as $sport): ?>
                 <option value="<?= $sport['id'] ?>" <?= ($_SESSION['sport_id'] ?? '') == $sport['id'] ? 'selected' : '' ?>>
                     <?= htmlspecialchars($sport['name']) ?>

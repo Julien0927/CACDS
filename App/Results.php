@@ -12,13 +12,20 @@ class Results {
     private $pouleId;
     private $sportId;
     private $id;
-    private $cupName;
+    private $cupName = null;
+    private $tournamentName = null;
     
-    public function __construct($db, $competitionId = null, $pouleId = null, $sportId = null) {
+    public function __construct($db, $competitionId = null, $pouleId = null, $sportId = null, $cupName = null, $tournamentName = null) {
         $this->db = $db;
         $this->competitionId = $competitionId;
         $this->pouleId = $pouleId;
         $this->setSportId($sportId);
+        if ($cupName !== null) {
+            $this->setCupName($cupName);
+        }
+        if ($tournamentName !== null) {
+            $this->setTournamentName($tournamentName);
+        }
     }
 
     /**
@@ -68,7 +75,7 @@ class Results {
         $this->id = (int)$id;
     }
     
-    public function addResult($pdfUrl, $dayNumber = NULL, $name = NULL) {
+    /* public function addResult($pdfUrl, $dayNumber = NULL, $name = NULL) {
         if ($this->competitionId === null) {
             throw new InvalidArgumentException("Competition ID est requis pour ajouter un résultat");
         }
@@ -106,10 +113,57 @@ class Results {
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de l'ajout du résultat : " . $e->getMessage());
         }
+    }  */
+
+    public function addResult($pdfUrl, $dayNumber = NULL, $name = NULL) {
+        if ($this->competitionId === null) {
+            throw new InvalidArgumentException("Competition ID est requis pour ajouter un résultat");
+        }
+        
+        try {
+            // Supprime d'abord l'ancien résultat s'il existe
+            $deleteQuery = "DELETE FROM journees WHERE competitions_id = :competitions_id AND sport_id = :sport_id";
+            $params = [
+                ':competitions_id' => $this->competitionId,
+                ':sport_id' => $this->sportId
+            ];
+    
+            // Ajoute les conditions spécifiques selon le type de compétition
+            if ($name !== null) {
+                $deleteQuery .= " AND name = :name";
+                $params[':name'] = $name;
+            } else {
+                $deleteQuery .= " AND day_number = :day_number";
+                if ($this->pouleId !== null) {
+                    $deleteQuery .= " AND poule_id = :poule_id";
+                    $params[':poule_id'] = $this->pouleId;
+                }
+                $params[':day_number'] = $dayNumber;
+            }
+    
+            $stmt = $this->db->prepare($deleteQuery);
+            $stmt->execute($params);
+    
+            // Insère le nouveau résultat
+            $query = $this->db->prepare(
+                "INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url, name, sport_id)
+                VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)"
+            );
+            
+            $query->bindValue(':poule_id', $this->pouleId, PDO::PARAM_INT);
+            $query->bindValue(':competitions_id', $this->competitionId, PDO::PARAM_INT);
+            $query->bindValue(':day_number', $dayNumber, PDO::PARAM_INT);
+            $query->bindValue(':pdf_url', $pdfUrl, PDO::PARAM_STR);
+            $query->bindValue(':name', $name, PDO::PARAM_STR);
+            $query->bindValue(':sport_id', $this->sportId, PDO::PARAM_INT);
+            
+            return $query->execute();
+        } catch (PDOException $e) {
+            throw new \Exception("Erreur lors de l'ajout du résultat : " . $e->getMessage());
+        }
     }
-
-
-    public function getResults() {
+     
+    /* public function getResults() {
         try {
             $query = "
                 SELECT 
@@ -151,7 +205,50 @@ class Results {
             throw new \Exception("Erreur lors de la récupération des résultats : " . $e->getMessage());
         }
     }
+ */
 
+ public function getResults() {
+    try {
+        $query = "
+            SELECT 
+                j.*,
+                c.name as competition_name,
+                c.type as competition_type
+            FROM journees j
+            INNER JOIN competitions c ON j.competitions_id = c.id
+            WHERE j.sport_id = :sport_id
+        ";
+        $params = ['sport_id' => $this->sportId];
+        
+        if ($this->competitionId) {
+            $query .= " AND j.competitions_id = :competitions_id";
+            $params['competitions_id'] = $this->competitionId;
+        }
+        
+        if ($this->pouleId) {
+            $query .= " AND j.poule_id = :poule_id";
+            $params['poule_id'] = $this->pouleId;
+        }
+
+        if ($this->cupName !== null) { // Changement de la condition
+            $query .= " AND j.name = :name";
+            $params['name'] = $this->cupName;
+        }
+        
+        $query .= " 
+        ORDER BY 
+            c.id, 
+            COALESCE(j.day_number, 0), 
+            j.name";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new \Exception("Erreur lors de la récupération des résultats : " . $e->getMessage());
+    }
+}
     public function getCompetitions() {
         try {
             $stmt = $this->db->query("SELECT id, name, type FROM competitions ORDER BY id");
@@ -194,7 +291,7 @@ class Results {
             if (empty($name)) {
                 throw new InvalidArgumentException("Le nom de la coupe est requis");
             }
-            $this->cupName = $name;
+            $this->cupName = trim($name);
         }
         public function setTournamentName($name): void {
             if (empty($name)) {

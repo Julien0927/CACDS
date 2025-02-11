@@ -15,7 +15,8 @@ $admin = [
   
 
 $menu = [
-    'main.php' => 'CACDS',
+    'index.php' => '<span><img src="/assets/icones/accueil-36.png" class="mb-2"></span>',
+    'cacds.php' => 'CACDS',
     'badminton.php' => 'Badminton',
     'volley.php' => 'Volley-Ball',
     'tennisDT.php' => 'Tennis de Table',

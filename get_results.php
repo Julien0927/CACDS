@@ -33,6 +33,15 @@ if (!$sportId) {
 try {
     // Création de l'instance Results avec le sport_id déterminé
     $results = new App\Results\Results($db, $competitionId, $pouleId, $sportId);
+
+    if (isset($_GET['cupName']) && !empty($_GET['cupName'])) {
+        $results->setCupName($_GET['cupName']);
+    }
+
+    if (isset($_GET['tournamentName']) && !empty($_GET['tournamentName'])) {
+        $results->setTournamentName($_GET['tournamentName']);
+    }
+
     $resultData = $results->getResults();
     
     if (empty($resultData)) {

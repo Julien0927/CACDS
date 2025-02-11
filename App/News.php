@@ -10,7 +10,7 @@ class News {
     private int $id;
     private string $title;
     private string $content;
-    private string $image;
+    private ?string $image;
     private string $date;
     private int $sport_id;
     private ?int $poule_id;
@@ -21,6 +21,7 @@ class News {
     public function __construct(PDO $db) {
         $this->db = $db;
         $this->newsParPage = 3;
+        $this->image = 'assets/img/info.webp';
     }
 
     public function setSportId(int $sport_id) {
@@ -47,8 +48,9 @@ class News {
         $this->content = $content;
     }
 
-    public function setImage(string $image) {
-        $this->image = $image;
+    public function setImage(?string $image) {
+        $this->image = $image ?? 'assets/img/info.webp';
+        return $this;
     }
 
     //Fonction permettant de recuperer la date et de la mettre au format date
