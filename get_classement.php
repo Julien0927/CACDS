@@ -203,6 +203,15 @@ if (!$sportId) {
 try {
     // Création de l'instance Classments avec le sport_id déterminé
     $classements = new App\Classements\Classements($db, $competitionId, $pouleId, $sportId);
+
+    if (isset($_GET['cupName']) && !empty($_GET['cupName'])) {
+        $results->setCupName($_GET['cupName']);
+    }
+
+    if (isset($_GET['tournamentName']) && !empty($_GET['tournamentName'])) {
+        $results->setTournamentName($_GET['tournamentName']);
+    }
+
     $classementData = $classements->getClassements();
 
     if (empty($classementData)) {

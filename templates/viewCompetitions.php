@@ -18,12 +18,12 @@
                         <!-- Les résultats seront chargés ici -->
                     </div>
                 </div>
-                <!--<div class="col-md-3">
+                <div class="col-md-3">
                     <h4>Classements</h4>
-                    <div id="classement-container">-->
+                    <div id="classement-container">
                         <!-- Le classement sera chargé ici -->
-                    <!--</div>
-                </div>-->
+                    </div>
+                </div>
             </div>
         <!--Coupe-->
         <h3 class="h3Sports" id="cup">Coupe</h3>
@@ -40,17 +40,17 @@
  
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <h4>Résultats et tableau</h4>
                 <div id="resultCup-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <h4>Classements</h4>
-                <div id="rankingCup-container">
+                <div id="rankingCup-container"> -->
                     <!-- Le classement sera chargé ici -->
-                </div>
-            </div>
+                <!-- </div>
+            </div> -->
         </div>
         </div>
         <!--Tournois-->
@@ -68,16 +68,16 @@
 
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <h4>Résultats et tableau</h4>
                 <div id="resultTournament-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <h4>Classements</h4>
-                <div id="rankingTournament-container">
+                <div id="rankingTournament-container"> -->
                     <!-- Le classement sera chargé ici -->
-                </div>
-            </div>
+                <!-- </div>
+            </div> -->
         </div>
 </section>

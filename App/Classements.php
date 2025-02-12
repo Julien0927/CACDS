@@ -11,14 +11,20 @@ class Classements {
     private $pouleId;
     private $sportId;
     private $id;
-    private $cupName;
-    private $tournamentName;
+    private $cupName = null;
+    private $tournamentName = null;
     
-    public function __construct($db, $competitionId = null, $pouleId = null, $sportId = null) {
+    public function __construct($db, $competitionId = null, $pouleId = null, $sportId = null, $cupName = null, $tournamentName = null) {
         $this->db = $db;
         $this->competitionId = $competitionId;
         $this->pouleId = $pouleId;        
         $this->setSportId($sportId);
+        if ($cupName !== null) {
+            $this->setCupName($cupName);
+        }
+        if ($tournamentName !== null) {
+            $this->setTournamentName($tournamentName);
+        }
     }
 
     /**
@@ -103,7 +109,7 @@ public function getClassements() {
     }
 }
 
-    public function addClassement($pdfUrl, $dayNumber = NULL, $name = NULL) { 
+/*     public function addClassement($pdfUrl, $dayNumber = NULL, $name = NULL) { 
         if ($dayNumber !== null && !is_numeric($dayNumber)) {
             throw new InvalidArgumentException("Le numéro de journée doit être un nombre ou nul.");
         }
@@ -126,8 +132,58 @@ public function getClassements() {
             throw new \Exception("Erreur lors de l'ajout du classement : " . $e->getMessage());
         }
     }
+ */
 
-
+ public function addClassement($pdfUrl, $dayNumber = NULL, $name = NULL) {
+    if ($dayNumber !== null && !is_numeric($dayNumber)) {
+        throw new InvalidArgumentException("Le numéro de journée doit être un nombre ou nul.");
+    }
+    if ($this->competitionId === null) {
+        throw new InvalidArgumentException("Competition ID est requis pour ajouter un classement");
+    }
+    
+    try {
+        // Supprime d'abord l'ancien classement s'il existe, toujours filtré par poule
+        $deleteQuery = "DELETE FROM classementbad 
+                       WHERE competitions_id = :competitions_id 
+                       AND sport_id = :sport_id 
+                       AND poule_id = :poule_id";
+        $params = [
+            ':competitions_id' => $this->competitionId,
+            ':sport_id' => $this->sportId,
+            ':poule_id' => $this->pouleId
+        ];
+        
+        // Ajoute la condition supplémentaire selon le type (name ou day_number)
+        if ($name !== null) {
+            $deleteQuery .= " AND name = :name";
+            $params[':name'] = $name;
+        } else {
+            $deleteQuery .= " AND day_number = :day_number";
+            $params[':day_number'] = $dayNumber;
+        }
+        
+        $stmt = $this->db->prepare($deleteQuery);
+        $stmt->execute($params);
+        
+        // Insère le nouveau classement
+        $query = $this->db->prepare(
+            "INSERT INTO classementbad (poule_id, competitions_id, day_number, classement_pdf_url, name, sport_id) 
+             VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)"
+        );
+        
+        $query->bindValue(':poule_id', $this->pouleId, PDO::PARAM_INT);
+        $query->bindValue(':competitions_id', $this->competitionId, PDO::PARAM_INT);
+        $query->bindValue(':day_number', $dayNumber, PDO::PARAM_INT);
+        $query->bindValue(':pdf_url', $pdfUrl, PDO::PARAM_STR);
+        $query->bindValue(':name', $name, PDO::PARAM_STR);
+        $query->bindValue(':sport_id', $this->sportId, PDO::PARAM_INT);
+        
+        return $query->execute();
+    } catch (PDOException $e) {
+        throw new \Exception("Erreur lors de l'ajout du classement : " . $e->getMessage());
+    }
+}
     public function displayClassement() {
         try {
             $classements = $this->getClassements(); // Correction de la variable

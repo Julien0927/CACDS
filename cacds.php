@@ -18,10 +18,10 @@ require_once 'lib/security.php';
     <div id="collapseContent" class="collapse">
     <div class="row">
         <div class=" d-flex flex-column col-12 col-md-8 mx-auto">
-            <p class="lecture text-center mt-3"> 
+            <p class="lecture text-center mt-3 lh-lg"> 
                 Début 1963, un groupe d’amis et sportifs, dirigé par Jacques ROUSSEL décident de créer une association sportive.<br>
-                Le 15 juillet 1963 nait la COUPE DE L’AMITIÉ DE FOOT-BALL DES DEUX-SÈVRES, avec comme objectif de "former un groupement corporatif, afin de permettre aux amateurs ne pouvant opérer dans une équipe officielle de pratiquer leur sport favori." Son siège social est situé au café "Le Glacier".<br>
-                Le 17 septembre 1969 elle change de nom et devient l’actuelle COUPE DE L’AMITIÉ CORPORATIVE DES DEUX-SÈVRES. Son siège social est transféré au café "Moderne".<br>
+                Le 15 juillet 1963 nait la COUPE DE L’AMITIÉ DE FOOT-BALL DES DEUX-SÈVRES, avec comme objectif de "former un groupement corporatif, afin de permettre aux amateurs ne pouvant opérer dans une équipe officielle de pratiquer leur sport favori.<br>Son siège social est situé au café "Le Glacier".<br>
+                Le 17 septembre 1969 elle change de nom et devient l’actuelle COUPE DE L’AMITIÉ CORPORATIVE DES DEUX-SÈVRES.<br> Son siège social est transféré au café "Moderne".<br>
                 Le 29 octobre 1975, nouveau siège social au 108 avenue de Paris.<br>
                 Le 24 septembre 1976 : la CACDS, elle devient propriétaire de son siège social, au 33 rue de l’Arsenal. Le 11 octobre 1982 elle revend cet immeuble pour s’installer au 38 rue Laurent Bonnevay dans une traverse aménagée de HLM.<br>
                 Avec la destruction de l’immeuble, la CACDS transfère son siège à la maison des associations, rue Joseph Cugnot à Niort.
@@ -56,6 +56,32 @@ require_once 'lib/security.php';
     </div>
 </section>
 <section class="container-fluid mt-3">
+    <h4 class="h3Sports">Le Comité de gestion
+        <img class="toggle-icon" id="toggleCollapseComity" data-target="collapseContentComity" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
+    </h4>
+    <div class="blueLine"></div>
+    <div id="collapseContentComity" class="collapse">
+        <div class="row">
+            <div class=" d-flex flex-column col-12 col-md-8 mx-auto">
+                <p class="text-center  mt-3"><a href="#" class="lecture" style="text-decoration: none;" alt="Le comité de gestion" title="Le comité de gestion">Le Comité de gestion</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container-fluid mt-3">
+    <h4 class="h3Sports">L'Assemblée Générale
+        <img class="toggle-icon" id="toggleCollapseAssemblee" data-target="collapseContentAssemblee" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
+    </h4>
+    <div class="blueLine"></div>
+    <div id="collapseContentAssemblee" class="collapse">
+        <div class="row">
+            <div class=" d-flex flex-column col-12 col-md-8 mx-auto">
+                <p class="text-center  mt-3"><a href="#" class="lecture" style="text-decoration: none;" alt="L'Assemblée Générale" title="L'Assemblée Générale">L'Assemblée Générale</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container-fluid mt-3">
     <h4 class="h3Sports">Les Statuts
         <img class="toggle-icon" id="toggleCollapseStatuts" data-target="collapseContentStatuts" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
     </h4>
@@ -77,6 +103,36 @@ require_once 'lib/security.php';
         <div class="row">
             <div class=" d-flex flex-column col-12 col-md-8 mx-auto">
                 <p class="text-center  mt-3"><a href="/assets/documents/reglements_generaux.pdf" class="lecture" style="text-decoration: none;" alt="Reglements généraux" title="Reglements généraux">Les Reglements Généraux</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container-fluid mt-3">
+    <h4 class="h3Sports">L’Assurance "Dommages Corporels"
+        <img class="toggle-icon" id="toggleCollapseAssurance" data-target="collapseContenteAssurance" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
+    </h4>
+    <div class="blueLine"></div>
+    <div id="collapseContenteAssurance" class="collapse">
+        <div class="row">
+            <div class=" d-flex flex-column col-12 col-md-10 mx-auto">
+                <p class="lecture text-center mt-3 lh-lg">
+                    Comme vous le savez, la CACDS a souscrit au nom et pour le compte de ses adhérents, une garantie "Dommages Corporels" en cas de survenance d’un accident corporel résultant de la pratique du sport en tant qu’adhérent CACDS.<br>
+                    Lors de la dernière Assemblée Générale, la garantie vous a été présentée.<br>
+                    Elle peut intervenir en cas de reste à charge pour l’adhérent, après intervention de la Sécurité Sociale et de sa mutuelle Santé.<br>
+
+                    Vous trouverez ci-dessous, le document type à télécharger, pour faire votre déclaration de sinistre.<br>
+
+                    La procédure est donc la suivante :<br>
+
+                    1/ En cas d’accident entrainant une déclaration de sinistre, le responsable de votre équipe informe le responsable de la section sportive qu’une déclaration va être transmise.<br>
+                    2/ Vous renseignez le document le plus précisément possible. Pour faciliter la lecture des informations par l’assureur, merci de remplir le document au format WORD (pas de mention manuscrite).<br>
+                    3/ Vous nous transmettez ce document renseigné par mail à l’adresse suivante : assocacds@gmail.com<br>
+                    A réception, nous transmettrons votre déclaration à la MAIF.<br>
+                    La MAIF aura ainsi vos coordonnées et gérera ensuite le dossier directement avec vous.
+
+                    En espérant malgré tout ne jamais avoir à traiter ce genre de situation !
+                </p>
+                <p class="text-center  mt-3"><a href="/assets/documents/Documents_declaration_sinistre.pdf" class="lecture" style="text-decoration: none;" alt="Reglements généraux" title="Reglements généraux">Document de déclaration de sinistre</a></p>
             </div>
         </div>
     </div>

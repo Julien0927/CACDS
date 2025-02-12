@@ -121,33 +121,33 @@ class Results {
         }
         
         try {
-            // Supprime d'abord l'ancien résultat s'il existe
-            $deleteQuery = "DELETE FROM journees WHERE competitions_id = :competitions_id AND sport_id = :sport_id";
+            // Supprime d'abord l'ancien résultat s'il existe, toujours filtré par poule
+            $deleteQuery = "DELETE FROM journees 
+                           WHERE competitions_id = :competitions_id 
+                           AND sport_id = :sport_id 
+                           AND poule_id = :poule_id";
             $params = [
                 ':competitions_id' => $this->competitionId,
-                ':sport_id' => $this->sportId
+                ':sport_id' => $this->sportId,
+                ':poule_id' => $this->pouleId
             ];
-    
-            // Ajoute les conditions spécifiques selon le type de compétition
+            
+            // Ajoute la condition supplémentaire selon le type (name ou day_number)
             if ($name !== null) {
                 $deleteQuery .= " AND name = :name";
                 $params[':name'] = $name;
             } else {
                 $deleteQuery .= " AND day_number = :day_number";
-                if ($this->pouleId !== null) {
-                    $deleteQuery .= " AND poule_id = :poule_id";
-                    $params[':poule_id'] = $this->pouleId;
-                }
                 $params[':day_number'] = $dayNumber;
             }
-    
+            
             $stmt = $this->db->prepare($deleteQuery);
             $stmt->execute($params);
-    
+            
             // Insère le nouveau résultat
             $query = $this->db->prepare(
                 "INSERT INTO journees (poule_id, competitions_id, day_number, result_pdf_url, name, sport_id)
-                VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)"
+                 VALUES (:poule_id, :competitions_id, :day_number, :pdf_url, :name, :sport_id)"
             );
             
             $query->bindValue(':poule_id', $this->pouleId, PDO::PARAM_INT);
@@ -161,8 +161,7 @@ class Results {
         } catch (PDOException $e) {
             throw new \Exception("Erreur lors de l'ajout du résultat : " . $e->getMessage());
         }
-    }
-     
+    }     
     /* public function getResults() {
         try {
             $query = "
