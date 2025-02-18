@@ -65,10 +65,73 @@ try {
     </div>
 <?php endif; ?>
 
-
-
-<?php require_once 'templates/insideNav.php'; ?>
-
+<!--inside nav-->
+<section class="insideNav mt-2 mb-3">
+  <div class="navbar navbar-expand-lg sportsNav">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem dropdown">
+            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
+              Compétitions
+            </a>
+            <ul class="dropdown-menu dropdown-menu">
+              <li><a class="dropdown-item" href="#calendrier">Calendrier de la saison</a></li>
+              <li><a class="dropdown-item" href="#compet">Championnat</a></li>
+              <li><a class="dropdown-item" href="#cup">Coupe</a></li>
+              <li><a class="dropdown-item" href="#tournament">Tournois</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem dropdown">
+            <a class="" href="#documents" style="text-decoration: none;">
+              Documents
+            </a>
+          </li>
+        </ul>
+         <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem dropdown">
+            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
+              Informations
+            </a>
+            <ul class="dropdown-menu dropdown-menu">
+              <li><a class="dropdown-item" href="#adhesion">Demande d'adhésion</a></li>
+              <li><a class="dropdown-item" href="#outils">Boite à outils</a></li>
+              <li><a class="dropdown-item" href="#palmares">Palmarès</a></li>
+              <li><a class="dropdown-item" href="#anniversaire">20 ans du badminton</a></li>
+              <li><a class="dropdown-item" href="#media">Photos et vidéos</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem">
+            <a class="" href="#chiffres" style="text-decoration: none;" >
+              Les chiffres
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem">
+            <a class="" href="#gallery" style="text-decoration: none;">
+              Galerie photos
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item insideItem">
+            <a class="" href="#link" style="text-decoration: none;">
+              Liens utiles
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="container-fluid">
 
     <!--Section News-->
@@ -87,75 +150,100 @@ try {
     <section class="container-fluid" id="documents">
         <h2 class="h2Sports">Documents</h2>
         <hr>
-        <p>Accédez aux documents officiels et informations utiles.</p>
-        <div class="row">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhésion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+        <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
+        <div class="row center gap-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Demande d'adhésion</h3>
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhésion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Demande d'engagement</h3>
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Fiche d'inscription</h3>
+                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+        <div class="row center gap-3 mt-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Règlement badminton</h3>
+                <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
         </div>
     </section>
 
     <!-- Section Informations -->
-<!--     <section class="container-fluid" id="informations">
-        <h2 class="h2Sports">Informations</h2>
-        <p>Toutes les informations à propos de nos événements et activités.</p>
-    </section>
- -->
+        <?php require_once 'templates/infos.php'; ?>
+
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
         <h2 class="h2Sports mt-3">Les Chiffres</h2>
         <hr>
-        <p>Quelques statistiques clés pour mieux comprendre nos performances.</p>
+        <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
+        <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a>
+        <p class="lecture text-center">Effectifs Badminton</p>
     </section>
 
     <!-- Section Galerie Photos -->
 <?php require_once 'templates/viewPhotos.php'; ?>
+
     <!-- Section Liens Utiles -->
     <section class="container-fluid" id="link">
-        <h2 class="h2Sports">Liens Utiles</h2>
+        <h2 class="h2Sports mt-3">Liens Utiles</h2>
         <hr>
-        <div class="d-flex justify-content-around mt-5">
-            <a href="https://www.ffbad.org/" target="_blank" aria-label="Fédération Française de Badminton">
-                <img src="/assets/logos/FFBAD.webp" alt="Fédération Française de Badminton" loading="lazy" class="img-fluid">
+        <div class="d-flex flex-column justify-content-around mt-3" >
+            <a href="https://www.ffbad.org/" target="_blank" class="lecture" aria-label="Fédération Française de Badminton" style="text-decoration: none;">
+                <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la Fédération Française de Badminton
             </a>
-            <a href="https://www.badmintoneurope.com/Cms/" target="_blank" aria-label="Badminton Europe">
-                <img src="/assets/logos/BadEurope.webp" alt="Badminton Europe" loading="lazy" class="img-fluid">
+            <a href="https://www.badmintoneurope.com/Cms/" target="_blank" class="lecture" aria-label="Badminton Europe" style="text-decoration: none;">
+                <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers Badminton Europe
             </a>
-            <a href="https://bwfbadminton.com/" target="_blank" aria-label="World Badminton Federation">
-                <img src="/assets/logos/WorldBad.webp" alt="World Badminton Federation" loading="lazy" class="img-fluid">
-            </a>
-            <a href="https://www.facebook.com/badcrechois/" target="_blank" aria-label="Page Facebook du Badminton Créchois">
-                <img src="/assets/logos/BadCrechois.webp" alt="Page Facebook du Badminton Créchois" loading="lazy" class="img-fluid">
+            <a href="https://bwfbadminton.com/" target="_blank" class="lecture" aria-label="World Badminton Federation" style="text-decoration: none;">
+                <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la World Badminton Federation
             </a>
         </div>
     </section>
+
+    <!-- Section partenaires -->
+    <section class="container-fluid" id="partenaires">
+        <h2 class="h2Sports mt-3">Partenaires</h2>
+        <hr>
+        <p class="lecture">Cette rubrique vous informe des partenariats passés avec la CACDS, au nom et pour le compte de ses adhérents.</p>
+        <div class="row">
+            <div class="col-12 col">
+                <a href="https://tennispassion79.com/" target="_blank" aria-label="Tennis Passion">
+                    <img src="/assets/logos/tennis-passion.jpg" alt="Tennis passion">
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section marché du badminton -->
+    <section class="container-fluid" id="partenaires">
+        <h2 class="h2Sports mt-3">Le marché du Badminton</h2>
+        <hr>
+        <p class="lecture">
+            Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
+            Alors n’hésitez pas à nous transmettre vos offres.
+        </p>
+        <div class="row">
+            <div class="col-12 col"></div>
+        </div>
+    </section>
+
+
     <!-- Bouton Retour en haut -->
     <div id="backToTop" >
         <img src="/assets/icones/chevron-up.png" alt="Retour en haut" loading="lazy">
-
     </div>
 </section>
 <?php

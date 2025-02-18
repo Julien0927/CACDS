@@ -45,7 +45,7 @@ try {
     $resultData = $results->getResults();
     
     if (empty($resultData)) {
-        echo '<p class="text-muted">Aucun résultat disponible.</p>';
+        echo '<p style="color: #EC930F">Aucun résultat disponible.</p>';
         exit;
     }
     

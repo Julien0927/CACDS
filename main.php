@@ -145,7 +145,7 @@ function displayNewsSection($news, $sport) {
                     <div class="col-12 col-md-6">
                         <?php displayNewsSection($latestNews['volley'], $sports['volley']); ?>
                     </div>
-                    <div class="row mt-5">
+                    <div class="row">
                     <div class="col-12 col-md-6">
                         <?php displayNewsSection($latestNews['tdt'], $sports['tdt']); ?>
                     </div>
@@ -158,10 +158,11 @@ function displayNewsSection($news, $sport) {
     </div>
 </section>
 
-<section class="container-fluid mt-3">
+<!-- <section class="container-fluid mt-3">
     <h2 class="h3Sports text-center">PRÉSENTATION DE L'ASSOCIATION</h2>
 
 </section>
+ -->
 <section class="container-fluid mx-auto row mt-5">
     <div class="center col-12 col-md-6">
         <iframe 

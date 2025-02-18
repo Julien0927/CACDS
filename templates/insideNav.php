@@ -25,16 +25,17 @@
             </a>
           </li>
         </ul>
-<!--         <ul class="navbar-nav me-5">
+<!--          <ul class="navbar-nav me-5">
           <li class="nav-item insideItem dropdown">
             <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
               Informations
             </a>
             <ul class="dropdown-menu dropdown-menu">
-              <li><a class="dropdown-item" href="#">Calendrier de la saison</a></li>
-              <li><a class="dropdown-item" href="#">Championnat</a></li>
-              <li><a class="dropdown-item" href="#">Coupe</a></li>
-              <li><a class="dropdown-item" href="#">Tournois</a></li>
+              <li><a class="dropdown-item" href="#adhesion">Demande d'adhésion</a></li>
+              <li><a class="dropdown-item" href="#outils">Boite à outils</a></li>
+              <li><a class="dropdown-item" href="#palmares">Palmarès</a></li>
+              <li><a class="dropdown-item" href="#anniversaire">20 ans du badminton</a></li>
+              <li><a class="dropdown-item" href="#media">Photos et vidéos</a></li>
             </ul>
           </li>
         </ul>

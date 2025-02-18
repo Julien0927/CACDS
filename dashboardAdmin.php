@@ -53,8 +53,8 @@ if ($_SESSION['role'] === 'super_admin') {
             exit();
         default:
             // Sport non reconnu, retour à la page admin avec un message d'erreur
-        $_SESSION['success_message'] = "Sport sélectionné avec succès !";
-        header("Location: " . $_SERVER['PHP_SELF']);
+/*         $_SESSION['success_message'] = "Sport sélectionné avec succès !";
+ */        header("Location: " . $_SERVER['PHP_SELF']);
         exit();
     }
 }

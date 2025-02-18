@@ -65,8 +65,69 @@ try {
     </div>
 <?php endif; ?>
 
-<?php require_once 'templates/insideNav.php'; ?>
-
+<!--Inside Nav-->
+<section class="insideNav mt-2 mb-3">
+  <div class="navbar navbar-expand-lg sportsNav">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem dropdown">
+            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
+              Compétitions
+            </a>
+            <ul class="dropdown-menu dropdown-menu">
+              <li><a class="dropdown-item" href="#calendrier">Calendrier de la saison</a></li>
+              <li><a class="dropdown-item" href="#compet">Championnat</a></li>
+              <li><a class="dropdown-item" href="#cup">Coupe</a></li>
+              <li><a class="dropdown-item" href="#tournament">Tournois</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem dropdown">
+            <a class="" href="#documents" style="text-decoration: none;">
+              Documents
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem dropdown">
+            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" style="text-decoration: none;" aria-expanded="false">
+              Informations
+            </a>
+            <ul class="dropdown-menu dropdown-menu">
+              <li><a class="dropdown-item" href="#lastSeason">Saisons précédentes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem">
+            <a class="" href="#chiffres" style="text-decoration: none;" >
+              Les chiffres
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem">
+            <a class="" href="#gallery" style="text-decoration: none;">
+              Galerie photos
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item insideItem">
+            <a class="" href="#link" style="text-decoration: none;">
+              Liens utiles
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="container-fluid">
 
     <!--Section News-->
@@ -83,54 +144,172 @@ try {
     
     <!-- Section Documents -->
     <section class="container-fluid" id="documents">
-        <h2 class="h2Sports">Documents</h2>
+        <h2 class="h2Sports mt-3">Documents</h2>
         <hr>
-        <p>Accédez aux documents officiels et informations utiles.</p>
-        <div class="row">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhesion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+        <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
+        <div class="row center gap-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Demande d'adhésion</h3>
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhesion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Demande d'engagement</h3>
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Fiche d'inscription</h3>
+                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+        <div class="row center gap-3 mt-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Feuille de match</h3>
+                <a href="/assets/documents/feuille_de_matchVB.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
         </div>
     </section>
 
 
     <!-- Section Informations -->
-    <!-- <section class="container-fluid" id="informations">
-        <h2 class="h2Sports">Informations</h2>
-        <p>Toutes les informations à propos de nos événements et activités.</p>
-    </section> -->
+     <section class="container-fluid" id="informations">
+        <h2 class="h2Sports mt-3">Informations</h2>
+        <hr>
+        <p class="lecture">Toutes les informations à propos de nos événements et activités.</p>
+        <section class="container-fluid">
+            <h3 class="h3Sports" id="lastSeason">Saisons précédentes
+                <img class="toggle-icon" id="toggleCollapselastSeason" data-target="collapseContentlastSeason" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
+            </h3>
+            <div id="collapseContentlastSeason" class="collapse">
+                <p class="lecture">
+                    Vous trouverez dans cette rubrique les résultats et classements des saisons précédentes.
+                </p>
+                <div class="row center">
+                    <div class="d-flex center flex-column col-12 col-md-3 salle-card">
+                        <h4 class="h4Sports text-center mt-3">Saisons</h4>
+                        <select class="season-select mx-auto" id="seasonSelect">
+                            <option value="">Sélectionner une saison</option>
+                            <option value="23">Saison 2023-24</option>
+                            <option value="22">Saison 2022-23</option>
+                            <option value="21">Saison 2021-22 </option>
+                            <option value="20">Saison 2020-21 (arrêtée)</option>
+                            <option value="19">Saison 2019-20 (arrêtée)</option>
+                            <option value="18">Saison 2018-19</option>
+                            <option value="17">Saison 2017-18</option>
+                            <option value="16">Saison 2016-17</option>
+                            <option value="15">Saison 2015-16</option>
+                        </select>
+                        <div class="mx-auto" id="linkSeasonContainer"></div>
+                    </div>
+                </div>
+            </div>
+            <script>
+        // Test console log immédiat
+        /* console.log('Script initialisé');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM chargé');
+            
+            // Gestion du collapse
+            const toggleIcon = document.getElementById('toggleCollapselastSeason');
+            const collapseContent = document.getElementById('collapseContentlastSeason');
+            
+            console.log('Toggle icon:', toggleIcon);
+            console.log('Collapse content:', collapseContent);
+            
+            if (toggleIcon && collapseContent) {
+                toggleIcon.addEventListener('click', function() {
+                    console.log('Toggle cliqué');
+                    collapseContent.classList.toggle('collapse');
+                    this.style.transform = collapseContent.classList.contains('collapse') 
+                        ? 'rotate(0deg)' 
+                        : 'rotate(180deg)';
+                });
+            }
+
+            // Gestion de la sélection des saisons
+            const seasonSelect = document.getElementById('seasonSelect');
+            const linkSeasonContainer = document.getElementById('linkSeasonContainer');
+
+            console.log('Season select:', seasonSelect);
+            console.log('Link container:', linkSeasonContainer);
+
+            if (seasonSelect && linkSeasonContainer) {
+                seasonSelect.addEventListener('change', function() {
+                    console.log('Changement de saison');
+                    const selectedValue = this.value;
+                    console.log('Valeur sélectionnée:', selectedValue);
+                    
+                    if (!selectedValue) {
+                        linkSeasonContainer.innerHTML = '';
+                        return;
+                    }
+                    
+                    const yearStart = 2000 + parseInt(selectedValue);
+                    const yearEnd = yearStart + 1;
+                    const fullYears = `${yearStart}-${yearEnd}`;
+                    
+                    console.log('Années:', fullYears);
+                    
+                    const poules = ['1', '2', '3'];
+                    
+                    const linksHTML = poules.map(poule => `
+                        <div class="poule-links mb-3">
+                            <h5 class="text-center">Poule ${poule}</h5>
+                            <a href="/assets/documents/resultats_poule_${poule}_${fullYears}.pdf"
+                               class="fm-link d-block mb-2"
+                               alt="Résultats"
+                               title="Résultats poule ${poule} ${fullYears}"
+                               style="text-decoration: none;">
+                                <img src="/assets/icones/attestation-64.png"
+                                     alt="icône document"
+                                     class="mb-1"
+                                     loading="lazy">
+                                <span class="lecture">Résultats</span>
+                            </a>
+                            <a href="/assets/documents/classement_poule_${poule}_${fullYears}.pdf"
+                               class="fm-link d-block"
+                               alt="Classement"
+                               title="Classement poule ${poule} ${fullYears}"
+                               style="text-decoration: none;">
+                                <img src="/assets/icones/attestation-64.png"
+                                     alt="icône document"
+                                     class="mb-1"
+                                     loading="lazy">
+                                <span class="lecture">Classement</span>
+                            </a>
+                        </div>
+                    `).join('');
+                    
+                    console.log('HTML généré:', linksHTML);
+                    linkSeasonContainer.innerHTML = linksHTML;
+                });
+            }
+        });  */
+    </script>
+            </div>
+        </section>
+    </section>
 
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports">Les Chiffres</h2>
+        <h2 class="h2Sports mt-3">Les Chiffres</h2>
         <hr>
-        <p>Quelques statistiques clés pour mieux comprendre nos performances.</p>
+        <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>
 
     <!-- Section Galerie Photos -->
     <?php require_once 'templates/viewPhotos.php'; ?>
     <!-- Section Liens Utiles -->
     <section class="container-fluid" id="link">
-        <h2 class="h2Sports">Liens Utiles</h2>
+        <h2 class="h2Sports mt-3">Liens Utiles</h2>
         <hr>
         <div class="d-flex justify-content-around mt-5">
         </div>

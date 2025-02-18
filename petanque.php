@@ -86,29 +86,33 @@ try {
     <section class="container-fluid" id="documents">
         <h2 class="h2Sports">Documents</h2>
         <hr>
-        <p>Accédez aux documents officiels et informations utiles.</p>
-        <div class="row">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhesion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+        <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
+        <div class="row center gap-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Demande d'adhésion</h3>
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhesion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Demande d'engagement</h3>
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Fiche d'inscription</h3>
+                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+        <div class="row center gap-3 mt-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-4">
-                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Règlement pétanque</h3>
+                <a href="/assets/documents/reglement_petanque.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
         </div>
     </section>
@@ -123,7 +127,7 @@ try {
     <section class="container-fluid" id="chiffres">
         <h2 class="h2Sports mt-3">Les Chiffres</h2>
         <hr>
-        <p>Quelques statistiques clés pour mieux comprendre nos performances.</p>
+        <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>
 
     <!-- Section Galerie Photos -->

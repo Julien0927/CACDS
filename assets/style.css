@@ -75,6 +75,12 @@ h4 {
   font-weight: 800;
 }
 
+.h4Sports {
+  color: var(--blue-color);
+  font-family: var(--montserrat);
+  font-weight: 500;
+}
+
 .h5Sports {
   color: var(--orange-color);
   font-family: var(--montserrat);
@@ -83,7 +89,7 @@ h4 {
 /*************************/
 /*Pargraphes*/
 
-p {
+p, ul {
   font-family: var(--font-lato);
   font-weight: 700;
 }
@@ -447,7 +453,7 @@ hr {
 
 
 .navbar {
-  background-color: var(--blueNav-color);
+  background-color: var(--blue-color);
 }
 
 .nav-link {
@@ -462,7 +468,7 @@ hr {
   font-weight: bold;
 }
 .nav-link.active {
-  text-decoration: 2px underline var(--blue-color) ; 
+  text-decoration: 2px underline var(--blueNav-color) ; 
   font-weight: bold;
   color: var(--white-color) !important;
 }
@@ -581,6 +587,102 @@ li .dropdown-item {
      object-fit: contain;
 }
 
+/*Trouver une salle*/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.salle-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: transform 0.2s;
+}
+
+.salle-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.salle-nom {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.salle-adresse {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.location-icon {
+  color: #e74c3c;
+  margin-right: 5px;
+}
+
+/*Feuilles de match*/
+fm-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.fm-select {
+  padding: 10px;
+  font-size: 16px;
+  margin: 20px 0;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.fm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 25px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.fm-link:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.fm-link img {
+  width: 32px;
+  height: 32px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+      grid-template-columns: 1fr;
+  }
+}
 
 /*Footer*/
 footer {
@@ -601,37 +703,24 @@ footer {
 }
 /*----RESPONSIVE----*/
 
-@media screen and (max-width: 768px) {
-/*   .insideNav {
-    display:flex;
-    justify-content: end;
-  }
- */
-}
 /* Responsive pour mobile */
 @media (max-width: 768px) {
   .news-wrapper {
       flex-direction: column;
   }
   
-  .news-image-container {
+/*   .news-image-container {
       width: 100%;
       height: 180px;
   }
-}
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-  .news-wrapper {
-      flex-direction: column;
+ */
+ 
+ .news-image-container {
+   width: 100%;
+   height: 200px;
   }
   
-  .news-image-container {
-      width: 100%;
-      height: 200px;
-  }
-
   .itemSquare {
     display: none;
   }
-
 }

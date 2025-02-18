@@ -2,7 +2,7 @@
 
         <!--Championnat-->
         <h3 class="h3Sports" id="compet">Championnat</h3>
-        <p class="">Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
+        <p class="lecture">Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
             En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
             <label for="sports" class="form-label me-2">Sélectionnez votre poule</label>
             <select name="poules" id="poules">
@@ -13,7 +13,7 @@
             </select>
             <div class="row d-flex justify-content-center mt-4">
                 <div class="col-md-3">
-                    <h4>Résultats et Classements</h4>
+                    <h4>Résultats</h4>
                     <div id="resultats-container">
                         <!-- Les résultats seront chargés ici -->
                     </div>
@@ -27,8 +27,8 @@
             </div>
         <!--Coupe-->
         <h3 class="h3Sports" id="cup">Coupe</h3>
-        <p class="">La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
-        <label for="coupe" class="form-label me-2">Sélectionnez votre coupe</label>
+        <p class="lecture">La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
+        <label for="coupe" class="form-label me-2">Sélectionnez votre information</label>
         <?php
         $cupNames = $results->getCupNames();
         ?>
@@ -40,7 +40,7 @@
  
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats et tableau</h4>
+                <h4>Résultats</h4>
                 <div id="resultCup-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
@@ -55,8 +55,8 @@
         </div>
         <!--Tournois-->
         <h3 class="h3Sports" id="tourn">Tournois</h3>
-        <p class="">Les tournois sont des compétitions individuelles ou par équipes sur une ou plusieurs journées.</p>
-        <label for="tournament" class="form-label me-2">Sélectionnez votre tournoi</label>
+        <p class="lecture">Les tournois sont des compétitions individuelles ou par équipes sur une ou plusieurs journées.</p>
+        <label for="tournament" class="form-label me-2">Sélectionnez votre information</label>
         <?php
         $tournamentNames = $results->getTournamentNames();
         ?>
@@ -68,7 +68,7 @@
 
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats et tableau</h4>
+                <h4>Résultats</h4>
                 <div id="resultTournament-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>

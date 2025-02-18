@@ -215,7 +215,7 @@ try {
     $classementData = $classements->getClassements();
 
     if (empty($classementData)) {
-        echo '<p class="text-muted">Aucun classement disponible pour cette poule.</p>';
+        echo '<p style="color: #EC930F">Aucun classement disponible.</p>';
         exit;
     }
 

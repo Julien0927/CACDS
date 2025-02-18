@@ -321,3 +321,163 @@ document.addEventListener('DOMContentLoaded', function() {
       targetElement.classList.toggle('show'); // Alterne entre affiché et masqué
     });
   });
+
+  // Cards salles //
+  const salles = [
+    {
+        nom: "Salle IMS, Niort",
+        adresse: "100 route de Cherveux, 79000 Niort"
+    },
+    {
+        nom: "Salle Cavaillès",
+        adresse: "Rue Cavaillès, 79400 Saint-Maixent-l'École"
+    },
+    {
+        nom: "Salle Omnisport de Magné",
+        adresse: "Avenue du Marais Poitevin, 79460 Magné"
+    },
+    {
+        nom: "Gymnase de Prahecq",
+        adresse: "Rue des Écoles, 79230 Prahecq"
+    },
+    {
+        nom: "Gymnase de Vouillé",
+        adresse: "Rue des Écoles, 79230 Vouillé"
+    },
+    {
+        nom: "Gymnase de Frontenay Rohan Rohan",
+        adresse: "Rue des Moulins, 79270 Frontenay Rohan Rohan"
+    },
+    {
+        nom: "Salle de la Venise Verte, Niort",
+        adresse: "Rue Jacques Daguerre, 79000 Niort"
+    },
+    {
+        nom: "Gymnase de Sainte-Néomaye",
+        adresse: "Rue des Olympiades, 79260 Sainte-Néomaye"
+    },
+    {
+        nom: "Complexe sportif de Celles-sur-Belle",
+        adresse: "Rue des Cèdres, 79370 Celles-sur-Belle"
+    },
+    {
+        nom: "Salle de sport de Chauray",
+        adresse: "Rue du Pied Griffier, 79180 Chauray"
+    },
+    {
+        nom: "Gymnase du collège de Coulonges-sur-l'Autize",
+        adresse: "Rue du Calvaire, 79160 Coulonges-sur-l'Autize"
+    },
+    {
+        nom: "Salle Gros Buisson, Bessines",
+        adresse: "Le Gros Buisson, 79000 Bessines"
+    },
+    {
+        nom: "Salle Omnisport de Champdeniers",
+        adresse: "Chemin du Pré de l'Eteuf, 79220 Champdeniers-Saint-Denis"
+    },
+    {
+        nom: "Salle Omnisports de Chatillon sur Thouet",
+        adresse: "41 Av. St Exupéry, 79200 Chatillon sur Thouet"
+    },
+    {
+        nom: "Gymnase Lycée Desfontaines, Melle",
+        adresse: "79500 Melle"
+    },
+    {
+        nom: "Complexe sportif de la MAIF, Niort",
+        adresse: "11 Boulevard Salvador Allende, 79000 Niort"
+    },
+    {
+        nom: "Salle Omnisports de La Crèche",
+        adresse: "Rue de Barilleau, 79260 La Crèche"
+    },
+    {
+        nom: "Espace Sportif Tartalin, Aiffres",
+        adresse: "rue de Tartalin, 79230 Aiffres"
+    },
+    {
+        nom: "Salle des sports de Périgné",
+        adresse: "route de Celles, 79170 Périgné"
+    },
+    {
+        nom: "Salle omnisport, Beauvoir sur Niort",
+        adresse: "route de Chizé, 79360 Beauvoir sur Niort"
+    },
+    {
+        nom: "Salle omnisport, Saint Maxire",
+        adresse: "8 Rue des sports, 79410 Saint Maxire"
+    },
+    {
+        nom: "Salle omnisport, Vasles",
+        adresse: "7 Rue de la Cité, 79340 Vasles"
+    },
+    {
+        nom: "Complexe sportif Henri Barbusse",
+        adresse: "18 Rue Gustave Eiffel, 79000 Niort"
+    }
+];
+
+function createGoogleMapsLink(salle) {
+    const query = encodeURIComponent(`${salle.nom} ${salle.adresse}`);
+    return `https://www.google.com/maps/search/?api=1&query=${query}`;
+}
+
+function createSalleCard(salle) {
+    const mapsLink = createGoogleMapsLink(salle);
+    return `
+        <div class="salle-card">
+            <div class="salle-nom">
+                ${salle.nom}
+            </div>
+            <div class="salle-adresse">${salle.adresse}</div>
+            <a href="${mapsLink}" target="_blank" class="maps-link">
+            <i class="fas fa-map-marker-alt location-icon"></i>
+                Voir sur Google Maps
+            </a>
+        </div>
+    `;
+}
+
+function afficherSalles() {
+    const container = document.getElementById('salles-container');
+    container.innerHTML = salles.map(salle => createSalleCard(salle)).join('');
+}
+
+document.addEventListener('DOMContentLoaded', afficherSalles);
+
+//Affichage feuille match//
+const pouleSelect = document.getElementById('pouleSelect');
+        const linkContainer = document.getElementById('linkContainer');
+
+        pouleSelect.addEventListener('change', function() {
+            const selectedValue = this.value;
+            if (!selectedValue) {
+                linkContainer.innerHTML = '';
+                return;
+            }
+
+            const fileName = selectedValue === 'coupe' ? 
+                'fm_coupe_.pdf' : 
+                `fm_poule_${selectedValue}.pdf`;
+
+            const title = selectedValue === 'coupe' ? 
+                'Feuille de match coupe' : 
+                `Feuille de match poule ${selectedValue}`;
+
+            linkContainer.innerHTML = `
+                <a href="/assets/documents/${fileName}" 
+                   class="fm-link" 
+                   alt="Feuille de match" 
+                   title="${title}"
+                   style="text-decoration: none;">
+                    <img src="/assets/icones/attestation-64.png" 
+                         alt="icône document" 
+                         class="mb-1" 
+                         loading="lazy">
+                    <span class="lecture">Télécharger la feuille</span>
+                </a>
+            `;
+        });
+
+//Affichage des résultats des matchs passés//
