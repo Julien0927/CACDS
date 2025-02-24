@@ -99,18 +99,16 @@ try {
               Informations
             </a>
             <ul class="dropdown-menu dropdown-menu">
-              <li><a class="dropdown-item" href="#adhesion">Demande d'adhésion</a></li>
+              <li><a class="dropdown-item" href="#adhesion">Trombinoscope</a></li>
               <li><a class="dropdown-item" href="#outils">Boite à outils</a></li>
-              <li><a class="dropdown-item" href="#palmares">Palmarès</a></li>
-              <li><a class="dropdown-item" href="#anniversaire">20 ans du badminton</a></li>
-              <li><a class="dropdown-item" href="#media">Photos et vidéos</a></li>
+              <li><a class="dropdown-item" href="#palmares">Palmarès Badminton CACDS</a></li>
             </ul>
           </li>
         </ul>
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#chiffres" style="text-decoration: none;" >
-              Les chiffres
+              Chiffres
             </a>
           </li>
         </ul>
@@ -118,6 +116,20 @@ try {
           <li class="nav-item insideItem">
             <a class="" href="#gallery" style="text-decoration: none;">
               Galerie photos
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem">
+            <a class="" href="#partners" style="text-decoration: none;">
+              Partenaires
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-5">
+          <li class="nav-item insideItem">
+            <a class="" href="#badMarket" style="text-decoration: none;">
+              Marché du Badminton
             </a>
           </li>
         </ul>
@@ -196,49 +208,50 @@ try {
     <!-- Section Galerie Photos -->
 <?php require_once 'templates/viewPhotos.php'; ?>
 
-    <!-- Section Liens Utiles -->
-    <section class="container-fluid" id="link">
-        <h2 class="h2Sports mt-3">Liens Utiles</h2>
-        <hr>
-        <div class="d-flex flex-column justify-content-around mt-3" >
-            <a href="https://www.ffbad.org/" target="_blank" class="lecture" aria-label="Fédération Française de Badminton" style="text-decoration: none;">
-                <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la Fédération Française de Badminton
-            </a>
-            <a href="https://www.badmintoneurope.com/Cms/" target="_blank" class="lecture" aria-label="Badminton Europe" style="text-decoration: none;">
-                <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers Badminton Europe
-            </a>
-            <a href="https://bwfbadminton.com/" target="_blank" class="lecture" aria-label="World Badminton Federation" style="text-decoration: none;">
-                <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la World Badminton Federation
-            </a>
-        </div>
-    </section>
 
-    <!-- Section partenaires -->
-    <section class="container-fluid" id="partenaires">
-        <h2 class="h2Sports mt-3">Partenaires</h2>
-        <hr>
-        <p class="lecture">Cette rubrique vous informe des partenariats passés avec la CACDS, au nom et pour le compte de ses adhérents.</p>
-        <div class="row">
-            <div class="col-12 col">
-                <a href="https://tennispassion79.com/" target="_blank" aria-label="Tennis Passion">
-                    <img src="/assets/logos/tennis-passion.jpg" style="border-radius: 5px" alt="Tennis passion">
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Section marché du badminton -->
-    <section class="container-fluid" id="partenaires">
-        <h2 class="h2Sports mt-3">Le marché du Badminton</h2>
-        <hr>
-        <p class="lecture">
-            Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
-            Alors n’hésitez pas à nous transmettre vos offres.
-        </p>
-        <div class="row">
-            <div class="col-12 col"></div>
-        </div>
-    </section>
+<!-- Section partenaires -->
+<section class="container-fluid" id="partners">
+  <h2 class="h2Sports mt-3">Partenaires</h2>
+  <hr>
+  <p class="lecture">Cette rubrique vous informe des partenariats passés avec la CACDS, au nom et pour le compte de ses adhérents.</p>
+  <div class="row">
+    <div class="col-12 col">
+      <a href="https://tennispassion79.com/" target="_blank" aria-label="Tennis Passion">
+        <img src="/assets/logos/tennis-passion.jpg" style="border-radius: 5px" alt="Tennis passion">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Section marché du badminton -->
+<section class="container-fluid" id="badMarket">
+  <h2 class="h2Sports mt-3">Marché du Badminton</h2>
+  <hr>
+  <p class="lecture">
+    Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
+    Alors n’hésitez pas à nous transmettre vos offres.
+  </p>
+  <div class="row">
+    <div class="col-12 col"></div>
+  </div>
+</section>
+
+<!-- Section Liens Utiles -->
+<section class="container-fluid" id="link">
+    <h2 class="h2Sports mt-3">Liens Utiles</h2>
+    <hr>
+    <div class="d-flex flex-column justify-content-around mt-3" >
+        <a href="https://www.ffbad.org/" target="_blank" class="lecture" aria-label="Fédération Française de Badminton" style="text-decoration: none;">
+            <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la Fédération Française de Badminton
+        </a>
+        <a href="https://www.badmintoneurope.com/Cms/" target="_blank" class="lecture" aria-label="Badminton Europe" style="text-decoration: none;">
+            <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers Badminton Europe
+        </a>
+        <a href="https://bwfbadminton.com/" target="_blank" class="lecture" aria-label="World Badminton Federation" style="text-decoration: none;">
+            <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la World Badminton Federation
+        </a>
+    </div>
+</section>
 
 
     <!-- Bouton Retour en haut -->

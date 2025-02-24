@@ -9,7 +9,7 @@
                     <?php include 'templates/partial_news.php'; ?>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Aucune actualité disponible pour le moment.</p>
+                <p style="color: #EC930F">Aucune actualité disponible pour le moment.</p>
             <?php endif; ?>
         </div>        
         <?php if ($totalPages > 1): ?>
