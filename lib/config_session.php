@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
  define ('_IMG_PATH_', 'uploads/photos/');
  define ('_NEWS_IMG_PATH_', 'uploads/news/');
+ define ('_VIDEOS_PATH_', 'uploads/videos/');
 // Pages pour les administrateurs (ajoutées dynamiquement selon l'utilisateur connecté)
 $admin = [
     'dashboardBad.php' => 'Dashboard Badminton',

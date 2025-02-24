@@ -1,5 +1,5 @@
 <section class="container-fluid" id="gallery">
-        <h2 class="h2Sports mt-3">Galerie Photos</h2>
+        <h2 class="h2Sports mt-3">Galerie Photos et Videos</h2>
         <hr>
         <p class="lecture">Découvrez les meilleurs moments du club en images.</p>
         <div class="row d-flex justify-content-center">
@@ -11,4 +11,5 @@
                 </div>
             <?php endforeach; ?>
         </div>
-    </section>
+</section>
+

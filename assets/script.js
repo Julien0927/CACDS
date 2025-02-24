@@ -480,4 +480,3 @@ const pouleSelect = document.getElementById('pouleSelect');
             `;
         });
 
-//Affichage des résultats des matchs passés//

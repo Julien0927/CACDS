@@ -66,11 +66,11 @@ function displayNewsSection($news, $sport) {
                 
                 <?php if ($news): ?>
                     <div class="news-body">
-                        <p class="content"><?= (truncateText($news['content'])) ?></p>
+                        <p class="content" style="color: #12758C"><?= (truncateText($news['content'])) ?></p>
                         <p class="date"><?= date ('d/m/Y', strtotime($news['date'])) ?></p>
                     </div>
                 <?php else: ?>
-                    <p>Aucun article disponible pour le <?= $sport['name'] ?>.</p>
+                    <p style="color: #EC930F">Aucun article disponible pour le <?= $sport['name'] ?>.</p>
                 <?php endif; ?>
                 
                 <!-- <button class="btn btn-original" href="">Lire</button> -->
@@ -173,11 +173,11 @@ function displayNewsSection($news, $sport) {
     <div class="center flex-column text-center col-12 col-md-6">
         <img src="/assets/logos/square_logo.webp" alt="logo CACDS" style="width: 20%; height: auto" class="img-fluid mx-auto">
         <h3 class="h3Sports">Adresse</h3>
-        <p>Maison des Associations, Rue Joseph Cugnot, Niort 79000</p>
+        <p class="lecture">Maison des Associations, Rue Joseph Cugnot, Niort 79000</p>
         <h3 class="h3Sports">Téléphone</h3>
-        <p>06 64 28 58 40</p>
+        <p class="lecture">06 64 28 58 40</p>
         <h3 class="h3Sports">Email</h3>
-        <p>assocacds@gmail.com</p>
+        <p class="lecture">assocacds@gmail.com</p>
     </div>
 </section>
 <section class="container-fluid mt-5 mb-5">

@@ -1,6 +1,5 @@
 
-
-  <footer class="d-flex flex-column flex-md-row flex-wrap justify-content-between align-items-center py-2 my-2  border-top text-center text-md-start">
+  <footer class="d-flex flex-column flex-md-row flex-wrap justify-content-between align-items-center py-2 border-top text-center text-md-start">
     <p class="col-12 col-md-4 mb-md-0">
       © 2025 Borderdev 
       <img src="/assets/icones/BorderDev-25.png" alt="Logo BorderDev">

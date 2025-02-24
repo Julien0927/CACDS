@@ -148,36 +148,36 @@ try {
 
     <!-- Section Documents -->
     <section class="container-fluid" id="documents">
-        <h2 class="h2Sports">Documents</h2>
+        <h2 class="h2Sports">Documents CACDS</h2>
         <hr>
         <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
         <div class="row center gap-3">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Demande d'adhésion</h3>
-                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhésion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Demande d'engagement</h3>
-                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Fiche d'inscription</h3>
-                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
+          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+              <h3 class="h3Sports text-center">Règlement Badminton CACDS</h3>
+              <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+          </div>
+          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+              <h3 class="h3Sports text-center">Compte rendu<br> Réunion des capitaines</h3>
+              <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+          </div>
+          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+              <h3 class="h3Sports text-center">Demande d'Engagement</h3>
+              <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+          </div>
         </div>
         <div class="row center gap-3 mt-3">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Attestation certificats médicaux</h3>
-                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Autorisation de droit à l'image</h3>
-                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Règlement badminton</h3>
-                <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
+          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+              <h3 class="h3Sports text-center">Demande d'Adhésions</h3>
+              <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhésion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+          </div>
+          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+              <h3 class="h3Sports text-center">Attestation<br> Certificats médicaux</h3>
+              <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+          </div>
+          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+              <h3 class="h3Sports text-center">Autorisation<br> Droit à l'image</h3>
+              <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+          </div>
         </div>
     </section>
 
@@ -186,9 +186,9 @@ try {
 
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports mt-3">Les Chiffres</h2>
+        <h2 class="h2Sports mt-3">Chiffres</h2>
         <hr>
-        <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
+        <p class="lecture">Quelques statistiques clés pour mieux comprendre l'évolution du Badminton CACDS.</p>
         <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a>
         <p class="lecture text-center">Effectifs Badminton</p>
     </section>
@@ -221,7 +221,7 @@ try {
         <div class="row">
             <div class="col-12 col">
                 <a href="https://tennispassion79.com/" target="_blank" aria-label="Tennis Passion">
-                    <img src="/assets/logos/tennis-passion.jpg" alt="Tennis passion">
+                    <img src="/assets/logos/tennis-passion.jpg" style="border-radius: 5px" alt="Tennis passion">
                 </a>
             </div>
         </div>

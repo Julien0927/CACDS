@@ -79,7 +79,7 @@ try {
         <a class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
 
     <!--Section Résultats-->
-<?php require_once 'templates/viewCompetitions.php';?>
+<?php require_once 'templates/viewCompetitionsBis.php';?>
 
     <!-- Section Documents -->
     <section class="container-fluid" id="documents">
@@ -120,7 +120,7 @@ try {
  -->
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports mt-3">Les Chiffres</h2>
+        <h2 class="h2Sports mt-3">Chiffres</h2>
         <hr>
         <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>

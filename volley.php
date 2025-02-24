@@ -140,7 +140,7 @@ try {
         <a class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
 
     <!--Section Résultats-->
-<?php require_once 'templates/viewCompetitions.php';?>
+<?php require_once 'templates/viewCompetitionsBis.php';?>
     
     <!-- Section Documents -->
     <section class="container-fluid" id="documents">
@@ -193,7 +193,7 @@ try {
                 </p>
                 <div class="row center">
                     <div class="d-flex center flex-column col-12 col-md-3 salle-card">
-                        <h4 class="h4Sports text-center mt-3">Saisons</h4>
+                        <h4 class="h4Sports text-center">Saisons</h4>
                         <select class="season-select mx-auto" id="seasonSelect">
                             <option value="">Sélectionner une saison</option>
                             <option value="23">Saison 2023-24</option>
@@ -210,97 +210,13 @@ try {
                     </div>
                 </div>
             </div>
-            <script>
-        // Test console log immédiat
-        /* console.log('Script initialisé');
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM chargé');
-            
-            // Gestion du collapse
-            const toggleIcon = document.getElementById('toggleCollapselastSeason');
-            const collapseContent = document.getElementById('collapseContentlastSeason');
-            
-            console.log('Toggle icon:', toggleIcon);
-            console.log('Collapse content:', collapseContent);
-            
-            if (toggleIcon && collapseContent) {
-                toggleIcon.addEventListener('click', function() {
-                    console.log('Toggle cliqué');
-                    collapseContent.classList.toggle('collapse');
-                    this.style.transform = collapseContent.classList.contains('collapse') 
-                        ? 'rotate(0deg)' 
-                        : 'rotate(180deg)';
-                });
-            }
-
-            // Gestion de la sélection des saisons
-            const seasonSelect = document.getElementById('seasonSelect');
-            const linkSeasonContainer = document.getElementById('linkSeasonContainer');
-
-            console.log('Season select:', seasonSelect);
-            console.log('Link container:', linkSeasonContainer);
-
-            if (seasonSelect && linkSeasonContainer) {
-                seasonSelect.addEventListener('change', function() {
-                    console.log('Changement de saison');
-                    const selectedValue = this.value;
-                    console.log('Valeur sélectionnée:', selectedValue);
-                    
-                    if (!selectedValue) {
-                        linkSeasonContainer.innerHTML = '';
-                        return;
-                    }
-                    
-                    const yearStart = 2000 + parseInt(selectedValue);
-                    const yearEnd = yearStart + 1;
-                    const fullYears = `${yearStart}-${yearEnd}`;
-                    
-                    console.log('Années:', fullYears);
-                    
-                    const poules = ['1', '2', '3'];
-                    
-                    const linksHTML = poules.map(poule => `
-                        <div class="poule-links mb-3">
-                            <h5 class="text-center">Poule ${poule}</h5>
-                            <a href="/assets/documents/resultats_poule_${poule}_${fullYears}.pdf"
-                               class="fm-link d-block mb-2"
-                               alt="Résultats"
-                               title="Résultats poule ${poule} ${fullYears}"
-                               style="text-decoration: none;">
-                                <img src="/assets/icones/attestation-64.png"
-                                     alt="icône document"
-                                     class="mb-1"
-                                     loading="lazy">
-                                <span class="lecture">Résultats</span>
-                            </a>
-                            <a href="/assets/documents/classement_poule_${poule}_${fullYears}.pdf"
-                               class="fm-link d-block"
-                               alt="Classement"
-                               title="Classement poule ${poule} ${fullYears}"
-                               style="text-decoration: none;">
-                                <img src="/assets/icones/attestation-64.png"
-                                     alt="icône document"
-                                     class="mb-1"
-                                     loading="lazy">
-                                <span class="lecture">Classement</span>
-                            </a>
-                        </div>
-                    `).join('');
-                    
-                    console.log('HTML généré:', linksHTML);
-                    linkSeasonContainer.innerHTML = linksHTML;
-                });
-            }
-        });  */
-    </script>
             </div>
         </section>
     </section>
 
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports mt-3">Les Chiffres</h2>
+        <h2 class="h2Sports mt-3">Chiffres</h2>
         <hr>
         <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>

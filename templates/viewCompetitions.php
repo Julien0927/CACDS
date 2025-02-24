@@ -11,7 +11,7 @@
             <?php endforeach; ?>
 
             </select>
-            <div class="row d-flex justify-content-center mt-4">
+            <div class="row d-flex justify-content-evenly gap-2 mt-4">
                 <div class="col-md-3">
                     <h4>Résultats</h4>
                     <div id="resultats-container">
@@ -23,6 +23,21 @@
                     <div id="classement-container">
                         <!-- Le classement sera chargé ici -->
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="">Feuilles de matchs</h4>
+                    <select class="fm-select mx-auto" id="pouleSelect">
+                        <option value="">Sélectionner une poule</option>
+                        <option value="1">Poule 1</option>
+                        <option value="2">Poule 2</option>
+                        <option value="3">Poule 3</option>
+                        <option value="4">Poule 4</option>
+                        <option value="5">Poule 5</option>
+                        <option value="6">Poule 6</option>
+                        <option value="7">Poule 7</option>
+                        <option value="8">Poule 8</option>
+                    </select>
+                    <div class="mx-auto" id="linkContainer"></div>
                 </div>
             </div>
         <!--Coupe-->
@@ -38,19 +53,19 @@
             <?php endforeach; ?>
         </select>
  
-        <div class="row d-flex justify-content-center mt-4">
+        <div class="row d-flex center gap-3 mt-4">
             <div class="col-md-3">
                 <h4>Résultats</h4>
                 <div id="resultCup-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
             </div>
-            <!-- <div class="col-md-3">
-                <h4>Classements</h4>
-                <div id="rankingCup-container"> -->
-                    <!-- Le classement sera chargé ici -->
-                <!-- </div>
-            </div> -->
+            <div class="d-flex flex-column col-md-3">
+                <h4 class="text-center">Feuilles de matchs</h4>
+                <a href="/assets/documents/fm_coupe_.pdf" class="mx-auto mt-4" alt="feuille de match coupe" target="_blank">
+                    <img src="/assets/icones/attestation-64.png" alt="feuille de match coupe" loading="lazy">
+                </a>
+            </div>
         </div>
         </div>
         <!--Tournois-->

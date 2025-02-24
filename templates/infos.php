@@ -1,15 +1,13 @@
 <section class="container-fluid" id="informations">
         <h2 class="h2Sports mt-3">Informations</h2>
         <hr>
-        <p class="lecture" >Toutes les informations à propos de nos événements et activités.</p>
         <section class="container-fluid">
-            <h3 class="h3Sports" id="adhesion">Adhésion / trombinoscope
+            <h3 class="h3Sports" id="adhesion">Trombinoscope
                 <img class="toggle-icon" id="toggleCollapseTrombi" data-target="collapseContentTrombi" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
             </h3>
             <div id="collapseContentTrombi" class="collapse">
                 <p class="lecture">
-                    Vous trouverez dans cette rubrique les demandes d’adhésion des joueurs et joueuses CACDS renseignées par les clubs, 
-                    ainsi que les cartes d’adhésion comportant la photo de l’adhérent(e) et la signature du capitaine et de l’adhérent(e).
+                    Vous trouverez dans cette rubrique les demandes d’adhésion des joueurs et joueuses CACDS renseignées par les clubs. 
                 </p>
             </div>
         </section>
@@ -18,48 +16,30 @@
             <img class="toggle-icon" id="toggleCollapseTools" data-target="collapseContentTools" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
         </h3>
         <div id="collapseContentTools" class="collapse">
-            <div class="row center gap-3">
-                <div class="d-flex flex-column col-12 col-md-3 salle-card">
+            <div class="row justify-content-evenly gap-3">
+                <div class="d-flex flex-column col-12 col-md-2 salle-card">
                     <h4 class="h4Sports text-center">Fournir un certificat médical</h4>
                     <a href="/assets/documents/article_certificat_medical.pdf" class="mx-auto" style="margin-left: 7rem" aria-label="article certificats médicaux" style="text-decoration: none;" title="Article certificats médicaux">
                         <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
                     </a>
                 </div>
-                <div class="d-flex center flex-column col-12 col-md-3 salle-card">
+                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
                     <h4 class="h4Sports text-center">Coordonnées des capitaines</h4>
                     <a href="/assets/documents/capitaines_2023_2024_version_12_dec.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Coordonnées des capitaines">
                         <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
                     </a>
                 </div>
-                <div class="d-flex center flex-column col-12 col-md-3 salle-card">
+                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
                     <h4 class="h4Sports text-center">Créneaux des équipes</h4>
                     <a href="/assets/documents/creneaux-2.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Créneaux des équipes">
                         <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
                     </a>
                 </div>
-            </div>
-            <div class="row center gap-3 mt-3">
-                <div class="d-flex center flex-column col-12 col-md-3 salle-card">
+                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
                     <h4 class="h4Sports text-center">Relais de l'information</h4>
                     <a href="/assets/documents/relais_info_2025.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Relais information">
                         <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
                     </a>
-                </div>
-                <div class="d-flex center flex-column col-12 col-md-3 salle-card">
-                    <h4 class="h4Sports text-center mt-3">Feuilles de matchs</h4>
-                    <select class="fm-select mx-auto" id="pouleSelect">
-                        <option value="">Sélectionner une poule</option>
-                        <option value="1">Poule 1</option>
-                        <option value="2">Poule 2</option>
-                        <option value="3">Poule 3</option>
-                        <option value="4">Poule 4</option>
-                        <option value="5">Poule 5</option>
-                        <option value="6">Poule 6</option>
-                        <option value="7">Poule 7</option>
-                        <option value="8">Poule 8</option>
-                        <option value="coupe">Coupe</option>
-                    </select>
-                    <div class="mx-auto" id="linkContainer"></div>
                 </div>
             </div>
                 <h4 class="h4Sports mt-3 text-center">Trouver une salle</h4>
@@ -68,7 +48,7 @@
         </div>
         </section>
         <section class="container-fluid">
-            <h3 class="h3Sports" id="palmares">Palmarès
+            <h3 class="h3Sports" id="palmares">Palmarès Badminton CACDS
                 <img class="toggle-icon" id="toggleCollapsePalmares" data-target="collapseContentPalmares" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
             </h3>
             <div id="collapseContentPalmares" class="collapse">
@@ -97,7 +77,7 @@
                 </div>
             </div>
         </section>
-        <section class="container-fluid">
+<!--         <section class="container-fluid">
             <h3 class="h3Sports" id="anniversaire">20 ans du badminton
                 <img class="toggle-icon" id="toggleCollapseAnniv" data-target="collapseContentAnniv" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
             </h3>
@@ -147,3 +127,4 @@
             </div>
         </section>
     </section>
+ -->

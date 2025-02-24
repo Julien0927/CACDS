@@ -473,6 +473,16 @@ hr {
   color: var(--white-color) !important;
 }
 
+.navMedia {
+  color: var(--blue-color);
+  font-family: var(--montserrat);
+}
+.navMedia.active {
+  color: var(--blue-color)!important;
+  font-family: var(--montserrat);
+}
+
+
 .logo {
   border-radius: 50px;
   width: 20%;
@@ -631,13 +641,23 @@ fm-container {
   text-align: center;
 }
 
+select {
+  border: 3px solid var(--blue-color);
+  border-radius: 5px;
+}
+
+.fm-select option , .season-select option {
+  font-family: var(--font-lato);
+  font-weight: 400;
+}
+
 .fm-select {
   padding: 10px;
   font-size: 16px;
   margin: 20px 0;
   width: 200px;
   border-radius: 5px;
-  border: 1px solid #ddd;
+  border: 2px solid var(--blueNav2-color);
 }
 
 .fm-link {
