@@ -18,55 +18,75 @@ $photosForCurrentPage = array_slice($allPhotos, $startIndex, $itemsPerPage);
 ?>
 
 <section class="container-fluid">
-<h3 class="h2Sports">Gestion des photos</h3>
-<hr>
-<div class="row">
-    <form method="POST" enctype="multipart/form-data">
+    <h3 class="h2Sports">Gestion des photos et vidéos</h3>
+    <hr>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="d-flex justify-content-center">
                     <div class="table-responsive-sm mt-3" id="tablePhotos">
                         <table class="table table-striped table-responsive text-center nowrap">
-                            <thead class="table-dark">
+                            <thead>
                                 <tr>
-                                    <th>Titre</th>
-                                    <th>Photo</th>
-                                    <th>Sélectionner</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Aperçu</th>
+                                    <th scope="col">Titre</th>
+                                    <th class="text-center" scope="col">Sélection</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($photosForCurrentPage)) : ?>
-                                    <?php foreach ($photosForCurrentPage as $photo) : ?>
-                                        <tr>
-                                            <td><?= htmlspecialchars($photo["title"]) ?></td>
-                                            <td><img src="<?= htmlspecialchars($photo["image"]) ?>" class="imgNew" alt="<?= htmlspecialchars($photo["title"]) ?>"></td>
-                                            <td><input type="checkbox" name="photoBox[]" value="<?= (int)$photo['id'] ?>"></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php else : ?>
+                                <?php if (!empty($allPhotos)) { ?>
+                                <?php foreach ($allPhotos as $photo): ?>
                                     <tr>
-                                        <td colspan="3">Aucune photo disponible.</td>
+                                        <td><?= date('d/m/Y', strtotime($photo['date'])) ?></td>
+                                        <td>
+                                            <?php if ($photo['type'] === 'photo'): ?> 
+                                                <span class="badge bg-photo">Photo</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-video">Vidéo</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($photo['type'] === 'photo'): ?> 
+                                                <img src="<?= $photo['image'] ?>" alt="<?= $photo['title'] ?>" width="100" class="img-thumbnail">
+                                            <?php else: ?>
+                                                <video width="100" controls>
+                                                    <source src="<?= $photo['video'] ?>" type="video/mp4">
+                                                    Vidéo non supportée
+                                                </video>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= $photo['title'] ?></td>
+                                        <td class="text-center">
+                                            <input type="checkbox" name="photoBox[]" value="<?= $photo['id'] ?>">
+                                        </td>
                                     </tr>
-                                <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?php } else { ?>
+                                    <tr>
+                                        <td colspan="5">Aucun média trouvé.</td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                         <nav aria-label="Navigation des pages">
                             <ul class="pagination justify-content-center">
                                 <?php if ($currentPage > 1): ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="?pagePhotos=<?= $currentPage - 1 ?>#tablePhotos"><</a>
+                                        <a class="page-link" href="?pageNews=<?= $currentPage - 1 ?>#tableNews"><</a>
                                     </li>
                                 <?php endif; ?>
 
                                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                                     <li class="page-item <?= $i === $currentPage ? 'active' : '' ?>">
-                                        <a class="page-link" href="?pagePhotos=<?= $i ?>#tablePhotos"><?= $i ?></a>
+                                        <a class="page-link" href="?pageNews=<?= $i ?>#tableNews"><?= $i ?></a>
                                     </li>
                                 <?php endfor; ?>
 
                                 <?php if ($currentPage < $totalPages): ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="?pagePhotos=<?= $currentPage + 1 ?>#tablePhotos">></a>
+                                        <a class="page-link" href="?pageNews=<?= $currentPage + 1 ?>#tableNews">></a>
                                     </li>
                                 <?php endif; ?>
                             </ul>
@@ -74,15 +94,13 @@ $photosForCurrentPage = array_slice($allPhotos, $startIndex, $itemsPerPage);
                     </div>
                 </div>
             </div>
-
             <div class="d-flex justify-content-end">
                 <div class="my-3">
-                    <a href="addPhotos.php" class="btn btn-card bold">Ajouter une photo</a>
-                    <?php addCSRFTokenToForm() ?>
-                    <button type="submit" class="btn btn-original bold" name="deletePhoto">Supprimer</button>
+                    <a href="addMedia.php" class="btn btn-card bold">Ajouter un média</a>
+                    <?php addCSRFTokenToForm(); ?>
+                    <button type="submit" name="deletePhoto" class="btn btn-original bold">Supprimer</button>
                 </div>
             </div>
         </div>
     </form>
-</div>
 </section>

@@ -78,8 +78,8 @@ $newsForCurrentPage = array_slice($allNews, $startIndex, $itemsPerPage);
     </div>
     <div class="row">
         <div class="d-flex justify-content-end">
-            <div class=" my-3">
-                <a href="addNews.php" class="btn btn-card bold">Ajouter un article</button></a>
+            <div class="my-3">
+                <a href="addNews.php" class="btn btn-card bold">Ajouter un article</a>
                 <?php addCSRFTokenToForm() ?>
                 <button type="submit" class="btn btn-second bold" name="updateNew">Modifier</button>
                 <button type="submit" class="btn btn-original bold" name="deleteNew">Supprimer</button>

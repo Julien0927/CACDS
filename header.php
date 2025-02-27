@@ -20,6 +20,7 @@
     <script src="/assets/script.js" defer></script>
     <script src="/assets/cookie-manager.js" defer></script>
     <script src="/assets/seasons.js" defer></script>
+    <script src="/assets/filter.js" defer></script>
     <title>CACDS</title>
 </head>
 <body>

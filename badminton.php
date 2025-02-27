@@ -201,8 +201,10 @@ try {
         <h2 class="h2Sports mt-3">Chiffres</h2>
         <hr>
         <p class="lecture">Quelques statistiques clés pour mieux comprendre l'évolution du Badminton CACDS.</p>
-        <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a>
-        <p class="lecture text-center">Effectifs Badminton</p>
+        <div class="d-flex flex-column justify-content-center mx-auto col-12 col-md-2">
+          <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a>
+          <p class="lecture text-center">Effectifs Badminton</p>
+        </div>
     </section>
 
     <!-- Section Galerie Photos -->

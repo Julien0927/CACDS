@@ -200,6 +200,13 @@ option, select {
   background-color: var(--orange-color);
   color: var(--white-color);
   border: 2px solid var(--orange-color);
+  font-weight: bold;
+}
+
+.btn-original.active {
+  background-color: var(--white-color);
+  color: var(--blue-color);
+  border: 4px solid var(--blue-color);
 }
 
 .btn-original:hover {
@@ -686,6 +693,61 @@ select {
   display: none;
 }
 
+/*Badge*/
+.bg-video {
+  background-color: var(--purple-color);
+}
+
+.bg-photo {
+  background-color: var(--green-color);
+}
+
+
+/*Videos*/
+.video-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-container video {
+  max-height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.video-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.media-item {
+  position: relative; /* Pour que les éléments restent dans le flux au début */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, height 0.5s ease-in-out;
+  height: auto; /* Assurer que la taille est naturelle */
+  display: block;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  position: absolute; /* Retirer l'élément du flux et libérer l'espace */
+  top: -9999px; /* Place l'élément hors de la vue */
+  left: -9999px;
+  margin-bottom: 0;
+}
+
 @media (max-width: 1200px) {
   .grid-container {
       grid-template-columns: repeat(3, 1fr);
@@ -744,3 +806,4 @@ footer {
     display: none;
   }
 }
+  

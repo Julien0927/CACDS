@@ -480,3 +480,26 @@ const pouleSelect = document.getElementById('pouleSelect');
             `;
         });
 
+// Script pour modifier dynamiquement l'attribut accept du champ de fichier
+document.addEventListener('DOMContentLoaded', function() {
+    const photoRadio = document.getElementById('type_photo'); // Changé 'type_image' en 'type_photo'
+    const videoRadio = document.getElementById('type_video');
+    const fileInput = document.getElementById('media_file');
+    const fileHelp = document.getElementById('file_help');
+    
+    function updateFileInput() {
+        if (photoRadio.checked) { // Changé 'imageRadio' en 'photoRadio'
+            fileInput.setAttribute('accept', 'image/*');
+            fileHelp.textContent = 'Formats acceptés: JPG, PNG, GIF (max 10MB)';
+        } else {
+            fileInput.setAttribute('accept', 'video/*');
+            fileHelp.textContent = 'Formats acceptés: MP4, WebM, OGG (max 100MB)';
+        }
+    }
+    
+    photoRadio.addEventListener('change', updateFileInput); // Changé 'imageRadio' en 'photoRadio'
+    videoRadio.addEventListener('change', updateFileInput);
+    
+    // Initialiser avec la valeur par défaut
+    updateFileInput();
+});
