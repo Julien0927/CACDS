@@ -93,13 +93,19 @@ try {
             </select>
             <div class="row d-flex justify-content-center mt-4">
                 <div class="col-md-3">
-                    <h4>Résultats</h4>
+                    <div class="d-flex align-items-center">
+                        <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                        <h4 class="h4Results">Résultats</h4>
+                    </div>
                     <div id="resultats-container">
                         <!-- Les résultats seront chargés ici -->
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h4>Classements</h4>
+                    <div class="d-flex align-items-center">
+                        <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                        <h4 class="h4Results">Classements</h4>
+                    </div>
                     <div id="classement-container">
                         <!-- Le classement sera chargé ici -->
                     </div>
@@ -120,7 +126,10 @@ try {
  
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results">Résultats</h4>
+                </div>
                 <div id="resultCup-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
@@ -148,7 +157,10 @@ try {
 
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results">Résultats</h4>
+                </div>
                 <div id="resultTournament-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
@@ -166,7 +178,7 @@ try {
 
     <!-- Section Documents -->
     <section class="container-fluid" id="documents">
-        <h2 class="h2Sports">Documents</h2>
+        <h2 class="h2Sports">Documents CACDS</h2>
         <hr>
         <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
         <div class="row center gap-3">
@@ -207,7 +219,7 @@ try {
  -->
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports mt-3">Chiffres</h2>
+        <h2 class="h2Sports mt-3">Chiffres et Statistiques</h2>
         <hr>
         <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>

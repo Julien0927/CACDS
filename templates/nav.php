@@ -19,8 +19,8 @@ $dashboardPages = [
 <nav class="navbar navbar-expand-lg ms-auto py-2">
     <div class="container-fluid">
         <a class="navbar-brand" href="#" aria-label="Nav"></a>
-        <button class="custom navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="custom navbar-toggler" style="border-color:rgb(255, 255, 255);" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" ></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav link-offset-3">

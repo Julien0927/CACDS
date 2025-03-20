@@ -89,7 +89,7 @@ try {
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem dropdown">
             <a class="" href="#documents" style="text-decoration: none;">
-              Documents
+              Documents CACDS
             </a>
           </li>
         </ul>
@@ -108,14 +108,14 @@ try {
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#chiffres" style="text-decoration: none;" >
-              Chiffres
+              Chiffres et Statistiques
             </a>
           </li>
         </ul>
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#gallery" style="text-decoration: none;">
-              Galerie photos
+              Photos et Vidéos
             </a>
           </li>
         </ul>
@@ -145,121 +145,120 @@ try {
   </div>
 </section>
 <section class="container-fluid">
-
     <!--Section News-->
 <?php require_once 'templates/viewNews.php'; ?>
 
-<section class="container-fluid">
-        <h2 class="h2Sports line">Compétitions</h2>
-        <hr>
-        <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
-        <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
+  <section class="container-fluid">
+          <h2 class="h2Sports line">Compétitions</h2>
+          <hr>
+          <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
+          <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
 
-    <!--Section Résultats-->
-<?php require_once 'templates/viewCompetitions.php';?>
+      <!--Section Résultats-->
+  <?php require_once 'templates/viewCompetitions.php';?>
 
-    <!-- Section Documents -->
-    <section class="container-fluid" id="documents">
-        <h2 class="h2Sports">Documents CACDS</h2>
-        <hr>
-        <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
-        <div class="row center gap-3">
-          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-              <h3 class="h3Sports text-center">Règlement Badminton CACDS</h3>
-              <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+      <!-- Section Documents -->
+      <section class="container-fluid" id="documents">
+          <h2 class="h2Sports">Documents CACDS</h2>
+          <hr>
+          <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
+          <div class="row center gap-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Règlement Badminton CACDS</h3>
+                <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Compte rendu<br> Réunion des capitaines</h3>
+                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Demande d'Engagement</h3>
+                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
           </div>
-          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-              <h3 class="h3Sports text-center">Compte rendu<br> Réunion des capitaines</h3>
-              <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+          <div class="row center gap-3 mt-3">
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Demande d'Adhésions</h3>
+                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhésion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Attestation<br> Certificats médicaux</h3>
+                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
+            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
+                <h3 class="h3Sports text-center">Autorisation<br> Droit à l'image</h3>
+                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+            </div>
           </div>
-          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-              <h3 class="h3Sports text-center">Demande d'Engagement</h3>
-              <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+      </section>
+
+      <!-- Section Informations -->
+          <?php require_once 'templates/infos.php'; ?>
+
+      <!-- Section Les Chiffres -->
+      <section class="container-fluid" id="chiffres">
+          <h2 class="h2Sports mt-3">Chiffres et Statistiques</h2>
+          <hr>
+          <p class="lecture">Quelques statistiques clés pour mieux comprendre l'évolution du Badminton CACDS.</p>
+          <div class="d-flex flex-column justify-content-center mx-auto col-12 col-md-2">
+            <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a>
+            <p class="lecture text-center">Effectifs Badminton</p>
           </div>
-        </div>
-        <div class="row center gap-3 mt-3">
-          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-              <h3 class="h3Sports text-center">Demande d'Adhésions</h3>
-              <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhésion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-          </div>
-          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-              <h3 class="h3Sports text-center">Attestation<br> Certificats médicaux</h3>
-              <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-          </div>
-          <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-              <h3 class="h3Sports text-center">Autorisation<br> Droit à l'image</h3>
-              <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-          </div>
-        </div>
-    </section>
+      </section>
 
-    <!-- Section Informations -->
-        <?php require_once 'templates/infos.php'; ?>
-
-    <!-- Section Les Chiffres -->
-    <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports mt-3">Chiffres</h2>
-        <hr>
-        <p class="lecture">Quelques statistiques clés pour mieux comprendre l'évolution du Badminton CACDS.</p>
-        <div class="d-flex flex-column justify-content-center mx-auto col-12 col-md-2">
-          <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a>
-          <p class="lecture text-center">Effectifs Badminton</p>
-        </div>
-    </section>
-
-    <!-- Section Galerie Photos -->
-<?php require_once 'templates/viewPhotos.php'; ?>
+      <!-- Section Galerie Photos -->
+  <?php require_once 'templates/viewPhotos.php'; ?>
 
 
-<!-- Section partenaires -->
-<section class="container-fluid" id="partners">
-  <h2 class="h2Sports mt-3">Partenaires</h2>
-  <hr>
-  <p class="lecture">Cette rubrique vous informe des partenariats passés avec la CACDS, au nom et pour le compte de ses adhérents.</p>
-  <div class="row">
-    <div class="col-12 col">
-      <a href="https://tennispassion79.com/" target="_blank" aria-label="Tennis Passion">
-        <img src="/assets/logos/tennis-passion.jpg" style="border-radius: 5px" alt="Tennis passion">
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- Section marché du badminton -->
-<section class="container-fluid" id="badMarket">
-  <h2 class="h2Sports mt-3">Marché du Badminton</h2>
-  <hr>
-  <p class="lecture">
-    Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
-    Alors n’hésitez pas à nous transmettre vos offres.
-  </p>
-  <div class="row">
-    <div class="col-12 col"></div>
-  </div>
-</section>
-
-<!-- Section Liens Utiles -->
-<section class="container-fluid" id="link">
-    <h2 class="h2Sports mt-3">Liens Utiles</h2>
+  <!-- Section partenaires -->
+  <section class="container-fluid" id="partners">
+    <h2 class="h2Sports mt-3">Partenaires</h2>
     <hr>
-    <div class="d-flex flex-column justify-content-around mt-3" >
-        <a href="https://www.ffbad.org/" target="_blank" class="lecture" aria-label="Fédération Française de Badminton" style="text-decoration: none;">
-            <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la Fédération Française de Badminton
+    <p class="lecture">Cette rubrique vous informe des partenariats passés avec la CACDS, au nom et pour le compte de ses adhérents.</p>
+    <div class="row">
+      <div class="col-12 col">
+        <a href="https://tennispassion79.com/" target="_blank" aria-label="Tennis Passion">
+          <img src="/assets/logos/tennis-passion.jpg" style="border-radius: 5px" alt="Tennis passion">
         </a>
-        <a href="https://www.badmintoneurope.com/Cms/" target="_blank" class="lecture" aria-label="Badminton Europe" style="text-decoration: none;">
-            <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers Badminton Europe
-        </a>
-        <a href="https://bwfbadminton.com/" target="_blank" class="lecture" aria-label="World Badminton Federation" style="text-decoration: none;">
-            <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la World Badminton Federation
-        </a>
+      </div>
     </div>
-</section>
+  </section>
+
+  <!-- Section marché du badminton -->
+  <section class="container-fluid" id="badMarket">
+    <h2 class="h2Sports mt-3">Marché du Badminton</h2>
+    <hr>
+    <p class="lecture">
+      Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
+      Alors n’hésitez pas à nous transmettre vos offres.
+    </p>
+    <div class="row">
+      <div class="col-12 col"></div>
+    </div>
+  </section>
+
+  <!-- Section Liens Utiles -->
+  <section class="container-fluid" id="link">
+      <h2 class="h2Sports mt-3">Liens Utiles</h2>
+      <hr>
+      <div class="d-flex flex-column justify-content-around mt-3" >
+          <a href="https://www.ffbad.org/" target="_blank" class="lecture" aria-label="Fédération Française de Badminton" style="text-decoration: none;">
+              <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la Fédération Française de Badminton
+          </a>
+          <a href="https://www.badmintoneurope.com/Cms/" target="_blank" class="lecture" aria-label="Badminton Europe" style="text-decoration: none;">
+              <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers Badminton Europe
+          </a>
+          <a href="https://bwfbadminton.com/" target="_blank" class="lecture" aria-label="World Badminton Federation" style="text-decoration: none;">
+              <img src="/assets/icones/fleche-droite-30.png" alt="fleche droite" class="mb-1">Lien vers la World Badminton Federation
+          </a>
+      </div>
+  </section>
 
 
-    <!-- Bouton Retour en haut -->
-    <div id="backToTop" >
-        <img src="/assets/icones/chevron-up.png" alt="Retour en haut" loading="lazy">
-    </div>
+      <!-- Bouton Retour en haut -->
+      <div id="backToTop" >
+          <img src="/assets/icones/chevron-up.png" alt="Retour en haut" loading="lazy">
+      </div>
 </section>
 <?php
 require_once 'templates/footer.php';

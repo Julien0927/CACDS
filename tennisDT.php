@@ -83,7 +83,7 @@ try {
 
     <!-- Section Documents -->
     <section class="container-fluid" id="documents">
-        <h2 class="h2Sports">Documents</h2>
+        <h2 class="h2Sports">Documents CACDS</h2>
         <hr>
         <p class="lecture">Créer une équipe c’est simple, 3 joueurs minimum (mixte) et pour tous renseignements, venir à la salle de Vouillé tous les jeudi soir à partir de 20h30.<br>Accédez aux documents officiels et informations utiles.</p>
         <div class="row center gap-3">
@@ -120,7 +120,7 @@ try {
  -->
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports mt-3">Chiffres</h2>
+        <h2 class="h2Sports mt-3">Chiffres et Statistiques</h2>
         <hr>
         <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>

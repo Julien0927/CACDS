@@ -13,13 +13,19 @@
             </select>
             <div class="row d-flex justify-content-center mt-4">
                 <div class="col-md-3">
-                    <h4>Résultats</h4>
+                    <div class="d-flex align-items-center">
+                        <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                        <h4 class="h4Results">Résultats</h4>
+                    </div>
                     <div id="resultats-container">
                         <!-- Les résultats seront chargés ici -->
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h4>Classements</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results">Classements</h4>
+                </div>
                     <div id="classement-container">
                         <!-- Le classement sera chargé ici -->
                     </div>
@@ -40,7 +46,10 @@
  
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results">Résultats</h4>
+                </div>
                 <div id="resultCup-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
@@ -68,7 +77,10 @@
 
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results">Résultats</h4>
+                </div>
                 <div id="resultTournament-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>

@@ -89,7 +89,7 @@ try {
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem dropdown">
             <a class="" href="#documents" style="text-decoration: none;">
-              Documents
+              Documents CACDS
             </a>
           </li>
         </ul>
@@ -106,14 +106,14 @@ try {
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#chiffres" style="text-decoration: none;" >
-              Les chiffres
+              Chiffres et Statistiques
             </a>
           </li>
         </ul>
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#gallery" style="text-decoration: none;">
-              Galerie photos
+              Photos et Vidéos
             </a>
           </li>
         </ul>
@@ -144,7 +144,7 @@ try {
     
     <!-- Section Documents -->
     <section class="container-fluid" id="documents">
-        <h2 class="h2Sports mt-3">Documents</h2>
+        <h2 class="h2Sports mt-3">Documents CACDS</h2>
         <hr>
         <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
         <div class="row center gap-3">
@@ -216,7 +216,7 @@ try {
 
     <!-- Section Les Chiffres -->
     <section class="container-fluid" id="chiffres">
-        <h2 class="h2Sports mt-3">Chiffres</h2>
+        <h2 class="h2Sports mt-3">Chiffres et Statistiques</h2>
         <hr>
         <p class="lecture">Quelques statistiques clés pour mieux comprendre nos performances.</p>
     </section>

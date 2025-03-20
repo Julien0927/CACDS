@@ -21,7 +21,7 @@
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem dropdown">
             <a class="" href="#documents" style="text-decoration: none;">
-              Documents
+              Documents CACDS
             </a>
           </li>
         </ul>
@@ -42,14 +42,14 @@
  -->        <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#chiffres" style="text-decoration: none;" >
-              Les chiffres
+              Chiffres et Statistiques
             </a>
           </li>
         </ul>
         <ul class="navbar-nav me-5">
           <li class="nav-item insideItem">
             <a class="" href="#gallery" style="text-decoration: none;">
-              Galerie photos
+              Photos et Vidéos
             </a>
           </li>
         </ul>

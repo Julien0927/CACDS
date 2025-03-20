@@ -13,19 +13,28 @@
             </select>
             <div class="row d-flex justify-content-evenly gap-2 mt-4">
                 <div class="col-md-3">
-                    <h4>Résultats</h4>
+                    <div class="d-flex align-items-center">
+                        <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                        <h4 class="h4Results">Résultats</h4>
+                    </div>
                     <div id="resultats-container">
                         <!-- Les résultats seront chargés ici -->
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h4>Classements</h4>
+                    <div class="d-flex align-items-center">
+                        <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                        <h4 class="h4Results">Classements</h4>
+                    </div>
                     <div id="classement-container">
                         <!-- Le classement sera chargé ici -->
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h4 class="">Feuilles de matchs</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results">Feuilles de matchs</h4>
+                </div>
                     <select class="fm-select mx-auto" id="pouleSelect">
                         <option value="">Sélectionner une poule</option>
                         <option value="1">Poule 1</option>
@@ -55,13 +64,19 @@
  
         <div class="row d-flex center gap-3 mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                <h4 class="h4Results">Résultats</h4>
+                </div>
                 <div id="resultCup-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>
             </div>
             <div class="d-flex flex-column col-md-3">
-                <h4 class="text-center">Feuilles de matchs</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results text-center">Feuilles de matchs</h4>
+                </div>
                 <a href="/assets/documents/fm_coupe_.pdf" class="mx-auto mt-4" alt="feuille de match coupe" target="_blank">
                     <img src="/assets/icones/attestation-64.png" alt="feuille de match coupe" loading="lazy">
                 </a>
@@ -83,7 +98,10 @@
 
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-md-3">
-                <h4>Résultats</h4>
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results">Résultats</h4>
+                </div>
                 <div id="resultTournament-container">
                     <!-- Les résultats seront chargés ici -->
                 </div>

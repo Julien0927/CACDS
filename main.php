@@ -13,22 +13,26 @@ $sports = [
     'tdt' => [
         'id' => 1,
         'name' => 'tennis de table',
-        'icon' => 'Square item TdT.svg'
+        'icon' => 'Square item TdT.svg',
+        'href' => 'tennisDT.php'
     ],
     'bad' => [
         'id' => 2,
         'name' => 'badminton',
-        'icon' => 'Square item bad.svg'
+        'icon' => 'Square item bad.svg',
+        'href' => 'badminton.php'
     ],
     'petanque' => [
         'id' => 3,
         'name' => 'pétanque',
-        'icon' => 'Square item petanque.svg'
+        'icon' => 'Square item petanque.svg',
+        'href' => 'petanque.php'
     ],
     'volley' => [
         'id' => 4,
         'name' => 'volleyball',
-        'icon' => 'Square item Volley.svg'
+        'icon' => 'Square item Volley.svg',
+        'href' => 'volley.php'
     ]
 ];
 
@@ -58,7 +62,9 @@ function displayNewsSection($news, $sport) {
             <div class="news-text-content">
                 <!-- En-tête avec icône et titre -->
                 <div class="news-header">
-                    <img class="sport-icon" src="/assets/icones/<?= $sport['icon'] ?>" alt="<?= $sport['name'] ?>">
+                    <a  href="<?= htmlspecialchars($sport['href']) ?>">
+                    <img class="sport-icon" src="/assets/icones/<?= $sport['icon'] ?>" alt="<?= $sport['name'] ?>" loading="lazy">
+                    </a>
                     <?php if ($news): ?>
                         <h3 class="news-title"><?= ($news['title']) ?></h3>
                     <?php endif; ?>

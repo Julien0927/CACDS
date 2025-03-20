@@ -1,6 +1,6 @@
 
 <section class="container-fluid" id="gallery">
-    <h2 class="h2Sports mt-3">Galerie Photos et Videos</h2>
+    <h2 class="h2Sports mt-3">Photos et Vidéos</h2>
     <hr>
     <p class="lecture">Découvrez les meilleurs moments du club en images et en vidéos.</p>
     
