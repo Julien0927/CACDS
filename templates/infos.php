@@ -9,6 +9,20 @@
                 <p class="lecture">
                     Vous trouverez dans cette rubrique les demandes d’adhésion des joueurs et joueuses CACDS renseignées par les clubs. 
                 </p>
+                <div class="row gap-3 ">
+                    <select class="fm-select ms-3" id="pouleAdhesionSelect">
+                        <option value="">Sélectionner une poule</option>
+                        <option value="1">Poule 1</option>
+                        <option value="2">Poule 2</option>
+                        <option value="3">Poule 3</option>
+                        <option value="4">Poule 4</option>
+                        <option value="5">Poule 5</option>
+                        <option value="6">Poule 6</option>
+                        <option value="7">Poule 7</option>
+                        <option value="8">Poule 8</option>
+                    </select>
+                    <div class="mx-auto" id="AdhesionContainer"></div>
+                </div>
             </div>
         </section>
         <section class="container-fluid">
@@ -25,13 +39,13 @@
                 </div>
                 <div class="d-flex center flex-column col-12 col-md-2 salle-card">
                     <h4 class="h4Sports text-center">Coordonnées des capitaines</h4>
-                    <a href="/assets/documents/capitaines_2023_2024_version_12_dec.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Coordonnées des capitaines">
+                    <a href="/assets/documents/Capitaines 2024 2025.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Coordonnées des capitaines">
                         <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
                     </a>
                 </div>
                 <div class="d-flex center flex-column col-12 col-md-2 salle-card">
                     <h4 class="h4Sports text-center">Créneaux des équipes</h4>
-                    <a href="/assets/documents/creneaux-2.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Créneaux des équipes">
+                    <a href="/assets/documents/Créneaux 2024 2025.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Créneaux des équipes">
                         <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
                     </a>
                 </div>

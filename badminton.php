@@ -169,7 +169,7 @@ try {
             </div>
             <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Compte rendu<br> Réunion des capitaines</h3>
-                <a href="/assets/documents/" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
+                <a href="/assets/documents/CR_capitaines_4_septembre_2024.pdf" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
             </div>
             <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
                 <h3 class="h3Sports text-center">Demande d'Engagement</h3>

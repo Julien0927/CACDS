@@ -19,7 +19,7 @@ $competitionMapping = [
 // Fonction de traitement des erreurs
 function handleError($message) {
     $_SESSION['error'] = $message;
-    header('Location: addScores.php');
+    header('Location: addScoresBad.php');
     exit();
 }
 
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $results->addResult($destPath, $dayNumber, $name);
 
         $_SESSION['messages'] = ["Le résultat a été ajouté avec succès"];
-        header('Location: addScores.php');
+        header('Location: addScoresBad.php');
         exit();
 
     } catch (Exception $e) {
@@ -111,7 +111,7 @@ ob_end_flush();
     <?php endif; ?>
 
     <h3 class="h2Sports mt-3 text-center">Ajouter un résultat</h3>
-    <form method="POST" action="addScores.php" enctype="multipart/form-data">
+    <form method="POST" action="addScoresBad.php" enctype="multipart/form-data">
         <!-- Choix de la compétition -->
         <div class="d-flex flex-row align-items-center justify-content-center flex-wrap">
             <div class="me-3 mt-4">
@@ -125,17 +125,23 @@ ob_end_flush();
             
             <!-- Choix de la poule -->
             <div id="poules-results-container" style="display: none;" class="me-3 mb-2">
-                <label for="poulesResults" class="form-label me-2">Choisir une poule</label>
+                <label for="poulesResults" class="form-label me-2">Choisir une poule </label>
                 <select name="poulesResults" id="poulesResults" class="form-select">
                     <!-- Les options seront générées en JS -->
                 </select>
             </div>
             <!-- Nom de la compétition -->
             <div id="competitionNameContainer" style="display: none;" class="me-3 mb-2">
-                <label for="name" class="form-label me-2">Nom de la compétition :</label>
+<!--                 <label for="name" class="form-label me-2">Nom de la compétition :</label>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Nom de la compétition">
+ -->           <select name="name" id="name" class="form-select mt-5 mb-3">
+                    <option value="Tour préléminaire">Tour Préléminaire</option>
+                    <option value="Coupe Principale">Coupe Principale</option>
+                    <option value="Coupe Consolante">Coupe Consolante</option>
+                    <option value="Tournoi Estival">Tournoi Estival</option>
+                    <option value="Autres Tournois">Autres Tournois</option>
+                </select> 
             </div>
-            
             <!-- Numéro de journée -->
             <div id="dayNumber-container" style="display: none;" class="me-3 mb-2">
                 <label for="dayNumber" class="form-label me-2">Numéro de la journée</label>

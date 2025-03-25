@@ -503,3 +503,160 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialiser avec la valeur par défaut
     updateFileInput();
 });
+
+/* document.addEventListener("DOMContentLoaded", function () {
+    const pouleAdhSelect = document.getElementById("pouleAdhesionSelect");
+    const adhesionContainer = document.getElementById("AdhesionContainer");
+
+    // Stockage des documents dans des tableaux pour chaque poule
+    const documents = {
+        1: ["BCC1.pdf", "CELLES SUR BELLE1.pdf", "ENSOA1.pdf", "PERIGNE2.pdf", "RB'NBAD.pdf", "VOUILLE1.pdf"],
+        2: ["poule2_guide.pdf", "poule2_matchs.pdf", "poule2_resultats.pdf", "poule2_tournoi.pdf", "poule2_stats.pdf", "poule2_evenements.pdf"],
+        3: ["poule3_infos.pdf", "poule3_results.pdf", "poule3_entrainements.pdf", "poule3_tournoi.pdf", "poule3_regles.pdf", "poule3_annonces.pdf"],
+        4: ["poule4_stats.pdf", "poule4_horaires.pdf", "poule4_matchs.pdf", "poule4_resultats.pdf", "poule4_evenements.pdf", "poule4_inscriptions.pdf"],
+        5: ["poule5_annonces.pdf", "poule5_regles.pdf", "poule5_horaires.pdf", "poule5_classement.pdf", "poule5_matchs.pdf"],
+        6: ["poule6_tournoi.pdf", "poule6_regles.pdf", "poule6_evenements.pdf", "poule6_resultats.pdf", "poule6_horaires.pdf", "poule6_entrainements.pdf"],
+        7: ["poule7_entrainements.pdf", "poule7_horaires.pdf", "poule7_regles.pdf", "poule7_annonces.pdf", "poule7_matchs.pdf"],
+        8: ["poule8_resultats.pdf", "poule8_agenda.pdf", "poule8_matchs.pdf", "poule8_evenements.pdf", "poule8_stats.pdf", "poule8_inscriptions.pdf"]
+    };
+
+    pouleAdhSelect.addEventListener("change", function () {
+        const selectedAdhPoule = this.value;
+        adhesionContainer.innerHTML = ""; // Vider le container avant d'afficher les nouveaux documents
+
+        if (selectedAdhPoule && documents[selectedAdhPoule]) {
+            documents[selectedAdhPoule].forEach(doc => {
+                const docElement = document.createElement("a");
+                docElement.href = `/assets/documents/${doc}`; // Chemin des fichiers
+                docElement.textContent = doc; // Nom du fichier affiché
+                docElement.target = "_blank"; // Ouvrir dans un nouvel onglet
+                docElement.classList.add("d-flex", "mt-2"); // Style Bootstrap
+                adhesionContainer.appendChild(docElement);
+            });
+        }
+    });
+});
+
+ */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const pouleSelect = document.getElementById("pouleAdhesionSelect");
+    const adhesionContainer = document.getElementById("AdhesionContainer");
+
+    // Stockage des documents avec un tableau pour chaque poule
+    const documents = {
+        1: [
+            {titre : "BCC 1", fichier : "BCC1.pdf"}, 
+            {titre : "CELLES S/ BELLE 1", fichier : "CELLES SUR BELLE1.pdf"},
+            {titre : "ENSOA 1", fichier : "ENSOA1.pdf"},
+            {titre : "PERIGNE 2", fichier : "PERIGNE2.pdf"},
+            {titre : "RB'N BAD", fichier : "RB'NBAD.pdf"},
+            {titre : "VOUILLE 1", fichier : "VOUILLE1.pdf"}
+        ],
+           
+        2: [
+            {titre : "ATSCAF", fichier : "ATSCAF.pdf"},
+            {titre : "BCCB 1", fichier : "Beauvoir.pdf"},
+            {titre : "CHAMPDENIERS", fichier : "Champdeniers.pdf"},
+            {titre : "COULONGES 1", fichier : "Coulonges.pdf"},
+            {titre : "ABC MAGNÉ 1", fichier : "Magné.pdf"},
+            {titre : "VOUILLÉ 2", fichier : "Vouillé 2.pdf"},
+        ],
+
+        3: [
+            {titre : "BCC 2", fichier : "BCC-2.pdf"},
+            {titre : "ENSOA 2", fichier : "ENSOA-2.pdf"},
+            {titre : "FRR 1", fichier : "FFR-1.pdf"},
+            {titre : "LA CRECHE 1", fichier : "LA-CRECHE-1.pdf"},
+            {titre : "MACIF 1", fichier : "MACIF-1.pdf"},
+        ],
+        
+        4: [
+            {titre : "AIFFRES", fichier : "Aiffres.pdf"},
+            {titre : "ATSCAF 2", fichier : "Atscaf 2.pdf"},
+            {titre : "BAD MAX 1", fichier : "Badmax1.pdf"},
+            {titre : "CHAMPDENIERS 2", fichier : "Champdeniers 2.pdf"},
+            {titre : "ECN", fichier : "ECN.pdf"},
+            {titre : "PRAHECQ", fichier : "Prahecq.pdf"},
+        ],
+
+        5: [
+            {titre : "BCC 3", fichier : "Chatillon 3.pdf"},
+            {titre : "VOULLÉ 3", fichier : "Vouillé3.pdf"},
+            {titre : "PÉRIGNÉ 1", fichier : "PERIGNE 1.pdf"},
+            {titre : "BC VASLES", fichier : "VASLES_2025.pdf"},
+            {titre : "FRR 2", fichier : "FRR2.pdf"},
+        ],
+
+        6: [
+            {titre : "ABC MAGNÉ 2", fichier : "ABC MAgné 2.pdf"},
+            {titre : "ENSOA 3", fichier : "ENSOA 3.pdf"},
+            {titre : "LA CRECHE 2", fichier : "La Creche 2.pdf"},
+            {titre : "LADM 1", fichier : "LADM 1.pdf"},
+            {titre : "MACIF 2", fichier : "MACIF 2.pdf"},
+            {titre : "MUTAVIE", fichier : "Mutavie.pdf"},
+        ],
+
+        7: [
+            {titre : "BAD MAX 2", fichier : "BAD MAX 2.pdf"},
+            {titre : "CELLES S/ BELLE 2", fichier : "CELLES SUR BELLE2.pdf"},
+            {titre : "COULONGES 2", fichier : "COULONGES 2.pdf"},
+            {titre : "LADM 2", fichier : "LADM 2.pdf"},
+            {titre : "SLM", fichier : "MAUZE.pdf"},
+            {titre : "SAINTE NÉOMAYE", fichier : "ST NEOMAYE.pdf"},
+        ],
+
+        8: [
+            {titre : "BCCB 2", fichier : "BEAUVOIR2.pdf"},
+            {titre : "CHAURAY", fichier : "CHAURAY.pdf"},
+            {titre : "COULONGES 3", fichier : "COULONGES3.pdf"},
+            {titre : "VOLANT MOTHAIS", fichier : "EXOUDUN.pdf"},
+            {titre : "BADAFOU MELLE", fichier : "MELLE.pdf"},
+        ],
+
+    };
+
+    pouleSelect.addEventListener("change", function () {
+        const selectedPoule = this.value;
+        adhesionContainer.innerHTML = ""; // On vide avant d'afficher
+    
+        if (selectedPoule && documents[selectedPoule]) {
+            // Conteneur Bootstrap
+            const container = document.createElement("div");
+            container.classList.add("container-fluid");
+    
+            // Création de la grille
+            const row = document.createElement("div");
+            row.classList.add("row", "justify-content-center", "gx-4");
+    
+            documents[selectedPoule].forEach(doc => {
+                const col = document.createElement("div");
+                col.classList.add("col-lg-2", "col-md-3", "col-sm-4", "text-center", "mb-4");
+    
+                // Lien avec icône et design carte
+                const docLink = document.createElement("a");
+                docLink.href = `/assets/documents/${doc.fichier}`;
+                docLink.target = "_blank";
+                docLink.classList.add("text-decoration-none", "d-block", "p-3", "shadow-sm", "rounded", "bg-light", "salle-card");
+                
+                // Icône (ex: fichier PDF)
+                const icon = document.createElement("i");
+                icon.classList.add("bi", "bi-file-earmark-text", "display-4", "text-primary"); // Besoin de Bootstrap Icons
+    
+                // Titre du document
+                const title = document.createElement("p");
+                title.textContent = doc.titre;
+                title.classList.add("mt-2", "lecture");
+    
+                docLink.appendChild(icon);
+                docLink.appendChild(title);
+                col.appendChild(docLink);
+                row.appendChild(col);
+            });
+    
+            container.appendChild(row);
+            adhesionContainer.appendChild(container);
+        }
+    });
+}
+);    

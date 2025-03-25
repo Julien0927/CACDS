@@ -817,5 +817,10 @@ footer {
   .itemSquare {
     display: none;
   }
+
+  .adjustFm {
+    display: flex;
+    justify-content: flex-start;
+  }
 }
   

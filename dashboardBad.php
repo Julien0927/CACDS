@@ -108,7 +108,7 @@ $allPhotos = $photo->getBySportId();
 <h2 class="h1Sports center mt-3">Tableau de bord badminton</h2>
 <?php
 require_once 'templates/dashArticles.php'; 
-require_once 'templates/dashResults.php';
+require_once 'templates/dashResultsBad.php';
 require_once 'templates/dashRanking.php';
 require_once 'templates/dashPhotos.php';
 require_once 'templates/footer.php';
