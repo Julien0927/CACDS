@@ -266,6 +266,14 @@ option, select {
   border: 2px solid var(--purple-color);
 }
 
+.itemSquare {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 /*Fleche pour remonter en haut de la page*/
 #backToTop {
   position: fixed;

@@ -55,6 +55,12 @@
                         <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
                     </a>
                 </div>
+                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
+                    <h4 class="h4Sports text-center">Feuille de match</h4>
+                    <a href="/assets/documents/fm_coupe_.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Relais information">
+                        <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
+                    </a>
+                </div>
             </div>
                 <h4 class="h4Sports mt-3 text-center">Trouver une salle</h4>
                 <p class="lecture text-center">Retrouvez les adresses de toutes les salles</p>

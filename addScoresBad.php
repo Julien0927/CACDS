@@ -136,6 +136,7 @@ ob_end_flush();
                 <input type="text" name="name" id="name" class="form-control" placeholder="Nom de la compétition">
  -->           <select name="name" id="name" class="form-select mt-5 mb-3">
                     <option value="Tour préléminaire">Tour Préléminaire</option>
+                    <option value="Matchs de Qualification">Matchs de Qualification</option>
                     <option value="Coupe Principale">Coupe Principale</option>
                     <option value="Coupe Consolante">Coupe Consolante</option>
                     <option value="Tournoi Estival">Tournoi Estival</option>

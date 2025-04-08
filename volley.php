@@ -194,7 +194,7 @@ try {
                 <div class="row center">
                     <div class="d-flex center flex-column col-12 col-md-3 salle-card">
                         <h4 class="h4Sports text-center">Saisons</h4>
-                        <select class="season-select mx-auto" id="seasonSelect">
+                        <select class="season-select mb-3 mx-auto" id="seasonSelect">
                             <option value="">Sélectionner une saison</option>
                             <option value="23">Saison 2023-24</option>
                             <option value="22">Saison 2022-23</option>

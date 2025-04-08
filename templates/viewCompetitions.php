@@ -31,9 +31,11 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h4 class="h4Results">Feuilles de matchs</h4>
+                    <div class="d-flex align-items-center">
+                        <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                        <h4 class="h4Results">Feuilles de matchs</h4>
+                    </div>
                     <select class="fm-select mx-auto" id="pouleSelect">
-                        <option value="">Sélectionner une poule</option>
                         <option value="1">Poule 1</option>
                         <option value="2">Poule 2</option>
                         <option value="3">Poule 3</option>
@@ -69,12 +71,15 @@
                     <!-- Les résultats seront chargés ici -->
                 </div>
             </div>
-            <div class="d-flex flex-column col-md-3">
-                <h4 class="h4Results text-center adjustFm">Feuilles de matchs</h4>
-                <a href="/assets/documents/fm_coupe_.pdf" class="mx-auto mt-4" alt="feuille de match coupe" target="_blank">
-                    <img src="/assets/icones/attestation-64.png" alt="feuille de match coupe" loading="lazy">
-                </a>
-            </div>
+            <!-- <div class="d-flex flex-column col-md-3">
+                <div class="d-flex align-items-center">
+                    <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                    <h4 class="h4Results text-center adjustFm">Feuilles de matchs</h4>
+                </div>
+                    <a href="/assets/documents/fm_coupe_.pdf" class="mx-auto mt-4" alt="feuille de match coupe" target="_blank">
+                        <img src="/assets/icones/attestation-64.png" alt="feuille de match coupe" loading="lazy">
+                    </a>
+            </div> -->
         </div>
         </div>
         <!--Tournois-->

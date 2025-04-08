@@ -10,10 +10,10 @@ if (file_exists($envFile)) {
     $dotenv->load();
 } else {
     // Configuration manuelle pour production
-    $_ENV['PROD_DB_HOST'] = 'mysql-julienvarachas.alwaysdata.net';
-    $_ENV['PROD_DB_NAME'] = 'julienvarachas_cacds1';
-    $_ENV['PROD_DB_USER'] = '327887';
-    $_ENV['PROD_DB_PASS'] = 'T0mEmm@1114';
+    $_ENV['PROD_DB_HOST'] = 'mysql-cacds.alwaysdata.net';
+    $_ENV['PROD_DB_NAME'] = 'cacds_79';
+    $_ENV['PROD_DB_USER'] = 'cacds';
+    $_ENV['PROD_DB_PASS'] = 'cacds79@Data';
     $_ENV['PROD_DB_PORT'] = '3306';
     $_ENV['PROD_DB_CHARSET'] = 'utf8';
 }

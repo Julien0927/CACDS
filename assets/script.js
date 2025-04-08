@@ -479,6 +479,10 @@ const pouleSelect = document.getElementById('pouleSelect');
                 </a>
             `;
         });
+        document.getElementById('poules').addEventListener('change', function() {
+            document.getElementById('pouleSelect').value = this.value;
+            document.getElementById('pouleSelect').dispatchEvent(new Event('change')); 
+        });
 
 // Script pour modifier dynamiquement l'attribut accept du champ de fichier
 document.addEventListener('DOMContentLoaded', function() {
@@ -660,3 +664,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 }
 );    
+
+document.addEventListener("DOMContentLoaded", function () {
+    const pouleSelect = document.getElementById('pouleSelect');
+
+    // Déclencher manuellement l'événement change si une valeur est déjà sélectionnée
+    if (pouleSelect.value) {
+        pouleSelect.dispatchEvent(new Event('change'));
+    }
+});

@@ -131,12 +131,16 @@ function displayNewsSection($news, $sport) {
 ?>
 
 <h1 class="text-center mt-3">Coupe de l'Amitié Corporative des Deux-Sèvres</h1>
-<div class="d-flex justify-content-center align-items-center mt-3 gap-5">
-    <img src="/assets/icones/Square item bad.svg" alt="badminton" class="img-fluid itemSquare">
-    <img src="/assets/icones/Square item Volley.svg" alt="volleyball" class="img-fluid itemSquare">
-    <img src="/assets/logos/cacds_logo_CACDS.webp" style="width: 10%; height: auto" alt="cacds" class="img-fluid">
-    <img src="/assets/icones/Square item TdT.svg" alt="tennis de table" class="img-fluid itemSquare">
-    <img src="/assets/icones/Square item petanque.svg" alt="pétanque" class="img-fluid itemSquare">
+<div class="d-flex justify-content-evenly align-items-center mt-3">
+     <!-- <img src="/assets/icones/Square item bad.svg" alt="badminton" class="img-fluid itemSquare" loading="lazy"> -->
+    <img src="/assets/img/imgBadminton.jpg" alt="badminton" class="img-fluid itemSquare" loading="lazy">
+    <!-- <img src="/assets/icones/Square item Volley.svg" alt="volleyball" class="img-fluid itemSquare" loading="lazy"> -->
+    <img src="/assets/img/imgPetanque.jpg" alt="badminton" class="img-fluid itemSquare" loading="lazy">
+    <img src="/assets/logos/cacds_logo_CACDS.webp" style="width: 10%; height: auto" alt="cacds" class="img-fluid" loading="lazy">
+    <!-- <img src="/assets/icones/Square item TdT.svg" alt="tennis de table" class="img-fluid itemSquare" loading="lazy"> -->
+    <img src="/assets/img/imgTdt.jpg" alt="badminton" class="img-fluid itemSquare" loading="lazy">
+    <!-- <img src="/assets/icones/Square item petanque.svg" alt="pétanque" class="img-fluid itemSquare" loading="lazy"> -->
+    <img src="/assets/img/imgVolley.jpg" alt="badminton" class="img-fluid itemSquare" loading="lazy">
 </div>
 
 <section class="mt-3">
