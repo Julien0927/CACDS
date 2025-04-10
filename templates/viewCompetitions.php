@@ -35,7 +35,7 @@
                         <img src="/assets/icones/cercle-plein-15.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
                         <h4 class="h4Results">Feuilles de matchs</h4>
                     </div>
-                    <select class="fm-select mx-auto" id="pouleSelect">
+                    <!-- <select class="fm-select mx-auto" id="pouleSelect">
                         <option value="1">Poule 1</option>
                         <option value="2">Poule 2</option>
                         <option value="3">Poule 3</option>
@@ -44,8 +44,8 @@
                         <option value="6">Poule 6</option>
                         <option value="7">Poule 7</option>
                         <option value="8">Poule 8</option>
-                    </select>
-                    <div class="mx-auto" id="linkContainer"></div>
+                    </select> -->
+                    <div class="mx-auto" id="fm-container"></div>
                 </div>
             </div>
         <!--Coupe-->

@@ -77,12 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ... (Le code pour la gestion des affichages reste identique) ...
 
     // Mise à jour de la partie chargement des résultats
     const pouleSelect = document.getElementById('poules');
     const resultsContainer = document.getElementById('resultats-container');
     const classementContainer = document.getElementById('classement-container');
+    const fmContainer = document.getElementById('fm-container');
     
     // Chargement des résultats du championnat
     if (pouleSelect) {
@@ -159,6 +159,26 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error('Erreur:', error);
             classementContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
+        });
+
+        // Chargement de la feuille de match associée
+        fetch(`get_fm.php?poule_id=${pouleId}&competition_id=1`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau');
+            }
+            return response.text();
+        })  
+        .then(data => {
+            fmContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            fmContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement de la feuille de match.</p>';
         });
     }
 
@@ -508,41 +528,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateFileInput();
 });
 
-/* document.addEventListener("DOMContentLoaded", function () {
-    const pouleAdhSelect = document.getElementById("pouleAdhesionSelect");
-    const adhesionContainer = document.getElementById("AdhesionContainer");
-
-    // Stockage des documents dans des tableaux pour chaque poule
-    const documents = {
-        1: ["BCC1.pdf", "CELLES SUR BELLE1.pdf", "ENSOA1.pdf", "PERIGNE2.pdf", "RB'NBAD.pdf", "VOUILLE1.pdf"],
-        2: ["poule2_guide.pdf", "poule2_matchs.pdf", "poule2_resultats.pdf", "poule2_tournoi.pdf", "poule2_stats.pdf", "poule2_evenements.pdf"],
-        3: ["poule3_infos.pdf", "poule3_results.pdf", "poule3_entrainements.pdf", "poule3_tournoi.pdf", "poule3_regles.pdf", "poule3_annonces.pdf"],
-        4: ["poule4_stats.pdf", "poule4_horaires.pdf", "poule4_matchs.pdf", "poule4_resultats.pdf", "poule4_evenements.pdf", "poule4_inscriptions.pdf"],
-        5: ["poule5_annonces.pdf", "poule5_regles.pdf", "poule5_horaires.pdf", "poule5_classement.pdf", "poule5_matchs.pdf"],
-        6: ["poule6_tournoi.pdf", "poule6_regles.pdf", "poule6_evenements.pdf", "poule6_resultats.pdf", "poule6_horaires.pdf", "poule6_entrainements.pdf"],
-        7: ["poule7_entrainements.pdf", "poule7_horaires.pdf", "poule7_regles.pdf", "poule7_annonces.pdf", "poule7_matchs.pdf"],
-        8: ["poule8_resultats.pdf", "poule8_agenda.pdf", "poule8_matchs.pdf", "poule8_evenements.pdf", "poule8_stats.pdf", "poule8_inscriptions.pdf"]
-    };
-
-    pouleAdhSelect.addEventListener("change", function () {
-        const selectedAdhPoule = this.value;
-        adhesionContainer.innerHTML = ""; // Vider le container avant d'afficher les nouveaux documents
-
-        if (selectedAdhPoule && documents[selectedAdhPoule]) {
-            documents[selectedAdhPoule].forEach(doc => {
-                const docElement = document.createElement("a");
-                docElement.href = `/assets/documents/${doc}`; // Chemin des fichiers
-                docElement.textContent = doc; // Nom du fichier affiché
-                docElement.target = "_blank"; // Ouvrir dans un nouvel onglet
-                docElement.classList.add("d-flex", "mt-2"); // Style Bootstrap
-                adhesionContainer.appendChild(docElement);
-            });
-        }
-    });
-});
-
- */
-
 document.addEventListener("DOMContentLoaded", function () {
     const pouleSelect = document.getElementById("pouleAdhesionSelect");
     const adhesionContainer = document.getElementById("AdhesionContainer");
@@ -673,3 +658,4 @@ document.addEventListener("DOMContentLoaded", function () {
         pouleSelect.dispatchEvent(new Event('change'));
     }
 });
+

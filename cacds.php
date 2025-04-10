@@ -18,7 +18,7 @@ require_once 'lib/security.php';
     <div id="collapseContent" class="collapse">
     <div class="row">
         <div class=" d-flex flex-column col-12 col-md-8 mx-auto">
-            <p class="lecture text-center mt-3 lh-lg"> 
+            <p class="lecture text-justify mt-3 lh-lg"> 
                 Début 1963, un groupe d’amis et sportifs, dirigé par Jacques ROUSSEL décident de créer une association sportive.<br>
                 Le 15 juillet 1963 nait la COUPE DE L’AMITIÉ DE FOOT-BALL DES DEUX-SÈVRES, avec comme objectif de "former un groupement corporatif, afin de permettre aux amateurs ne pouvant opérer dans une équipe officielle de pratiquer leur sport favori.<br>Son siège social est situé au café "Le Glacier".<br>
                 Le 17 septembre 1969 elle change de nom et devient l’actuelle COUPE DE L’AMITIÉ CORPORATIVE DES DEUX-SÈVRES.<br> Son siège social est transféré au café "Moderne".<br>
@@ -115,7 +115,7 @@ require_once 'lib/security.php';
     <div id="collapseContenteAssurance" class="collapse">
         <div class="row">
             <div class=" d-flex flex-column col-12 col-md-10 mx-auto">
-                <p class="lecture text-center mt-3 lh-lg">
+                <p class="lecture text-justify mt-3 lh-lg">
                     Comme vous le savez, la CACDS a souscrit au nom et pour le compte de ses adhérents, une garantie "Dommages Corporels" en cas de survenance d’un accident corporel résultant de la pratique du sport en tant qu’adhérent CACDS.<br>
                     Lors de la dernière Assemblée Générale, la garantie vous a été présentée.<br>
                     Elle peut intervenir en cas de reste à charge pour l’adhérent, après intervention de la Sécurité Sociale et de sa mutuelle Santé.<br>

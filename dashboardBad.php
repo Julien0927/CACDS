@@ -11,6 +11,7 @@ require_once 'templates/messages.php';
 require_once 'App/News.php';
 require_once 'App/Results.php';
 require_once 'App/Classements.php';
+require_once 'App/PaperMatch.php';
 require_once 'App/Photos.php';
 
 $messages = [];
@@ -33,6 +34,7 @@ $pouleId = $_POST['poulesResults'] ?? null;
 $news = new App\News\News($db);
 $results = new App\Results\Results($db, $competitionId, $pouleId);
 $classement = new App\Classements\Classements($db);
+$paperMatch = new App\PaperMatch\PaperMatch($db);
 $photo = new App\Photos\Photos($db);
 
 function handleDeletion($postKey, $boxKey, $entity, $singleMessage, $multipleMessage) {
@@ -99,9 +101,18 @@ handleDeletion(
     "Les photos ont bien été supprimées"
 );
 
+handleDeletion(
+    'deletePaperMatch',
+    'fmBox',
+    $paperMatch,
+    "La feuille de match a bien été supprimée",
+    "Les feuilles de match ont bien été supprimées"
+);
+
 $allNews = $news->getAllNews();
 $allResults = $results->getResults();
 $allClassements = $classement->getClassements();
+$allFm = $paperMatch->getPaperMatch();
 $allPhotos = $photo->getBySportId();
 ?>
 
@@ -110,5 +121,6 @@ $allPhotos = $photo->getBySportId();
 require_once 'templates/dashArticles.php'; 
 require_once 'templates/dashResultsBad.php';
 require_once 'templates/dashRanking.php';
+require_once 'templates/dashFmBad.php';
 require_once 'templates/dashPhotos.php';
 require_once 'templates/footer.php';

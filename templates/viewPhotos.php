@@ -18,6 +18,10 @@
                     <a href="<?= $media['image'] ?>" data-lightbox="photos" data-title="<?= $media['title'] ?>">
                         <img src="<?= $media['image'] ?>" class="img-fluid imgGallery" title="<?= $media['title'] ?>" alt="<?= $media['title'] ?>">
                     </a>
+                    <div class="media-info d-flex flex-column text-center mt-2">
+                        <h5><?= htmlspecialchars($media['title']) ?></h5>
+                        <p class="text-muted"><?= date('d/m/Y', strtotime($media['date'])) ?></p> <!-- Date formatée -->
+                    </div>
                 <?php else: ?>
                     <div class="video-container">
                         <video controls class="img-fluid">

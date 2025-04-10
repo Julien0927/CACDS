@@ -6,7 +6,7 @@ require_once 'templates/messages.php';
 require_once 'lib/pdo.php';
 require_once 'lib/tools.php';
 require_once 'lib/security.php';
-require_once 'App/Results.php';
+require_once 'App/PaperMatch.php';
 
 // Mapping des IDs de compétition
 $competitionMapping = [
@@ -19,7 +19,7 @@ $competitionMapping = [
 // Fonction de traitement des erreurs
 function handleError($message) {
     $_SESSION['error'] = $message;
-    header('Location: addScoresBad.php');
+    header('Location: addSPaperMatch.php');
     exit();
 }
 
@@ -82,10 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Ajout du résultat dans la base de données
-        $results = new App\Results\Results($db, $competitionId, $pouleId);
-        $results->addResult($destPath, $dayNumber, $name);
+        $paperMatches = new App\PaperMatch\PaperMatch($db, $competitionId, $pouleId);
+        $paperMatches->addPaperMatch($destPath, $dayNumber, $name);
 
-        $_SESSION['messages'] = ["Le résultat a été ajouté avec succès"];
+        $_SESSION['messages'] = ["Feuille de match ajoutée avec succès"];
         header('Location: addScoresBad.php');
         exit();
 
@@ -110,8 +110,8 @@ ob_end_flush();
         <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
 
-    <h3 class="h2Sports mt-3 text-center">Ajouter un résultat</h3>
-    <form method="POST" action="addScoresBad.php" enctype="multipart/form-data">
+    <h3 class="h2Sports mt-3 text-center">Ajouter une feuille de match</h3>
+    <form method="POST" action="addPaperMatch.php" enctype="multipart/form-data">
         <!-- Choix de la compétition -->
         <div class="d-flex flex-row align-items-center justify-content-center flex-wrap">
             <div class="me-3 mt-4">
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
             nameContainer.style.display = 'block';
             selectTournoi.style.display = 'block';
             selectTournoi.disabled = false;
-        }
+        } 
     });
 });
 </script>
