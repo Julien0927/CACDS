@@ -6,6 +6,7 @@ require_once 'App/News.php';
 require_once 'App/Classements.php';
 require_once 'App/Results.php';
 require_once 'App/Photos.php';
+require_once 'App/Documents.php';
 
 // Définition constante pour l'ID du badminton
 const BADMINTON_SPORT_ID = 2;
@@ -20,6 +21,9 @@ try {
     
     // Initialisation de Results avec l'ID du badminton explicite
     $results = new App\Results\Results($db, null, null, BADMINTON_SPORT_ID);
+
+    // Initialisation de Documents
+    $documentsManager = new App\Documents\Documents($db);
     
     // Initialisation de Photos
     $photos = new App\Photos\Photos($db);
@@ -158,7 +162,7 @@ try {
   <?php require_once 'templates/viewCompetitions.php';?>
 
       <!-- Section Documents -->
-      <section class="container-fluid" id="documents">
+<!--       <section class="container-fluid" id="documents">
           <h2 class="h2Sports">Documents CACDS</h2>
           <hr>
           <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
@@ -191,6 +195,46 @@ try {
             </div>
           </div>
       </section>
+ -->
+ <section class="container-fluid" id="documents">
+    <h2 class="h2Sports">Documents CACDS</h2>
+    <hr>
+    <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
+    <div class="row center gap-3">
+
+    <?php
+    // Tableau des catégories de documents à afficher
+    $categories = [
+      "Règlement Badminton CACDS", 
+      "Compte rendu réunion des capitaines",
+      "Demande d'engagement",
+      "Demande d'adhésions", 
+      "Attestation certificats médicaux",
+      "Autorisation droit à l'image"
+  ];
+
+    // Récupérer les documents pour chaque catégorie
+    foreach ($categories as $categorie) {
+        $documents = $documentsManager->getDocumentsByCategory(htmlspecialchars($categorie));
+
+        if (!empty($documents)) {
+            foreach ($documents as $document) {
+                // Affichage de chaque document sous forme de carte
+                echo '<div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">';
+                echo '<h3 class="h3Sports text-center">' . ($document['categorie']) . '</h3>';
+                echo '<a href="' . htmlspecialchars($document['fichier']) . '" class="center" aria-label="">';
+                echo '<img src="/assets/icones/attestation-64.png" class="zoom">';
+                echo '</a>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>Aucun document disponible pour cette catégorie.</p>';
+        }
+    }
+    ?>
+
+    </div>
+</section>
 
       <!-- Section Informations -->
           <?php require_once 'templates/infos.php'; ?>
