@@ -162,40 +162,6 @@ try {
   <?php require_once 'templates/viewCompetitions.php';?>
 
       <!-- Section Documents -->
-<!--       <section class="container-fluid" id="documents">
-          <h2 class="h2Sports">Documents CACDS</h2>
-          <hr>
-          <p class="lecture">Accédez aux documents officiels et informations utiles.</p>
-          <div class="row center gap-3">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Règlement Badminton CACDS</h3>
-                <a href="/assets/documents/Reglement_badminton_CACDS_Saison_2024_2025.pdf" class="center" aria-label="reglement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Compte rendu<br> Réunion des capitaines</h3>
-                <a href="/assets/documents/CR_capitaines_4_septembre_2024.pdf" class="center" aria-label="Fiche d'inscription"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Demande d'Engagement</h3>
-                <a href="/assets/documents/Demande_engagement_2025.pdf" class="center" aria-label="Demande d'engagement"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-          </div>
-          <div class="row center gap-3 mt-3">
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Demande d'Adhésions</h3>
-                <a href="/assets/documents/Demande_d_adhesions_2025.pdf" class="center" aria-label="Demande d'adhésion"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Attestation<br> Certificats médicaux</h3>
-                <a href="/assets/documents/Attestation_certificats_medicaux_2025.pdf" class="center" aria-label="certificats medicaux"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-            <div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">
-                <h3 class="h3Sports text-center">Autorisation<br> Droit à l'image</h3>
-                <a href="/assets/documents/Autorisation_droit_image_2025.pdf" class="center" aria-label="Droit à l'image"><img src="/assets/icones/attestation-64.png" class="zoom"></a>
-            </div>
-          </div>
-      </section>
- -->
  <section class="container-fluid" id="documents">
     <h2 class="h2Sports">Documents CACDS</h2>
     <hr>
@@ -211,7 +177,7 @@ try {
       "Demande d'adhésions", 
       "Attestation certificats médicaux",
       "Autorisation droit à l'image"
-  ];
+    ];
 
     // Récupérer les documents pour chaque catégorie
     foreach ($categories as $categorie) {

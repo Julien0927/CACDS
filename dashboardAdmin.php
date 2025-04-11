@@ -225,7 +225,15 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
                     "Demande d'engagement",
                     "Demande d'adhésions", 
                     "Attestation certificats médicaux",
-                    "Autorisation droit à l'image"
+                    "Autorisation droit à l'image",
+                    "Fournir un certificat médical",
+                    "Coordonnées des capitaines",
+                    "Créneaux des équipes",
+                    "Relais de l'information",
+                    "Feuille de match",
+                    "Palmarès championnat",
+                    "Palmarès coupe",
+                    "Palmarès titres et double"
                 ];
               
                 foreach ($categories as $categorie) {
@@ -253,7 +261,7 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
 <div class="container mt-4 mb-3">
     <h2 class="h2Sports text-center mb-4">Ajouter un document</h2>
 
-    <form action="dashBoardAdmin.php" method="post" enctype="multipart/form-data">
+    <form action="dashboardAdmin.php" method="post" enctype="multipart/form-data">
         <div class="d-flex justify-content center gap-3 flex-wrap">
 
             <label for="categorie">Catégorie :</label>
@@ -264,6 +272,14 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
                 <option value="Demande d'adhésions">Demande d'adhésions</option>
                 <option value="Attestation certificats médicaux">Attestation certificats médicaux</option>
                 <option value="Autorisation droit à l'image">Autorisation droit à l'image</option>
+                <option value="Fournir un certificat médical">Fournir un certificat médical</option>
+                <option value="Coordonnées des capitaines">Coordonnées des capitaines</option>
+                <option value="Créneaux des équipes">Créneaux des équipes</option>
+                <option value="Relais de l'information">Relais de l'information</option>
+                <option value="Feuille de match">Feuille de match</option>
+                <option value="Palmarès Championnat">Palmarès Championnat</option>
+                <option value="Palmarès Coupe">Palmarès Coupe</option>
+                <option value="Palmarès titres et double">Palmarès titres et double</option>
             </select>
 
             <label for="document">Fichier PDF :</label>

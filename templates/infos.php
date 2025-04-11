@@ -31,36 +31,34 @@
         </h3>
         <div id="collapseContentTools" class="collapse">
             <div class="row justify-content-evenly gap-3">
-                <div class="d-flex flex-column col-12 col-md-2 salle-card">
-                    <h4 class="h4Sports text-center">Fournir un certificat médical</h4>
-                    <a href="/assets/documents/article_certificat_medical.pdf" class="mx-auto" style="margin-left: 7rem" aria-label="article certificats médicaux" style="text-decoration: none;" title="Article certificats médicaux">
-                        <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
-                    </a>
-                </div>
-                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
-                    <h4 class="h4Sports text-center">Coordonnées des capitaines</h4>
-                    <a href="/assets/documents/Capitaines 2024 2025.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Coordonnées des capitaines">
-                        <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
-                    </a>
-                </div>
-                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
-                    <h4 class="h4Sports text-center">Créneaux des équipes</h4>
-                    <a href="/assets/documents/Créneaux 2024 2025.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Créneaux des équipes">
-                        <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
-                    </a>
-                </div>
-                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
-                    <h4 class="h4Sports text-center">Relais de l'information</h4>
-                    <a href="/assets/documents/relais_info_2025.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Relais information">
-                        <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
-                    </a>
-                </div>
-                <div class="d-flex center flex-column col-12 col-md-2 salle-card">
-                    <h4 class="h4Sports text-center">Feuille de match</h4>
-                    <a href="/assets/documents/fm_coupe_.pdf" class="mx-auto" style="margin-left: 7rem; text-decoration: none;" alt="coordonnées des capitaines" title="Relais information">
-                        <img src="/assets/icones/attestation-64.png" alt="fleche droite" class="mb-1" loading="lazy">
-                    </a>
-                </div>
+                <?php
+                // Tableau des catégories de documents à afficher
+                $categories = [
+                "Fournir un certificat médical",
+                "Coordonnées des capitaines",
+                "Créneaux des équipes",
+                "Relais de l'information",
+                "Feuille de match"
+                ];
+                            // Récupérer les documents pour chaque catégorie
+                foreach ($categories as $categorie) {
+                    $documents = $documentsManager->getDocumentsByCategory(htmlspecialchars($categorie));
+
+                    if (!empty($documents)) {
+                        foreach ($documents as $document) {
+                            // Affichage de chaque document sous forme de carte
+                            echo '<div class="d-flex flex-column justify-content-center col-12 col-md-2 salle-card">';
+                            echo '<h4 class="h4Sports text-center">' . ($document['categorie']) . '</h4>';
+                            echo '<a href="' . htmlspecialchars($document['fichier']) . '" class="center" aria-label="">';
+                            echo '<img src="/assets/icones/attestation-64.png" class="zoom">';
+                            echo '</a>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<p>Aucun document disponible pour cette catégorie.</p>';
+                    }
+                }
+            ?>    
             </div>
                 <h4 class="h4Sports mt-3 text-center">Trouver une salle</h4>
                 <p class="lecture text-center">Retrouvez les adresses de toutes les salles</p>
@@ -76,24 +74,33 @@
                     Retrouvez ici les palmarès des différentes compétitions de la saison.
                 </p>
                 <div class="row center gap-3">
-                    <div class="d-flex center flex-column col-12 col-md-3 salle-card">
-                        <h4 class="h4Sports text-center">Palmarès championnat</h4>
-                        <a href="/assets/documents/palmares_championnat_cacds.pdf" class="mx-auto" style="margin-left: 7rem" aria-label="Palmarès championnat" style="text-decoration: none;" title="Palmarès championnat">
-                            <img src="/assets/icones/trophée-64.png" alt="trophée" class="mb-1" loading="lazy">
-                        </a>
-                    </div>
-                    <div class="d-flex center flex-column col-12 col-md-3 salle-card">
-                        <h4 class="h4Sports text-center">Palmarès coupe</h4>
-                        <a href="/assets/documents/palmares_coupe_cacds.pdf" class="mx-auto" style="margin-left: 7rem" aria-label="Palmarès championnat" style="text-decoration: none;" title="Palmarès championnat">
-                            <img src="/assets/icones/trophée-64.png" alt="trophée" class="mb-1" loading="lazy">
-                        </a>
-                    </div>
-                    <div class="d-flex center flex-column col-12 col-md-3 salle-card">
-                        <h4 class="h4Sports text-center">Palmarès titres et double</h4>
-                        <a href="/assets/documents/nombre_de_titres_et_de_doubles.pdf" class="mx-auto" style="margin-left: 7rem" aria-label="Palmarès championnat" style="text-decoration: none;" title="Palmarès championnat">
-                            <img src="/assets/icones/trophée-64.png" alt="trophée" class="mb-1" loading="lazy">
-                        </a>
-                    </div>
+                <?php
+                    // Tableau des catégories de documents à afficher
+                    $categories = [
+                        "Palmarès championnat",
+                        "Palmarès coupe",
+                        "Palmarès titres et double"
+                    ];
+
+                    // Récupérer les documents pour chaque catégorie
+                    foreach ($categories as $categorie) {
+                        $documents = $documentsManager->getDocumentsByCategory(htmlspecialchars($categorie));
+
+                        if (!empty($documents)) {
+                            foreach ($documents as $document) {
+                                // Affichage de chaque document sous forme de carte
+                                echo '<div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">';
+                                echo '<h4 class="h4Sports text-center">' . ($document['categorie']) . '</h4>';
+                                echo '<a href="' . htmlspecialchars($document['fichier']) . '" class="center" aria-label="">';
+                                echo '<img src="/assets/icones/trophée-64.png" class="zoom">';
+                                echo '</a>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<p>Aucun document disponible pour cette catégorie.</p>';
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </section>
