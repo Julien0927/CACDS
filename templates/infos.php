@@ -21,7 +21,7 @@
                         <option value="7">Poule 7</option>
                         <option value="8">Poule 8</option>
                     </select>
-                    <div class="mx-auto" id="AdhesionContainer"></div>
+                    <div class="mx-auto" id="adhesionContainer"></div>
                 </div>
             </div>
         </section>
@@ -155,3 +155,63 @@
         </section>
     </section>
  -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const selectPoule = document.getElementById('pouleAdhesionSelect');
+    const adhesionContainer = document.getElementById('adhesionContainer');
+
+    selectPoule.addEventListener('change', function () {
+        const selectedPoule = this.value;
+        adhesionContainer.innerHTML = ''; // On vide le container
+
+        if (!selectedPoule) return;
+
+        fetch(`get_trombinos.php?poule=${selectedPoule}`)
+            .then(response => {
+                if (!response.ok) throw new Error("Erreur serveur");
+                return response.json();
+            })
+            .then(data => {
+                if (data.success && data.data.length > 0) {
+                    const container = document.createElement("div");
+                    container.classList.add("container-fluid");
+
+                    const row = document.createElement("div");
+                    row.classList.add("row", "justify-content-center", "gx-4");
+
+                    data.data.forEach(doc => {
+                        const col = document.createElement("div");
+                        col.classList.add("col-lg-2", "col-md-3", "col-sm-4", "text-center", "mb-4");
+
+                        const docLink = document.createElement("a");
+                        docLink.href = doc.file_path;
+                        docLink.target = "_blank";
+                        docLink.classList.add("text-decoration-none", "d-block", "p-3", "shadow-sm", "rounded", "bg-light", "salle-card");
+
+                        const icon = document.createElement("i");
+                        icon.classList.add("bi", "bi-file-earmark-text", "display-4", "text-primary");
+
+                        const title = document.createElement("p");
+                        title.textContent = doc.titre;
+                        title.classList.add("mt-2", "lecture");
+
+                        docLink.appendChild(icon);
+                        docLink.appendChild(title);
+                        col.appendChild(docLink);
+                        row.appendChild(col);
+                    });
+
+                    container.appendChild(row);
+                    adhesionContainer.appendChild(container);
+                } else {
+                    adhesionContainer.innerHTML = '<p class="text-center mt-3" style="color: #EC930F">Aucun trombinoscope disponible pour cette poule.</p>';
+                }
+            })
+            .catch(error => {
+                console.error("Erreur :", error);
+                adhesionContainer.innerHTML = '<p class="text-danger mt-3">Une erreur est survenue.</p>';
+            });
+    });
+});
+
+</script>

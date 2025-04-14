@@ -156,7 +156,28 @@ try {
           <h2 class="h2Sports line">Compétitions</h2>
           <hr>
           <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
-          <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a>
+          <!-- <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a> -->
+          <?php
+          $categories = [
+                "Calendrier de la saison",
+                
+                ];
+                            // Récupérer les documents pour chaque catégorie
+                foreach ($categories as $categorie) {
+                    $documents = $documentsManager->getDocumentsByCategory(htmlspecialchars($categorie));
+
+                    if (!empty($documents)) {
+                        foreach ($documents as $document) {
+                            // Affichage de chaque document sous forme de carte
+                            echo '<a href="' . htmlspecialchars($document['fichier']) . '" class="center" aria-label="">';
+                            echo '<img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison">';
+                            echo '</a>';
+                        }
+                    } else {
+                        echo '<p>Aucun document disponible pour cette catégorie.</p>';
+                    }
+                }
+            ?>    
 
       <!--Section Résultats-->
   <?php require_once 'templates/viewCompetitions.php';?>

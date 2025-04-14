@@ -38,11 +38,11 @@ class Documents
     }
 
     // Méthode pour supprimer un document par catégorie
-    public function deleteDocumentByCategory($categorie)
+    public function deleteDocument($categorie)
     {
-        $sql = "DELETE FROM documents WHERE categorie = :categorie";
+        $sql = "DELETE FROM documents WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':categorie', $categorie);
+        $stmt->bindParam(':id', $categorie);
         return $stmt->execute();
     }
 

@@ -14,7 +14,8 @@ require_once 'App/Classements.php';
 require_once 'App/Photos.php';
 require_once 'App/Contacts.php';
 require_once 'App/AdminSportsHandler.php';
-require_once 'App/Documents.php'; 
+require_once 'App/Documents.php';
+require_once 'App/Trombinoscope.php'; 
 
 $messages = [];
 $errors = [];
@@ -27,6 +28,8 @@ if (isset($_SESSION['success_message'])) {
 // Initialisation de la classe AdminSportsHandler
 $adminHandler = new App\AdminSportsHandler\AdminSportsHandler($db);
 $documentsManager = new App\Documents\Documents($db);
+$trombinosManager = new App\Trombinoscope\Trombinoscope($db);
+
 
 // Vérification si l'utilisateur est super administrateur
 if ($_SESSION['role'] === 'super_admin') {
@@ -90,6 +93,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['document']) && isset
     header('Location: dashboardAdmin.php');
     exit;
 }
+// Traitement pour la suppression d’un document
+if (isset($_POST['delete_document']) && isset($_POST['document_id'])) {
+    if (verifyCSRFToken()) {
+        if ($documentsManager->deleteDocument((int)$_POST['document_id'])) {
+            $_SESSION['success_message'] = "Document supprimé avec succès.";
+        } else {
+            $_SESSION['error'] = "Erreur lors de la suppression du document.";
+        }
+    } else {
+        $_SESSION['error'] = "Erreur de sécurité.";
+    }
+    header('Location: dashboardAdmin.php');
+    exit;
+}
+//AJout d'un trombinoscope
+// Traitement pour l'ajout d’un document Trombinoscope
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file_path']) && isset($_POST['titre']) && isset($_POST['poule'])) {
+    if (verifyCSRFToken()) {
+        $poule = $_POST['poule'];
+        $title = $_POST['titre'];
+        $file = $_FILES['file_path'];
+
+        if ($file['type'] === 'application/pdf') {
+            $uploadDir = 'uploads/trombinoscopes/';
+            $filePath = $uploadDir . basename($file['name']);
+
+            if (move_uploaded_file($file['tmp_name'], $filePath)) {
+                if ($trombinosManager->addTrombinos($poule, $title, $filePath)) {
+                    $_SESSION['success_message'] = "Trombinoscope ajouté avec succès.";
+                } else {
+                    $_SESSION['error'] = "Erreur lors de l'ajout du document trombinoscope.";
+                }
+            } else {
+                $_SESSION['error'] = "Erreur lors de l'upload du fichier.";
+            }
+        } else {
+            $_SESSION['error'] = "Le fichier doit être un PDF.";
+        }
+    } else {
+        $_SESSION['error'] = "Erreur de sécurité.";
+    }
+    header('Location: dashboardAdmin.php');
+    exit;
+}
+
+// Traitement pour suppression d’un document Trombinoscope
+if (isset($_POST['delete_trombinoscope']) && isset($_POST['document_id'])) {
+    if (verifyCSRFToken()) {
+        if ($trombinosManager->deleteTrombinos((int)$_POST['document_id'])) {
+            $_SESSION['success_message'] = "Trombinoscope supprimé avec succès.";
+        } else {
+            $_SESSION['error'] = "Erreur lors de la suppression du document.";
+        }
+    } else {
+        $_SESSION['error'] = "Erreur de sécurité.";
+    }
+    header('Location: dashboardAdmin.php');
+    exit;
+}
+
 }
 ?>
 <h1 class="h1Sports text-center mt-3">Tableau de bord administrateur</h1>
@@ -142,7 +205,7 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
                     <th>Prénom</th>
                     <th>Email</th>
                     <th>Message</th>
-                    <th>Actions</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -205,15 +268,15 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
     </div>
 </div>
 <div class="container mt-4 mb-3">
-    <h2 class="h2Sports text-center mb-4">Documents existants</h2>
+    <h2 class="h2Sports text-center mb-4">Documents</h2>
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="table-info">
                 <tr>
                     <th>Catégorie</th>
-                    <th>fichier</th>
-                    <th>Actions</th>
+                    <th>Fichier</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -233,22 +296,32 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
                     "Feuille de match",
                     "Palmarès championnat",
                     "Palmarès coupe",
-                    "Palmarès titres et double"
+                    "Palmarès titres et double",
+                    "Calendrier de la saison",
                 ];
               
                 foreach ($categories as $categorie) {
                     $documents = $documentsManager->getDocumentsByCategory(htmlspecialchars($categorie));
                     if (!empty($documents)) {
-                        foreach ($documents as $document) {
-                            echo "<tr>";
-                            echo "<td>" . (htmlspecialchars($categorie)) . "</td>";
-                            echo "<td><a href='" . htmlspecialchars($document['fichier']) . "'><i class='fas fa-file-pdf d-flex justify-content-center mt-3' style='color: purple;'></i></a></td>";
-                            echo "<td><form method='POST' action='delete_document.php' onsubmit='return confirm(\"Êtes-vous sûr de vouloir supprimer ce document ?\");'>
-                                    <input type='hidden' name='document_id' value='" . (int)$document['id'] . "'>
-                                    <button type='submit' class='btn btn-original bold btn-sm mb-2'>Supprimer</button>
-                                  </form></td>";
-                            echo "</tr>";
-                        }
+                        foreach ($documents as $document) { ?>
+                            <tr>
+                                <td><?=(htmlspecialchars($categorie)) ?></td>
+                                <td>
+                                    <a href="<?= htmlspecialchars($document['fichier']) ?>" target="_blank">
+                                        <i class="fas fa-file-pdf d-flex justify-content-center mt-3" style="color: purple;"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form method="POST" action="" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce document ?');">
+                                        <?php addCSRFTokenToForm(); ?>
+                                        <input type="hidden" name="document_id" value="<?= (int)$document['id'] ?>">
+                                        <button type="submit" name="delete_document" class="btn btn-original btn-sm">
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>                     
+                        <?php }
                     } else {
                         echo "<tr><td colspan='3' class='text-center'>Aucun document dans cette catégorie.</td></tr>";
                     }
@@ -266,6 +339,7 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
 
             <label for="categorie">Catégorie :</label>
             <select name="categorie" id="categorie" required>
+                <option value="Calendrier de la saison">Calendrier de la saison</option>
                 <option value="Règlement Badminton CACDS">Règlement Badminton CACDS</option>
                 <option value="Compte rendu réunion des capitaines">Compte rendu réunion des capitaines</option>
                 <option value="Demande d'engagement">Demande d'engagement</option>
@@ -284,6 +358,84 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
 
             <label for="document">Fichier PDF :</label>
             <input type="file" name="document" id="document" accept="application/pdf" required>
+        </div>
+        <?php addCSRFTokenToForm(); ?>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-original bold mt-3">Ajouter le document</button>
+        </div>
+    </form>
+</div>
+
+<!--Affichage trombinoscope-->
+
+<div class="container mt-4 mb-3">
+    <h2 class="h2Sports text-center mb-4">Trombinoscopes</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-info">
+                <tr>
+                    <th>Poule</th>
+                    <th>Équipe</th>
+                    <th>Fichier</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $trombiDocs = $trombinosManager->getAllTrombinos();
+                if (!empty($trombiDocs)) {
+                    foreach ($trombiDocs as $doc) {?>
+                        <tr>
+                            <td ><?= htmlspecialchars($doc['poule']) ?></td>
+                            <td><?= htmlspecialchars($doc['titre']) ?></td>
+                            <td>
+                                <a href="<?= htmlspecialchars($document['fichier']) ?>" target="_blank">
+                                    <i class="fas fa-file-pdf d-flex justify-content-center mt-3" style="color: purple;"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <form method="POST" action="" onsubmit="return confirm('Supprimer ce document ?');">
+                                    <?php addCSRFTokenToForm(); ?>
+                                    <input type="hidden" name="document_id" value="<?= (int)$doc['id'] ?>">
+                                    <button type="submit" name="delete_trombinoscope" class="btn btn-original btn-sm">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php }
+                } else {
+                    echo "<tr><td colspan='4' class='text-center'>Aucun document</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container mt-4 mb-3">
+    <h2 class="h2Sports text-center mb-4">Ajouter un trombinoscope</h2>
+
+    <form action="dashboardAdmin.php" method="post" enctype="multipart/form-data">
+        <div class="d-flex justify-content center gap-3 flex-wrap">
+
+            <label for="poule">Poule :</label>
+            <select name="poule" id="categorie" required>
+                <option value="1">Poule 1</option>
+                <option value="2">Poule 2</option>
+                <option value="3">Poule 3</option>
+                <option value="4">Poule 4</option>
+                <option value="5">Poule 5</option>
+                <option value="6">Poule 6</option>
+                <option value="7">Poule 7</option>
+                <option value="8">Poule 8</option>
+            </select>
+
+            <label for="titre">Équipe :</label>
+            <input type="text" name="titre" id="titre" accept="application/pdf" required>
+
+            <label for="file_path">Fichier PDF :</label>
+            <input type="file" name="file_path" id="file_path" accept="application/pdf" required>
         </div>
         <?php addCSRFTokenToForm(); ?>
         <div class="d-flex justify-content-center">
