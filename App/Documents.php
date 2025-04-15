@@ -26,7 +26,7 @@ class Documents
         
         // Si un document existe déjà pour cette catégorie, le supprimer
         if ($count > 0) {
-            $this->deleteDocumentByCategory($categorie);
+            $this->deleteDocument($categorie);
         }
 
         // Insertion du nouveau document

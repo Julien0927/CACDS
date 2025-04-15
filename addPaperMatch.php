@@ -15,7 +15,6 @@ $competitionMapping = [
     'Tournoi' => 3
 ];
 
-
 // Fonction de traitement des erreurs
 function handleError($message) {
     $_SESSION['error'] = $message;
