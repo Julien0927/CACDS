@@ -335,6 +335,23 @@ hr {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/*card marché du badminton*/
+.card.fixed-height {
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
 /*styles pour les news-Home*/
  .news-container {
   padding: 15px;

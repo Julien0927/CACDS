@@ -7,6 +7,8 @@ require_once 'App/Classements.php';
 require_once 'App/Results.php';
 require_once 'App/Photos.php';
 require_once 'App/Documents.php';
+require_once 'App/Annonces.php';
+require_once 'App/Partenaires.php';
 
 // Définition constante pour l'ID du badminton
 const BADMINTON_SPORT_ID = 2;
@@ -24,6 +26,12 @@ try {
 
     // Initialisation de Documents
     $documentsManager = new App\Documents\Documents($db);
+
+    // Initialisation de Partenaires
+    $partenaireManager = new App\Partenaires\Partenaires($db);
+
+    // Initialisation des annonces
+    $annonces = new App\Annonces\Annonces($db);
     
     // Initialisation de Photos
     $photos = new App\Photos\Photos($db);
@@ -42,6 +50,12 @@ try {
     // Récupération des noms des compétitions
     $cupNames = $results->getCupNames();
     $tournamentNames = $results->getTournamentNames();
+
+    //Récupération des partenaires
+    $listePartners = $partenaireManager->getAllPartenaires();
+
+    //Récupération des annonces
+    $listeAnnonces = $annonces->getAllAnnonces();
 
     // Récupération des photos
     $photoData = $photos->getBySportId(BADMINTON_SPORT_ID);
@@ -241,30 +255,78 @@ try {
   <?php require_once 'templates/viewPhotos.php'; ?>
 
 
-  <!-- Section partenaires -->
+<!-- Section partenaires -->
   <section class="container-fluid" id="partners">
     <h2 class="h2Sports mt-3">Partenaires</h2>
     <hr>
-    <p class="lecture">Cette rubrique vous informe des partenariats passés avec la CACDS, au nom et pour le compte de ses adhérents.</p>
-    <div class="row">
-      <div class="col-12 col">
-        <a href="https://tennispassion79.com/" target="_blank" aria-label="Tennis Passion">
-          <img src="/assets/logos/tennis-passion.jpg" style="border-radius: 5px" alt="Tennis passion">
-        </a>
-      </div>
+
+    <div class="row justify-content-center align-items-center mt-5">
+      <?php foreach ($listePartners as $partner): ?>
+        <?php if (!empty($partner['logo'])): ?>
+          <div class="col-6 col-md-3 mb-3 text-center">
+            <a href="<?= htmlspecialchars($partner['url']) ?>" target="_blank" aria-label="Partenaire">
+              <img src="<?= htmlspecialchars($partner['logo']) ?>" alt="Logo partenaire" class="img-fluid" style="max-height: 100px; border-radius: 5px;" loading="lazy">
+            </a>
+          </div>
+        <?php endif; ?>
+      <?php endforeach; ?>
     </div>
   </section>
 
   <!-- Section marché du badminton -->
+   <?php 
+   // Nombre d’annonces par page
+        $annoncesParPage = 3;
+
+        // Page actuelle (par défaut 1)
+        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+
+        // Calcul de l’offset
+        $offset = ($page - 1) * $annoncesParPage;
+
+        // Récupération des annonces paginées
+        $listeAnnonces = $annonces->getAnnoncesLimite($annoncesParPage, $offset);
+
+        // Nombre total d’annonces (pour le nombre de pages)
+        $nombreTotal = $annonces->countAnnonces();
+        $nombrePages = ceil($nombreTotal / $annoncesParPage);
+        ?>
   <section class="container-fluid" id="badMarket">
     <h2 class="h2Sports mt-3">Marché du Badminton</h2>
     <hr>
     <p class="lecture">
-      Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
-      Alors n’hésitez pas à nous transmettre vos offres.
+        Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
+        Alors n’hésitez pas à nous transmettre vos offres.
     </p>
-    <div class="row">
-      <div class="col-12 col"></div>
+
+    <div class="row justify-content-center">
+        <?php foreach ($listeAnnonces as $annonce): ?>
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card shadow-sm fixed-height">
+                    <?php if (!empty($annonce['image_path'])): ?>
+                        <img src="<?= htmlspecialchars($annonce['image_path']) ?>" class="card-img-top" alt="Image annonce">
+                    <?php endif; ?>
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($annonce['titre']) ?></h5>
+                        <p class="card-text"><?= nl2br(htmlspecialchars($annonce['texte'])) ?></p>
+                    </div>
+                    <div class="card-footer text-muted text-end small">
+                        Publié le <?= date('d/m/Y', strtotime($annonce['created_at'])) ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach;
+        if ($nombrePages > 1): ?>
+          <nav class="mt-4">
+              <ul class="pagination justify-content-center">
+                  <?php for ($i = 1; $i <= $nombrePages; $i++): ?>
+                      <li class="page-item <?= $i === $page ? 'active' : '' ?>">
+                          <a class="page-link" href="?tab=annonces&page=<?= $i ?>#badMarket"><?= $i ?></a>
+                      </li>
+                  <?php endfor; ?>
+              </ul>
+          </nav>
+      <?php endif; ?>
     </div>
   </section>
 

@@ -8,6 +8,7 @@ require_once 'lib/pdo.php';
 require_once 'lib/security.php';
 require_once 'templates/nav.php';
 require_once 'templates/messages.php';
+include_once 'templates/toast.php'; 
 require_once 'App/News.php';
 require_once 'App/Results.php';
 require_once 'App/Classements.php';
@@ -16,7 +17,8 @@ require_once 'App/Contacts.php';
 require_once 'App/AdminSportsHandler.php';
 require_once 'App/Documents.php';
 require_once 'App/Trombinoscope.php'; 
-include_once 'templates/toast.php'; // Inclus le fichier contenant la fonction showToast
+require_once 'App/Annonces.php'; 
+require_once 'App/Partenaires.php';
 
 $messages = [];
 $errors = [];
@@ -39,6 +41,7 @@ if (isset($_SESSION['success_message'])) {
 $adminHandler = new App\AdminSportsHandler\AdminSportsHandler($db);
 $documentsManager = new App\Documents\Documents($db);
 $trombinosManager = new App\Trombinoscope\Trombinoscope($db);
+$annonces = new App\Annonces\Annonces($db);
 
 
 // Vérification si l'utilisateur est super administrateur
@@ -129,6 +132,16 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
        style="background-color: #6A0572" 
        href="?tab=trombinoscope">Trombinoscope</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link <?= (isset($_GET['tab']) && $_GET['tab'] === 'annonces') ? 'active bg-messages' : '' ?>" 
+       style="background-color: #6A0572" 
+       href="?tab=annonces">Annonces</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?= (isset($_GET['tab']) && $_GET['tab'] === 'partenaires') ? 'active bg-messages' : '' ?>" 
+       style="background-color: #6A0572" 
+       href="?tab=partenaires">Partenaires</a>
+  </li>
 </ul>
 <?php
 $tab = $_GET['tab'] ?? 'messages'; // Onglet par défaut
@@ -142,6 +155,12 @@ switch ($tab) {
         break;
     case 'trombinoscope':
         require_once 'templates/trombinos.php';
+        break;
+    case 'annonces':
+        require_once 'templates/annoncesAdmin.php';
+        break;
+    case 'partenaires':
+        require_once 'templates/partnersAdmin.php';
         break;
     default:
         echo "<p>Onglet inconnu.</p>";
