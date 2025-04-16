@@ -170,7 +170,6 @@ try {
           <h2 class="h2Sports line">Compétitions</h2>
           <hr>
           <h3 id="calendrier" class="h3Sports text-center mt-3">Calendrier de la saison</h3>
-          <!-- <a href="/assets/documents/Calendrier 2024 2025.pdf" class="center"><img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison"></a> -->
           <?php
           $categories = [
                 "Calendrier de la saison",
@@ -233,7 +232,6 @@ try {
         }
     }
     ?>
-
     </div>
 </section>
 
@@ -246,7 +244,27 @@ try {
           <hr>
           <p class="lecture">Quelques statistiques clés pour mieux comprendre l'évolution du Badminton CACDS.</p>
           <div class="d-flex flex-column justify-content-center mx-auto col-12 col-md-2">
-            <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a>
+            <?php
+            $categories = [
+                "Chiffres et statistiques",
+                ];
+            // Récupérer le document "Effectifs Badminton" depuis la base de données
+            foreach ($categories as $categorie) {
+              $documents = $documentsManager->getDocumentsByCategory(htmlspecialchars($categorie));
+
+              if (!empty($documents)) {
+                  foreach ($documents as $document) {
+                      // Affichage de chaque document sous forme de carte
+                      echo '<a href="' . htmlspecialchars($document['fichier']) . '" class="center" aria-label="">';
+                      echo '<img src="/assets/icones/stats-64.png" alt="effectif badminton" titre="Effectif Badminton">';
+                      echo '</a>';
+                  }
+              } else {
+                  echo '<p style="color:#EC930F" >Aucun document disponible.</p>';
+              }
+          }   
+            ?>
+             <!-- <a href="/assets/documents/effectifs_badminton_2024.pdf" class="center"><img src="/assets/icones/stats-64.png" alt="Chiffres du badminton" title="Chiffres du badminton"></a> -->
             <p class="lecture text-center">Effectifs Badminton</p>
           </div>
       </section>

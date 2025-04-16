@@ -38,7 +38,7 @@
                 "Coordonnées des capitaines",
                 "Créneaux des équipes",
                 "Relais de l'information",
-                "Feuille de match"
+                "Feuille de match Coupe"
                 ];
                             // Récupérer les documents pour chaque catégorie
                 foreach ($categories as $categorie) {
@@ -47,7 +47,7 @@
                     if (!empty($documents)) {
                         foreach ($documents as $document) {
                             // Affichage de chaque document sous forme de carte
-                            echo '<div class="d-flex flex-column justify-content-center col-12 col-md-2 salle-card">';
+                            echo '<div class="d-flex flex-column justify-content-center col-12 col-md-3 salle-card">';
                             echo '<h4 class="h4Sports text-center">' . ($document['categorie']) . '</h4>';
                             echo '<a href="' . htmlspecialchars($document['fichier']) . '" class="center" aria-label="">';
                             echo '<img src="/assets/icones/attestation-64.png" class="zoom">';
@@ -58,11 +58,28 @@
                         echo '<p>Aucun document disponible pour cette catégorie.</p>';
                     }
                 }
-            ?>    
+            ?>
+            <div class="col-md-3">
+            <div class="d-flex flex-column align-items-center salle-card">
+                <h4 class="h4Sports text-center">Feuilles de match Championnat</h4>
+                <img src="/assets/icones/attestation-64.png" class="mb-1 me-2" alt="icone" loading="lazy"/>
+                <select class="fm-select mx-auto" id="pouleChampSelect">
+                    <option value="1">Poule 1</option>
+                    <option value="2">Poule 2</option>
+                    <option value="3">Poule 3</option>
+                    <option value="4">Poule 4</option>
+                    <option value="5">Poule 5</option>
+                    <option value="6">Poule 6</option>
+                    <option value="7">Poule 7</option>
+                    <option value="8">Poule 8</option>
+                </select>
+            </div>
+            <div class="mx-auto" id="fm-champContainer"></div>
+        </div>    
             </div>
                 <h4 class="h4Sports mt-3 text-center">Trouver une salle</h4>
                 <p class="lecture text-center">Retrouvez les adresses de toutes les salles</p>
-                <div class="grid-container" id="salles-container"></div>
+            <div class="grid-container" id="salles-container"></div>
         </div>
         </section>
         <section class="container-fluid">

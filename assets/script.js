@@ -265,6 +265,50 @@ document.addEventListener('DOMContentLoaded', () => {
             tournamentRankingContainer.innerHTML = '<p class="text-danger">Erreur lors du chargement du classement.</p>';
         });
     }
+
+    //affichage dynamique des FM championnat
+    const pouleChampSelect = document.getElementById('pouleChampSelect');
+const fmChampContainer = document.getElementById('fm-champContainer');
+
+// Objet associant les poules à leurs fichiers (chemins à adapter selon ton arborescence)
+const feuillesDeMatch = {
+    1: 'assets/documents/fm_poule_1.pdf',
+    2: 'assets/documents/fm_poule_2.pdf',
+    3: 'assets/documents/fm_poule_3.pdf',
+    4: 'assets/documents/fm_poule_4.pdf',
+    5: 'assets/documents/fm_poule_5.pdf',
+    6: 'assets/documents/fm_poule_6.pdf',
+    7: 'assets/documents/fm_poule_7.pdf',
+    8: 'assets/documents/fm_poule_8.pdf',
+};
+
+// Fonction d'affichage
+function afficherFeuilleDeMatch(pouleId) {
+    const fichier = feuillesDeMatch[pouleId];
+
+    if (!fichier) {
+        fmChampContainer.innerHTML = '<p class="text-danger">Feuille de match non disponible pour cette poule.</p>';
+        return;
+    }
+
+    fmChampContainer.innerHTML = `
+        <div class="text-center mt-2">
+            <a href="${fichier}" target="_blank" class="btn btn-third">
+                Télécharger la feuille de match (Poule ${pouleId})
+            </a>
+        </div>
+    `;
+}
+
+// Déclenchement au chargement initial + au changement
+if (pouleChampSelect && fmChampContainer) {
+    afficherFeuilleDeMatch(pouleChampSelect.value); // Affiche au chargement
+
+    pouleChampSelect.addEventListener('change', function () {
+        afficherFeuilleDeMatch(this.value);
+    });
+}
+
 });
 
 // Remplir la modal avec les données dynamiques

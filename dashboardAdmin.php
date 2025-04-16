@@ -125,7 +125,7 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
   <li class="nav-item">
     <a class="nav-link <?= (isset($_GET['tab']) && $_GET['tab'] === 'documents') ? 'active bg-messages' : '' ?>" 
        style="background-color: #6A0572" 
-       href="?tab=documents">Documents CACDS</a>
+       href="?tab=documents">Documents</a>
   </li>
   <li class="nav-item">
     <a class="nav-link <?= (isset($_GET['tab']) && $_GET['tab'] === 'trombinoscope') ? 'active bg-messages' : '' ?>" 

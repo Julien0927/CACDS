@@ -72,11 +72,12 @@ if (isset($_POST['delete_document']) && isset($_POST['document_id'])) {
                     "Coordonnées des capitaines",
                     "Créneaux des équipes",
                     "Relais de l'information",
-                    "Feuille de match",
+                    "Feuille de match Coupe",
                     "Palmarès championnat",
                     "Palmarès coupe",
                     "Palmarès titres et double",
                     "Calendrier de la saison",
+                    "Chiffres et statistiques",
                 ];
               
                 foreach ($categories as $categorie) {
@@ -129,10 +130,11 @@ if (isset($_POST['delete_document']) && isset($_POST['document_id'])) {
                 <option value="Coordonnées des capitaines">Coordonnées des capitaines</option>
                 <option value="Créneaux des équipes">Créneaux des équipes</option>
                 <option value="Relais de l'information">Relais de l'information</option>
-                <option value="Feuille de match">Feuille de match</option>
+                <option value="Feuille de match Coupe">Feuille de match Coupe</option>
                 <option value="Palmarès Championnat">Palmarès Championnat</option>
                 <option value="Palmarès Coupe">Palmarès Coupe</option>
                 <option value="Palmarès titres et double">Palmarès titres et double</option>
+                <option value="Chiffres et statistiques">Chiffres et statistiques</option>
             </select>
 
             <label for="document">Fichier PDF :</label>
