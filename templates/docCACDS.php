@@ -103,7 +103,7 @@ if (isset($_POST['delete_document']) && isset($_POST['document_id'])) {
                             </tr>                     
                         <?php }
                     } else {
-                        echo "<tr><td colspan='3' class='text-center'>Aucun document dans cette catégorie.</td></tr>";
+                        echo "<tr><td colspan='3' class='text-center'>Aucun document.</td></tr>";
                     }
                 }
                 ?>

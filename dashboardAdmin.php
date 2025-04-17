@@ -19,6 +19,7 @@ require_once 'App/Documents.php';
 require_once 'App/Trombinoscope.php'; 
 require_once 'App/Annonces.php'; 
 require_once 'App/Partenaires.php';
+require_once 'App/Actualite.php'; 
 
 $messages = [];
 $errors = [];
@@ -33,15 +34,16 @@ if (isset($_SESSION['success_message'])) {
 
 
 // Affichage des messages de succès
-if (isset($_SESSION['success_message'])) {
+/* if (isset($_SESSION['success_message'])) {
     echo '<div class="alert success connexion bold mx-auto">' . $_SESSION['success_message'] . '</div>';
     unset($_SESSION['success_message']); // Supprimer le message après affichage
 }
-// Initialisation de la classe AdminSportsHandler
+ */// Initialisation de la classe AdminSportsHandler
 $adminHandler = new App\AdminSportsHandler\AdminSportsHandler($db);
 $documentsManager = new App\Documents\Documents($db);
 $trombinosManager = new App\Trombinoscope\Trombinoscope($db);
 $annonces = new App\Annonces\Annonces($db);
+$actualiteManager = new App\Actualite\Actualite($db);
 
 
 // Vérification si l'utilisateur est super administrateur
@@ -118,7 +120,12 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
 ?>
 <ul class="nav nav-tabs mt-3">
   <li class="nav-item">
-    <a class="nav-link <?= (!isset($_GET['tab']) || $_GET['tab'] === 'messages') ? 'active bg-messages' : '' ?>" 
+    <a class="nav-link <?= (!isset($_GET['tab']) || $_GET['tab'] === 'actualite') ? 'active bg-messages' : '' ?>" 
+       style="background-color: #6A0572;"
+       href="?tab=actualite">Actualité</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?= (isset($_GET['tab']) && $_GET['tab'] === 'messages') ? 'active bg-messages' : '' ?>" 
        style="background-color: #6A0572;"
        href="?tab=messages">Messages reçus</a>
   </li>
@@ -144,9 +151,12 @@ if (isset($_POST['delete_message']) && isset($_POST['message_id'])) {
   </li>
 </ul>
 <?php
-$tab = $_GET['tab'] ?? 'messages'; // Onglet par défaut
+$tab = $_GET['tab'] ?? 'actualite'; // Onglet par défaut
 
 switch ($tab) {
+    case 'actualite':
+        require_once 'templates/actualiteAdmin.php';
+        break;
     case 'messages':
         require_once 'templates/messagesAdmin.php';
         break;

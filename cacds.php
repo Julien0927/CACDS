@@ -5,10 +5,79 @@ require_once 'lib/pdo.php';
 require_once 'lib/config_session.php';
 require_once 'App/News.php';
 require_once 'lib/security.php';
+require_once 'App/Actualite.php';
+
+$actualiteManager = new App\Actualite\Actualite($db); 
+$actualites = $actualiteManager->getAllActualites();
 ?>
 <div class="center">
     <img src="/assets/logos/cacds_logo_CACDS.webp" style="width: 10%; height: auto" alt="cacds" class="img-fluid">
 </div>
+<!-- <section class="container-fluid mt-3">
+    <h4 class="h3Sports">Actualité
+        <img class="toggle-icon" id="toggleCollapsePresidentWord" data-target="collapseContentPresidentWord" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
+    </h4>
+    <div class="blueLine"></div>
+    <div id="collapseContentPresidentWord" class="collapse">
+        <div class="row">
+            <div class=" d-flex flex-column col-12 col-md-8 mx-auto">
+                <p class="text-center  mt-3"><a href="/assets/documents/mot du president.pdf" class="lecture" style="text-decoration: none;" alt="Le mot du président" title="Le mot du président">Le mot du Président</a></p>
+                <p class="text-center  mt-3"><a href="/assets/documents/bureau.pdf" class="lecture" style="text-decoration: none;" alt="Composition du bureau" title="La composition du bureau">La composition du bureau</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+ -->
+ <section class="container-fluid mt-3">
+    <h4 class="h3Sports">Actualité
+        <img class="toggle-icon" id="toggleCollapsePresidentWord" data-target="collapseContentPresidentWord" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
+    </h4>
+    <div class="blueLine"></div>
+    <div id="collapseContentPresidentWord" class="collapse">
+        <div class="row justify-content-center mt-4">
+            <?php if (!empty($actualites)): ?>
+                <?php foreach ($actualites as $actu): ?>
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 shadow-sm border-2" style="border-color: #12758C;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="h5Sports card-title"><?= htmlspecialchars($actu['titre']) ?></h5>
+                                <h6 class="card-subtitle mb-2 text-muted"><?= date('d/m/Y', strtotime($actu['date_publication'])) ?></h6>
+                                <p class="card-text mt-2"><?= nl2br(htmlspecialchars(mb_strimwidth($actu['contenu'], 0, 200, '...'))) ?></p>
+                                <button type="button" class="btn btn-card mt-auto p-2 text-start" data-bs-toggle="modal" data-bs-target="#actualiteModal<?= $actu['id'] ?>">
+                                    Lire la suite
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal "Lire la suite" -->
+                    <div class="modal fade" id="actualiteModal<?= $actu['id'] ?>" tabindex="-1" aria-labelledby="modalLabel<?= $actu['id'] ?>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="h5Sports modal-title" id="modalLabel<?= $actu['id'] ?>"><?= htmlspecialchars($actu['titre']) ?></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($actu['date_publication'])) ?></p>
+                                    <hr>
+                                    <p><?= nl2br(htmlspecialchars($actu['contenu'])) ?></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-original" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="col-12 text-center">
+                    <p style="color: #EC930F">Aucune actualité pour le moment.</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
 
 <section class="container-fluid">
     <h4 class="h3Sports">Histoire
