@@ -40,9 +40,9 @@ $actualites = $actualiteManager->getAllActualites();
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm border-2" style="border-color: #12758C;">
                             <div class="card-body d-flex flex-column">
-                                <h5 class="h5Sports card-title"><?= htmlspecialchars($actu['titre']) ?></h5>
+                                <h5 class="h5Sports card-title"><?= ($actu['titre']) ?></h5>
                                 <h6 class="card-subtitle mb-2 text-muted"><?= date('d/m/Y', strtotime($actu['date_publication'])) ?></h6>
-                                <p class="card-text mt-2"><?= nl2br(htmlspecialchars(mb_strimwidth($actu['contenu'], 0, 200, '...'))) ?></p>
+                                <p class="card-text mt-2"><?= nl2br((mb_strimwidth($actu['contenu'], 0, 200, '...'))) ?></p>
                                 <button type="button" class="btn btn-card mt-auto p-2 text-start" data-bs-toggle="modal" data-bs-target="#actualiteModal<?= $actu['id'] ?>">
                                     Lire la suite
                                 </button>
@@ -55,13 +55,13 @@ $actualites = $actualiteManager->getAllActualites();
                         <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="h5Sports modal-title" id="modalLabel<?= $actu['id'] ?>"><?= htmlspecialchars($actu['titre']) ?></h5>
+                                    <h5 class="h5Sports modal-title" id="modalLabel<?= $actu['id'] ?>"><?= ($actu['titre']) ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                                 </div>
                                 <div class="modal-body">
                                     <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($actu['date_publication'])) ?></p>
                                     <hr>
-                                    <p><?= nl2br(htmlspecialchars($actu['contenu'])) ?></p>
+                                    <p><?= nl2br(($actu['contenu'])) ?></p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-original" data-bs-dismiss="modal">Fermer</button>

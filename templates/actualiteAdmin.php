@@ -2,8 +2,8 @@
 // Traitement de l'ajout
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titre'], $_POST['contenu'])) {
     if (verifyCSRFToken()) {
-        $titre = htmlspecialchars($_POST['titre'] ?? '');
-        $contenu = htmlspecialchars($_POST['contenu'] ?? '');
+        $titre = trim($_POST['titre'] ?? '');
+        $contenu = trim($_POST['contenu'] ?? '');
 
         if (!empty($titre) && !empty($contenu)) {
             if ($actualiteManager->addActualite($titre, $contenu)) {
@@ -42,7 +42,7 @@ $actualites = $actualiteManager->getAllActualites();
 ?>
 
 <div class="container mt-5">
-    <h2 class="h2Sports text-center mb-4">Actualités</h2>
+    <h2 class="h2Sports text-center mb-4">Actualités CACDS</h2>
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="table-info">
@@ -57,10 +57,10 @@ $actualites = $actualiteManager->getAllActualites();
                 <?php if (!empty($actualites)): ?>
                     <?php foreach ($actualites as $actu): ?>
                         <tr>
-                            <td><?= htmlspecialchars($actu['date_publication']) ?></td>
-                            <td><?= htmlspecialchars($actu['titre']) ?></td>
+                            <td><?= ($actu['date_publication']) ?></td>
+                            <td><?= ($actu['titre']) ?></td>
                             <td>
-                                <?= htmlspecialchars(mb_strlen($actu['contenu']) > 100 
+                                <?= (mb_strlen($actu['contenu']) > 100 
                                     ? mb_substr($actu['contenu'], 0, 100) . '...' 
                                     : $actu['contenu']) ?>
                             </td>
