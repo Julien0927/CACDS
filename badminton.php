@@ -313,7 +313,7 @@ try {
     <h2 class="h2Sports mt-3">Marché du Badminton</h2>
     <hr>
     <p class="lecture">
-        Cette rubrique créée à l’initiative d’un adhérent (merci Jérôme !) vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
+        Cette rubrique vous permet de mettre en ligne une annonce en lien avec du matériel de badminton pouvant intéresser un club ou un adhérent.<br>
         Alors n’hésitez pas à nous transmettre vos offres.
     </p>
 

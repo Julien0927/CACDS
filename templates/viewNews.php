@@ -2,7 +2,7 @@
     <section class="container-fluid">
         <h2 class="h2Sports">Actualités</h2>
         <hr>
-        <p class="lecture">Retrouvez ici les dernières nouvelles importantes concernant le club.</p>
+        <p class="lecture">Retrouvez ici l'actualité de la section Badminton.</p>
         <div class="row d-flex flex-wrap">
             <?php if (!empty($newsPageActuelle)): ?>
                 <?php foreach ($newsPageActuelle as $new): ?>

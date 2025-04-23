@@ -2,7 +2,7 @@
 <section class="container-fluid" id="gallery">
     <h2 class="h2Sports mt-3">Photos et Vidéos</h2>
     <hr>
-    <p class="lecture">Découvrez les meilleurs moments du club en images et en vidéos.</p>
+    <p class="lecture">Cette rubrique vous permet de revivre vos rencontres de championnat ou de coupe grâce aux photos ou vidéos que vous nous transmettez.</p>
     
     <!-- Boutons de filtre -->
     <div class="filter-buttons mb-4 text-center">
@@ -19,7 +19,7 @@
                         <img src="<?= $media['image'] ?>" class="img-fluid imgGallery" title="<?= $media['title'] ?>" alt="<?= $media['title'] ?>">
                     </a>
                     <div class="media-info d-flex flex-column text-center mt-2">
-                        <h5><?= htmlspecialchars($media['title']) ?></h5>
+                        <h5  class="h4Sports"><?= htmlspecialchars($media['title']) ?></h5>
                         <p class="text-muted"><?= date('d/m/Y', strtotime($media['date'])) ?></p> <!-- Date formatée -->
                     </div>
                 <?php else: ?>

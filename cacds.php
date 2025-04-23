@@ -103,7 +103,7 @@ $actualites = $actualiteManager->getAllActualites();
                     <li>M. MORIN Jacques</li>
                     <li>M. LAMY Michel (1981 à 2006)</li>
                     <li>M. MOINARD Laurent (2006 à 2023),</li>
-                    <li>M. PEROCHON Eric, l’actuel Président</li>
+                    <li>M. PÉROCHON Eric, l’actuel Président</li>
                 </ul>
            
         </div>
@@ -163,7 +163,7 @@ $actualites = $actualiteManager->getAllActualites();
         </div>
     </div>
 </section>
-<section class="container-fluid mt-3">
+<section class="container-fluid mt-3 mb-5">
     <h4 class="h3Sports">Les Réglements Généraux
         <img class="toggle-icon" id="toggleCollapseReglement" data-target="collapseContentReglement" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
     </h4>
@@ -176,7 +176,7 @@ $actualites = $actualiteManager->getAllActualites();
         </div>
     </div>
 </section>
-<section class="container-fluid mt-3">
+<!-- <section class="container-fluid mt-3">
     <h4 class="h3Sports">L’Assurance "Dommages Corporels"
         <img class="toggle-icon" id="toggleCollapseAssurance" data-target="collapseContenteAssurance" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">
     </h4>
@@ -206,5 +206,5 @@ $actualites = $actualiteManager->getAllActualites();
         </div>
     </div>
 </section>
-<?php
+ --><?php
 require_once 'templates/footer.php';

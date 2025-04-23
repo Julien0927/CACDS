@@ -2,8 +2,8 @@
 
         <!--Championnat-->
         <h3 class="h3Sports" id="compet">Championnat</h3>
-        <p class="lecture">Le championnat regroupe plusieurs poules où évoluent 8 équipes. Les matchs se déroulent en phase aller-retour.<br> 
-            En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure</p>
+        <p class="lecture">Le championnat regroupe plusieurs poules où évoluent 6 équipes. Les matchs se déroulent en phase aller-retour.<br> 
+            En fin de saison, les deux premiers montent en poule supérieure, les deux derniers descendent en poule inférieure.</p>
             <label for="sports" class="form-label me-2">Sélectionnez votre poule</label>
             <select name="poules" id="poules">
             <?php foreach ($poules as $poule): ?>
@@ -50,7 +50,8 @@
             </div>
         <!--Coupe-->
         <h3 class="h3Sports" id="cup">Coupe</h3>
-        <p class="lecture">La coupe est une compétition à élimination directe. Les matchs se jouent en 3 sets gagnants.</p>
+        <p class="lecture">La coupe est une compétition à élimination directe. </p>
+        <p class="lecture">Un tour préliminaire permet aux vainqueurs de disputer la Coupe Principale. Les autres disputent la Coupe Consolante.</p>
         <label for="coupe" class="form-label me-2">Sélectionnez votre information</label>
         <?php
         $cupNames = $results->getCupNames();
