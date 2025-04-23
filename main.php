@@ -5,8 +5,10 @@ require_once 'lib/pdo.php';
 require_once 'lib/config_session.php';
 require_once 'App/News.php';
 require_once 'lib/security.php';
+require_once 'App/Actualite.php';
 
 $news = new App\News\News($db);
+$actualiteGenerale = new App\Actualite\Actualite($db);
 
 // Structure des sports avec leurs données
 $sports = [
@@ -33,6 +35,12 @@ $sports = [
         'name' => 'volleyball',
         'icon' => 'Square item Volley.svg',
         'href' => 'volley.php'
+    ],
+    'actus' => [
+        'id' => 5,
+        'name' => 'actus',
+        'icon' => 'cacds_logo.jpg',
+        'href' => 'actus.php'
     ]
 ];
 
@@ -45,12 +53,16 @@ foreach ($sports as $key => $sport) {
     $latestNews[$key] = !empty($sportNews) ? $sportNews[0] : null;
 }
 
+$actusGenerale = $actualiteGenerale->getLatestActualite(1); // par exemple une par défaut
+$latestActus['actus'] = !empty($actusGenerale) ? $actusGenerale[0] : null;
+
 function truncateText($text, $length = 100) {
     if (strlen($text) <= $length) {
         return $text;
     }
     return substr($text, 0, $length) . '...';
 }
+
 // Fonction pour afficher une section d'actualité
 function displayNewsSection($news, $sport) {
 ?>
@@ -93,7 +105,8 @@ function displayNewsSection($news, $sport) {
                     </button>
                 <?php endif; ?>
             </div>
-            <!-- Modal Bootstrap -->
+            
+            <!-- Modal News -->
             <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -110,7 +123,7 @@ function displayNewsSection($news, $sport) {
                             <p id="modalDate" class="text-muted"></p>
                             <div class="center">
                                 <button type="button" class="btn btn-original bold" data-bs-dismiss="modal">Fermer</button>
-                                <a id="moreArticles" href="#" class="btn btn-card bold ms-3">Plus d'articles</a>
+                                <a id="moreArticles" href="cacds.php" class="btn btn-card bold ms-3">Plus d'articles</a>
                             </div>                            
                         </div>
                     </div>
@@ -128,7 +141,63 @@ function displayNewsSection($news, $sport) {
 </div>     
 <?php
 }
-?>
+function displayActuGenerale($actualite) {
+    if (!$actualite) return;
+    ?>
+    <div class="news-text-content">
+        <!-- En-tête avec icône et titre -->
+        <div class="news-header">
+            <a href="cacds.php">
+                <img class="sport-icon" src="/assets/icones/Square Cacds.svg" alt="Cacds" loading="lazy">
+            </a>
+            <h3 class="news-title"><?= ($actualite['titre']) ?></h3>
+        </div>
+
+        <div class="news-body">
+            <p class="content" style="color: #12758C"><?= (substr($actualite['contenu'], 0, 100)) ?>...</p>
+            <p class="date"><?= date('d/m/Y', strtotime($actualite['date_publication'])) ?></p>
+        </div>
+
+        <button class="btn btn-original bold" 
+                data-bs-toggle="modal" 
+                data-bs-target="#actuModal"
+                data-title="<?= ($actualite['titre']) ?>"
+                data-content="<?= ($actualite['contenu']) ?>"
+                data-date="<?= date('d/m/Y', strtotime($actualite['date_publication'])) ?>">
+                Lire
+        </button>
+    </div>
+    <?php
+}?>
+<!-- Modal Actu -->
+<div class="modal fade" id="actuModal" tabindex="-1" aria-labelledby="actuModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- En-tête sans titre mais avec bouton de fermeture -->
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+
+            <!-- Corps de la modale -->
+            <div class="modal-body">
+                <h3 class="h3Sports" id="actuModalTitle"></h3>
+
+                <!-- Image ? À ajouter ici si nécessaire -->
+
+                <p id="actuModalContent"></p>
+                <p id="actuModalDate" class="text-muted"></p>
+
+                <div class="center">
+                    <button type="button" class="btn btn-original bold" data-bs-dismiss="modal">Fermer</button>
+                    <a id="actuMoreArticles" href="cacds.php" class="btn btn-card bold ms-3">Plus d'articles</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 <h1 class="text-center mt-3">Coupe de l'Amitié Corporative des Deux-Sèvres</h1>
 <div class="d-flex justify-content-evenly align-items-center mt-3">
@@ -144,20 +213,27 @@ function displayNewsSection($news, $sport) {
         <div class="col-12 col-md-12">
             <fieldset>
                 <legend id="menu">Actualités</legend>
-                <div class="row">
+                <div class="row mx-auto">
+                    <div class="col-12 col-md-12 mt-3 ms-3">
+                        <?php displayActuGenerale($latestActus['actus']); ?>
+                    </div>
+                </div>
+                <div class="row mt-3">
                     <div class="col-12 col-md-6">
                         <?php displayNewsSection($latestNews['bad'], $sports['bad']); ?>
                     </div>
                     <div class="col-12 col-md-6">
                         <?php displayNewsSection($latestNews['volley'], $sports['volley']); ?>
                     </div>
-                    <div class="row">
+                </div>
+                <div class="row">
                     <div class="col-12 col-md-6">
                         <?php displayNewsSection($latestNews['tdt'], $sports['tdt']); ?>
                     </div>
                     <div class="col-12 col-md-6">
                         <?php displayNewsSection($latestNews['petanque'], $sports['petanque']); ?>
                     </div>
+                </div>
                 </div>
             </fieldset>
         </div>

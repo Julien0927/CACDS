@@ -311,8 +311,8 @@ if (pouleChampSelect && fmChampContainer) {
 
 });
 
-// Remplir la modal avec les données dynamiques
-document.addEventListener('DOMContentLoaded', () => {
+// Remplir la modal avec les données dynamiques //
+/* document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('newsModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalImage = document.getElementById('modalImage');
@@ -345,8 +345,52 @@ document.addEventListener('DOMContentLoaded', () => {
             moreArticles.href = 'index.php';
         }
     });
+});*/
+document.addEventListener('DOMContentLoaded', () => {
+    // NewsModal (déjà présent)
+    const newsModal = document.getElementById('newsModal');
+    if (newsModal) {
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalContent = document.getElementById('modalContent');
+        const modalDate = document.getElementById('modalDate');
+        const moreArticles = document.getElementById('moreArticles');
+
+        newsModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            modalTitle.textContent = button.getAttribute('data-title');
+            modalImage.src = button.getAttribute('data-image');
+            modalContent.textContent = button.getAttribute('data-content');
+            modalDate.textContent = `Publié le : ${button.getAttribute('data-date')}`;
+
+            const sportId = button.getAttribute('data-sport-id');
+            switch (sportId) {
+                case '1': moreArticles.href = 'tennisDT.php'; break;
+                case '2': moreArticles.href = 'badminton.php'; break;
+                case '3': moreArticles.href = 'petanque.php'; break;
+                case '4': moreArticles.href = 'volley.php'; break;
+                default:  moreArticles.href = 'index.php'; break;
+            }
+        });
+    }
+
+    // ActuModal (celui que tu viens de créer)
+    const actuModal = document.getElementById('actuModal');
+    if (actuModal) {
+        const modalTitle = document.getElementById('actuModalTitle');
+        const modalContent = document.getElementById('actuModalContent');
+        const modalDate = document.getElementById('actuModalDate');
+
+        actuModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            modalTitle.textContent = button.getAttribute('data-title');
+            modalContent.textContent = button.getAttribute('data-content');
+            modalDate.textContent = `Publié le : ${button.getAttribute('data-date')}`;
+        });
+    }
 });
-//Fleche pour remonter en haut de la page
+
+ //Fleche pour remonter en haut de la page
 document.addEventListener('DOMContentLoaded', function() {
     const backToTopButton = document.getElementById('backToTop');
     
