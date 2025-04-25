@@ -21,7 +21,7 @@ class News {
     public function __construct(PDO $db) {
         $this->db = $db;
         $this->newsParPage = 3;
-        $this->image = 'assets/img/info.webp';
+        $this->image = null;
     }
 
     public function setSportId(int $sport_id) {
@@ -49,7 +49,7 @@ class News {
     }
 
     public function setImage(?string $image) {
-        $this->image = $image ?? 'assets/img/info.webp';
+        $this->image = !empty($image) ? $image : null;
         return $this;
     }
 
@@ -142,7 +142,7 @@ public function getTotalNewsBySport($sport_id): int
 
         $query->bindValue(":title", $this->title, PDO::PARAM_STR);
         $query->bindValue(":content", $this->content, PDO::PARAM_STR);
-        $query->bindValue(":image", $this->image, PDO::PARAM_STR);
+        $query->bindValue(":image", $this->image, $this->image === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
         $query->bindValue(":date", $this->date, PDO::PARAM_STR);
         $query->bindValue(":sport_id", $_SESSION['sport_id'], PDO::PARAM_INT);
         $query->bindValue(":poule_id", $_SESSION['poule_id'], PDO::PARAM_INT);
@@ -235,7 +235,7 @@ public function getTotalNewsBySport($sport_id): int
 
         $query->bindValue(":title", $this->title, PDO::PARAM_STR);
         $query->bindValue(":content", $this->content, PDO::PARAM_STR);
-        $query->bindValue(":image", $this->image, PDO::PARAM_STR);
+        $query->bindValue(":image", $this->image, $this->image === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
         $query->bindValue(":date", $this->date, PDO::PARAM_STR);
         $query->bindValue(":id", $this->id, PDO::PARAM_INT);
 

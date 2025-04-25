@@ -91,7 +91,6 @@ function displayNewsSection($news, $sport) {
                     <p style="color: #EC930F">Aucun article disponible pour le <?= $sport['name'] ?>.</p>
                 <?php endif; ?>
                 
-                <!-- <button class="btn btn-original" href="">Lire</button> -->
                 <?php if ($news): ?>
                     <button class="btn btn-original bold" 
                             data-bs-toggle="modal" 
@@ -107,14 +106,13 @@ function displayNewsSection($news, $sport) {
             </div>
             
             <!-- Modal News -->
-            <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+             <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- Contenu dynamique -->
                             <h3 class="h3Sports" id="modalTitle"></h3>
                             <div class="center">
                                 <img id="modalImage" class="img-fluid center" alt="Image de l'article" loading="lazy">
@@ -128,14 +126,14 @@ function displayNewsSection($news, $sport) {
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div>         
+  
             <!-- Image à droite -->
-            <?php if ($news): ?>
-                <div class="news-image-container">
+            <?php if ($news && !empty($news['image'])): ?>
+                <div class="news-image-container col-12 col-md-4">
                     <img class="news-image img-fluid" src="<?= $news['image'] ?>" alt="<?= ($news['title']) ?>" loading="lazy">
                 </div>
-            <?php endif; ?>
+            <?php endif; ?>       
         </div>
     </div>
 </div>     
@@ -240,11 +238,6 @@ function displayActuGenerale($actualite) {
     </div>
 </section>
 
-<!-- <section class="container-fluid mt-3">
-    <h2 class="h3Sports text-center">PRÉSENTATION DE L'ASSOCIATION</h2>
-
-</section>
- -->
 <section class="container-fluid mx-auto row mt-5">
     <div class="center col-12 col-md-6">
         <iframe 

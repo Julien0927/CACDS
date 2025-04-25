@@ -363,6 +363,15 @@ document.addEventListener('DOMContentLoaded', () => {
             modalContent.textContent = button.getAttribute('data-content');
             modalDate.textContent = `Publié le : ${button.getAttribute('data-date')}`;
 
+            // Vérifier si une image existe
+            const imageSrc = button.getAttribute('data-image');
+            if (imageSrc) {
+                modalImage.src = imageSrc;
+                modalImage.style.display = 'block'; // Afficher l'image
+            } else {
+                modalImage.style.display = 'none'; // Cacher l'image si elle n'existe pas
+            }
+
             const sportId = button.getAttribute('data-sport-id');
             switch (sportId) {
                 case '1': moreArticles.href = 'tennisDT.php'; break;
