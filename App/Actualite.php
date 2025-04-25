@@ -41,8 +41,8 @@ class Actualite {
     
         echo '<div class="card actu-generale">';
         echo '<div class="card-body">';
-        echo '<h5 class="card-title">' . htmlspecialchars($actualite['titre']) . '</h5>';
-        echo '<p class="card-text">' . htmlspecialchars(substr($actualite['contenu'], 0, 100)) . '...</p>';
+        echo '<h5 class="card-title">' . ($actualite['titre']) . '</h5>';
+        echo '<p class="card-text">' . (substr($actualite['contenu'], 0, 100)) . '...</p>';
         echo '<a href="actualites.php?id=' . $actualite['id'] . '" class="btn btn-primary">Lire</a>';
         echo '</div>';
         echo '</div>';

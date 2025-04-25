@@ -213,7 +213,7 @@ function displayActuGenerale($actualite) {
         <div class="col-12 col-md-12">
             <fieldset>
                 <legend id="menu">Actualités</legend>
-                <div class="row mx-auto">
+                <div class="row ">
                     <div class="col-12 col-md-12 mt-3 ms-3">
                         <?php displayActuGenerale($latestActus['actus']); ?>
                     </div>
