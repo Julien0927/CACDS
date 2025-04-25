@@ -35,11 +35,11 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel-<?= $new["id"] ?>"><?= $new["title"] ?></h1>
+                <h1 class="h5Sports modal-title fs-5" id="staticBackdropLabel-<?= $new["id"] ?>"><?= $new["title"] ?></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <p class="ms-3"><?= date('d/m/Y', strtotime($new["date"])) ?></p>
-            <div class="modal-body" style="text-align: justify;">
+            <div class="lecture modal-body" style="text-align: justify;">
                 <img src="<?= $new['image'] ?>" class="imgModal mb-3" alt="Image new">
                 <?php
                 $fullNew = $news->getNewById($new['id']);

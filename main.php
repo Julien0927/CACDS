@@ -119,7 +119,7 @@ function displayNewsSection($news, $sport) {
                             <div class="center">
                                 <img id="modalImage" class="img-fluid center" alt="Image de l'article" loading="lazy">
                             </div>
-                            <p id="modalContent"></p>
+                            <p class="lecture" id="modalContent"></p>
                             <p id="modalDate" class="text-muted"></p>
                             <div class="center">
                                 <button type="button" class="btn btn-original bold" data-bs-dismiss="modal">Fermer</button>
@@ -133,7 +133,7 @@ function displayNewsSection($news, $sport) {
             <!-- Image à droite -->
             <?php if ($news): ?>
                 <div class="news-image-container">
-                    <img class="news-image img-fluid" src="<?= $news['image'] ?>" alt="<?= htmlspecialchars($news['title']) ?>" loading="lazy">
+                    <img class="news-image img-fluid" src="<?= $news['image'] ?>" alt="<?= ($news['title']) ?>" loading="lazy">
                 </div>
             <?php endif; ?>
         </div>
@@ -185,7 +185,7 @@ function displayActuGenerale($actualite) {
 
                 <!-- Image ? À ajouter ici si nécessaire -->
 
-                <p id="actuModalContent"></p>
+                <p class="lecture" id="actuModalContent"></p>
                 <p id="actuModalDate" class="text-muted"></p>
 
                 <div class="center">
