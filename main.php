@@ -142,60 +142,86 @@ function displayNewsSection($news, $sport) {
 function displayActuGenerale($actualite) {
     if (!$actualite) return;
     ?>
-    <div class="news-text-content">
-        <!-- En-tête avec icône et titre -->
-        <div class="news-header">
-            <a href="cacds.php">
-                <img class="sport-icon" src="/assets/icones/Square Cacds.svg" alt="Cacds" loading="lazy">
-            </a>
-            <h3 class="news-title"><?= ($actualite['titre']) ?></h3>
-        </div>
+    <section>
+    <div class="col-12 col-md-6">
+        <div class="news-container">
+            <div class="news-wrapper">
+                <!-- Partie gauche avec le texte -->
+                <div class="news-text-content">
+                    <!-- En-tête avec icône et titre -->
+                    <div class="news-header">
+                        <a href="cacds.php">
+                            <img class="sport-icon" src="/assets/icones/Square Cacds.svg" alt="Cacds" loading="lazy">
+                        </a>
+                        <h3 class="news-title"><?= ($actualite['titre']) ?></h3>
+                    </div>
+                    
+                    <div class="news-body">
+                        <p class="content" style="color: #12758C"><?= (substr($actualite['contenu'], 0, 100)) ?>...</p>
+                        <p class="date"><?= date('d/m/Y', strtotime($actualite['date_publication'])) ?></p>
+                    </div>
+                    
+                    <button class="btn btn-original bold" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#actuModal"
+                            data-title="<?= ($actualite['titre']) ?>"
+                            data-content="<?= ($actualite['contenu']) ?>"
+                            data-date="<?= date('d/m/Y', strtotime($actualite['date_publication'])) ?>"
+                            data-document="<?= ($actualite['document_path']) ?>">
+                        Lire
+                    </button>
+                </div>
 
-        <div class="news-body">
-            <p class="content" style="color: #12758C"><?= (substr($actualite['contenu'], 0, 100)) ?>...</p>
-            <p class="date"><?= date('d/m/Y', strtotime($actualite['date_publication'])) ?></p>
+                <!-- Document ou image à droite -->
+                <?php if (!empty($actualite['document_path'])): ?>
+                    <div class="actus-image-container col-12 col-md-4 ">
+                        <?php
+                        $ext = strtolower(pathinfo($actualite['document_path'], PATHINFO_EXTENSION));
+                        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) {
+                            echo '<img class="news-image img-fluid " src="' . htmlspecialchars($actualite['document_path']) . '" alt="Image de l\'actualité" loading="lazy">';
+                        } else {
+                            echo '<a href="' . htmlspecialchars($actualite['document_path']) . '" target="_blank">
+                            <img src="/assets/icones/pdf-250.png" style="width: 100px; height: 100px" alt="Document PDF" class="img-fluid" loading="lazy">
+                            </a>';
+                        }
+                        ?>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
-
-        <button class="btn btn-original bold" 
-                data-bs-toggle="modal" 
-                data-bs-target="#actuModal"
-                data-title="<?= ($actualite['titre']) ?>"
-                data-content="<?= ($actualite['contenu']) ?>"
-                data-date="<?= date('d/m/Y', strtotime($actualite['date_publication'])) ?>">
-                Lire
-        </button>
     </div>
+    </section>
     <?php
-}?>
-<!-- Modal Actu -->
+}
+?>
+<!-- Modal Actu --> 
 <div class="modal fade" id="actuModal" tabindex="-1" aria-labelledby="actuModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
+            
             <!-- En-tête sans titre mais avec bouton de fermeture -->
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
-
+            
             <!-- Corps de la modale -->
             <div class="modal-body">
                 <h3 class="h3Sports" id="actuModalTitle"></h3>
-
-                <!-- Image ? À ajouter ici si nécessaire -->
-
+                
+                <!-- Container pour l'image ou le document -->
+                <div id="actuModalImage" class="text-center mb-3"></div>
+                
                 <p class="lecture" id="actuModalContent"></p>
                 <p id="actuModalDate" class="text-muted"></p>
-
+                
                 <div class="center">
                     <button type="button" class="btn btn-original bold" data-bs-dismiss="modal">Fermer</button>
                     <a id="actuMoreArticles" href="cacds.php" class="btn btn-card bold ms-3">Plus d'articles</a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
 
 <h1 class="text-center mt-3">Coupe de l'Amitié Corporative des Deux-Sèvres</h1>
 <div class="d-flex justify-content-evenly align-items-center mt-3">

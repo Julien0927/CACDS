@@ -12,9 +12,9 @@ class Actualite {
     }
 
     // Ajouter une actualité
-    public function addActualite($titre, $contenu) {
-        $stmt = $this->db->prepare("INSERT INTO actualite (titre, contenu) VALUES (?, ?)");
-        return $stmt->execute([$titre, $contenu]);
+    public function addActualite($titre, $contenu, $documentPath = null) {
+        $stmt = $this->db->prepare("INSERT INTO actualite (titre, contenu, document_path) VALUES (?, ?, ?)");
+        return $stmt->execute([$titre, $contenu, $documentPath]);
     }
 
     // Récupérer toutes les actualités
@@ -47,6 +47,22 @@ class Actualite {
         echo '</div>';
         echo '</div>';
     }
+
+    public function uploadDocument($file) {
+        $targetDir = 'uploads/actualites/';
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+    
+        $fileName = basename($file['name']);
+        $targetFilePath = $targetDir . time() . '_' . $fileName;
+    
+        if (move_uploaded_file($file['tmp_name'], $targetFilePath)) {
+            return $targetFilePath;
+        }
+        return null;
+    }
+    
     
     
 }

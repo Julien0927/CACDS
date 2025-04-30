@@ -1,12 +1,17 @@
 <?php
-// Traitement de l'ajout
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titre'], $_POST['contenu'])) {
     if (verifyCSRFToken()) {
-        $titre = trim($_POST['titre'] ?? '');
-        $contenu = trim($_POST['contenu'] ?? '');
+        $titre = trim($_POST['titre']);
+        $contenu = trim($_POST['contenu']);
+        $documentPath = null;
 
         if (!empty($titre) && !empty($contenu)) {
-            if ($actualiteManager->addActualite($titre, $contenu)) {
+            // Gérer l'upload
+            if (isset($_FILES['document']) && $_FILES['document']['error'] === UPLOAD_ERR_OK) {
+                $documentPath = $actualiteManager->uploadDocument($_FILES['document']);
+            }
+
+            if ($actualiteManager->addActualite($titre, $contenu, $documentPath)) {
                 $_SESSION['success_message'] = "Actualité ajoutée avec succès.";
                 header('Location: dashboardAdmin.php?tab=actualite');
                 exit;
@@ -50,6 +55,7 @@ $actualites = $actualiteManager->getAllActualites();
                     <th>Date de publication</th>
                     <th>Titre</th>
                     <th>Contenu</th>
+                    <th>Document</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -63,6 +69,15 @@ $actualites = $actualiteManager->getAllActualites();
                                 <?= (mb_strlen($actu['contenu']) > 100 
                                     ? mb_substr($actu['contenu'], 0, 100) . '...' 
                                     : $actu['contenu']) ?>
+                            </td>
+                            <td class="text-center">
+                                <?php if (!empty($actu['document_path'])): ?>
+                                    <a href="<?= htmlspecialchars($actu['document_path']) ?>" class="d-flex justify-content-center mt-2" target="_blank" style="text-decoration: none; color: black">
+                                        Voir le document
+                                    </a>
+                                    <?php else: ?>
+                                        —
+                                <?php endif; ?>
                             </td>
                             <td class="center">
                                 <button type="button" class="btn btn-second bold btn-sm mb-2 me-2" 
@@ -87,8 +102,8 @@ $actualites = $actualiteManager->getAllActualites();
         </table>
         <div class="container mt-4 mb-3">
             <h2 class="h2Sports text-center mb-4">Ajouter une actualité</h2>
-
-            <form action="?tab=actualite" method="post">
+       
+            <form action="?tab=actualite" method="post" enctype="multipart/form-data">
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
 
                     <div class="mb-3 d-flex flex-column w-50">
@@ -101,6 +116,10 @@ $actualites = $actualiteManager->getAllActualites();
                         <textarea name="contenu" id="contenu" rows="5" class="form-control" required></textarea>
                     </div>
 
+                    <div class="mb-3 d-flex flex-column w-50">
+                        <label for="document">Document (PDF/image) :</label>
+                        <input type="file" name="document" id="document" class="form-control">
+                    </div>
                 </div>
 
                 <?php addCSRFTokenToForm(); ?>
@@ -118,15 +137,33 @@ $actualites = $actualiteManager->getAllActualites();
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="actualiteModalLabel<?= $actu['id'] ?>">
-                                <?= htmlspecialchars($actu['titre']) ?>
+                            <h5 class="h5Sports modal-title" id="actualiteModalLabel<?= $actu['id'] ?>">
+                                <?= ($actu['titre']) ?>
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Date de publication :</strong> <?= htmlspecialchars($actu['date_publication']) ?></p>
-                            <p><strong>Contenu :</strong></p>
-                            <p><?= nl2br(htmlspecialchars($actu['contenu'])) ?></p>
+                            <p class="lecture"><?=($actu['date_publication']) ?></p>
+                            <?php if (!empty($actu['document_path'])): ?>
+                                <?php 
+                                    $extension = strtolower(pathinfo($actu['document_path'], PATHINFO_EXTENSION)); 
+                                    $isImage = in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+                                ?>
+                                <?php if ($isImage): ?>
+                                    <div class="d-flex justify-content-center mb-3">
+                                        <img src="<?= ($actu['document_path']) ?>" 
+                                        alt="Image associée" 
+                                        class="img-fluid rounded shadow mb-3" 
+                                        style="max-height: 500px; object-fit: contain;">
+                                    </div>
+                                <?php else: ?>
+                                    <a href="<?= ($actu['document_path']) ?>" target="_blank" class="d-block text-center mt-3">
+                                        <img src="/assets/icones/pdf-250.png" alt="PDF" class="img-fluid mb-2" style="width: 50px; height: auto;">
+                                        
+                                    </a>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <p class="lecture"><?= nl2br(($actu['contenu'])) ?></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-original bold" data-bs-dismiss="modal">Fermer</button>

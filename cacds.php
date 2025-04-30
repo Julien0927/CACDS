@@ -39,13 +39,42 @@ $actualites = $actualiteManager->getAllActualites();
                 <?php foreach ($actualites as $actu): ?>
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm border-2" style="border-color: #12758C;">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="h5Sports card-title"><?= ($actu['titre']) ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><?= date('d/m/Y', strtotime($actu['date_publication'])) ?></h6>
-                                <p class="card-text mt-2"><?= nl2br((mb_strimwidth($actu['contenu'], 0, 200, '...'))) ?></p>
-                                <button type="button" class="btn btn-card mt-auto p-2 text-start" data-bs-toggle="modal" data-bs-target="#actualiteModal<?= $actu['id'] ?>">
-                                    Lire la suite
-                                </button>
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <!-- Contenu à gauche -->
+                                    <div class="<?= !empty($actu['document_path']) ? 'col-8' : 'col-12' ?> d-flex flex-column">
+                                        <h5 class="h5Sports card-title"><?= ($actu['titre']) ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"><?= date('d/m/Y', strtotime($actu['date_publication'])) ?></h6>
+                                        <p class="lecture card-text mt-2"><?= nl2br((mb_strimwidth($actu['contenu'], 0, 150, '...'))) ?></p>
+                                        <button type="button" class="btn btn-card mt-auto p-2 text-start" data-bs-toggle="modal" data-bs-target="#actualiteModal<?= $actu['id'] ?>">
+                                            Lire la suite
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Image ou document à droite -->
+                                    <?php if (!empty($actu['document_path'])): ?>
+                                        <div class="col-4 d-flex align-items-center justify-content-center">
+                                            <?php
+                                            $ext = strtolower(pathinfo($actu['document_path'], PATHINFO_EXTENSION));
+                                            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])):
+                                            ?>
+                                                <div style="height: 120px; width: 100%; overflow: hidden;">
+                                                    <img src="<?= htmlspecialchars($actu['document_path']) ?>" 
+                                                         alt="Image de l'actualité" 
+                                                         style="object-fit: cover; height: 100%; width: 100%;" 
+                                                         loading="lazy">
+                                                </div>
+                                            <?php elseif (in_array($ext, ['pdf', 'doc', 'docx'])): ?>
+                                                <div class="text-center">
+                                                    <img src="/assets/icones/pdf-250.png" 
+                                                         style="width: 50px; height: 50px" 
+                                                         alt="Document PDF" 
+                                                         loading="lazy">
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,10 +89,31 @@ $actualites = $actualiteManager->getAllActualites();
                                 </div>
                                 <div class="modal-body">
                                     <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($actu['date_publication'])) ?></p>
-                                    <hr>
-                                    <p><?= nl2br(($actu['contenu'])) ?></p>
+                                    
+                                    <?php if (!empty($actu['document_path'])): ?>
+                                        <div class="text-center mb-3">
+                                            <?php
+                                            $ext = strtolower(pathinfo($actu['document_path'], PATHINFO_EXTENSION));
+                                            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])):
+                                            ?>
+                                                <img src="<?= htmlspecialchars($actu['document_path']) ?>" class="img-fluid" alt="Image de l'actualité" loading="lazy">
+                                            <?php elseif (in_array($ext, ['pdf', 'doc', 'docx'])): ?>
+                                                <a href="<?= htmlspecialchars($actu['document_path']) ?>" target="_blank" class="d-block mb-2">
+                                                    <img src="/assets/icones/pdf-250.png" style="width: 80px; height: 80px" alt="Document PDF" loading="lazy">
+                                                    
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <p class="lecture"><?= nl2br(($actu['contenu'])) ?></p>
                                 </div>
                                 <div class="modal-footer">
+                                    <?php if (!empty($actu['document_path']) && !in_array(strtolower(pathinfo($actu['document_path'], PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'webp', 'gif'])): ?>
+                                        <a href="<?= htmlspecialchars($actu['document_path']) ?>" target="_blank" class="btn btn-card">
+                                            Télécharger
+                                        </a>
+                                    <?php endif; ?>
                                     <button type="button" class="btn btn-original" data-bs-dismiss="modal">Fermer</button>
                                 </div>
                             </div>
@@ -78,7 +128,6 @@ $actualites = $actualiteManager->getAllActualites();
         </div>
     </div>
 </section>
-
 <section class="container-fluid">
     <h4 class="h3Sports">Histoire
         <img class="toggle-icon" id="toggleCollapse" data-target="collapseContent" src="/assets/icones/tri-décroissant-30.png" alt="toggle collapse" style="cursor: pointer;" loading="lazy">

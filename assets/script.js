@@ -383,19 +383,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ActuModal (celui que tu viens de créer)
-    const actuModal = document.getElementById('actuModal');
-    if (actuModal) {
-        const modalTitle = document.getElementById('actuModalTitle');
-        const modalContent = document.getElementById('actuModalContent');
-        const modalDate = document.getElementById('actuModalDate');
+// ActuModal (pour les actualités générales)
+const actuModal = document.getElementById('actuModal');
+if (actuModal) {
+    const modalTitle = document.getElementById('actuModalTitle');
+    const modalContent = document.getElementById('actuModalContent');
+    const modalDate = document.getElementById('actuModalDate');
+    const modalImage = document.getElementById('actuModalImage');
 
-        actuModal.addEventListener('show.bs.modal', (event) => {
-            const button = event.relatedTarget;
-            modalTitle.textContent = button.getAttribute('data-title');
-            modalContent.textContent = button.getAttribute('data-content');
-            modalDate.textContent = `Publié le : ${button.getAttribute('data-date')}`;
-        });
+    actuModal.addEventListener('show.bs.modal', (event) => {
+        const button = event.relatedTarget;
+        
+        // Récupération des données
+        const title = button.getAttribute('data-title');
+        const content = button.getAttribute('data-content');
+        const date = button.getAttribute('data-date');
+        const documentPath = button.getAttribute('data-document');
+        
+        // Application des données au modal
+        modalTitle.textContent = title;
+        modalContent.textContent = content;
+        modalDate.textContent = `Publié le : ${date}`;
+        
+        // Gestion du document (image ou PDF)
+        if (documentPath) {
+            modalImage.innerHTML = ''; // Vider le conteneur d'image
+            
+            // Déterminer si c'est une image ou un document PDF
+            const ext = documentPath.split('.').pop().toLowerCase();
+            const isImage = ['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(ext);
+            
+            if (isImage) {
+                // Créer un élément img pour les images
+                const img = document.createElement('img');
+                img.src = documentPath;
+                img.alt = "Image de l'actualité";
+                img.className = "img-fluid";
+                modalImage.appendChild(img);
+            } else {
+                // Créer un lien vers le document pour les PDF
+                const link = document.createElement('a');
+                link.href = documentPath;
+                link.target = "_blank";
+                
+                const img = document.createElement('img');
+                img.src = "/assets/icones/pdf-250.png";
+                img.alt = "Document PDF";
+                img.className = "img-fluid";
+                img.style.width = "100px";
+                img.style.height = "100px";
+                
+                link.appendChild(img);
+                modalImage.appendChild(link);
+            }
+            
+            modalImage.style.display = 'block';
+        } else {
+            // Aucun document, cacher le conteneur
+            modalImage.style.display = 'none';
+        } 
+      });
     }
 });
 
