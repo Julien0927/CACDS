@@ -104,7 +104,7 @@ public function getNewsBySport($sport_id, $page)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Ajoutez une nouvelle méthode pour compter le total des news par sport
+// nouvelle méthode pour compter le total des news par sport
 public function getTotalNewsBySport($sport_id): int
 {
     $sql = "SELECT COUNT(*) FROM news WHERE sport_id = :sport_id";

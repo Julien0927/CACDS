@@ -40,7 +40,26 @@ $newsForCurrentPage = array_slice($allNews, $startIndex, $itemsPerPage);
                             <td><?=($new["date"])?></td>
                             <td><?=($new["title"])?></td>
                             <td class="content d-none d-md-table-cell"><?=mb_strlen($new["content"]) > 150 ? mb_substr($new["content"], 0, 150) . '...' : $new["content"] ?></td>
-                            <td class="text-center"><img src="<?=($new["image"])?>" class="imgNew"></td>
+                            <!-- <td class="text-center"><img src="<?=($new["image"])?>" class="imgNew"></td> -->
+                            <td class="text-center">
+                                <?php if (!empty($new['image'])): ?>
+                                    <?php
+                                        $filePath = htmlspecialchars($new['image']);
+                                        $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+                                    ?>
+                                    <?php if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])): ?>
+                                        <img src="<?= $filePath ?>" alt="Image" class="imgNew">
+                                    <?php elseif ($extension === 'pdf'): ?>
+                                        <a href="<?= $filePath ?>" target="_blank" >
+                                            <img src="/assets/icones/pdf-250.png" alt="document" class="img-fluid mb-2" style="width: 50px; height: auto;">
+                                        </a>
+                                    <?php else: ?>
+                                        
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    
+                                <?php endif; ?>
+                            </td>
                             <td class="text-center"><input type="checkbox" name="newBox[]" value="<?= $new['id'] ?>"></td>
                         </tr>
                         <?php } ?>

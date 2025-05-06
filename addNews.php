@@ -11,19 +11,37 @@ if(!empty($_POST)){
     if(isset($_POST["title"], $_POST["content"], $_POST["date"])
         && !empty($_POST["title"]) && !empty($_POST["content"]) && !empty($_POST["date"])){
     
-        if (!empty($_FILES['image']['tmp_name'])) {
-            $checkImage = getimagesize($_FILES['image']['tmp_name']);
-            if ($checkImage !== false) {
-                $rawFileName = $_FILES['image']['name'];
-                $cleanedFileName = strip_tags($rawFileName);
-                $fileName = uniqid() . '-' . slugify($cleanedFileName);
-                move_uploaded_file($_FILES['image']['tmp_name'], _NEWS_IMG_PATH_ . $fileName);
-                $imagePath = _NEWS_IMG_PATH_ . $fileName;
-            } else {
-                $errors[] = 'Le fichier doit être une image';
-            }
+    if (!empty($_FILES['image']['tmp_name'])) {
+    // Récupère l'extension du fichier téléchargé
+    $fileInfo = pathinfo($_FILES['image']['name']);
+    $extension = strtolower($fileInfo['extension']); // Extension en minuscule pour éviter les erreurs
+
+    // Liste des types de fichiers autorisés
+    $allowedTypes = ['jpg', 'jpeg', 'png', 'webp', 'pdf'];
+
+    // Vérifie si l'extension est autorisée
+    if (in_array($extension, $allowedTypes)) {
+        // Création du nom de fichier unique pour éviter les collisions
+        $cleanedFileName = uniqid() . '-' . basename($fileInfo['basename']); // Ajoute l'extension
+        $targetPath = _NEWS_IMG_PATH_ . $cleanedFileName;
+
+        // Déplace le fichier téléchargé vers le répertoire cible
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+            // Si le fichier a été déplacé avec succès, enregistre le chemin
+            $imagePath = $targetPath;
+        } else {
+            // Erreur si l'upload échoue
+            $errors[] = "Erreur lors de l'upload du fichier.";
         }
-        
+    } else {
+        // Si le fichier n'est pas dans les types autorisés
+        $errors[] = 'Le fichier doit être une image ou un PDF.';
+    }
+} else {
+    // Si aucun fichier n'est téléchargé
+    $imagePath = null;
+}
+
         $news = new App\News\News($db);
         $news->setTitle($_POST["title"]);
         $news->setContent($_POST["content"]);
@@ -62,7 +80,7 @@ require_once 'templates/messages.php';
                 <label for="date" class="form-label">Date</label>
                 <input type="date" class="form-control" name="date" id="date">
                 <label for="image" class="form-label">Image</label>
-                <input type="file" class="form-control" name="image" id="image">
+                <input type="file" class="form-control" name="image" id="image" accept="image/*,.pdf">
             </div>
         </div>
         <div class="d-flex justify-content-center">
