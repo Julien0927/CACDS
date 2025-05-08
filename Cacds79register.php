@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 
 <h1 class="center mt-3">Inscription</h1>
-<form class="ms-2" method="POST" action="register.php">
+<form class="ms-2" method="POST" action="Cacds79register.php">
     <div class="mb-3">
         <label for="name" class="form-label">Nom</label>
         <input type="text" name="name" class="form-control inputRegister" id="name" placeholder="Nom" required>
