@@ -182,7 +182,7 @@ try {
                     if (!empty($documents)) {
                         foreach ($documents as $document) {
                             // Affichage de chaque document sous forme de carte
-                            echo '<a href="' . htmlspecialchars($document['fichier']) . '" class="center" aria-label="">';
+                            echo '<a href="' . ($document['fichier']) . '" class="center" aria-label="">';
                             echo '<img src="/assets/icones/calendrier.gif" alt="calendrier saison" titre="Calendrier de la saison">';
                             echo '</a>';
                         }
