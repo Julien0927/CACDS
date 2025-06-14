@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Si aucun problème, procéder à la création de l'utilisateur
-    if (empty($erreurs)) {
+    if (empty($errors)) {
         if ($users->createUser($data)) {
             $message = "Votre inscription a été réussie.";
         } else {
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="alert success mx-auto" style="width: 50%;"><?php echo $message; ?></div>
 <?php endif; ?>
 
-<?php if (!empty($erreurs)): ?>
+<?php if (!empty($errors)): ?>
     <div class="alert error mx-auto" style="width: 50%;">
         <?php foreach ($errors as $error): ?>
             <p><?php echo $error; ?></p>

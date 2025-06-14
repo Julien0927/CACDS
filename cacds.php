@@ -311,6 +311,7 @@ $actualites = $actualiteManager->getAllActualites();
             </div>
         </div>
     </div>
+    
 </section>
 <section class="container-fluid mt-3 mb-5">
     <h4 class="h3Sports">Les Réglements Généraux

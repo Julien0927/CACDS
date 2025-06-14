@@ -62,7 +62,7 @@ require_once 'header.php';
                 <li class="h3Sports"><h3 class="h3Sports">Droits des utilisateurs</h3></li>
                 <p class="text-justify">Vous avez le droit d'accéder à vos données personnelles, de les rectifier, 
                     de les supprimer ou de vous opposer à leur traitement. 
-                    Vous pouvez exercer ces droits en nous contactant à aunisathletisme@sfr.
+                    Vous pouvez exercer ces droits en nous contactant à assocacds@gmail.com.
                 </p>
                 <li class="h3Sports"><h3 class="h3Sports">Modifications de la politique de confidentialité</h3></li>
                 <p class="text-justify">Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. 

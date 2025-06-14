@@ -96,7 +96,7 @@
                     $categories = [
                         "Palmarès championnat",
                         "Palmarès coupe",
-                        "Palmarès titres et double"
+                        "Palmarès titres et doublés"
                     ];
 
                     // Récupérer les documents pour chaque catégorie

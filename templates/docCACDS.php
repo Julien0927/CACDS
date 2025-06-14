@@ -77,7 +77,7 @@ if (isset($_POST['delete_document']) && isset($_POST['document_id'])) {
                     "Feuille de match Coupe",
                     "Palmarès championnat",
                     "Palmarès coupe",
-                    "Palmarès titres et double",
+                    "Palmarès titres et doublés",
                     "Calendrier de la saison",
                     "Chiffres et statistiques",
                     "Bureau",
